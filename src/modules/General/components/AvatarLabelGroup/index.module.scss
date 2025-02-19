@@ -1,0 +1,28 @@
+@import 'src/styles/utilities/_mixins.scss';
+@import 'src/styles/constants/_primitives.scss';
+
+.container {
+    height: fit-content;
+    display: flex;
+    gap: 0.75rem;
+
+    &--full {
+        width: 100%;
+    }
+
+    .info {
+        @include flex(normal, normal, column);
+        flex-grow: 1;
+        overflow: hidden;
+    }
+
+    .subtitle {
+        color: $color-grey-600;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}

@@ -1,0 +1,53 @@
+@import 'src/styles/constants/_primitives.scss';
+
+.container {
+    width: 100%;
+    border-radius: 0.25rem;
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    color: $color-primary-700;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    word-break: break-word;
+
+    &--oval {
+        width: 2.75rem;
+    }
+
+    &--circle {
+        aspect-ratio: 1;
+    }
+}
+
+.indicator {
+    border-radius: 0.25rem;
+    background-color: $color-grey-200;
+
+    &--xs {
+        height: 0.25rem;
+    }
+
+    &--sm {
+        height: 0.5rem;
+    }
+
+    &--md {
+        height: 0.625rem;
+    }
+
+    &--lg {
+        height: 0.75rem;
+    }
+
+    &--active {
+        background-color: $color-primary-600;
+    }
+}
