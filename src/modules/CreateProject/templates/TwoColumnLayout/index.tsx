@@ -1,11 +1,11 @@
-import { ReactNode } from "react";
-import logo from "src/assets/images/logo/logo.svg";
+import { ReactNode } from 'react';
+import logo from 'src/assets/images/logo/logo.svg';
 
 interface TwoColumnLayoutProps {
   title: string;
   description: string | ReactNode;
   bulletPoints?: string[];
-  descriptionMode?: "text" | "html";
+  descriptionMode?: 'text' | 'html';
   children: ReactNode;
 }
 
@@ -13,7 +13,7 @@ const TwoColumnLayout: React.FC<TwoColumnLayoutProps> = ({
   title,
   description,
   bulletPoints,
-  descriptionMode = "text",
+  descriptionMode = 'text',
   children,
 }) => {
   return (
@@ -22,23 +22,17 @@ const TwoColumnLayout: React.FC<TwoColumnLayoutProps> = ({
         <img className="w-[43px] absolute top-16 left-16 h-auto" src={logo} />
 
         <div className="mb-[12px]">
-          <h1 className="text-[30px] font-medium leading-[38px] text-primary-900">
-            {title}
-          </h1>
+          <h1 className="text-[30px] font-medium leading-[38px] text-primary-900">{title}</h1>
         </div>
 
-        {descriptionMode === "text" ? (
+        {descriptionMode === 'text' ? (
           <>
             {description && (
-              <p className="text-[16px] font-normal leading-[24px] text-tertiary-600 mb-3">
-                {description}
-              </p>
+              <p className="text-[16px] font-normal leading-[24px] text-tertiary-600 mb-3">{description}</p>
             )}
           </>
         ) : (
-          <div className="text-[16px] font-normal leading-[24px] text-tertiary-600 mb-3">
-            {description}
-          </div>
+          <div className="text-[16px] font-normal leading-[24px] text-tertiary-600 mb-3">{description}</div>
         )}
       </div>
 

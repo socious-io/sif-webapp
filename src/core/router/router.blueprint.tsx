@@ -1,31 +1,23 @@
-import {
-  Navigate,
-  RouteObject,
-  createBrowserRouter,
-  useRouteError,
-} from "react-router-dom";
-import { Layout } from "src/modules/Layout";
-
+import { Navigate, RouteObject, createBrowserRouter, useRouteError } from 'react-router-dom';
+import { Layout } from 'src/modules/Layout';
 
 export const blueprint: RouteObject[] = [
-  { path: "/", element: <DefaultRoute /> },
+  { path: '/', element: <DefaultRoute /> },
 
   {
-    path: "*",
+    path: '*',
     element: <div>Page not found :(</div>,
   },
   {
-    path: "/",
+    path: '/',
     children: [
       {
         element: <Layout />,
         children: [
           {
-            path: "/create",
+            path: '/create',
             async lazy() {
-              const { CreateProject } = await import(
-                "src/pages/CreateProject/landing"
-              );
+              const { CreateProject } = await import('src/pages/CreateProject/landing');
               return {
                 Component: CreateProject,
               };
@@ -34,25 +26,21 @@ export const blueprint: RouteObject[] = [
         ],
       },
       {
-        path: "/create",
+        path: '/create',
         children: [
           {
-            path: "step-1",
+            path: 'step-1',
             async lazy() {
-              const { CreateProjectStep1 } = await import(
-                "src/pages/CreateProject/step-1"
-              );
+              const { CreateProjectStep1 } = await import('src/pages/CreateProject/step-1');
               return {
                 Component: CreateProjectStep1,
               };
             },
           },
           {
-            path: "step-2",
+            path: 'step-2',
             async lazy() {
-              const { CreateProjectStep2 } = await import(
-                "src/pages/CreateProject/step-2"
-              );
+              const { CreateProjectStep2 } = await import('src/pages/CreateProject/step-2');
               return {
                 Component: CreateProjectStep2,
               };

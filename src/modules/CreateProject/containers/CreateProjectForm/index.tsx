@@ -1,25 +1,22 @@
-import { translate } from "src/core/helpers/utils";
-import bg from "src/assets/images/create-hero.jpeg";
-import Button from "src/modules/General/components/Button";
-import AvatarLabelGroup from "src/modules/General/components/AvatarLabelGroup";
-import Icon from "src/modules/General/components/Icon";
-import Rating from "@mui/material/Rating";
-import { useCreateProjectForm } from "./useCreateProjectForm";
-import AvatarGroup from "src/modules/General/components/avatarGroup";
-import { accounts } from "./statics";
+import Rating from '@mui/material/Rating';
+import bg from 'src/assets/images/create-hero.jpeg';
+import { translate } from 'src/core/helpers/utils';
+import AvatarGroup from 'src/modules/General/components/avatarGroup';
+import AvatarLabelGroup from 'src/modules/General/components/AvatarLabelGroup';
+import Button from 'src/modules/General/components/Button';
+import Icon from 'src/modules/General/components/Icon';
+
+import { accounts } from './statics';
+import { useCreateProjectForm } from './useCreateProjectForm';
+
 const CreateProjectForm: React.FC = () => {
   const { navigateCreateProject } = useCreateProjectForm();
   return (
     <div className="flex flex-col md:grid md:grid-cols-2 items-center max-w-[1280px] mx-auto px-4">
       <div className="w-full max-w-md">
-        <h1 className="text-[60px] font-semibold leading-[72px] text-primary-900">
-          Bring your project to life.
-        </h1>
+        <h1 className="text-[60px] font-semibold leading-[72px] text-primary-900">Bring your project to life.</h1>
         <div className="mt-3xl">Apply in minutes and get funded!</div>
-        <Button
-          onClick={navigateCreateProject}
-          customStyle="my-6xl"
-          color="primary">
+        <Button onClick={navigateCreateProject} customStyle="my-6xl" color="primary">
           Start a project
         </Button>
 
@@ -30,13 +27,7 @@ const CreateProjectForm: React.FC = () => {
               <Rating
                 value={5}
                 readOnly
-                icon={
-                  <Icon
-                    name="star-filled"
-                    className="mr-1 text-Warning-300"
-                    fontSize={20}
-                  />
-                }
+                icon={<Icon name="star-filled" className="mr-1 text-Warning-300" fontSize={20} />}
               />
               <span>5.0</span>
             </div>

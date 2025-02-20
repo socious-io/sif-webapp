@@ -18,8 +18,6 @@ function App() {
     i18next.changeLanguage(language);
   }, [language]);
 
-
-
   return (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>

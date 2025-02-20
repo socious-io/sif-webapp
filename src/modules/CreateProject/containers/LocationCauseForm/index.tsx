@@ -1,12 +1,12 @@
-import Button from "src/modules/General/components/Button";
-import CardRadioButton from "src/modules/General/components/CardRadioButton";
-import Input from "src/modules/General/components/Input";
-import MultiSelect from "src/modules/General/components/MultiSelect";
-import SearchDropdown from "src/modules/General/components/SearchDropdown";
-import variables from "src/styles/constants/_exports.module.scss";
-import { useLocationCauseForm } from "./useLocationCauseForm";
-import { locationOptions } from "./statics";
+import Button from 'src/modules/General/components/Button';
+import CardRadioButton from 'src/modules/General/components/CardRadioButton';
+import Input from 'src/modules/General/components/Input';
+import MultiSelect from 'src/modules/General/components/MultiSelect';
+import SearchDropdown from 'src/modules/General/components/SearchDropdown';
+import variables from 'src/styles/constants/_exports.module.scss';
 
+import { locationOptions } from './statics';
+import { useLocationCauseForm } from './useLocationCauseForm';
 
 const LocationCauseForm: React.FC = () => {
   const { navigateStep2 } = useLocationCauseForm();
@@ -14,9 +14,7 @@ const LocationCauseForm: React.FC = () => {
     <div>
       <form>
         <div>
-          <label className="text-[18px] font-medium leading-[28px] text-secondary-900">
-            Location*
-          </label>
+          <label className="text-[18px] font-medium leading-[28px] text-secondary-900">Location*</label>
         </div>
         <span className="text-[16px] font-normal leading-[24px] text-tertiary-600">
           Choose the location of your project
@@ -24,12 +22,12 @@ const LocationCauseForm: React.FC = () => {
         <CardRadioButton
           customStyle="flex flex-row w-full mt-[20px] mb-[32px]"
           items={locationOptions}
-          selectedValue={null}
-          setSelectedValue={(value) => {}}
+          selectedValue=""
+          setSelectedValue={value => console.log(value)}
         />
         <SearchDropdown
           id="location"
-          placeholder={"Select a location"}
+          placeholder={'Select a location'}
           isAsync
           // loadOptions={searchCities}
           className="my-5"
@@ -39,12 +37,12 @@ const LocationCauseForm: React.FC = () => {
           // onChange={(value) => onSelectCity(value)}
         />
         <MultiSelect
-          id={"social-causes"}
-          searchTitle={"Social cause"}
+          id={'social-causes'}
+          searchTitle={'Social cause'}
           max={5}
           maxLabel={"What best describes why you're fundraising?"}
           items={[]}
-          placeholder={"Search a social cause"}
+          placeholder={'Search a social cause'}
           componentValue={[]}
           setComponentValue={() => console.log}
           customHeight="100px"
@@ -56,11 +54,7 @@ const LocationCauseForm: React.FC = () => {
         <Button color="primary" block onClick={navigateStep2}>
           Continue
         </Button>
-        <Button
-          color="secondary"
-          block
-          variant="outlined"
-          customStyle="mt-[16px]">
+        <Button color="secondary" block variant="outlined" customStyle="mt-[16px]">
           Cancel
         </Button>
       </form>
