@@ -18,7 +18,7 @@ const TwoColumnLayout: React.FC<TwoColumnLayoutProps> = ({
 }) => {
   return (
     <div className="flex flex-col md:flex-row w-full h-screen">
-      <div className="hidden md:flex md:w-1/3 bg-[#F9FAFB] p-8 flex-col justify-center relative">
+      <div className="hidden md:flex md:w-1/3 bg-[#F9FAFB] p-8 flex-col justify-center relative p-x-[64px]">
         <img className="w-[43px] absolute top-16 left-16 h-auto" src={logo} />
 
         <div className="mb-[12px]">
