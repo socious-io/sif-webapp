@@ -6,7 +6,7 @@ import { isTestingEnvironment } from 'src/config';
 const isNative = Capacitor.isNativePlatform();
 
 function removeCookiesFromAllPaths() {
-  document.cookie.replace(/(?<=^|;).+?(?=\=|;|$)/g, name =>
+  document.cookie.replace(/(?<=^|;).+?(?=\\=|;|$)/g, name =>
     location.hostname
       .split('.')
       .reverse()

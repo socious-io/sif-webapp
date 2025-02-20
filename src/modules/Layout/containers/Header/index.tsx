@@ -1,9 +1,8 @@
-import logo from "src/assets/logo/logo.svg";
-import variables from "src/styles/constants/_exports.module.scss";
-
-import Avatar from "src/modules/General/components/Avatar";
-import Button from "src/modules/General/components/Button";
-import { translate } from "src/core/helpers/utils";
+import logo from 'src/assets/logo/logo.svg';
+import { translate } from 'src/core/helpers/utils';
+import Avatar from 'src/modules/General/components/Avatar';
+import Button from 'src/modules/General/components/Button';
+import variables from 'src/styles/constants/_exports.module.scss';
 
 const Header: React.FC = () => {
   return (
@@ -20,8 +19,9 @@ const Header: React.FC = () => {
             color="secondary"
             variant="outlined"
             customStyle="h-[40px] text-sm font-semibold leading-5 mr-6"
-            onClick={() => console.log}>
-            {translate("layout-action-button")}
+            onClick={() => console.log}
+          >
+            {translate('layout-action-button')}
           </Button>
           <Avatar type="organizations" size="40px" />
         </div>

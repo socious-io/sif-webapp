@@ -1,6 +1,6 @@
 interface Account {
   id: string;
-  type?: "users" | "organizations";
+  type?: 'users' | 'organizations';
   image?: string;
 }
 

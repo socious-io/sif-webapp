@@ -1,4 +1,4 @@
-import layout from "./layout.json";
+import layout from './layout.json';
 
 export function generateTranslationFile() {
   return Object.assign({}, layout);
