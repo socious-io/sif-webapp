@@ -128,6 +128,15 @@ export const blueprint: RouteObject[] = [
               };
             },
           },
+          {
+            path: 'step-3',
+            async lazy() {
+              const { CreateProjectStep3 } = await import('src/pages/CreateProject/step-3');
+              return {
+                Component: CreateProjectStep3,
+              };
+            },
+          },
         ],
       },
     ],
