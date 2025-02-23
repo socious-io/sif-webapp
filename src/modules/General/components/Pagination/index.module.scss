@@ -1,3 +1,4 @@
+@import 'src/styles/utilities/_mixins.scss';
 @import 'src/styles/constants/_primitives.scss';
 
 @mixin Font {
@@ -7,21 +8,18 @@
 }
 
 .container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: row-reverse;
+    width: 100%;
+    @include flex(space-between, center);
 }
 
 .button {
-    display: flex;
-    align-items: center;
+    @include flex(center, center);
     @include Font;
     font-weight: 600;
+    cursor: pointer;
 }
 
-.label {
-    margin-right: auto;
-    @include Font;
-    font-weight: 500;
+.numbers {
+    @include flex(center, center);
+    flex-grow: 1;
 }
