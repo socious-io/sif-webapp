@@ -1,0 +1,39 @@
+@import 'src/styles/constants/_primitives.scss';
+
+.container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .button {
+        cursor: pointer;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+
+        &__left {
+            margin-left: 0;
+            margin-right: auto;
+        }
+
+        &__right {
+            margin-right: 0;
+            margin-left: auto;
+        }
+    }
+
+    .page {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+        color: $color-grey-700;
+
+        .bold {
+            font-weight: 500;
+        }
+    }
+}
