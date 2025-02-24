@@ -1,10 +1,11 @@
-import Button from "src/modules/General/components/Button";
-import FileUploader from "src/modules/General/components/FileUploader";
-import Input from "src/modules/General/components/Input";
-import { useUploadBannerForm } from "./useUploadBannerForm";
+import Button from 'src/modules/General/components/Button';
+import FileUploader from 'src/modules/General/components/FileUploader';
+import Input from 'src/modules/General/components/Input';
+
+import { useUploadBannerForm } from './useUploadBannerForm';
 
 const UploadBannerForm: React.FC = () => {
-  const { attachments } = useUploadBannerForm();
+  const { attachments, navigateStep4 } = useUploadBannerForm();
   return (
     <div>
       <form>
@@ -12,18 +13,14 @@ const UploadBannerForm: React.FC = () => {
         <FileUploader
           files={attachments}
           onDropFiles={() => {}}
-          fileTypes={["PNG", "JPG", "GIF"]}
+          fileTypes={['PNG', 'JPG', 'GIF']}
           maxSize={2}
           showFileName={false}
         />
-        <Button color="primary" block>
+        <Button color="primary" block onClick={navigateStep4}>
           Continue
         </Button>
-        <Button
-          color="secondary"
-          block
-          variant="outlined"
-          customStyle="mt-[16px]">
+        <Button color="secondary" block variant="outlined" customStyle="mt-[16px]">
           Cancel
         </Button>
       </form>
