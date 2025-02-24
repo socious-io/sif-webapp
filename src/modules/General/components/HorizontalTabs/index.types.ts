@@ -8,7 +8,7 @@ export type HorizontalTabsItem = {
 export interface HorizontalTabsProps {
   tabs: HorizontalTabsItem[];
   leftAligned?: boolean;
-  containerCustomStyle?: string;
   activeIndex?: number;
   onActiveIndex?: (index: number) => void;
+  containerCustomStyle?: string;
 }
