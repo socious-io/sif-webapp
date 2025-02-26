@@ -70,14 +70,12 @@ body {
     }
 }
 
-//shared container for all sign up pages
-.form-container {
-    width: 360px;
-    margin: auto;
-
-    @media (max-width: 640px) {
-        width: 100%;
-    }
+// Mihn's container
+$container-width: 1280px;
+.container {
+  width: 100%;
+  max-width: $container-width;
+  margin: 0 auto;
 }
 
 .emoji-font {

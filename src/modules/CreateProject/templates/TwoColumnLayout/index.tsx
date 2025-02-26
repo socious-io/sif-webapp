@@ -37,7 +37,7 @@ const TwoColumnLayout: React.FC<TwoColumnLayoutProps> = ({
       </div>
 
       <div className="w-full md:w-2/3 flex justify-center items-center p-8">
-        <div className="w-full max-w-[560px]">
+        <div className="w-full max-w-[560px] max-h-[680px]">
           <img className="w-[43px] mb-[24px] block md:hidden" src={logo} />
           {children}
         </div>
