@@ -9,7 +9,8 @@ export const uploadMediaAdaptor = async (file: File): Promise<AdaptorRes<UploadM
     return {
       data: {
         ...res,
-        date: res.createdAt?.toString(),
+        identity_id: '',
+        created_at: res.created_at.toString(),
       },
       error: null,
     };
@@ -31,7 +32,8 @@ export const uploadMediaWithProgressAdaptor = async (
     return {
       data: {
         ...res,
-        date: res.createdAt?.toString(),
+        identity_id: '',
+        created_at: res.created_at.toString(),
       },
       error: null,
     };

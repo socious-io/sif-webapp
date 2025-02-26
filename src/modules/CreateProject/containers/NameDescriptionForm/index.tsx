@@ -4,7 +4,7 @@ import Input from 'src/modules/General/components/Input';
 import { useNameDescriptionForm } from './useNameDescriptionForm';
 
 const NameDescriptionForm: React.FC = () => {
-  const { handleSubmit, onSubmit, errors, register } = useNameDescriptionForm();
+  const { handleSubmit, onSubmit, errors, register, goBack, hasErrors } = useNameDescriptionForm();
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -35,13 +35,14 @@ const NameDescriptionForm: React.FC = () => {
           errors={errors['description']?.message ? [errors['description']?.message.toString()] : undefined}
           required
           multiline
+          customHeight="216px"
         />
 
-        <Button color="primary" block type="submit">
+        <Button color="primary" block type="submit" disabled={hasErrors} customStyle="mt-[48px]">
           Continue
         </Button>
-        <Button color="secondary" block variant="outlined" customStyle="mt-[16px]">
-          Cancel
+        <Button color="secondary" block variant="outlined" customStyle="mt-[16px]" onClick={goBack}>
+          Back
         </Button>
       </form>
     </div>

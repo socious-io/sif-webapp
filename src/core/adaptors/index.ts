@@ -3,6 +3,8 @@ export * from './media/index.types';
 
 export * from './projects/index.adaptors';
 export * from './projects/index.types';
+export * from './media/index.adaptors';
+export * from './media/index.types';
 
 export * from './auth/index.adaptors';
 export * from './auth/index.types';

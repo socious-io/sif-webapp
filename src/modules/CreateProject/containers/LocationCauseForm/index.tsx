@@ -1,15 +1,24 @@
 import Button from 'src/modules/General/components/Button';
 import CardRadioButton from 'src/modules/General/components/CardRadioButton';
-import Input from 'src/modules/General/components/Input';
 import MultiSelect from 'src/modules/General/components/MultiSelect';
-import SearchDropdown from 'src/modules/General/components/SearchDropdown';
+import LocationSearchDropdown from 'src/modules/General/containers/LocationSearchDropdown';
 import variables from 'src/styles/constants/_exports.module.scss';
 
-import { locationOptions } from './statics';
 import { useLocationCauseForm } from './useLocationCauseForm';
 
 const LocationCauseForm: React.FC = () => {
-  const { navigateStep2 } = useLocationCauseForm();
+  const {
+    navigateStep2,
+    items,
+    options,
+    selectedCardId,
+    setSelectedCardId,
+    goBack,
+    onSelectCauses,
+    onSelectLocation,
+    isEnabled,
+    socialCauses,
+  } = useLocationCauseForm();
   return (
     <div>
       <form>
@@ -21,41 +30,39 @@ const LocationCauseForm: React.FC = () => {
         </span>
         <CardRadioButton
           customStyle="flex flex-row w-full mt-[20px] mb-[32px]"
-          items={locationOptions}
-          selectedValue=""
-          setSelectedValue={value => console.log(value)}
+          items={options}
+          selectedValue={selectedCardId}
+          setSelectedValue={value => {
+            setSelectedCardId(value);
+          }}
         />
-        <SearchDropdown
-          id="location"
-          placeholder={'Select a location'}
-          isAsync
-          // loadOptions={searchCities}
-          className="my-5"
-          icon="search-lg"
-          hasDropdownIcon={false}
-          // value={cityValue}
-          // onChange={(value) => onSelectCity(value)}
-        />
-        <MultiSelect
-          id={'social-causes'}
-          searchTitle={'Social cause'}
-          max={5}
-          maxLabel={"What best describes why you're fundraising?"}
-          items={[]}
-          placeholder={'Search a social cause'}
-          componentValue={[]}
-          setComponentValue={() => console.log}
-          customHeight="100px"
-          chipBorderColor={variables.color_primary_200}
-          chipBgColor={variables.color_primary_50}
-          chipFontColor={variables.color_primary_700}
-          chipIconColor={variables.color_primary_500}
-        />
-        <Button color="primary" block onClick={navigateStep2}>
+        {selectedCardId === 'City / Country' && (
+          <div className="my-[20px]">
+            <LocationSearchDropdown onChange={location => onSelectLocation(location.City)} />
+          </div>
+        )}
+        <div className="mb-[48px]">
+          <MultiSelect
+            id={'social-causes'}
+            searchTitle={'Social cause'}
+            max={5}
+            maxLabel={"What best describes why you're fundraising?"}
+            items={items}
+            placeholder={'Search a social cause'}
+            componentValue={socialCauses}
+            setComponentValue={items => onSelectCauses(items)}
+            customHeight="156px"
+            chipBorderColor={variables.color_primary_200}
+            chipBgColor={variables.color_primary_50}
+            chipFontColor={variables.color_primary_700}
+            chipIconColor={variables.color_primary_500}
+          />
+        </div>
+        <Button color="primary" block onClick={navigateStep2} customStyle="mt-32px" disabled={!isEnabled}>
           Continue
         </Button>
-        <Button color="secondary" block variant="outlined" customStyle="mt-[16px]">
-          Cancel
+        <Button color="secondary" block variant="outlined" customStyle="mt-[16px]" onClick={goBack}>
+          Back
         </Button>
       </form>
     </div>
