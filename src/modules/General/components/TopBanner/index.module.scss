@@ -1,0 +1,88 @@
+@import 'src/styles/constants/_primitives.scss';
+
+.container {
+    width: 100%;
+    padding: 0.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    border-bottom: 1px solid;
+
+    @media (max-width: $xl) {
+        padding: 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    &--warning {
+        background-color: $color-warning-25;
+        border-color: $color-warning-300;
+        color: $color-warning-700;
+    }
+
+    &--success {
+        background-color: $color-success-25;
+        border-color: $color-success-300;
+        color: $color-success-700;
+    }
+
+    .header {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: inherit;
+
+        @media (max-width: $xl) {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .texts {
+            display: flex;
+            gap: 0.375rem;
+            font-size: 14px;
+            line-height: 1.25rem;
+            color: inherit;
+
+            @media (max-width: $xl) {
+                flex-direction: column;
+                gap: 0.125rem;
+            }
+        }
+    }
+
+    .buttons {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+
+        .btn {
+            height: auto;
+            padding: 0;
+            font-size: 14px;
+            line-height: 1.25rem;
+            text-decoration: underline;
+
+            &__secondary {
+                &--warning {
+                    color: $color-warning-600;
+                }
+
+                &--success {
+                    color: $color-success-600;
+                }
+            }
+
+            &__primary {
+                &--warning {
+                    color: $color-warning-700;
+                }
+
+                &--success {
+                    color: $color-success-700;
+                }
+            }
+        }
+    }
+}
