@@ -1,0 +1,18 @@
+{
+  "general-file-uploader": {
+    "click": "クリックしてアップロード",
+    "drag": "またはドラッグ＆ドロップ",
+    "or": "または",
+    "max": "最大",
+    "max-error": "{{name}}は最大サイズ{{max}}MBを超えています",
+    "limit-error": "アップロードできるファイル数は最大{{limit}}件です。ファイル数を減らしてください。"
+  },
+  "general-multi-select-popular": "人気",
+  "general-pagination": {
+    "next": "次へ",
+    "prev": "前へ",
+    "page": "ページ",
+    "of": "/"
+  },
+  "general-copy-link": "コピー"
+}

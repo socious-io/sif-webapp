@@ -41,10 +41,10 @@ const FileUploader: React.FC<FileUploaderProps> = ({
         <FeaturedIcon iconName="upload-cloud-02" size="md" type="modern" theme="gray" />
         <div className="flex mt-2">
           <Typography variant="subtitle2" color={variables.color_primary_700} className="700 mr-1">
-            {translate('file-uploader-click')}
+            {translate('general-file-uploader.click')}
           </Typography>
           <Typography variant="caption" color={variables.color_grey_600}>
-            {translate('file-uploader-drag')}
+            {translate('general-file-uploader.drag')}
           </Typography>
         </div>
         <p className={styles['input__description']}>{subtitle}</p>

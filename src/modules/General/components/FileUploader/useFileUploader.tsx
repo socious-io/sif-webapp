@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { useTranslation } from 'react-i18next';
+import { translate } from 'src/core/helpers/utils';
 
 import { Files } from './index.types';
 
@@ -14,10 +14,9 @@ export const useFileUploader = (
   error: string,
   limitUploading?: boolean,
 ) => {
-  const { t: translate } = useTranslation();
   const [errorMessage, setErrorMessage] = useState('');
   const joinedFileTypes = fileTypes.slice(0, fileTypes.length - 1).join(', ');
-  const subtitle = `${joinedFileTypes} ${translate('file-uploader-or')} ${fileTypes[fileTypes.length - 1]} (${translate('file-uploader-max')}. ${maxSize}MB)`;
+  const subtitle = `${joinedFileTypes} ${translate('general-file-uploader.or')} ${fileTypes[fileTypes.length - 1]} (${translate('general-file-uploader.max')}. ${maxSize}MB)`;
   const KB = 1024;
   const types = {
     DOC: { doc: 'application/msword', extension: ['.doc'], icon: '' },
@@ -51,11 +50,11 @@ export const useFileUploader = (
       const validFiles: File[] = [];
       const totalUploadedFiles = files.length + acceptedFiles.length;
       if (limitUploading && totalUploadedFiles > maxFiles) {
-        setErrorMessage(translate('file-uploader-limit-error', { limit: maxFiles }));
+        setErrorMessage(translate('general-file-uploader.limit-error', { limit: maxFiles }));
       } else {
         for (const file of acceptedFiles) {
           if (file.size > maxSize * KB * KB) {
-            setErrorMessage(translate('file-uploader-max-error', { name: file.name, max: maxSize }));
+            setErrorMessage(translate('general-file-uploader.max-error', { name: file.name, max: maxSize }));
           } else {
             validFiles.push(file);
           }
