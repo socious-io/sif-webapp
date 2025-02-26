@@ -1,5 +1,3 @@
-import React from 'react';
-
 import styles from './index.module.scss';
 import { ChipProps } from './index.types';
 
@@ -13,16 +11,25 @@ const Chip: React.FC<ChipProps> = ({
   shape = 'round',
   size = 'md',
   transparent = false,
+  customStyle = '',
 }) => {
-  const chipClasses = `${styles[`chip-${size}`]} ${styles[`${theme}-theme`]} ${
-    shape === 'round' ? styles.round : styles.sharp
-  } ${transparent ? styles[`${theme}-transparent`] : ''}`;
+  const chipClasses = `${styles['chip']} ${styles[`chip--${size}`]} ${
+    styles[`chip--${shape}`]
+  } ${styles[theme]} ${transparent && styles[`${theme}--transparent`]} ${customStyle}`;
 
   return (
     <div className={chipClasses}>
-      {startIcon && <div onClick={onStartIconClick}>{startIcon}</div>}
+      {startIcon && (
+        <div className={styles['icon']} onClick={onStartIconClick}>
+          {startIcon}
+        </div>
+      )}
       {label}
-      {endIcon && <div onClick={onEndIconClick}>{endIcon}</div>}
+      {endIcon && (
+        <div className={styles['icon']} onClick={onEndIconClick}>
+          {endIcon}
+        </div>
+      )}
     </div>
   );
 };

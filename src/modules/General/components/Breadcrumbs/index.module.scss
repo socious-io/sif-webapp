@@ -1,0 +1,23 @@
+@import 'src/styles/constants/_primitives.scss';
+
+.container {
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+
+    @media (max-width: $md) {
+        display: none;
+    }
+
+    .link {
+        color: $color-grey-600;
+    }
+
+    .chip {
+        font-size: 14px;
+        font-weight: 600;
+        color: $color-grey-700;
+        background-color: $color-grey-50;
+        border-radius: 6px;
+    }
+}

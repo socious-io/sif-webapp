@@ -1,5 +1,7 @@
-import { Navigate, RouteObject, createBrowserRouter, useRouteError } from 'react-router-dom';
+import { Navigate, RouteObject, createBrowserRouter } from 'react-router-dom';
 import { Layout } from 'src/modules/Layout';
+
+import { getProjectAdaptor, getProjectsAdaptor } from '../adaptors';
 
 export const blueprint: RouteObject[] = [
   { path: '/', element: <DefaultRoute /> },
@@ -15,6 +17,15 @@ export const blueprint: RouteObject[] = [
         element: <Layout />,
         children: [
           {
+            path: '/home',
+            async lazy() {
+              const { Home } = await import('src/pages/home');
+              return {
+                Component: Home,
+              };
+            },
+          },
+          {
             path: '/create',
             async lazy() {
               const { CreateProject } = await import('src/pages/CreateProject/landing');
@@ -22,6 +33,39 @@ export const blueprint: RouteObject[] = [
                 Component: CreateProject,
               };
             },
+          },
+          {
+            path: '/projects',
+            children: [
+              {
+                path: '',
+                loader: async () => {
+                  const projects = await getProjectsAdaptor(1, 10);
+                  return { projects: projects.data };
+                },
+                async lazy() {
+                  const { Projects } = await import('src/pages/projects');
+                  return {
+                    Component: Projects,
+                  };
+                },
+              },
+              {
+                path: ':id',
+                loader: async ({ params }) => {
+                  if (params.id) {
+                    const detail = await getProjectAdaptor(params.id);
+                    return { projectDetail: detail.data };
+                  }
+                },
+                async lazy() {
+                  const { ProjectDetail } = await import('src/pages/projects/detail');
+                  return {
+                    Component: ProjectDetail,
+                  };
+                },
+              },
+            ],
           },
         ],
       },
@@ -53,7 +97,7 @@ export const blueprint: RouteObject[] = [
 ];
 
 function DefaultRoute() {
-  return <Navigate to="/" />;
+  return <Navigate to="/home" />;
 }
 
 const isAuthenticated = async () => {

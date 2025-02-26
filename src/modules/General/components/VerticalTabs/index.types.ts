@@ -1,13 +1,12 @@
 import { ReactNode } from 'react';
 
-export type HorizontalTabsItem = {
+export type VerticalTabsItem = {
   label: ReactNode;
   content: ReactNode;
 };
 
-export interface HorizontalTabsProps {
-  tabs: HorizontalTabsItem[];
-  leftAligned?: boolean;
+export interface VerticalTabsProps {
+  tabs: VerticalTabsItem[];
   activeIndex?: number;
   onActiveIndex?: (index: number) => void;
   containerCustomStyle?: string;

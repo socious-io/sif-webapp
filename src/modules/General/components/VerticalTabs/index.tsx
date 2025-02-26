@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
 import styles from './index.module.scss';
-import { HorizontalTabsProps } from './index.types';
+import { VerticalTabsProps } from './index.types';
 
-const HorizontalTabs: React.FC<HorizontalTabsProps> = ({
+const VerticalTabs: React.FC<VerticalTabsProps> = ({
   tabs,
-  leftAligned = true,
   activeIndex = 0,
   onActiveIndex,
   containerCustomStyle = '',
@@ -30,7 +29,7 @@ const HorizontalTabs: React.FC<HorizontalTabsProps> = ({
         {tabs.map((tab, index) => (
           <div
             key={`${tab.label}-${index.toString()}`}
-            className={`${styles['tab']} ${index === active && styles['tab--active']} ${!leftAligned && 'flex-1'}`}
+            className={`${styles['tab']} ${index === active && styles['tab--active']}`}
             onClick={() => handleTabClick(index)}
           >
             {tab.label}
@@ -42,4 +41,4 @@ const HorizontalTabs: React.FC<HorizontalTabsProps> = ({
   );
 };
 
-export default HorizontalTabs;
+export default VerticalTabs;

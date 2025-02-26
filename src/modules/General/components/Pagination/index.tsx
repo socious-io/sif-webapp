@@ -1,58 +1,73 @@
 import { Pagination as MUIPagination, PaginationItem, PaginationProps } from '@mui/material';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
 import variables from 'src/styles/constants/_exports.module.scss';
 
 import css from './index.module.scss';
+import Icon from '../Icon';
 
 const Pagination: React.FC<PaginationProps> = props => {
-  const { t: translate } = useTranslation();
-
   return (
     <div className={css['container']}>
       <MUIPagination
-        page={props.page}
-        shape="rounded"
-        sx={{
-          '.MuiPagination-ul': {
-            display: 'flex',
-            listStyleType: 'none',
-            padding: 0,
-            margin: 0,
-          },
-          '.MuiPaginationItem-root': {
-            color: variables.color_grey_600,
-            fontSize: '14px',
-            fontWeight: '500',
-            padding: '12px',
-            borderRadius: '8px',
-            border: `1px solid ${variables.color_grey_300}`,
-          },
-          '.MuiPaginationItem-page, .MuiPaginationItem-ellipsis': {
-            display: 'none',
-          },
-          '.MuiPaginationItem-previous, .MuiPaginationItem-next': {
-            margin: '0 4px',
-          },
-          '.Mui-selected': {
-            backgroundColor: variables.color_grey_50,
-            color: variables.color_grey_800,
-          },
-        }}
-        renderItem={item => (
-          <PaginationItem
-            slots={{
-              previous: () => <div className={css['button']}>{translate('pagination-previous')}</div>,
-              next: () => <div className={css['button']}>{translate('pagination-next')}</div>,
-            }}
-            {...item}
-          />
-        )}
         {...props}
+        shape="rounded"
+        renderItem={item => {
+          if (item.type === 'previous') {
+            return (
+              <PaginationItem
+                {...item}
+                slots={{
+                  previous: () => (
+                    <div className={css['button']}>
+                      <Icon name="arrow-left" fontSize={20} color={variables.color_grey_800} className="mr-2" />
+                      Previous
+                    </div>
+                  ),
+                }}
+              />
+            );
+          }
+          return null;
+        }}
       />
-      <div className={css['label']}>
-        {translate('pagination-page')} {props.page} {translate('pagination-of')} {props.count}
+
+      <div className={css['numbers']}>
+        <MUIPagination
+          shape="rounded"
+          renderItem={item => (
+            <PaginationItem
+              {...item}
+              slots={{
+                previous: () => null,
+                next: () => null,
+              }}
+            />
+          )}
+          {...props}
+        />
       </div>
+
+      <MUIPagination
+        {...props}
+        shape="rounded"
+        renderItem={item => {
+          if (item.type === 'next') {
+            return (
+              <PaginationItem
+                {...item}
+                slots={{
+                  next: () => (
+                    <div className={css['button']}>
+                      Next
+                      <Icon name="arrow-right" fontSize={20} color={variables.color_grey_800} className="ml-2" />
+                    </div>
+                  ),
+                }}
+              />
+            );
+          }
+          return null;
+        }}
+      />
     </div>
   );
 };

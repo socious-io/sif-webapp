@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
-export type ChipTheme = 'primary' | 'secondary' | 'grey_blue' | 'error' | 'warning' | 'success';
+
 export interface ChipProps {
   label: string;
-  theme?: ChipTheme;
+  theme?: 'primary' | 'secondary' | 'grey_blue' | 'error' | 'warning' | 'success' | 'grey';
   shape?: 'round' | 'sharp';
   onStartIconClick?: () => void;
   onEndIconClick?: () => void;
@@ -10,4 +10,5 @@ export interface ChipProps {
   endIcon?: ReactNode;
   size?: 'sm' | 'md' | 'lg';
   transparent?: boolean;
+  customStyle?: string;
 }
