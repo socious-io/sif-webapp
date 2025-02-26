@@ -1,0 +1,29 @@
+{
+  "verification-kyb": {
+    "desc-title": "Verify your organization",
+    "desc-subtitle": "Get your organization verified to issue credentials.",
+    "desc-step1-title": "Send your organization details",
+    "desc-step1-subtitle": "Send a company registration document such as a company certificate/equivalent along with your organization name.",
+    "desc-step2-title": "Wait for processing",
+    "desc-step2-subtitle": "Our verification team will take 1-3 days to process your verification request.",
+    "desc-step3-title": "Verification complete",
+    "desc-step3-subtitle": "An email and notification will be sent to you upon successful verification and you will then be able to issue credentials.",
+    "upload-title": "Send your organization details",
+    "upload-subtitle": "Please upload your company registration document, like a certificate or equivalent.",
+    "success-title": "Your documents have been sent",
+    "success-subtitle": "Our verification team will take 1-3 days to process your verification request. An email and notification will be sent to you upon successful verification and you will then be able to issue credentials.",
+    "continue-button": "Continue",
+    "cancel-button": "Cancel"
+  },
+  "verification-kyc": {
+    "title": "Verify your identity",
+    "subtitle": "Verify your identity to access all Socious features",
+    "hint-title": "Socious uses blockchain technology to make credentials transparent and traceable.",
+    "hint-subtitle": "We’ve partnered with Atala Prism through which your decentralized ID can receive verifiable credentials.",
+    "how-verify": "How to verify your identity",
+    "how-verify-step1": "1. Go through the app’s onboarding process which will create a decentralized ID on Atala Prism.",
+    "how-verify-step2": "2. Verify your identity with Veriff, our KYC partner.",
+    "download-wallet": "Download the Socious Wallet app",
+    "open-wallet": "Open Socious Wallet app"
+  }
+}
