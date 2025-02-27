@@ -39,9 +39,9 @@ export const Home = () => {
         <div className="max-w-full md:max-w-[60rem] flex flex-col mx-4 bg-Base-White shadow-md rounded-xl overflow-hidden absolute top-[calc(100%-2rem)] md:top-[calc(100%-9.75rem)]">
           <img src="/images/explorer-cover.png" alt="Explorer" />
           <div className="flex flex-col gap-4 p-6 md:p-8">
-            <div className="flex flex-col md:flex-row gap-2 md:gap-4 items-start md:items-center">
+            <div className="flex flex-col items-start gap-1">
+              {roundIsClosed && <Chip theme="warning" label="This round has ended" />}
               <span className="text-2xl md:text-3xl font-semibold">Round 1: Empowering Change Makers</span>
-              {roundIsClosed && <Chip theme="grey" label="Closed" />}
             </div>
             {!roundIsClosed &&
               (isIdentityUser ? (

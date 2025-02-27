@@ -7,6 +7,7 @@ export const useProjectDetail = () => {
   const { projectDetail: detail } = useLoaderData() as { projectDetail: Project };
   //FIXME: not static
   const isOwner = false;
+  const roundIsClosed = false;
 
   const onShare = () => console.log('share');
 
@@ -19,6 +20,7 @@ export const useProjectDetail = () => {
       detail,
       projectId,
       isOwner,
+      roundIsClosed,
     },
     operations: {
       navigate,

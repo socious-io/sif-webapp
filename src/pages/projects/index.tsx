@@ -28,9 +28,9 @@ export const Projects = () => {
       <div className="flex flex-col items-stretch gap-6 px-4 py-5 md:p-8">
         <Breadcrumbs items={breadcrumbs} />
         <div className="flex flex-col gap-2">
-          <div className="flex flex-col md:flex-row gap-2 md:gap-4 items-start md:items-center">
+          <div className="flex flex-col items-start gap-1">
+            {roundIsClosed && <Chip theme="warning" label="This round has ended" />}
             <span className="text-2xl md:text-3xl font-semibold">Round 1: Empowering Change Makers</span>
-            {roundIsClosed && <Chip theme="grey" label="Closed" />}
           </div>
           {!roundIsClosed && (
             <div className="flex items-center gap-4 text-sm text-Gray-light-mode-600">
