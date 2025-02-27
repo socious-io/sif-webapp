@@ -77,6 +77,10 @@ export const getProjectAdaptor = async (projectId: string): Promise<AdaptorRes<P
     overview:
       '"Empowering Ethiopia Future" is a project dedicated to providing accessible, high-quality education to children in underprivileged communities across Ethiopia. By establishing community-based learning centers, training local educators, and providing essential educational resources, we aim to bridge the education gap and create opportunities for every child to reach their full potential.',
     roundStats: { estimatedMatch: 1240.4, donatedAmount: 24.3, votes: 2 },
+    donations: [
+      { id: '1', donated_identity: { name: 'Chris Willis' }, donated_price: '100.00 ADA', date: new Date().toString() },
+      { id: '2', donated_identity: { name: 'Anonymous' }, donated_price: '200.00 ADA', date: new Date().toString() },
+    ],
   };
 
   try {
