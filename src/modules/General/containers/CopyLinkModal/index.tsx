@@ -1,3 +1,4 @@
+import { translate } from 'src/core/helpers/utils';
 import FeaturedIcon from 'src/modules/General/components/FeaturedIcon';
 import Icon from 'src/modules/General/components/Icon';
 import Input from 'src/modules/General/components/Input';
@@ -45,7 +46,7 @@ const CopyLinkModal: React.FC<CopyLinkModalProps> = ({
               fontSize={20}
               color={copied ? variables.color_success_700 : variables.color_grey_700}
             />
-            {copyText}
+            {copyText || translate('general-copy-link')}
           </div>
         }
       />

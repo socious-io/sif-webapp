@@ -1,14 +1,19 @@
+import { useCallback, useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { useTranslation } from 'react-i18next';
+import { translate } from 'src/core/helpers/utils';
 
-export const useFileUploader = (
-  files: File[],
+import { Files } from './index.types';
+
+export const useProgressFileUploader = (
+  files: Files[],
   fileTypes: string[],
   onDropFiles: (files: File[]) => void,
   maxSize: number,
   maxFiles: number,
+  error?: string,
+  multiple?: boolean,
 ) => {
-  const { t: translate } = useTranslation();
+  const [errorMessage, setErrorMessage] = useState('');
   const KB = 1024;
   const types = {
     DOC: { doc: 'application/msword', extension: ['.doc'], icon: '' },
@@ -24,8 +29,8 @@ export const useFileUploader = (
     GIF: { doc: 'image/gif', extension: ['.gif'], icon: '' },
     CSV: { doc: 'text/csv', extension: ['.csv'], icon: '/icons/file-csv.svg' },
   };
-  const fileTypesToString = fileTypes.slice(0, fileTypes.length - 1).join();
-  const subtitle = `${fileTypesToString} or ${fileTypes[fileTypes.length - 1]} (max. ${maxSize}mb)`;
+  const joinedFileTypes = fileTypes.slice(0, fileTypes.length - 1).join(', ');
+  const subtitle = `${joinedFileTypes} ${translate('general-file-uploader.or')} ${fileTypes[fileTypes.length - 1]} (${translate('general-file-uploader.max')}. ${maxSize}MB)`;
   const acceptedFileTypes = fileTypes.reduce((acc, value) => {
     if (types[value]) {
       const { doc, extension } = types[value];
@@ -33,6 +38,10 @@ export const useFileUploader = (
     }
     return acc;
   }, {});
+
+  useEffect(() => {
+    setErrorMessage(error || '');
+  }, [error]);
 
   const getIconByType = (type: string) => {
     return Object.values(types).find(item => item.doc === type)?.icon;
@@ -47,16 +56,37 @@ export const useFileUploader = (
     }
   };
 
-  const onDrop = async (acceptedFiles: File[]) => onDropFiles([...files, ...acceptedFiles]);
+  const onDrop = useCallback(
+    (acceptedFiles: File[]) => {
+      setErrorMessage('');
+      const validFiles: File[] = [];
+      const totalUploadedFiles = files.length + acceptedFiles.length;
+      if (totalUploadedFiles > maxFiles) {
+        setErrorMessage(translate('general-file-uploader.limit-error', { limit: maxFiles }));
+      } else {
+        for (const file of acceptedFiles) {
+          if (file.size > maxSize * KB * KB) {
+            setErrorMessage(translate('general-file-uploader.max-error', { name: file.name, max: maxSize }));
+          } else {
+            validFiles.push(file);
+          }
+        }
+        onDropFiles(validFiles);
+      }
+    },
+    [files],
+  );
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     accept: acceptedFileTypes,
     maxFiles,
+    multiple,
+    disabled: files.length + 1 > maxFiles,
   });
 
   return {
-    data: { translate, subtitle },
+    data: { translate, subtitle, errorMessage },
     operations: { generateFileSize, getIconByType, getRootProps, getInputProps },
   };
 };

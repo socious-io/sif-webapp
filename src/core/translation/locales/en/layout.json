@@ -1,3 +1,14 @@
 {
-  "layout-action-button": " Create a Project"
+  "layout-action-button": " Create a Project",
+  "layout-verification": {
+    "success-text": "Your {{title}} has been successfully verified",
+    "success-support-text": "You can now vote and donate for projects.",
+    "success-primary-btn": "Dismiss", 
+    "pending-text": "Verification pending",
+    "pending-support-text": "We reviewing your submitted documents, we will notify you once it is complete.",
+    "not-verified-text": "Verify your {{title}}",
+    "not-verified-support-text": "To vote and donate on our platform, please verify your {{title}}.",
+    "not-verified-primary-btn": "Verify now",
+    "not-verified-secondary-btn": "Learn more"
+  }
 }

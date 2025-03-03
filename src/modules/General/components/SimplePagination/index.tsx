@@ -1,4 +1,5 @@
 import { Pagination as MUIPagination, PaginationItem, PaginationProps } from '@mui/material';
+import { translate } from 'src/core/helpers/utils';
 import variables from 'src/styles/constants/_exports.module.scss';
 
 import css from './index.module.scss';
@@ -38,8 +39,8 @@ const SimplePagination: React.FC<PaginationProps> = props => {
         renderItem={item => (
           <PaginationItem
             slots={{
-              previous: () => <div className={css['button']}>Previous</div>,
-              next: () => <div className={css['button']}>Next</div>,
+              previous: () => <div className={css['button']}>{translate('general-pagination.prev')}</div>,
+              next: () => <div className={css['button']}>{translate('general-pagination.next')}</div>,
             }}
             {...item}
           />
@@ -47,7 +48,7 @@ const SimplePagination: React.FC<PaginationProps> = props => {
         {...props}
       />
       <div className={css['label']}>
-        page {props.page} of {props.count}
+        {translate('general-pagination.page')} {props.page} {translate('general-pagination.of')} {props.count}
       </div>
     </div>
   );

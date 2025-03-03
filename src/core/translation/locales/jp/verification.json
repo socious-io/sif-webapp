@@ -1,0 +1,29 @@
+{
+  "verification-kyb": {
+    "desc-title": "組織を認証する",
+    "desc-subtitle": "資格情報を発行するために、組織の認証を受けてください。",
+    "desc-step1-title": "組織の詳細を送信",
+    "desc-step1-subtitle": "会社証明書などの登録書類と組織名を送信してください。",
+    "desc-step2-title": "処理を待つ",
+    "desc-step2-subtitle": "認証チームが 1 ～ 3 日以内に審査を行います。",
+    "desc-step3-title": "認証完了",
+    "desc-step3-subtitle": "認証が完了すると、メールと通知が送信され、資格情報を発行できるようになります。",
+    "upload-title": "組織の詳細を送信",
+    "upload-subtitle": "会社証明書などの登録書類をアップロードしてください。",
+    "success-title": "書類が送信されました",
+    "success-subtitle": "認証チームが 1 ～ 3 日以内に審査を行います。認証が完了すると、メールと通知が送信され、資格情報を発行できるようになります。",
+    "continue-button": "続行",
+    "cancel-button": "キャンセル"
+  },
+  "verification-kyc": {
+    "title": "本人確認を行う",
+    "subtitle": "すべての Socious 機能にアクセスするために、本人確認を行ってください。",
+    "hint-title": "Socious はブロックチェーン技術を使用して、資格情報を透明かつ追跡可能にします。",
+    "hint-subtitle": "Atala Prism と提携しており、分散型 ID で検証可能な資格情報を受け取ることができます。",
+    "how-verify": "本人確認の方法",
+    "how-verify-step1": "1. アプリのオンボーディングプロセスを完了し、Atala Prism 上で分散型 ID を作成します。",
+    "how-verify-step2": "2. KYC パートナーである Veriff を使用して本人確認を行います。",
+    "download-wallet": "Socious Wallet アプリをダウンロード",
+    "open-wallet": "Socious Wallet アプリを開く"
+  }
+}

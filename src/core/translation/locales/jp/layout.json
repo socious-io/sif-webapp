@@ -1,3 +1,14 @@
 {
-    
+  "layout-action-button": "プロジェクトを作成",
+  "layout-verification": {
+    "success-text": "あなたの{{title}}は正常に認証されました",
+    "success-support-text": "これでプロジェクトへの投票や寄付が可能になりました。",
+    "success-primary-btn": "閉じる",
+    "pending-text": "認証保留中",
+    "pending-support-text": "提出された書類を確認しています。完了次第、お知らせいたします。",
+    "not-verified-text": "{{title}}を認証してください",
+    "not-verified-support-text": "プラットフォームで投票や寄付を行うには、{{title}}の認証が必要です。",
+    "not-verified-primary-btn": "今すぐ認証",
+    "not-verified-secondary-btn": "詳細を見る"
+  }
 }

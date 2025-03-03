@@ -4,6 +4,7 @@ import AvatarLabelGroup from 'src/modules/General/components/AvatarLabelGroup';
 import BackLink from 'src/modules/General/components/BackLink';
 import Breadcrumbs from 'src/modules/General/components/Breadcrumbs';
 import Button from 'src/modules/General/components/Button';
+import Chip from 'src/modules/General/components/Chip';
 import HorizontalTabs from 'src/modules/General/components/HorizontalTabs';
 import Icon from 'src/modules/General/components/Icon';
 import VerticalTabs from 'src/modules/General/components/VerticalTabs';
@@ -14,7 +15,7 @@ import { useProjectDetail } from './useProjectDetail';
 
 export const ProjectDetail = () => {
   const {
-    data: { detail, projectId, isOwner },
+    data: { detail, projectId, isOwner, roundIsClosed },
     operations: { navigate, onShare, onEditProject, onVote },
   } = useProjectDetail();
 
@@ -104,7 +105,10 @@ export const ProjectDetail = () => {
       <Breadcrumbs items={breadcrumbs} />
       <img src="/images/explorer-cover.png" alt="Explorer Cover" width="100%" height="100%" className="rounded-2xl" />
       <div className="flex flex-col md:flex-row items-stretch justify-between gap-4">
-        <span className="text-2xl md:text-3xl font-medium">{detail.title}</span>
+        <div className="flex flex-col items-start gap-1">
+          {roundIsClosed && <Chip theme="warning" label="This round has ended" />}
+          <span className="text-2xl md:text-3xl font-medium">{detail.title}</span>
+        </div>
         {isOwner && (
           <div className="flex items-stretch gap-3">
             <Button

@@ -1,3 +1,6 @@
+export * from './media/index.adaptors';
+export * from './media/index.types';
+
 export * from './projects/index.adaptors';
 export * from './projects/index.types';
 
