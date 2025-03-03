@@ -81,8 +81,10 @@ const Input: React.FC<InputProps> = ({
       {postfixDropdown && (
         <InputDropdown
           options={postfixDropdown.options}
-          maxMenuHeight={100}
+          value={postfixDropdown.value}
           onChange={option => postfixDropdown.onChange?.((option as Option).value)}
+          maxMenuHeight={100}
+          minWidth={postfixDropdown.minWidth || '6rem'}
         />
       )}
     </>
