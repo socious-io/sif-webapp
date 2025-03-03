@@ -9,6 +9,7 @@ import HorizontalTabs from 'src/modules/General/components/HorizontalTabs';
 import Icon from 'src/modules/General/components/Icon';
 import VerticalTabs from 'src/modules/General/components/VerticalTabs';
 import VoteDetailCard from 'src/modules/Projects/components/VoteDetailCard';
+import DonationsList from 'src/modules/Projects/containers/DonationsList';
 import variables from 'src/styles/constants/_exports.module.scss';
 
 import { useProjectDetail } from './useProjectDetail';
@@ -92,8 +93,9 @@ export const ProjectDetail = () => {
     {
       label: 'Donations',
       content: (
-        <div>
+        <div className="flex flex-col items-stretch gap-8">
           <span className="text-2xl font-semibold leading-8">Donations</span>
+          <DonationsList />
         </div>
       ),
     },

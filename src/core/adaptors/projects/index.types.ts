@@ -8,6 +8,13 @@ export type RoundStats = {
   votes: number;
 };
 
+export interface Donation {
+  id: string;
+  donated_identity: { name: string };
+  donated_price: string;
+  date: string;
+}
+
 export interface Project {
   id: string;
   coverImg: string;
@@ -19,6 +26,7 @@ export interface Project {
   location?: string;
   overview?: string;
   roundStats?: RoundStats;
+  donations?: Donation[];
 }
 
 export type ProjectRes = PaginateRes<Project>;
