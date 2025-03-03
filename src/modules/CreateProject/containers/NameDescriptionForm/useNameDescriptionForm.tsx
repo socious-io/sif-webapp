@@ -28,6 +28,7 @@ export const useNameDescriptionForm = () => {
     formState: { errors },
     handleSubmit,
     watch,
+    setValue,
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -39,7 +40,8 @@ export const useNameDescriptionForm = () => {
   const onSubmit = (data: FormData) => {
     const { name, description, website } = data;
     dispatch(setProjectData({ name, description, website }));
-    navigateStep2();
+    console.log(description);
+    // navigateStep2();
   };
 
   const navigateStep2 = () => navigate('/create/step-3');
@@ -60,5 +62,7 @@ export const useNameDescriptionForm = () => {
     name,
     description,
     hasErrors,
+    watch,
+    setValue,
   };
 };
