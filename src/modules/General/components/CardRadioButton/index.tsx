@@ -1,15 +1,18 @@
 import { Radio, RadioGroup } from '@mui/material';
 
-import css from './index.module.scss';
+import styles from './index.module.scss';
 import { CardRadioButtonProps } from './index.types';
 
 const CardRadioButton: React.FC<CardRadioButtonProps> = ({
   items,
   selectedValue,
   setSelectedValue,
+  direction = 'row',
   customStyle = '',
   containerClassName = '',
+  titleClassName = '',
 }) => {
+  const isColDirection = direction === 'col';
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedValue(event.target.value);
   };
@@ -19,25 +22,29 @@ const CardRadioButton: React.FC<CardRadioButtonProps> = ({
       {items.map(item => (
         <div
           key={item.id}
-          className={`${css['container']} 
-          ${selectedValue === item.value && !item.disabled && css['container--selected']} 
-          ${item.disabled && css['container--disabled']} 
-          ${containerClassName}`}
           onClick={() => !item.disabled && setSelectedValue(item.value)}
+          className={`${styles['container']} 
+          ${selectedValue === item.value && !item.disabled && styles['container--selected']} 
+          ${item.disabled && styles['container--disabled']} 
+          ${containerClassName}`}
         >
-          {item.icon && item.icon}
-          <div className={css['content']}>
-            <div className={css['content__title']}>{item.title && item.title}</div>
-            <div className={css['content__desc']}>{item.description && item.description}</div>
+          <div className={`${styles['wrapper']} ${isColDirection && styles['wrapper--col']}`}>
+            {item.icon}
+            <div className={styles['content']}>
+              <div className={`${styles['content__title']} ${titleClassName}`}>{item.title}</div>
+              {item.description && (
+                <div className={styles['content__desc']}>{item.description && item.description}</div>
+              )}
+            </div>
           </div>
           <Radio
             id={item.id}
-            size={item?.radioSize || 'medium'}
-            onChange={handleChange}
             value={item.value}
             checked={selectedValue === item.value}
+            onChange={handleChange}
             disabled={item.disabled}
-            className="p-0"
+            size={item?.radioSize || 'medium'}
+            className={`p-0 ${isColDirection && styles['radio']}`}
           />
         </div>
       ))}

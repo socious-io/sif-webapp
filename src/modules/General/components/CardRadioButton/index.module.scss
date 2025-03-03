@@ -1,11 +1,13 @@
-@import 'src/styles/utilities/_mixins.scss';
 @import 'src/styles/constants/_primitives.scss';
 
 .container {
-    @include flex(normal, flex-start);
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
     gap: 1rem;
-    flex:1;
     padding: 1rem;
+    position: relative;
     border: solid 1px $color-grey-200;
     border-radius: $radius-xl;
     cursor: pointer;
@@ -19,31 +21,45 @@
     }
 
     &--disabled {
-        display: none;
-        // background-color: $color-grey-200;
-        // &:hover {
-        //     box-shadow: none;
-        // }
+        background-color: $color-grey-200;
+        &:hover {
+            box-shadow: none;
+        }
+    }
+
+    .wrapper {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 1rem;
+
+        &--col {
+            flex-direction: column;
+        }
     }
 
     .content {
+        flex: 1;
         display: flex;
         flex-direction: column;
-        flex: 1;
 
         &__title,
         &__desc {
             font-size: 14px;
             font-weight: 500;
             line-height: 24px;
-            letter-spacing: 0em;
-            text-align: left;
             color: $color-grey-700;
+            text-align: left;
         }
 
         &__desc {
             font-weight: 400;
             color: $color-grey-600;
         }
+    }
+
+    .radio {
+        position: absolute;
+        right: 1rem;
     }
 }

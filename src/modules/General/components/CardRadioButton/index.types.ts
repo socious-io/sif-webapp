@@ -4,16 +4,18 @@ export interface CardRadioButtonProps {
   items: CardRadioButtonItem[];
   selectedValue?: string;
   setSelectedValue: (value: string) => void;
+  direction?: 'row' | 'col';
   customStyle?: string;
   containerClassName?: string;
+  titleClassName?: string;
 }
 
 export type CardRadioButtonItem = {
   id: string;
   value: string;
   title: string;
-  disabled: boolean;
   description?: string;
   icon?: ReactNode;
+  disabled?: boolean;
   radioSize?: 'small' | 'medium';
 };
