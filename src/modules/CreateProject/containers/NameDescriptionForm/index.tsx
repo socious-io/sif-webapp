@@ -1,10 +1,11 @@
 import Button from 'src/modules/General/components/Button';
 import Input from 'src/modules/General/components/Input';
+import TiptapEditor from 'src/modules/General/components/RichTextEditor';
 
 import { useNameDescriptionForm } from './useNameDescriptionForm';
 
 const NameDescriptionForm: React.FC = () => {
-  const { handleSubmit, onSubmit, errors, register, goBack, hasErrors } = useNameDescriptionForm();
+  const { handleSubmit, onSubmit, errors, register, goBack, hasErrors, watch, setValue } = useNameDescriptionForm();
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -16,7 +17,6 @@ const NameDescriptionForm: React.FC = () => {
           errors={errors['projectName']?.message ? [errors['projectName']?.message.toString()] : undefined}
           required
         />
-
         <div className="my-[32px]">
           <Input
             label="Website (optional)"
@@ -26,16 +26,12 @@ const NameDescriptionForm: React.FC = () => {
             errors={errors['website']?.message ? [errors['website']?.message.toString()] : undefined}
           />
         </div>
-
-        <Input
-          label="Description*"
-          placeholder="Tell us more about your project"
-          register={register}
-          name="description"
+        <TiptapEditor
+          placeholder="Enter a description..."
+          value={watch('description')}
+          setValue={setValue}
+          label="Project description*"
           errors={errors['description']?.message ? [errors['description']?.message.toString()] : undefined}
-          required
-          multiline
-          customHeight="216px"
         />
 
         <Button color="primary" block type="submit" disabled={hasErrors} customStyle="mt-[48px]">

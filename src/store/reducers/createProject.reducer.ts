@@ -15,11 +15,11 @@ export interface ProjectState {
 }
 
 const initialState: ProjectState = {
-  name: 'Project name',
+  name: '',
   wallet: '',
-  coverImage: 'https://marketplace.canva.com/EAE4nT7zOMA/1/0/1600w/canva-professional-linkedin-banner-XlMmvzORY4U.jpg',
-  website: 'www.example.com',
-  description: 'A project with blockchain and for crowdfunding',
+  coverImage: '',
+  website: '',
+  description: '',
   socialCauses: [],
   location: '',
 };
