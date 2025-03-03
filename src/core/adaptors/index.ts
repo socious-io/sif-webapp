@@ -17,3 +17,4 @@ export interface PaginateRes<T> {
   total: number;
   items: T[];
 }
+

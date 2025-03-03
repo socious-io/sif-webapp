@@ -3,9 +3,10 @@ import Pagination from 'src/modules/General/components/Pagination';
 import PaginationMobile from 'src/modules/General/components/PaginationMobile';
 import ProjectCard from 'src/modules/Projects/components/ProjectCard';
 
+import { ProjectsListProps } from './index.types';
 import { useProjectsList } from './useProjectsList';
 
-const ProjectsList = () => {
+const ProjectsList: React.FC<ProjectsListProps> = ({ hasTitle = true }) => {
   const {
     data: { projects, total, page, totalPage },
     operations: { navigate, onChangePage },
@@ -14,7 +15,7 @@ const ProjectsList = () => {
   return (
     <>
       <div className="flex flex-col gap-8 mt-2 text-lg font-semibold">
-        All projects ({total})
+        {hasTitle && <> All projects ({total})</>}
         {!!projects.length && (
           <div className="flex flex-wrap mx-[-1.5rem] text-base font-normal">
             {projects.map(project => (
