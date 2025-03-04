@@ -2,8 +2,6 @@ import { useState } from 'react';
 import { Location, searchLocation } from 'src/core/api';
 
 export const useLocationSearchDropdown = () => {
-  const [selectedOption, setSelectedOption] = useState();
-    
   const cityToOption = (cities: Location[]) => {
     return cities.map(city => ({
       label: JSON.stringify({ label: `${city.name}, ${city.country_name}`, description: city.timezone_utc }),
@@ -22,8 +20,6 @@ export const useLocationSearchDropdown = () => {
       console.error('Error fetching city data:', error);
     }
   };
-  const onSelectCity = location => {
-    // updateUser({ ...state, city: location.city, country: location.countryCode, cityLabel: location.label });
-  };
-  return { searchCities, onSelectCity };
+
+  return { searchCities };
 };

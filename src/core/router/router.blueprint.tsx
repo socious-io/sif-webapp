@@ -97,6 +97,21 @@ export const blueprint: RouteObject[] = [
               };
             },
           },
+          {
+            path: ':id/edit',
+            loader: async ({ params }) => {
+              if (params.id) {
+                const projects = await getProjectAdaptor(params.id);
+                return { project: projects.data };
+              }
+            },
+            async lazy() {
+              const { EditProject } = await import('src/pages/editProject');
+              return {
+                Component: EditProject,
+              };
+            },
+          },
         ],
       },
       {

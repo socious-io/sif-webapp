@@ -467,6 +467,9 @@ export default {
       tertiary: {
         600: '#445568',
       },
+      secondary: {
+        700: '2D4158',
+      },
     },
     fontSize: {
       xs: '0.75rem',
