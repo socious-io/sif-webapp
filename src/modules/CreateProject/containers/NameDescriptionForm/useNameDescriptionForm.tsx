@@ -13,8 +13,8 @@ interface FormData {
 }
 
 const schema = yup.object().shape({
-  name: yup.string().required('Name is required'),
-  description: yup.string().required('Description is required'),
+  name: yup.string().required('This field is required'),
+  description: yup.string().required('This field is required'),
   website: yup.string().nullable(),
 });
 
@@ -25,44 +25,45 @@ export const useNameDescriptionForm = () => {
 
   const {
     register,
-    formState: { errors },
+    formState: { errors, isValid },
     handleSubmit,
     watch,
     setValue,
   } = useForm({
     resolver: yupResolver(schema),
+    mode: 'all',
     defaultValues: {
       name: project.name || '',
       description: project.description || '',
-      website: project.website || null,
+      website: project.website || '',
     },
   });
+  const description = watch('description') || '';
+  const hasErrors = !isValid;
+
+  const goBack = () => navigate('/create/step-1');
+
+  const nextStep = () => navigate('/create/step-3');
+
   const onSubmit = (data: FormData) => {
     const { name, description, website } = data;
     dispatch(setProjectData({ name, description, website }));
-    console.log(description);
-    // navigateStep2();
+    console.log(description, data);
+    // nextStep();
   };
 
-  const navigateStep2 = () => navigate('/create/step-3');
-
-  const goBack = () => navigate(-1);
-
-  const name = watch('name') || '';
-  const description = watch('description') || '';
-  const hasErrors = Object.keys(errors).length > 0 || !name || !description;
-
   return {
-    navigateStep2,
-    handleSubmit,
-    onSubmit,
-    errors,
-    register,
-    goBack,
-    name,
-    description,
-    hasErrors,
-    watch,
-    setValue,
+    data: {
+      register,
+      errors,
+      description,
+      hasErrors,
+    },
+    operations: {
+      goBack,
+      setValue,
+      handleSubmit,
+      onSubmit,
+    },
   };
 };
