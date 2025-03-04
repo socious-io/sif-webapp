@@ -66,7 +66,8 @@ export const getProjectAdaptor = async (projectId: string): Promise<AdaptorRes<P
   //FIXME: mapping from API to adaptor
   const data = {
     id: '1',
-    coverImg: '/images/explorer-cover.png',
+    coverImg:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0aqTwu5tsXDLTumQkzZqkGPWqrwBwHRxxJd-9mUy5Jo3zisyq0xGsPBbvBI98Z2d60g&usqp=CAU',
     category: 'Gender Equality',
     title: 'Empowering Women Through Education',
     description:

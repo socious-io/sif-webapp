@@ -1,5 +1,9 @@
-import { Organization } from 'src/core/api';
-
-import { SelectProps } from '../../components/SearchDropdown/index.types';
-
-export type CompanySearchDropdownProps = SelectProps & { onSetCompanies?: (companies: Organization[]) => void };
+export type Location = {
+  city: string;
+  countryCode: string;
+  label: string;
+};
+export interface CompanySearchDropdownProps {
+  onSelect: (value) => void;
+  value?: Location;
+}

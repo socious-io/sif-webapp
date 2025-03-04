@@ -4,8 +4,8 @@ import { CompanySearchDropdownProps } from './index.types';
 import { useLocationSearchDropdown } from './useLocationSearchDropdown';
 import SearchDropdown from '../../components/SearchDropdown';
 
-const LocationSearchDropdown: React.FC<CompanySearchDropdownProps> = ({ onSelect }) => {
-  const { onSelectCity, searchCities, value } = useLocationSearchDropdown();
+const LocationSearchDropdown: React.FC<CompanySearchDropdownProps> = ({ onSelect, value }) => {
+  const { searchCities } = useLocationSearchDropdown();
   return (
     <SearchDropdown
       isClearable
@@ -17,7 +17,7 @@ const LocationSearchDropdown: React.FC<CompanySearchDropdownProps> = ({ onSelect
       loadOptions={searchCities}
       icon="search-lg"
       hasDropdownIcon={false}
-      onChange={value => console.log(value)}
+      onChange={onSelect}
     />
   );
 };
