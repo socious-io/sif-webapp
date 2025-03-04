@@ -24,7 +24,7 @@ const IconButton: React.FC<IconButtonProps> = ({
       onClick={handleClick}
       {...props}
     >
-      {iconName ? <Icon fontSize={iconSize} name={iconName} color={iconColor} className="!cursor-pointer" /> : img}
+      {iconName ? <Icon fontSize={iconSize} name={iconName} color={iconColor} cursor="pointer" /> : img}
     </MUIIconButton>
   );
 };

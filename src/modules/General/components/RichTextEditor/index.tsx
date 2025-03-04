@@ -1,56 +1,74 @@
-import './index.module.scss';
+import Image from '@tiptap/extension-image';
 import Placeholder from '@tiptap/extension-placeholder';
 import Underline from '@tiptap/extension-underline';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
+import { ChangeEvent, useEffect } from 'react';
+import variables from 'src/styles/constants/_exports.module.scss';
 
 import styles from './index.module.scss';
 import { RichTextEditorProps } from './index.types';
+import IconButton from '../IconButton';
 
 const MenuBar = ({ editor }) => {
-  if (!editor) return null;
+  const onUploadImage = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => editor.chain().focus().setImage({ src: reader.result }).run();
+      reader.readAsDataURL(file);
+    }
+  };
 
   return (
     <div className={styles['menu']}>
-      <div className="button-group">
-        <button
-          onClick={() => editor.chain().focus().toggleBold().run()}
-          disabled={!editor.can().chain().focus().toggleBold().run()}
-          className={editor.isActive('bold') ? styles['menu-button-active'] : styles['menu-button']}
-        >
-          B
-        </button>
-        <button
-          onClick={() => editor.chain().focus().toggleItalic().run()}
-          disabled={!editor.can().chain().focus().toggleItalic().run()}
-          className={
-            editor.isActive('italic') ? `${styles['menu-button-active']} italic` : `${styles['menu-button']} italic`
-          }
-        >
-          i
-        </button>
-        <button
-          onClick={() => editor.chain().focus().toggleUnderline().run()}
-          disabled={!editor.can().chain().focus().toggleUnderline().run()}
-          className={
-            editor.isActive('underline')
-              ? `${styles['menu-button-active']} underline`
-              : `${styles['menu-button']} underline`
-          }
-        >
-          u
-        </button>
+      <div className="relative">
+        <input type="file" className={styles['file']} onChange={onUploadImage} />
+        <IconButton
+          iconName="image-01"
+          size="medium"
+          iconSize={20}
+          iconColor={variables.color_grey_600}
+          customStyle={styles['button']}
+        />
       </div>
+      <button
+        type="button"
+        onClick={() => editor.chain().focus().toggleBold().run()}
+        disabled={!editor.can().chain().focus().toggleBold().run()}
+        className={`${styles['button']} ${editor.isActive('bold') && styles['button--active']}`}
+      >
+        B
+      </button>
+      <button
+        type="button"
+        onClick={() => editor.chain().focus().toggleItalic().run()}
+        disabled={!editor.can().chain().focus().toggleItalic().run()}
+        className={`italic ${styles['button']} ${editor.isActive('italic') && styles['button--active']}`}
+      >
+        i
+      </button>
+      <button
+        type="button"
+        onClick={() => editor.chain().focus().toggleUnderline().run()}
+        disabled={!editor.can().chain().focus().toggleUnderline().run()}
+        className={`underline ${styles['button']} ${editor.isActive('underline') && styles['button--active']}`}
+      >
+        u
+      </button>
     </div>
   );
 };
 
-const RichTextEditor: React.FC<RichTextEditorProps & { setValue: any; label?: string }> = ({
+const RichTextEditor: React.FC<RichTextEditorProps> = ({
+  name,
+  label,
+  placeholder,
   value = '',
   onChange,
-  placeholder,
   setValue,
-  label,
+  register,
+  errors,
 }) => {
   const extensions = [
     Placeholder.configure({ placeholder, emptyNodeClass: 'is-empty' }),
@@ -59,6 +77,7 @@ const RichTextEditor: React.FC<RichTextEditorProps & { setValue: any; label?: st
       italic: { HTMLAttributes: { class: 'italic' } },
     }),
     Underline.configure({ HTMLAttributes: { class: 'underline' } }),
+    Image,
   ];
 
   const editor = useEditor({
@@ -66,27 +85,32 @@ const RichTextEditor: React.FC<RichTextEditorProps & { setValue: any; label?: st
     content: value,
     onUpdate: ({ editor }) => {
       const html = editor.getHTML();
-      setValue('description', html, { shouldValidate: true });
+      const isEmptyEditor = editor.isEmpty;
+      setValue?.(name, isEmptyEditor ? '' : html, { shouldValidate: true });
       onChange?.(html);
     },
   });
 
+  useEffect(() => {
+    register?.(name);
+  }, [register, name]);
+
   if (!editor) return null;
 
   return (
-    <>
-      {label && (
-        <div className={'mb-2'}>
-          <label className={styles['label']}>{label}</label>{' '}
-        </div>
-      )}
-      <div className={styles['container']}>
-        <div className={styles['editor-wrapper']}>
-          <EditorContent editor={editor} />
-          <MenuBar editor={editor} />
-        </div>
+    <div className={styles['main']}>
+      {label && <label className={styles['label']}>{label}</label>}
+      <div className={`${styles['container']} ${errors ? styles['container--error'] : styles['container--default']}`}>
+        <EditorContent editor={editor} />
+        <MenuBar editor={editor} />
       </div>
-    </>
+      {errors &&
+        errors.map((e, index) => (
+          <p key={index} className={styles['errors']}>
+            {e}
+          </p>
+        ))}
+    </div>
   );
 };
 

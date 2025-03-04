@@ -1,9 +1,10 @@
-import { Editor } from '@tiptap/react';
-
 export interface RichTextEditorProps {
+  name: string;
+  label?: string;
+  placeholder?: string;
   value?: string;
   onChange?: (value: string) => void;
-  placeholder?: string;
-  label?: string;
+  setValue?: any;
+  register?: any;
   errors?: string[];
 }
