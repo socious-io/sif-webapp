@@ -65,6 +65,21 @@ export const blueprint: RouteObject[] = [
                   };
                 },
               },
+              {
+                path: ':id/vote',
+                loader: async ({ params }) => {
+                  if (params.id) {
+                    const detail = await getProjectAdaptor(params.id);
+                    return { projectDetail: detail.data };
+                  }
+                },
+                async lazy() {
+                  const { VoteProject } = await import('src/pages/projects/vote');
+                  return {
+                    Component: VoteProject,
+                  };
+                },
+              },
             ],
           },
         ],

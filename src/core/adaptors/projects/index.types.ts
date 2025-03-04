@@ -30,3 +30,9 @@ export interface Project {
 }
 
 export type ProjectRes = PaginateRes<Project>;
+
+export type DonateReq = {
+  donate: string;
+  currency: string;
+  preventDisplayName: boolean;
+};

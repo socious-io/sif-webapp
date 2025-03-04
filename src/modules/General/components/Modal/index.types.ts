@@ -6,7 +6,7 @@ export interface ModalProps {
   handleClose: (a?: any) => void;
   icon?: ReactNode;
   title?: string | ReactNode;
-  subTitle?: string;
+  subTitle?: string | ReactNode;
   content?: ReactNode;
   footer?: ReactNode;
   mobileFullHeight?: boolean;
@@ -16,6 +16,7 @@ export interface ModalProps {
   customStyle?: string;
   id?: string;
   inlineTitle?: boolean;
+  centerHeader?: boolean;
   contentClassName?: string;
   closeButtonClassName?: string;
 }

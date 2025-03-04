@@ -4,6 +4,10 @@ export * from './media/index.types';
 export * from './projects/index.adaptors';
 export * from './projects/index.types';
 
+export interface SuccessRes {
+  message?: string;
+}
+
 export type AdaptorRes<T = null> = {
   data: T | null;
   error: string | null;

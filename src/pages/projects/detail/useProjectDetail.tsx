@@ -13,7 +13,7 @@ export const useProjectDetail = () => {
 
   const onEditProject = () => console.log('edit project:', projectId);
 
-  const onVote = () => console.log('vote');
+  const onVote = () => navigate('vote');
 
   return {
     data: {

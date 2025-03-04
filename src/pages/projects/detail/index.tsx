@@ -105,7 +105,7 @@ export const ProjectDetail = () => {
     <div className="flex flex-col gap-6 px-4 py-8 md:p-8">
       <BackLink title="Back" onBack={() => navigate('/projects')} customStyle="md:!hidden !justify-start !p-0" />
       <Breadcrumbs items={breadcrumbs} />
-      <img src="/images/explorer-cover.png" alt="Explorer Cover" width="100%" height="100%" className="rounded-2xl" />
+      <img src="/images/explorer-cover.png" alt="Project Cover" width="100%" height="100%" className="rounded-2xl" />
       <div className="flex flex-col md:flex-row items-stretch justify-between gap-4">
         <div className="flex flex-col items-start gap-1">
           {roundIsClosed && <Chip theme="warning" label="This round has ended" />}
