@@ -28,7 +28,7 @@ export const blueprint: RouteObject[] = [
           {
             path: '/create',
             async lazy() {
-              const { CreateProject } = await import('src/pages/CreateProject/landing');
+              const { CreateProject } = await import('src/pages/createProject/landing');
               return {
                 Component: CreateProject,
               };
@@ -67,6 +67,36 @@ export const blueprint: RouteObject[] = [
               },
             ],
           },
+          {
+            path: ':id/projects',
+            loader: async ({ params }) => {
+              if (params.id) {
+                const projects = await getProjectsAdaptor(1, 10);
+                return { projects: projects.data };
+              }
+            },
+            async lazy() {
+              const { UsersProjects } = await import('src/pages/usersProjects');
+              return {
+                Component: UsersProjects,
+              };
+            },
+          },
+          {
+            path: ':id/edit',
+            loader: async ({ params }) => {
+              if (params.id) {
+                const projects = await getProjectAdaptor(params.id);
+                return { project: projects.data };
+              }
+            },
+            async lazy() {
+              const { EditProject } = await import('src/pages/editProject');
+              return {
+                Component: EditProject,
+              };
+            },
+          },
         ],
       },
       {
@@ -75,7 +105,7 @@ export const blueprint: RouteObject[] = [
           {
             path: 'step-1',
             async lazy() {
-              const { CreateProjectStep1 } = await import('src/pages/CreateProject/step-1');
+              const { CreateProjectStep1 } = await import('src/pages/createProject/step-1');
               return {
                 Component: CreateProjectStep1,
               };
@@ -84,9 +114,36 @@ export const blueprint: RouteObject[] = [
           {
             path: 'step-2',
             async lazy() {
-              const { CreateProjectStep2 } = await import('src/pages/CreateProject/step-2');
+              const { CreateProjectStep2 } = await import('src/pages/createProject/step-2');
               return {
                 Component: CreateProjectStep2,
+              };
+            },
+          },
+          {
+            path: 'step-3',
+            async lazy() {
+              const { CreateProjectStep3 } = await import('src/pages/createProject/step-3');
+              return {
+                Component: CreateProjectStep3,
+              };
+            },
+          },
+          {
+            path: 'step-4',
+            async lazy() {
+              const { CreateProjectStep4 } = await import('src/pages/createProject/step-4');
+              return {
+                Component: CreateProjectStep4,
+              };
+            },
+          },
+          {
+            path: 'publish',
+            async lazy() {
+              const { Publish } = await import('src/pages/createProject/publish');
+              return {
+                Component: Publish,
               };
             },
           },

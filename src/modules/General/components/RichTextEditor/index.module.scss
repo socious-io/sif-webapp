@@ -1,0 +1,37 @@
+@import 'src/styles/constants/_primitives.scss';
+
+.container {
+    border: 1px solid #ced5df;
+    border-radius: 8px;
+    padding: 16px;
+    :global(.tiptap) {
+        font-size: 16px;
+        height: 216px;
+        &.is-empty::before {
+            color: red; /* Set placeholder text color to red */
+        }
+    }
+    :global(p.is-editor-empty:first-child::before) {
+        color: #617089;
+        content: attr(data-placeholder);
+        float: left;
+        height: 0;
+        pointer-events: none;
+    }
+}
+.label {
+    margin-bottom: 6px;
+    color: $color-grey-700;
+}
+.menu {
+    cursor: pointer;
+    display: flex;
+    flex-direction: row-reverse;
+}
+.menu-button {
+    padding: 8px;
+}
+.menu-button-active {
+    padding: 8px;
+    font-weight: bold;
+}

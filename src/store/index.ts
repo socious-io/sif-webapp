@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 
+import { createProjectSlice } from './reducers/createProject.reducer';
 import { languageSlice } from './reducers/language.reducer';
 import { notificationSlice } from './reducers/notification.reducer';
 import { orgSlice } from './reducers/org.reducer';
@@ -13,6 +14,7 @@ const store = configureStore({
     user: userSlice.reducer,
     org: orgSlice.reducer,
     notification: notificationSlice.reducer,
+    createProject: createProjectSlice.reducer,
   },
   middleware: getDefaultMiddleware => {
     return getDefaultMiddleware({
