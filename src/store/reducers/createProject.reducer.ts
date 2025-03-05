@@ -10,8 +10,9 @@ export interface ProjectState {
   coverImage: string;
   website?: string | null;
   description: string;
-  socialCauses: SocialCauseVal[];
-  location: string;
+  socialCause: string;
+  city: string;
+  country: string;
 }
 
 const initialState: ProjectState = {
@@ -20,8 +21,9 @@ const initialState: ProjectState = {
   coverImage: '',
   website: '',
   description: '',
-  socialCauses: [],
-  location: '',
+  socialCause: '',
+  city: '',
+  country: '',
 };
 
 export const createProjectSlice = createSlice({
@@ -29,7 +31,6 @@ export const createProjectSlice = createSlice({
   initialState,
   reducers: {
     setProjectData: (state, action: PayloadAction<Partial<ProjectState>>) => {
-      console.log(state);
       return { ...state, ...action.payload };
     },
     resetProject: () => initialState,

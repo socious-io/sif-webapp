@@ -1,6 +1,6 @@
 export type Location = {
   city: string;
-  countryCode: string;
+  country: string;
   label: string;
 };
 export interface CompanySearchDropdownProps {

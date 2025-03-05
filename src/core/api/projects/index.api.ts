@@ -1,4 +1,4 @@
-import { get, post } from '../http';
+import { get, post, patch } from '../http';
 import { FilterReq, PaginateReq } from '../types';
 import { Project, ProjectsRes } from './index.types';
 
@@ -16,4 +16,12 @@ export async function vote(id: string): Promise<any> {
 
 export async function donate(id: string, payload: any): Promise<any> {
   return (await post<any>(`projects/${id}/donate`, payload)).data;
+}
+
+export async function createProjects(payload: Project): Promise<any> {
+  return (await post<any>('projects', payload)).data;
+}
+
+export async function editProjects(payload: Project): Promise<any> {
+  return (await post<any>('projects', payload)).data;
 }

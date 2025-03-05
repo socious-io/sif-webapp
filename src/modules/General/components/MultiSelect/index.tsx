@@ -126,13 +126,13 @@ const MultiSelect: React.FC<MultiSelectProps> = props => {
         </Typography>
       </div>
 
-      {displayDefaultBadges && (
+      {/* {displayDefaultBadges && (
         <div className={css.popularDiv}>
           <Typography variant="caption" className={css.popularLabel}>
             {translate('general-multi-select-popular')}
           </Typography>
         </div>
-      )}
+      )} */}
       {(displayDefaultBadges || searchVal) && (
         <div className={css.chipContainer} style={customHeight ? { height: customHeight, overflowY: 'auto' } : {}}>
           {chipItems?.map(i => (

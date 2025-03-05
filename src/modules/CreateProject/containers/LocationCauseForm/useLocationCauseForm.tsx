@@ -7,16 +7,15 @@ import { RootState } from 'src/store';
 import { setProjectData } from 'src/store/reducers/createProject.reducer';
 
 import { locationOptions } from './statics';
+import { socialCausesToCategoryAdaptor } from 'src/core/adaptors';
 
 export const useLocationCauseForm = () => {
   const navigate = useNavigate();
   const [selectedCardId, setSelectedCardId] = useState('');
-  const { location, socialCauses } = useSelector((state: RootState) => state.createProject);
+  const { city, country, socialCause } = useSelector((state: RootState) => state.createProject);
   const dispatch = useDispatch();
   const keyItems = Object.keys(SOCIAL_CAUSES);
-  const items = keyItems.map(i => {
-    return { value: SOCIAL_CAUSES[i].value, label: SOCIAL_CAUSES[i].value };
-  });
+  const items = socialCausesToCategoryAdaptor();
   const options: CardRadioButtonItem[] = locationOptions.map(option => {
     return {
       id: option.id,
@@ -26,12 +25,12 @@ export const useLocationCauseForm = () => {
     };
   });
 
-  const onSelectLocation = (location: string) => dispatch(setProjectData({ location }));
-  const onSelectCauses = (socialCauses: string[]) => dispatch(setProjectData({ socialCauses }));
+  const onSelectLocation = location => dispatch(setProjectData({ city: location.city, country: location.country }));
+  const onSelectCauses = value => dispatch(setProjectData({ socialCause: value.length ? value[0].label : '' }));
 
   const navigateStep2 = () => navigate('/create/step-2');
   const goBack = () => navigate(-1);
-  const isEnabled = location !== null && socialCauses.length;
+  const isEnabled = socialCause !== '' && ((country !== '' && city !== '') || selectedCardId === 'Worldwide');
   return {
     navigateStep2,
     items,
@@ -42,6 +41,6 @@ export const useLocationCauseForm = () => {
     onSelectCauses,
     onSelectLocation,
     isEnabled,
-    socialCauses,
+    socialCause,
   };
 };

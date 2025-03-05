@@ -17,7 +17,7 @@ const LocationSearchDropdown: React.FC<CompanySearchDropdownProps> = ({ onSelect
       loadOptions={searchCities}
       icon="search-lg"
       hasDropdownIcon={false}
-      onChange={onSelect}
+      onChange={value => onSelect(value)}
     />
   );
 };
