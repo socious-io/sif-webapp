@@ -19,3 +19,9 @@ export interface PaginateRes<T> {
   total: number;
   items: T[];
 }
+
+export interface OptionType {
+  value: string;
+  label: string;
+  icon?: string;
+}
