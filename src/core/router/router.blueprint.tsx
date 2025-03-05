@@ -76,6 +76,15 @@ export const blueprint: RouteObject[] = [
         ],
       },
       {
+        path: '/intro',
+        async lazy() {
+          const { Intro } = await import('src/pages/intro');
+          return {
+            Component: Intro,
+          };
+        },
+      },
+      {
         path: '/create',
         children: [
           {
