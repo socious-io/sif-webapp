@@ -2,6 +2,7 @@ import marker from 'src/assets/icons/location-marker.svg';
 import Button from 'src/modules/General/components/Button';
 import ConnectButton from 'src/modules/General/components/ConnectButton';
 import SuccessModal from 'src/modules/General/SuccessModal';
+import { translate } from 'src/core/helpers/utils';
 
 import { useCreatePreview } from './useCreatePreview';
 
@@ -30,31 +31,31 @@ const CreatePreview: React.FC = () => {
         <div className="text-[20px] font-medium my-[20px] border-b border-b-Gray-light-mode-300 border-solid border-t-0 border-l-0 border-r-0 pb-5">
           {name}
         </div>
-        <div className={styles.titles}>Social cause</div>
+        <div className={styles.titles}>{translate('create-preview-social-cause')}</div>
         <div className={styles.values}>
-          <span>{socialCause} </span>
+          <span>{socialCause}</span>
         </div>
-        <div className={styles.titles}>Website</div>
+        <div className={styles.titles}>{translate('create-preview-website')}</div>
         <div className={styles.values}>{website}</div>
-        <div className={styles.titles}>Location</div>
+        <div className={styles.titles}>{translate('create-preview-location')}</div>
         <div className={styles.values}>
           <img src={marker} className="mr-3" /> {country}, {city}
         </div>
         <div className="text-[20px] font-medium mt-5 pt-5 border-t border-t-Gray-light-mode-300 border-solid border-b-0 border-l-0 border-r-0 pb-5">
-          Overview
+          {translate('create-preview-overview')}
         </div>
         <div className={styles.values}>{description}</div>
         <Button color="primary" block type="submit" onClick={() => setShowSuccessModal(true)} customStyle="mt-9">
-          Publish
+          {translate('publish-button')}
         </Button>
         <Button color="secondary" block variant="outlined" customStyle="mt-[16px]" onClick={goBack}>
-          Back
+          {translate('back-button')}
         </Button>
       </div>
       <SuccessModal
         open={showSuccessModal}
-        message="Your project has been successfully published!"
-        title="Congrats!"
+        message={translate('create-preview-success-message')}
+        title={translate('create-preview-success-title')}
         handleClose={() => setShowSuccessModal(false)}
       />
     </>

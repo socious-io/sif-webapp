@@ -3,9 +3,11 @@ import ConnectWalletForm from 'src/modules/CreateProject/containers/ConnectWalle
 import TwoColumnLayout from 'src/modules/CreateProject/templates/TwoColumnLayout';
 
 export const CreateProjectStep4 = () => {
-  const verified = false;
   return (
-    <TwoColumnLayout title={'Connect a wallet'} description={'Connect your wallet to receive donations and fund'}>
+    <TwoColumnLayout
+      title={translate("create-project-step4-title")}
+      description={translate("create-project-step4-description")}
+    >
       <ConnectWalletForm />
     </TwoColumnLayout>
   );

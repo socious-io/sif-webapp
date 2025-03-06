@@ -3,10 +3,10 @@ import CardRadioButton from 'src/modules/General/components/CardRadioButton';
 import MultiSelect from 'src/modules/General/components/MultiSelect';
 import LocationSearchDropdown from 'src/modules/General/containers/LocationSearchDropdown';
 import variables from 'src/styles/constants/_exports.module.scss';
+import { translate } from 'src/core/helpers/utils';
 
 import { useLocationCauseForm } from './useLocationCauseForm';
 import { socialCausesToCategory } from 'src/core/adaptors';
-
 const LocationCauseForm: React.FC = () => {
   const {
     navigateStep2,
@@ -24,10 +24,12 @@ const LocationCauseForm: React.FC = () => {
     <div>
       <form>
         <div>
-          <label className="text-[18px] font-medium leading-[28px] text-secondary-900">Location*</label>
+          <label className="text-[18px] font-medium leading-[28px] text-secondary-900">
+            {translate('location-label')}*
+          </label>
         </div>
         <span className="text-[16px] font-normal leading-[24px] text-tertiary-600">
-          Choose the location of your project
+          {translate('location-description')}
         </span>
         <CardRadioButton
           customStyle="flex flex-row w-full mt-[20px] mb-[32px]"
@@ -47,17 +49,19 @@ const LocationCauseForm: React.FC = () => {
         )}
         <div className="mb-[48px]">
           <div>
-            <label className="text-[18px] font-medium leading-[28px] text-secondary-900">Social cause*</label>
+            <label className="text-[18px] font-medium leading-[28px] text-secondary-900">
+              {translate('social-cause-label')}*
+            </label>
           </div>
           <span className="text-[16px] font-normal leading-[24px] text-tertiary-600">
-            What best describes why you're fundraising?
+            {translate('social-cause-description')}
           </span>
           <div className="mt-5">
             <MultiSelect
               id={'social-causes'}
               max={1}
               items={items}
-              placeholder={'Search a social cause'}
+              placeholder={translate('social-cause-placeholder')}
               componentValue={socialCause ? socialCausesToCategory([socialCause]) : []}
               setComponentValue={onSelectCauses}
               customHeight="156px"
@@ -69,10 +73,10 @@ const LocationCauseForm: React.FC = () => {
           </div>
         </div>
         <Button color="primary" block onClick={navigateStep2} customStyle="mt-32px" disabled={!isEnabled}>
-          Continue
+          {translate('continue-button')}
         </Button>
         <Button color="secondary" block variant="outlined" customStyle="mt-[16px]" onClick={goBack}>
-          Back
+          {translate('back-button')}
         </Button>
       </form>
     </div>

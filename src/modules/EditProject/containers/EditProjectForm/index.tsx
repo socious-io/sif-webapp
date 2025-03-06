@@ -5,6 +5,7 @@ import MultiSelect from 'src/modules/General/components/MultiSelect';
 import RichTextEditor from 'src/modules/General/components/RichTextEditor';
 import LocationSearchDropdown from 'src/modules/General/containers/LocationSearchDropdown';
 import variables from 'src/styles/constants/_exports.module.scss';
+import { translate } from 'src/core/helpers/utils';
 
 import { useEditProjectForm } from './useEditProjectForm';
 import ProjectEditHeader from '../../components/ProjectEditHeader';
@@ -27,19 +28,24 @@ const EditProjectForm: React.FC = () => {
     imagePreview,
     watch,
   } = useEditProjectForm();
-  console.log('data', description);
   return (
     <div className="container px-4 pt-12 pb-24 md:pb-16">
       <ProjectEditHeader onDiscard={goBack} onPublish={handleSubmit(onSubmit)} disabled={false} />
-      <FormColumnTemplate title="Location" subtitle="What best describes why you're fundraising?">
+      <FormColumnTemplate
+        title={translate('edit-project-location')}
+        subtitle={translate('edit-project-location-subtitle')}
+      >
         <LocationSearchDropdown onSelect={location => console.log(location)} />
       </FormColumnTemplate>
-      <FormColumnTemplate title="Social cause" subtitle="What best describes why you're fundraising?">
+      <FormColumnTemplate
+        title={translate('edit-project-social-cause')}
+        subtitle={translate('edit-project-social-cause-subtitle')}
+      >
         <MultiSelect
           id={'social-causes'}
           max={5}
           items={items}
-          placeholder={'Search a social cause'}
+          placeholder={translate('edit-project-social-cause-placeholder')}
           componentValue={[]}
           setComponentValue={items => console.log(items)}
           customHeight="156px"
@@ -49,30 +55,35 @@ const EditProjectForm: React.FC = () => {
           chipIconColor={variables.color_primary_500}
         />
       </FormColumnTemplate>
-      <FormColumnTemplate title="Project name" subtitle="What is your project name?">
-        <Input placeholder="What is your project name?" register={register} name="name" required />
+      <FormColumnTemplate title={translate('edit-project-name')} subtitle={translate('edit-project-name-subtitle')}>
+        <Input placeholder={translate('edit-project-name-placeholder')} register={register} name="name" required />
       </FormColumnTemplate>
-      <FormColumnTemplate title="Website" subtitle="You project’s website">
+      <FormColumnTemplate
+        title={translate('edit-project-website')}
+        subtitle={translate('edit-project-website-subtitle')}
+      >
         <Input
-          placeholder="You project’s website"
+          placeholder={translate('edit-project-website-placeholder')}
           register={register}
           name="website"
-          //   errors={errors['projectName']?.message ? [errors['projectName']?.message.toString()] : undefined}
           required
         />
       </FormColumnTemplate>
-      <FormColumnTemplate title="Project description" subtitle="What your project is about?" isLarge>
+      <FormColumnTemplate
+        title={translate('edit-project-description')}
+        subtitle={translate('edit-project-description-subtitle')}
+        isLarge
+      >
         <RichTextEditor
           register={register}
           name="description"
-          label="Project description*"
-          placeholder="Enter a description..."
+          label={translate('edit-project-description-label')}
+          placeholder={translate('edit-project-description-placeholder')}
           value={description}
           setValue={setValue}
-          // errors={errors['description']?.message ? [errors['description']?.message.toString()] : undefined}
         />
       </FormColumnTemplate>
-      <FormColumnTemplate title="Cover Photo" isLarge>
+      <FormColumnTemplate title={translate('edit-project-cover-photo')} isLarge>
         <>
           <img className="w-full rounded-lg mb-8" alt="banner" src={imagePreview} />
           <FileUploader
@@ -84,15 +95,15 @@ const EditProjectForm: React.FC = () => {
           />
         </>
       </FormColumnTemplate>
-      <FormColumnTemplate title="Wallet" isLarge>
+      <FormColumnTemplate title={translate('edit-project-wallet')} isLarge>
         <></>
       </FormColumnTemplate>
-      <div className="flex  flex-row-reverse p-6 gap-3 justify-start">
+      <div className="flex flex-row-reverse p-6 gap-3 justify-start">
         <Button color="info" variant="outlined" onClick={goBack}>
-          Cancel
+          {translate('edit-project-cancel')}
         </Button>
         <Button color="primary" variant="contained" onClick={goBack}>
-          Publish
+          {translate('edit-project-publish')}
         </Button>
       </div>
     </div>
