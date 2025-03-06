@@ -24,6 +24,7 @@ const options = {
     },
   },
 };
+
 export function convertMarkdownToJSX(value: string): JSX.Element {
   if (!value) return <></>;
   const modifiedVal = value.replaceAll('<br/>', '  \n');
@@ -33,4 +34,13 @@ export function convertMarkdownToJSX(value: string): JSX.Element {
     console.error('Markdown rendering failed:', error);
     return <pre>{modifiedVal}</pre>;
   }
+}
+
+export function cleanMarkdown(markdown: string) {
+  if (!markdown) return '';
+
+  return markdown
+    .replace(/<img[^>]*>/g, '')
+    .replace(/(<br\s*\/?>\s*)+/g, '\n')
+    .trim();
 }
