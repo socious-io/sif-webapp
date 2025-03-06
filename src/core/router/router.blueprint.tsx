@@ -85,6 +85,20 @@ export const blueprint: RouteObject[] = [
         },
       },
       {
+        path: '/oauth',
+        children: [
+          {
+            path: 'socious',
+            async lazy() {
+              const { SociousID } = await import('src/pages/oauth/socious');
+              return {
+                Component: SociousID,
+              };
+            },
+          },
+        ],
+      },
+      {
         path: '/create',
         children: [
           {
