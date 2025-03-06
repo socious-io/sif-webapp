@@ -6,13 +6,12 @@ export interface PaginateReq {
   page?: number;
   limit?: number;
 }
-
-export interface PaginateRes {
+export interface PaginateRes<T> {
   page: number;
-  total: number;
   limit: number;
+  total: number;
+  results: T[];
 }
-
 export interface FilterReq extends PaginateReq {
   [key: string]: any;
 }
