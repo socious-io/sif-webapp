@@ -14,8 +14,9 @@ const CreatePreview: React.FC = () => {
   const {
     name,
     description,
-    location,
-    socialCauses,
+    city,
+    country,
+    socialCause,
     coverImage,
     website,
     goBack,
@@ -31,15 +32,13 @@ const CreatePreview: React.FC = () => {
         </div>
         <div className={styles.titles}>Social cause</div>
         <div className={styles.values}>
-          {socialCauses.map((cause, index) => (
-            <span key={index}>{cause.label} </span>
-          ))}
+          <span>{socialCause} </span>
         </div>
         <div className={styles.titles}>Website</div>
         <div className={styles.values}>{website}</div>
         <div className={styles.titles}>Location</div>
         <div className={styles.values}>
-          <img src={marker} className="mr-3" /> {location}
+          <img src={marker} className="mr-3" /> {country}, {city}
         </div>
         <div className="text-[20px] font-medium mt-5 pt-5 border-t border-t-Gray-light-mode-300 border-solid border-b-0 border-l-0 border-r-0 pb-5">
           Overview

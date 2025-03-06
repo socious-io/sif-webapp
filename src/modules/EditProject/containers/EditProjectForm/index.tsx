@@ -2,7 +2,7 @@ import Button from 'src/modules/General/components/Button';
 import FileUploader from 'src/modules/General/components/FileUploader';
 import Input from 'src/modules/General/components/Input';
 import MultiSelect from 'src/modules/General/components/MultiSelect';
-import TiptapEditor from 'src/modules/General/components/RichTextEditor';
+import RichTextEditor from 'src/modules/General/components/RichTextEditor';
 import LocationSearchDropdown from 'src/modules/General/containers/LocationSearchDropdown';
 import variables from 'src/styles/constants/_exports.module.scss';
 
@@ -19,8 +19,6 @@ const EditProjectForm: React.FC = () => {
     setSelectedCardId,
     onSelectCauses,
     onSelectLocation,
-    isEnabled,
-    socialCauses,
     register,
     handleSubmit,
     onSubmit,
@@ -31,7 +29,7 @@ const EditProjectForm: React.FC = () => {
   } = useEditProjectForm();
   console.log('data', description);
   return (
-    <div className="container pt-12 pb-24 md:pb-16">
+    <div className="container px-4 pt-12 pb-24 md:pb-16">
       <ProjectEditHeader onDiscard={goBack} onPublish={handleSubmit(onSubmit)} disabled={false} />
       <FormColumnTemplate title="Location" subtitle="What best describes why you're fundraising?">
         <LocationSearchDropdown onSelect={location => console.log(location)} />
@@ -42,7 +40,7 @@ const EditProjectForm: React.FC = () => {
           max={5}
           items={items}
           placeholder={'Search a social cause'}
-          componentValue={socialCauses}
+          componentValue={[]}
           setComponentValue={items => console.log(items)}
           customHeight="156px"
           chipBorderColor={variables.color_primary_200}
@@ -64,9 +62,12 @@ const EditProjectForm: React.FC = () => {
         />
       </FormColumnTemplate>
       <FormColumnTemplate title="Project description" subtitle="What your project is about?" isLarge>
-        <TiptapEditor
+        <RichTextEditor
+          register={register}
+          name="description"
+          label="Project description*"
           placeholder="Enter a description..."
-          value={watch('description')}
+          value={description}
           setValue={setValue}
           // errors={errors['description']?.message ? [errors['description']?.message.toString()] : undefined}
         />

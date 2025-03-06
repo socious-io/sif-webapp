@@ -6,7 +6,7 @@ import { RootState } from 'src/store';
 export const useCreatePreview = () => {
   const navigate = useNavigate();
   const [showSuccessModal, setShowSuccessModal] = useState(false);
-  const { name, description, location, socialCauses, coverImage, website } = useSelector(
+  const { name, description, city, country, socialCause, coverImage, website } = useSelector(
     (state: RootState) => state.createProject,
   );
 
@@ -17,8 +17,9 @@ export const useCreatePreview = () => {
     navigateProjectDetails,
     name,
     description,
-    location,
-    socialCauses,
+    city,
+    country,
+    socialCause,
     coverImage,
     website,
     goBack,

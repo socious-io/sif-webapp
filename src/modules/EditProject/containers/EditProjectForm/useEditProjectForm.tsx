@@ -51,7 +51,6 @@ export const useEditProjectForm = () => {
 
   const navigate = useNavigate();
   const [selectedCardId, setSelectedCardId] = useState('');
-  const { location, socialCauses } = useSelector((state: RootState) => state.createProject);
   const dispatch = useDispatch();
   const keyItems = Object.keys(SOCIAL_CAUSES);
   const items = keyItems.map(i => {
@@ -66,8 +65,8 @@ export const useEditProjectForm = () => {
       disabled: false,
     };
   });
-  const onSelectLocation = (location: string) => dispatch(setProjectData({ location }));
-  const onSelectCauses = (socialCauses: SocialCauseVal[]) => dispatch(setProjectData({ socialCauses }));
+  const onSelectLocation = (location: string) => console.log;
+  const onSelectCauses = () => console.log;
   const onSubmit = (formData: FormData) => {
     console.log(formData);
   };
@@ -75,7 +74,6 @@ export const useEditProjectForm = () => {
   const imagePreview = watch('image');
   console.log('the description', description);
   const goBack = () => navigate(-1);
-  const isEnabled = location !== null && socialCauses.length;
   return {
     goBack,
     items,
@@ -84,8 +82,6 @@ export const useEditProjectForm = () => {
     setSelectedCardId,
     onSelectCauses,
     onSelectLocation,
-    isEnabled,
-    socialCauses,
     register,
     handleSubmit,
     description,
