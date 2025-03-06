@@ -1,4 +1,5 @@
 import Avatar from 'src/modules/General/components/Avatar';
+import ExpandableText from 'src/modules/General/components/ExpandableText';
 
 import { ProjectCardProps } from './index.types';
 
@@ -21,7 +22,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         <div className="flex flex-col items-stretch gap-1">
           <span className="font-semibold leading-6 text-Brand-600">{category}</span>
           <span className="text-2xl font-medium leading-8 text-Gray-light-mode-900">{title}</span>
-          <p className="mt-3 leading-6 text-Gray-light-mode-600">{description}</p>
+          <ExpandableText
+            text={description}
+            isMarkdown
+            seeMoreButton={false}
+            customStyle="mt-3 leading-6 text-Gray-light-mode-600"
+          />
         </div>
         <div className="flex items-center justify-between">
           <div className="leading-6 text-Gray-light-mode-600">

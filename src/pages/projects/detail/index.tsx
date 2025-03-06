@@ -73,7 +73,7 @@ export const ProjectDetail = () => {
       label: 'Location',
       content: (
         <div className="flex items-center gap-1.5 text-base font-semibold leading-6 text-Brand-600">
-          <Icon name="marker-pin-02" fontSize={20} color={variables.color_grey_400} />
+          {detail.location && <Icon name="marker-pin-02" fontSize={20} color={variables.color_grey_400} />}
           {detail.location}
         </div>
       ),
