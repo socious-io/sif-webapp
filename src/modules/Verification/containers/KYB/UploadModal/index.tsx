@@ -15,7 +15,13 @@ const UploadModal: React.FC<UploadModalProps> = ({ open, handleClose, handleOpen
 
   const footerJSX = (
     <div className="w-full flex flex-col gap-3 px-4 pb-4 pt-6 md:p-6">
-      <Button variant="contained" color="primary" fullWidth onClick={handleContinue} disabled={!files.length}>
+      <Button
+        variant="contained"
+        color="primary"
+        fullWidth
+        onClick={handleContinue}
+        disabled={!files.length || !!Object.values(uploadedErrors).some(Boolean)}
+      >
         {translate('verification-kyb.continue-button')}
       </Button>
       <Button variant="outlined" color="primary" fullWidth onClick={handleClose}>

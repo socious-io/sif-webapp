@@ -7,6 +7,8 @@ export * from './projects/index.types';
 export * from './auth/index.adaptors';
 export * from './auth/index.types';
 
+export * from './verification/index.adaptors';
+
 export interface SuccessRes {
   message?: string;
 }

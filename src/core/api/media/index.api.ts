@@ -8,14 +8,14 @@ export async function getMedia(id: string): Promise<Media> {
 export async function uploadMedia(file: File): Promise<Media> {
   const formData = new FormData();
   formData.append('file', file);
-  return (await post<Media>('/media/upload', formData)).data;
+  return (await post<Media>('/media', formData)).data;
 }
 
 export async function uploadMediaWithProgress(file: File, setProgress: (val: number) => void): Promise<Media> {
   const formData = new FormData();
   formData.append('file', file);
 
-  const res = await post<Media>('/media/upload', formData, {
+  const res = await post<Media>('/media', formData, {
     onUploadProgress: progressEvent => {
       if (progressEvent?.total) {
         const percentage = Math.round((progressEvent.loaded * 100) / progressEvent.total);
