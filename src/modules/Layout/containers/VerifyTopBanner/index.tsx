@@ -10,7 +10,10 @@ const VerifyTopBanner = () => {
     data: { type, verified, hideVerifyBanner, pendingOrgVerification, connectUrl, openVerifyModal },
     operations: { onDismiss, setConnectUrl, onVerifyIdentity, setOpenVerifyModal },
   } = useVerifyTopBanner();
-  const title = type === 'users' ? 'identity' : 'organization';
+  const title =
+    type === 'users'
+      ? translate('layout-verification.title-identity')
+      : translate('layout-verification.title-organization');
 
   if (verified) {
     return (

@@ -1,3 +1,4 @@
+import { translate } from 'src/core/helpers/utils';
 import Avatar from 'src/modules/General/components/Avatar';
 import ExpandableText from 'src/modules/General/components/ExpandableText';
 
@@ -31,7 +32,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         </div>
         <div className="flex items-center justify-between">
           <div className="leading-6 text-Gray-light-mode-600">
-            By <span className="font-medium text-Brand-700">{creator.name}</span>
+            {translate('projects-by')} <span className="font-medium text-Brand-700">{creator.name}</span>
           </div>
           <Avatar type={creator.type || 'users'} img={creator.img || ''} />
         </div>

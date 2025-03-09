@@ -1,4 +1,5 @@
 import { toRelativeTime } from 'src/core/helpers/relative-time';
+import { translate } from 'src/core/helpers/utils';
 import Icon from 'src/modules/General/components/Icon';
 import variables from 'src/styles/constants/_exports.module.scss';
 
@@ -27,7 +28,7 @@ const DonationsList = () => {
               <div className="flex flex-col items-stretch">
                 <span className="font-semibold leading-6">{donation.donated_identity.name}</span>
                 <span className="hidden xl:inline text-sm leading-5 text-Gray-light-mode-600">
-                  Donated {toRelativeTime(donation.date)}
+                  {translate('projects-detail.donated-by')} {toRelativeTime(donation.date)}
                 </span>
                 <div className="flex items-center gap-1 xl:hidden text-sm leading-5 text-Gray-light-mode-600">
                   <span className="font-medium leading-6 text-Gray-light-mode-900">{donation.donated_price} • </span>
