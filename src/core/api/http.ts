@@ -5,28 +5,32 @@ import { dialog } from 'src/core/dialog/dialog';
 import { nonPermanentStorage } from 'src/core/storage/non-permanent';
 import { hideSpinner, showSpinner } from 'src/store/reducers/spinner.reducer';
 
-import { refreshToken } from './auth/auth.service';
 import { removedEmptyProps } from '../helpers/objects-arrays';
-import { translate } from '../helpers/utils';
 
 export const http = axios.create({
   baseURL: config.baseURL,
-  withCredentials: true,
+  // withCredentials: true,
   timeout: 1000000,
 });
 
-export async function getAuthHeaders(): Promise<{ Authorization: string; CurrentIdentity: string }> {
-  const token = await nonPermanentStorage.get('access_token');
-  const prefix = await nonPermanentStorage.get('token_type');
-  const currentIdentity = await nonPermanentStorage.get('identity');
+export async function getAuthHeaders(): Promise<{ Authorization: string }> {
+  const token = (await nonPermanentStorage.get('access_token')) || '';
+  const prefix = (await nonPermanentStorage.get('token_type')) || 'Bearer';
   return {
-    Authorization: `${prefix} ${token}`,
-    CurrentIdentity: currentIdentity || '',
+    Authorization: token && prefix ? `${prefix} ${token}` : '',
   };
 }
 
 export async function post<T>(uri: string, payload: unknown, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
   return http.post<T>(uri, removedEmptyProps(payload), config);
+}
+
+export async function put<T>(uri: string, payload: unknown, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+  return http.put<T>(uri, removedEmptyProps(payload), config);
+}
+
+export async function patch<T>(uri: string, payload?: unknown, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+  return http.patch<T>(uri, removedEmptyProps(payload), config);
 }
 
 export async function get<T>(
@@ -47,14 +51,6 @@ export async function get<T>(
   };
 
   return http.get<T>(uri, config);
-}
-
-export async function put<T>(uri: string, payload: unknown, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
-  return http.put<T>(uri, removedEmptyProps(payload), config);
-}
-
-export async function patch<T>(uri: string, payload?: unknown, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
-  return http.patch<T>(uri, removedEmptyProps(payload), config);
 }
 
 export async function del<T>(uri: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
@@ -81,14 +77,8 @@ const errorSections: ErrorSection[] = ['AUTH', 'FORGET_PASSWORD'];
 export function handleError(params?: ErrorHandlerParams) {
   return (err?: AxiosError<{ error: string }>) => {
     const errMessage = params?.message || err?.response?.data.error || 'An error accrued';
-    const section = params?.section || (err && err.request ? getErrorSection(err?.request) : '');
-
-    const message = translate(errMessage, {
-      cluster: 'ERROR',
-      section,
-    });
     dialog.alert({
-      message,
+      message: errMessage,
       title: params?.title || 'Failed',
     });
   };
@@ -96,9 +86,8 @@ export function handleError(params?: ErrorHandlerParams) {
 
 http.interceptors.request.use(
   async function (config) {
-    const { Authorization, CurrentIdentity } = await getAuthHeaders();
+    const { Authorization } = await getAuthHeaders();
     if (Authorization) config.headers.set('Authorization', Authorization);
-    if (CurrentIdentity) config.headers.set('Current-Identity', CurrentIdentity);
     // Do something before request is sent
     return config;
   },
@@ -121,7 +110,6 @@ export function setupInterceptors(store: Store) {
       return Promise.reject(error);
     },
   );
-
   http.interceptors.response.use(
     function (response) {
       store.dispatch(hideSpinner());
@@ -132,7 +120,6 @@ export function setupInterceptors(store: Store) {
       store.dispatch(hideSpinner());
       if (error?.response?.status === 401 && !error.config.url.includes('auth')) {
         try {
-          await refreshToken();
           return http.request(error.config);
         } catch {
           return Promise.reject(error);
@@ -142,8 +129,4 @@ export function setupInterceptors(store: Store) {
       return Promise.reject(error);
     },
   );
-}
-
-function getErrorSection(request: XMLHttpRequest): string | undefined {
-  return errorSections.filter(s => request.responseURL.toUpperCase().includes(s))[0];
 }

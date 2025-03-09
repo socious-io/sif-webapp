@@ -5,5 +5,5 @@ export type Location = {
 };
 export interface CompanySearchDropdownProps {
   onSelect: (value) => void;
-  value?: Location;
+  value?: Location | null;
 }

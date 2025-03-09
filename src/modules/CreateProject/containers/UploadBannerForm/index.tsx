@@ -1,6 +1,7 @@
+import { translate } from 'src/core/helpers/utils';
 import Button from 'src/modules/General/components/Button';
 import FileUploader from 'src/modules/General/components/FileUploader';
-import { translate } from 'src/core/helpers/utils';
+
 import { useUploadBannerForm } from './useUploadBannerForm';
 
 const UploadBannerForm: React.FC = () => {

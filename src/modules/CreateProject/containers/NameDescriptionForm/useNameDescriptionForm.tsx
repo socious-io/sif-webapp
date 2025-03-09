@@ -49,7 +49,7 @@ export const useNameDescriptionForm = () => {
     const { name, description, website } = data;
     dispatch(setProjectData({ name, description, website }));
     console.log(description, data);
-    // nextStep();
+    nextStep();
   };
 
   return {

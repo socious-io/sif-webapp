@@ -1,12 +1,13 @@
+import { socialCausesToCategory } from 'src/core/adaptors';
+import { translate } from 'src/core/helpers/utils';
 import Button from 'src/modules/General/components/Button';
 import CardRadioButton from 'src/modules/General/components/CardRadioButton';
 import MultiSelect from 'src/modules/General/components/MultiSelect';
 import LocationSearchDropdown from 'src/modules/General/containers/LocationSearchDropdown';
 import variables from 'src/styles/constants/_exports.module.scss';
-import { translate } from 'src/core/helpers/utils';
 
 import { useLocationCauseForm } from './useLocationCauseForm';
-import { socialCausesToCategory } from 'src/core/adaptors';
+
 const LocationCauseForm: React.FC = () => {
   const {
     navigateStep2,
@@ -19,6 +20,8 @@ const LocationCauseForm: React.FC = () => {
     onSelectLocation,
     isEnabled,
     socialCause,
+    city,
+    country,
   } = useLocationCauseForm();
   return (
     <div>
@@ -43,7 +46,7 @@ const LocationCauseForm: React.FC = () => {
           <div className="my-[20px]">
             <LocationSearchDropdown
               onSelect={location => onSelectLocation(location)}
-              value={{ label: 'rasht', city: 'rasht', country: '' }}
+              value={city ? { label: `${city}, ${country}`, city, country } : null}
             />
           </div>
         )}

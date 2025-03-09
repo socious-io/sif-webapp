@@ -1,8 +1,8 @@
 import marker from 'src/assets/icons/location-marker.svg';
-import Button from 'src/modules/General/components/Button';
-import ConnectButton from 'src/modules/General/components/ConnectButton';
-import SuccessModal from 'src/modules/General/SuccessModal';
+import { convertMarkdownToJSX } from 'src/core/convert-md-to-jsx';
 import { translate } from 'src/core/helpers/utils';
+import Button from 'src/modules/General/components/Button';
+import SuccessModal from 'src/modules/General/SuccessModal';
 
 import { useCreatePreview } from './useCreatePreview';
 
@@ -23,6 +23,8 @@ const CreatePreview: React.FC = () => {
     goBack,
     showSuccessModal,
     setShowSuccessModal,
+    onPublish,
+    onCloseModal,
   } = useCreatePreview();
   return (
     <>
@@ -44,8 +46,8 @@ const CreatePreview: React.FC = () => {
         <div className="text-[20px] font-medium mt-5 pt-5 border-t border-t-Gray-light-mode-300 border-solid border-b-0 border-l-0 border-r-0 pb-5">
           {translate('create-preview-overview')}
         </div>
-        <div className={styles.values}>{description}</div>
-        <Button color="primary" block type="submit" onClick={() => setShowSuccessModal(true)} customStyle="mt-9">
+        <div className={styles.values}>{convertMarkdownToJSX(description)}</div>
+        <Button color="primary" block type="submit" onClick={onPublish} customStyle="mt-9">
           {translate('publish-button')}
         </Button>
         <Button color="secondary" block variant="outlined" customStyle="mt-[16px]" onClick={goBack}>
@@ -56,7 +58,7 @@ const CreatePreview: React.FC = () => {
         open={showSuccessModal}
         message={translate('create-preview-success-message')}
         title={translate('create-preview-success-title')}
-        handleClose={() => setShowSuccessModal(false)}
+        handleClose={onCloseModal}
       />
     </>
   );

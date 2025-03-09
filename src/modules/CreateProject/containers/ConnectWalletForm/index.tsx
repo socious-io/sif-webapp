@@ -1,5 +1,5 @@
-import Button from 'src/modules/General/components/Button';
 import { translate } from 'src/core/helpers/utils';
+import Button from 'src/modules/General/components/Button';
 
 import { useConnectWalletForm } from './useConnectWalletForm';
 const ConnectWalletForm: React.FC = () => {

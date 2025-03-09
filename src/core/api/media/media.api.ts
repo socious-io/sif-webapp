@@ -8,7 +8,7 @@ export async function getMedia(id: string): Promise<PostMediaUploadRes> {
 export async function uploadMedia(file: File): Promise<PostMediaUploadRes> {
   const formData = new FormData();
   formData.append('file', file);
-  return (await post<PostMediaUploadRes>('/media/upload', formData)).data;
+  return (await post<PostMediaUploadRes>('/media', formData)).data;
 }
 
 export async function uploadMediaWithProgress(

@@ -14,6 +14,7 @@ export interface Project {
   cover: Media;
   website?: string;
   wallet_address: string;
+  website?: string;
   wallet_env: string;
   created_at: Date;
   updated_at: Date;

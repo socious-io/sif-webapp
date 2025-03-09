@@ -3,11 +3,10 @@ import UploadBannerForm from 'src/modules/CreateProject/containers/UploadBannerF
 import TwoColumnLayout from 'src/modules/CreateProject/templates/TwoColumnLayout';
 
 export const CreateProjectStep3 = () => {
-
   return (
     <TwoColumnLayout
-      title={translate("create-project-step3-title")}
-      description={translate("create-project-step3-description")}
+      title={translate('create-project-step3-title')}
+      description={translate('create-project-step3-description')}
       descriptionMode="html"
     >
       <UploadBannerForm />

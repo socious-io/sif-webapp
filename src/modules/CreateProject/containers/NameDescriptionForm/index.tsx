@@ -1,7 +1,7 @@
+import { translate } from 'src/core/helpers/utils';
 import Button from 'src/modules/General/components/Button';
 import Input from 'src/modules/General/components/Input';
 import RichTextEditor from 'src/modules/General/components/RichTextEditor';
-import { translate } from 'src/core/helpers/utils';
 
 import { useNameDescriptionForm } from './useNameDescriptionForm';
 const NameDescriptionForm: React.FC = () => {
@@ -12,7 +12,7 @@ const NameDescriptionForm: React.FC = () => {
 
   return (
     <div>
-      <form className="flex flex-col items-stretch gap-8" onSubmit={handleSubmit(onSubmit)}>
+      <form className="flex flex-col items-stretch gap-8">
         <Input
           register={register}
           name="name"
@@ -38,7 +38,14 @@ const NameDescriptionForm: React.FC = () => {
           errors={errors['description']?.message ? [errors['description']?.message.toString()] : undefined}
         />
         <div className="flex flex-col items-stretch gap-3">
-          <Button color="primary" block type="submit" disabled={hasErrors} customStyle="mt-12">
+          <Button
+            color="primary"
+            block
+            type="submit"
+            disabled={hasErrors}
+            customStyle="mt-12"
+            onClick={handleSubmit(onSubmit)}
+          >
             {translate('continue-button')}
           </Button>
           <Button color="secondary" block variant="text" onClick={goBack}>

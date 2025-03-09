@@ -2,12 +2,12 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { SOCIAL_CAUSES } from 'src/constants/SOCIAL_CAUSES';
+import { socialCausesToCategoryAdaptor } from 'src/core/adaptors';
 import { CardRadioButtonItem } from 'src/modules/General/components/CardRadioButton/index.types';
 import { RootState } from 'src/store';
 import { setProjectData } from 'src/store/reducers/createProject.reducer';
 
 import { locationOptions } from './statics';
-import { socialCausesToCategoryAdaptor } from 'src/core/adaptors';
 
 export const useLocationCauseForm = () => {
   const navigate = useNavigate();
@@ -42,5 +42,7 @@ export const useLocationCauseForm = () => {
     onSelectLocation,
     isEnabled,
     socialCause,
+    city,
+    country,
   };
 };
