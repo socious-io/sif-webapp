@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface ProjectState {
-  name: string;
-  wallet: string;
+  title: string;
+  wallet_address: string;
   cover_id: string;
   website?: string | null;
   description: string;
@@ -12,8 +12,8 @@ export interface ProjectState {
 }
 
 const initialState: ProjectState = {
-  name: '',
-  wallet: '',
+  title: '',
+  wallet_address: '',
   cover_id: '',
   website: '',
   description: '',

@@ -1,0 +1,18 @@
+.wallet-address {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid #93a2b7;
+
+    &__text {
+        font-size: 16px;
+        color: #98a2b3;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 24px;
+        display: block;
+    }
+}

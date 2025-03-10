@@ -78,7 +78,7 @@ const LocationCauseForm: React.FC = () => {
         <Button color="primary" block onClick={navigateStep2} customStyle="mt-32px" disabled={!isEnabled}>
           {translate('continue-button')}
         </Button>
-        <Button color="secondary" block variant="outlined" customStyle="mt-[16px]" onClick={goBack}>
+        <Button color="secondary" block variant="text" customStyle="mt-[16px]" onClick={goBack}>
           {translate('back-button')}
         </Button>
       </form>

@@ -7,13 +7,13 @@ import { setProjectData } from 'src/store/reducers/createProject.reducer';
 import * as yup from 'yup';
 
 interface FormData {
-  name: string;
+  title: string;
   description: string;
   website?: string | null;
 }
 
 const schema = yup.object().shape({
-  name: yup.string().required('This field is required'),
+  title: yup.string().required('This field is required'),
   description: yup.string().required('This field is required'),
   website: yup.string().nullable(),
 });
@@ -33,7 +33,7 @@ export const useNameDescriptionForm = () => {
     resolver: yupResolver(schema),
     mode: 'all',
     defaultValues: {
-      name: project.name || '',
+      title: project.title || '',
       description: project.description || '',
       website: project.website || '',
     },
@@ -46,8 +46,8 @@ export const useNameDescriptionForm = () => {
   const nextStep = () => navigate('/create/step-3');
 
   const onSubmit = (data: FormData) => {
-    const { name, description, website } = data;
-    dispatch(setProjectData({ name, description, website }));
+    const { title, description, website } = data;
+    dispatch(setProjectData({ title, description, website }));
     console.log(description, data);
     nextStep();
   };

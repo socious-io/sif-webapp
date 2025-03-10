@@ -46,7 +46,7 @@ const ConnectWalletForm: React.FC = () => {
       <Button color="primary" block type="submit" onClick={navigatePublish} disabled={!isEnabled} customStyle="mt-6xl">
         {translate('preview-button')}
       </Button>
-      <Button color="secondary" block variant="outlined" customStyle="mt-[16px]" onClick={goBack}>
+      <Button color="secondary" block variant="text" customStyle="mt-[16px]" onClick={goBack}>
         {translate('back-button')}
       </Button>
     </div>

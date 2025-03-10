@@ -15,7 +15,7 @@ const NameDescriptionForm: React.FC = () => {
       <form className="flex flex-col items-stretch gap-8">
         <Input
           register={register}
-          name="name"
+          name="title"
           label={translate('project-name-label') + '*'}
           placeholder={translate('project-name-placeholder')}
           required

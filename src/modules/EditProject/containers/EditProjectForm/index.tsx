@@ -1,10 +1,12 @@
 import { socialCausesToCategory } from 'src/core/adaptors';
 import { translate } from 'src/core/helpers/utils';
+import AlertMessage from 'src/modules/General/components/AlertMessage';
 import Button from 'src/modules/General/components/Button';
 import FileUploader from 'src/modules/General/components/FileUploader';
 import Input from 'src/modules/General/components/Input';
 import MultiSelect from 'src/modules/General/components/MultiSelect';
 import RichTextEditor from 'src/modules/General/components/RichTextEditor';
+import WalletAddress from 'src/modules/General/components/WalletAddress';
 import LocationSearchDropdown from 'src/modules/General/containers/LocationSearchDropdown';
 import variables from 'src/styles/constants/_exports.module.scss';
 
@@ -28,6 +30,7 @@ const EditProjectForm: React.FC = () => {
     onSelectCauses,
     onSelectLocation,
     errors,
+    wallet_address,
   } = useEditProjectForm();
   return (
     <form className="container px-4 pt-12 pb-24 md:pb-16">
@@ -107,8 +110,14 @@ const EditProjectForm: React.FC = () => {
           />
         </>
       </FormColumnTemplate>
-      <FormColumnTemplate title={translate('edit-project-wallet')} isLarge>
-        <></>
+      <FormColumnTemplate title={translate('edit-project-wallet')}>
+        <WalletAddress address={wallet_address} />
+        <AlertMessage
+          theme="warning"
+          iconName="alert-circle"
+          title={'You cannot change your wallet address'}
+          containerClassName="mt-4"
+        />
       </FormColumnTemplate>
       <div className="flex flex-row-reverse p-6 gap-3 justify-start">
         <Button color="info" variant="outlined" onClick={goBack}>

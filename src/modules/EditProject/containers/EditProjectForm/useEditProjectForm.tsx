@@ -16,7 +16,7 @@ interface FormData {
   country: string;
   social_cause: string;
   cover_id: string;
-  wallet: string;
+  wallet_address: string;
 }
 
 const schema = yup.object().shape({
@@ -27,7 +27,7 @@ const schema = yup.object().shape({
   country: yup.string().required('Location is required'),
   social_cause: yup.string().required('Social Cause is required'),
   cover_id: yup.string().nullable(),
-  wallet: yup.string().required(),
+  wallet_address: yup.string().required(),
 });
 export const useEditProjectForm = () => {
   const { project } = useLoaderData() as { project: Project };
@@ -49,7 +49,7 @@ export const useEditProjectForm = () => {
       country: project.country,
       social_cause: project.social_cause,
       cover_id: project.cover_id || '',
-      wallet: project.wallet_address,
+      wallet_address: project.wallet_address,
     },
   });
 
@@ -81,6 +81,7 @@ export const useEditProjectForm = () => {
   const city = watch('city');
   const country = watch('country');
   const social_cause = watch('social_cause');
+  const wallet_address = watch('wallet_address');
 
   console.log('the description', description);
   const goBack = () => navigate(-1);
@@ -104,5 +105,6 @@ export const useEditProjectForm = () => {
     country,
     social_cause,
     errors,
+    wallet_address,
   };
 };
