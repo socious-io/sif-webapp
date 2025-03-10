@@ -1,10 +1,7 @@
 import { SOCIAL_CAUSES } from 'src/constants/SOCIAL_CAUSES';
-import { getProjects, getProject, vote, donate } from 'src/core/api';
-import { createProjects, IdentityType } from 'src/core/api';
+import { createProjects, editProjects, getProject, getProjects, IdentityType } from 'src/core/api';
 import { cleanMarkdown, convertMarkdownToJSX } from 'src/core/helpers/convert-md-to-jsx';
-// import { getProjects, getProject, vote, donate } from 'src/core/api';
 import { removedEmptyProps } from 'src/core/helpers/objects-arrays';
-import { ProjectState } from 'src/store/reducers/createProject.reducer';
 
 import { AdaptorRes, DonateReq, Project, ProjectRes, SuccessRes } from '..';
 import { getIdentityMeta } from '../users/index.adaptors';
@@ -117,12 +114,33 @@ export const voteOrDonateProjectAdaptor = async (
   }
 };
 
-export const createProjectAdaptor = async (project: ProjectState): Promise<AdaptorRes<SuccessRes>> => {
+export const createProjectAdaptor = async (project): Promise<AdaptorRes<Project>> => {
   try {
-    const createdProject = await createProjects(removedEmptyProps(project));
-    return { data: { message: 'succeed' }, error: null };
+    const newProject = await createProjects(removedEmptyProps(project) as Partial<Project>);
+    return { data: newProject, error: null };
   } catch (error) {
     console.error('Error in creating project: ', error);
     return { data: null, error: 'Error in creating project' };
+  }
+};
+
+export const editProjectAdaptor = async (project): Promise<AdaptorRes<SuccessRes>> => {
+  try {
+    await editProjects(project.id, removedEmptyProps(project) as Partial<Project>);
+    return { data: { message: 'succeed' }, error: null };
+  } catch (error) {
+    console.error('Error in editing project: ', error);
+    return { data: null, error: 'Error in editing project' };
+  }
+};
+
+//Fix should be filtered by identity
+export const getUserProjects = async (page = 1, limit = 10): Promise<AdaptorRes<ProjectRes>> => {
+  try {
+    const { results, page, limit, total } = await getProjects({});
+    return { data: { items: results, page, limit, total }, error: null };
+  } catch (error) {
+    console.error('Error in editing project: ', error);
+    return { data: null, error: 'Error in editing project' };
   }
 };

@@ -1,16 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-export type SocialCauseVal = {
-  label: string;
-  value: string;
-};
 export interface ProjectState {
   name: string;
   wallet: string;
-  coverImage: string;
+  cover_id: string;
   website?: string | null;
   description: string;
-  socialCause: string;
+  social_cause: string;
   city: string;
   country: string;
 }
@@ -18,10 +14,10 @@ export interface ProjectState {
 const initialState: ProjectState = {
   name: '',
   wallet: '',
-  coverImage: '',
+  cover_id: '',
   website: '',
   description: '',
-  socialCause: '',
+  social_cause: '',
   city: '',
   country: '',
 };

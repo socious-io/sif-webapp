@@ -17,32 +17,35 @@ const CreatePreview: React.FC = () => {
     description,
     city,
     country,
-    socialCause,
-    coverImage,
+    social_cause,
+    cover_id,
     website,
     goBack,
     showSuccessModal,
-    setShowSuccessModal,
     onPublish,
     onCloseModal,
   } = useCreatePreview();
   return (
     <>
       <div>
-        <img src={coverImage} alt="banner" className={styles.banner} />
+        <img src={cover_id} alt="banner" className={styles.banner} />
         <div className="text-[20px] font-medium my-[20px] border-b border-b-Gray-light-mode-300 border-solid border-t-0 border-l-0 border-r-0 pb-5">
           {name}
         </div>
         <div className={styles.titles}>{translate('create-preview-social-cause')}</div>
         <div className={styles.values}>
-          <span>{socialCause}</span>
+          <span>{social_cause}</span>
         </div>
         <div className={styles.titles}>{translate('create-preview-website')}</div>
         <div className={styles.values}>{website}</div>
-        <div className={styles.titles}>{translate('create-preview-location')}</div>
-        <div className={styles.values}>
-          <img src={marker} className="mr-3" /> {country}, {city}
-        </div>
+        {city && (
+          <>
+            <div className={styles.titles}>{translate('create-preview-location')}</div>
+            <div className={styles.values}>
+              <img src={marker} className="mr-3" /> {country}, {city}
+            </div>
+          </>
+        )}
         <div className="text-[20px] font-medium mt-5 pt-5 border-t border-t-Gray-light-mode-300 border-solid border-b-0 border-l-0 border-r-0 pb-5">
           {translate('create-preview-overview')}
         </div>

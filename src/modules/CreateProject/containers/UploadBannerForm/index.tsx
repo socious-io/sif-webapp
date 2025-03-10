@@ -5,7 +5,7 @@ import FileUploader from 'src/modules/General/components/FileUploader';
 import { useUploadBannerForm } from './useUploadBannerForm';
 
 const UploadBannerForm: React.FC = () => {
-  const { attachments, navigateStep4, goBack, onDropFiles } = useUploadBannerForm();
+  const { attachments, navigateStep4, goBack, onDropFiles, isEnabled } = useUploadBannerForm();
   return (
     <div className="flex flex-col justify-between md:h-[560px] h-full">
       <div>
@@ -19,7 +19,7 @@ const UploadBannerForm: React.FC = () => {
         />
       </div>
       <div>
-        <Button color="primary" block onClick={navigateStep4}>
+        <Button color="primary" block onClick={navigateStep4} disabled={isEnabled}>
           {translate('continue-button')}
         </Button>
         <Button onClick={goBack} color="secondary" block variant="outlined" customStyle="mt-[16px]">

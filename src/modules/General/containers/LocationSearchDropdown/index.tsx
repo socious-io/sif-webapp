@@ -8,7 +8,6 @@ const LocationSearchDropdown: React.FC<CompanySearchDropdownProps> = ({ onSelect
   const { searchCities } = useLocationSearchDropdown();
   return (
     <SearchDropdown
-      isClearable
       id="location"
       value={value}
       placeholder="Select a location"

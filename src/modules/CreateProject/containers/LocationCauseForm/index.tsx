@@ -19,7 +19,7 @@ const LocationCauseForm: React.FC = () => {
     onSelectCauses,
     onSelectLocation,
     isEnabled,
-    socialCause,
+    social_cause,
     city,
     country,
   } = useLocationCauseForm();
@@ -65,7 +65,7 @@ const LocationCauseForm: React.FC = () => {
               max={1}
               items={items}
               placeholder={translate('social-cause-placeholder')}
-              componentValue={socialCause ? socialCausesToCategory([socialCause]) : []}
+              componentValue={social_cause ? socialCausesToCategory([social_cause]) : []}
               setComponentValue={onSelectCauses}
               customHeight="156px"
               chipBorderColor={variables.color_primary_200}

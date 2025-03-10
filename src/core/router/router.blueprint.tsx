@@ -1,7 +1,7 @@
 import { Navigate, RouteObject, createBrowserRouter } from 'react-router-dom';
 import { Layout } from 'src/modules/Layout';
 
-import { getProjectAdaptor, getProjectsAdaptor } from '../adaptors';
+import { getProjectAdaptor, getProjectsAdaptor, getUserProjects } from '../adaptors';
 
 export const blueprint: RouteObject[] = [
   { path: '/', element: <DefaultRoute /> },
@@ -86,7 +86,7 @@ export const blueprint: RouteObject[] = [
             path: ':id/projects',
             loader: async ({ params }) => {
               if (params.id) {
-                const projects = await getProjectsAdaptor(1, 10);
+                const projects = await getUserProjects();
                 return { projects: projects.data };
               }
             },
@@ -102,6 +102,7 @@ export const blueprint: RouteObject[] = [
             loader: async ({ params }) => {
               if (params.id) {
                 const projects = await getProjectAdaptor(params.id);
+                console.log('projects : ', projects);
                 return { project: projects.data };
               }
             },
