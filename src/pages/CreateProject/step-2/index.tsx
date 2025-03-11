@@ -14,7 +14,7 @@ export const CreateProjectStep2 = () => {
     </>
   );
   return (
-    <TwoColumnLayout title={translate('create-project-step2-title')} description={description} descriptionMode="html">
+    <TwoColumnLayout title={translate('create-project-step2-title')} description={description}>
       <NameDescriptionForm />
     </TwoColumnLayout>
   );

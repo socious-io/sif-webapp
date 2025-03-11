@@ -5,7 +5,7 @@ export type Files = {
 };
 
 export interface FileUploaderProps {
-  files: Files[] | null;
+  files: Files[];
   onDropFiles: (files: File[]) => void;
   fileTypes: string[];
   showPreviewImages?: boolean;

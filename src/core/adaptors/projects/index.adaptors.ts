@@ -41,28 +41,6 @@ export const getProjectsAdaptor = async (page = 1, limit = 10): Promise<AdaptorR
 };
 
 export const getProjectAdaptor = async (projectId: string): Promise<AdaptorRes<Project>> => {
-  //   const project = await getProject(id);
-  //FIXME: mapping from API to adaptor
-  const data = {
-    id: '1',
-    coverImg:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0aqTwu5tsXDLTumQkzZqkGPWqrwBwHRxxJd-9mUy5Jo3zisyq0xGsPBbvBI98Z2d60g&usqp=CAU',
-    category: 'Gender Equality',
-    title: 'Empowering Women Through Education',
-    description:
-      'This initiative focuses on providing access to quality education and vocational training for women in underserved communities, empowering them to break the cycle of poverty.',
-    creator: { type: 'users' as IdentityType, name: 'EduWomen Alliance', username: '@EduWomenAlliance', img: '' },
-    website: 'empoweringwomenethiopia.org',
-    location: 'Addis Ababa, Ethiopia',
-    overview:
-      '"Empowering Ethiopia Future" is a project dedicated to providing accessible, high-quality education to children in underprivileged communities across Ethiopia. By establishing community-based learning centers, training local educators, and providing essential educational resources, we aim to bridge the education gap and create opportunities for every child to reach their full potential.',
-    roundStats: { estimatedMatch: 1240.4, donatedAmount: 24.3, votes: 2 },
-    donations: [
-      { id: '1', donated_identity: { name: 'Chris Willis' }, donated_price: '100.00 ADA', date: new Date().toString() },
-      { id: '2', donated_identity: { name: 'Anonymous' }, donated_price: '200.00 ADA', date: new Date().toString() },
-    ],
-  };
-
   try {
     const project = await getProject(projectId);
     const { name, username, profileImage: img, type } = getIdentityMeta(project.identity);

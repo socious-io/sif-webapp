@@ -22,7 +22,7 @@ const CreateProjectForm: React.FC = () => {
         </Button>
         <div className="flex">
           <AvatarGroup accounts={accounts} length={3} />
-          <div className="flex flex-col ml-[16px]">
+          <div className="flex flex-col ml-4">
             <div className="flex">
               <Rating
                 value={5}

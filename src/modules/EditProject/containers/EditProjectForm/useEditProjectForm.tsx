@@ -2,23 +2,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useLoaderData, useNavigate } from 'react-router-dom';
-import { editProjectAdaptor, socialCausesToCategoryAdaptor } from 'src/core/adaptors';
+import { editProjectAdaptor, socialCausesToCategoryAdaptor, uploadMediaAdaptor } from 'src/core/adaptors';
 import { Project } from 'src/core/api';
-import { CardRadioButtonItem } from 'src/modules/General/components/CardRadioButton/index.types';
+import { Files } from 'src/modules/General/components/ProgressFileUploader/index.types';
 import * as yup from 'yup';
 
-import { locationOptions } from './statics';
-interface FormData {
-  name: string;
-  description: string;
-  website?: string | null;
-  city: string;
-  country: string;
-  social_cause: string;
-  cover_id: string;
-  wallet_address: string;
-}
-
+import { FormData } from './index.types';
 const schema = yup.object().shape({
   name: yup.string().required('Name is required'),
   description: yup.string().required('Description is required'),
@@ -31,7 +20,7 @@ const schema = yup.object().shape({
 });
 export const useEditProjectForm = () => {
   const { project } = useLoaderData() as { project: Project };
-
+  console.log('pro3', project);
   const {
     register,
     handleSubmit,
@@ -55,15 +44,17 @@ export const useEditProjectForm = () => {
   const navigate = useNavigate();
   const [selectedCardId, setSelectedCardId] = useState('');
   const items = socialCausesToCategoryAdaptor();
+  const [attachments, setAttachments] = useState<Files[]>([]);
 
-  const options: CardRadioButtonItem[] = locationOptions.map(option => {
-    return {
-      id: option.id,
-      value: option.value,
-      title: option.title,
-      disabled: false,
-    };
-  });
+  const onDropFiles = async (newFiles: File[]) => {
+    newFiles.forEach(async (file: File) => {
+      const { error, data } = await uploadMediaAdaptor(file);
+      setValue('cover_id', data?.url as string);
+      if (error) return;
+      data && setAttachments([{ id: data.id, url: data.url }]);
+    });
+  };
+
   const onSelectLocation = ({ city, country }) => {
     setValue('city', city);
     setValue('country', country);
@@ -85,7 +76,6 @@ export const useEditProjectForm = () => {
   return {
     goBack,
     items,
-    options,
     selectedCardId,
     setSelectedCardId,
     onSelectCauses,
@@ -102,5 +92,7 @@ export const useEditProjectForm = () => {
     social_cause,
     errors,
     wallet_address,
+    attachments,
+    onDropFiles,
   };
 };

@@ -8,7 +8,7 @@ export const useCreatePreview = () => {
   const navigate = useNavigate();
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const projectState = useSelector((state: RootState) => state.createProject);
-  const { name, description, city, country, social_cause, cover_id, website } = projectState;
+  const { title, description, city, country, social_cause, cover_id, website, cover_url } = projectState;
   const [newProjectId, setNewProjectId] = useState<string | null>(null);
   const onPublish = async () => {
     try {
@@ -28,7 +28,7 @@ export const useCreatePreview = () => {
 
   return {
     navigateProjectDetails,
-    name,
+    title,
     description,
     city,
     country,
@@ -40,5 +40,6 @@ export const useCreatePreview = () => {
     setShowSuccessModal,
     onPublish,
     onCloseModal,
+    cover_url,
   };
 };

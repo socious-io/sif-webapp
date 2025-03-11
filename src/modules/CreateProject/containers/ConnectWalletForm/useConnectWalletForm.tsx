@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import dapp from 'src/dapp';
+import dapp from 'src/core/dapp';
 import { setProjectData } from 'src/store/reducers/createProject.reducer';
 
 export const useConnectWalletForm = () => {
@@ -9,12 +9,10 @@ export const useConnectWalletForm = () => {
   const dispatch = useDispatch();
 
   const { Web3Connect, account } = dapp.useWeb3();
-  console.log(!!account);
 
   const navigatePublish = () => navigate('/create/publish');
-  const goBack = () => navigate(-1);
+  const goBack = () => navigate('/create/step-3');
   useEffect(() => {
-    console.log(account);
     dispatch(setProjectData({ wallet_address: account }));
   }, [account]);
   const isEnabled = !!account;

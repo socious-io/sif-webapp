@@ -8,29 +8,29 @@ import { useCreatePreview } from './useCreatePreview';
 
 const styles = {
   banner: 'w-full h-[120px] rounded-[16px]',
-  titles: 'text-[14px] font-medium mt-[20px] mb-[8px]',
+  titles: 'text-[14px] font-medium mt-[20px] mb-2',
   values: 'text-[16px] font-medium flex',
 };
 const CreatePreview: React.FC = () => {
   const {
-    name,
+    title,
     description,
     city,
     country,
     social_cause,
-    cover_id,
     website,
     goBack,
     showSuccessModal,
     onPublish,
     onCloseModal,
+    cover_url,
   } = useCreatePreview();
   return (
     <>
       <div>
-        <img src={cover_id} alt="banner" className={styles.banner} />
-        <div className="text-[20px] font-medium my-[20px] border-b border-b-Gray-light-mode-300 border-solid border-t-0 border-l-0 border-r-0 pb-5">
-          {name}
+        <img src={cover_url} alt="banner" className={styles.banner} />
+        <div className="text-[20px] font-medium my-5 border-b border-b-Gray-light-mode-300 border-solid border-t-0 border-l-0 border-r-0 pb-5">
+          {title}
         </div>
         <div className={styles.titles}>{translate('create-preview-social-cause')}</div>
         <div className={styles.values}>
@@ -53,7 +53,7 @@ const CreatePreview: React.FC = () => {
         <Button color="primary" block type="submit" onClick={onPublish} customStyle="mt-9">
           {translate('publish-button')}
         </Button>
-        <Button color="secondary" block variant="outlined" customStyle="mt-[16px]" onClick={goBack}>
+        <Button color="secondary" block variant="outlined" customStyle="mt-4" onClick={goBack}>
           {translate('back-button')}
         </Button>
       </div>

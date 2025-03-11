@@ -23,7 +23,7 @@ const UploadBannerForm: React.FC = () => {
         <Button color="primary" block onClick={navigateStep4} disabled={isEnabled}>
           {translate('continue-button')}
         </Button>
-        <Button onClick={goBack} color="secondary" block variant="text" customStyle="mt-[16px]">
+        <Button onClick={goBack} color="secondary" block variant="text" customStyle="mt-4">
           {translate('back-button')}
         </Button>
       </div>

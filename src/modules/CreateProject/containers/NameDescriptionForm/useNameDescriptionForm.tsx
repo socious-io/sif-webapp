@@ -48,7 +48,6 @@ export const useNameDescriptionForm = () => {
   const onSubmit = (data: FormData) => {
     const { title, description, website } = data;
     dispatch(setProjectData({ title, description, website }));
-    console.log(description, data);
     nextStep();
   };
 

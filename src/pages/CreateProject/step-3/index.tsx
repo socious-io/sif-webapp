@@ -7,7 +7,6 @@ export const CreateProjectStep3 = () => {
     <TwoColumnLayout
       title={translate('create-project-step3-title')}
       description={translate('create-project-step3-description')}
-      descriptionMode="html"
     >
       <UploadBannerForm />
     </TwoColumnLayout>

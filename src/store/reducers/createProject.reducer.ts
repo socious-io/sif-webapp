@@ -9,12 +9,14 @@ export interface ProjectState {
   social_cause: string;
   city: string;
   country: string;
+  cover_url: string;
 }
 
 const initialState: ProjectState = {
   title: '',
   wallet_address: '',
   cover_id: '',
+  cover_url: '',
   website: '',
   description: '',
   social_cause: '',

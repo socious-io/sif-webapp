@@ -31,6 +31,8 @@ const EditProjectForm: React.FC = () => {
     onSelectLocation,
     errors,
     wallet_address,
+    attachments,
+    onDropFiles,
   } = useEditProjectForm();
   return (
     <form className="container px-4 pt-12 pb-24 md:pb-16">
@@ -102,8 +104,8 @@ const EditProjectForm: React.FC = () => {
         <>
           <img className="w-full rounded-lg mb-8" alt="banner" src={imagePreview} />
           <FileUploader
-            files={[]}
-            onDropFiles={() => console.log}
+            files={attachments}
+            onDropFiles={onDropFiles}
             fileTypes={['PNG', 'JPG', 'GIF']}
             maxSize={2}
             showFileName={false}
@@ -115,7 +117,7 @@ const EditProjectForm: React.FC = () => {
         <AlertMessage
           theme="warning"
           iconName="alert-circle"
-          title={'You cannot change your wallet address'}
+          title={translate('edit-project-wallet-alert')}
           containerClassName="mt-4"
         />
       </FormColumnTemplate>

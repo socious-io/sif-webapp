@@ -88,6 +88,7 @@
   "edit-project-description-placeholder": "Enter a description...",
   "edit-project-cover-photo": "Cover Photo",
   "edit-project-wallet": "Wallet",
+  "edit-project-wallet-alert": "You cannot change your wallet address",
   "edit-project-cancel": "Cancel",
   "edit-project-publish": "Publish",
   "project-edit-back": "Back to project",

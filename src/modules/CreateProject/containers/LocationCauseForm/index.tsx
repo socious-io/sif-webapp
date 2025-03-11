@@ -35,22 +35,22 @@ const LocationCauseForm: React.FC = () => {
           {translate('location-description')}
         </span>
         <CardRadioButton
-          customStyle="flex flex-row w-full mt-[20px] mb-[32px]"
+          customStyle="flex flex-row w-full mt-5px] mb-[32px]"
           items={options}
           selectedValue={selectedCardId}
           setSelectedValue={value => {
             setSelectedCardId(value);
           }}
         />
-        {selectedCardId === 'City / Country' && (
-          <div className="my-[20px]">
+        {selectedCardId === 'COUNTRY_CITY' && (
+          <div className="my-5">
             <LocationSearchDropdown
               onSelect={location => onSelectLocation(location)}
               value={city ? { label: `${city}, ${country}`, city, country } : null}
             />
           </div>
         )}
-        <div className="mb-[48px]">
+        <div className="mb-12">
           <div>
             <label className="text-[18px] font-medium leading-[28px] text-secondary-900">
               {translate('social-cause-label')}*
@@ -75,10 +75,10 @@ const LocationCauseForm: React.FC = () => {
             />
           </div>
         </div>
-        <Button color="primary" block onClick={navigateStep2} customStyle="mt-32px" disabled={!isEnabled}>
+        <Button color="primary" block onClick={navigateStep2} customStyle="mt-8" disabled={!isEnabled}>
           {translate('continue-button')}
         </Button>
-        <Button color="secondary" block variant="text" customStyle="mt-[16px]" onClick={goBack}>
+        <Button color="secondary" block variant="text" customStyle="mt-4" onClick={goBack}>
           {translate('back-button')}
         </Button>
       </form>

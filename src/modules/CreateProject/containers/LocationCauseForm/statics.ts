@@ -2,11 +2,11 @@ export const locationOptions = [
   {
     id: 1,
     title: 'Worldwide',
-    value: 'Worldwide',
+    value: 'WOLRDWIDE',
   },
   {
     id: 2,
     title: 'City / Country',
-    value: 'City / Country',
+    value: 'COUNTRY_CITY',
   },
 ];

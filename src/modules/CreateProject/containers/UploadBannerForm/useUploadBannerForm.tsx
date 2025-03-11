@@ -9,20 +9,19 @@ import { setProjectData } from 'src/store/reducers/createProject.reducer';
 export const useUploadBannerForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [attachments, setAttachments] = useState<Files[] | null>([]);
   const { cover_id } = useSelector((state: RootState) => state.createProject);
+  const [attachments, setAttachments] = useState<Files[]>([]);
 
   const onDropFiles = async (newFiles: File[]) => {
-    console.log('new file', newFiles);
     newFiles.forEach(async (file: File) => {
       const { error, data } = await uploadMediaAdaptor(file);
-      dispatch(setProjectData({ cover_id: data?.url }));
+      dispatch(setProjectData({ cover_id: data?.id, cover_url: data?.url }));
       if (error) return;
       data && setAttachments([{ id: data.id, url: data.url }]);
     });
   };
   const navigateStep4 = () => navigate('/create/step-4');
-  const goBack = () => navigate(-1);
+  const goBack = () => navigate('/create/step-2');
   const isEnabled = cover_id === '';
 
   return { navigateStep4, attachments, goBack, onDropFiles, isEnabled };

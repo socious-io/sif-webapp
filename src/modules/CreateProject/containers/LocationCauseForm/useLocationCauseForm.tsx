@@ -27,8 +27,8 @@ export const useLocationCauseForm = () => {
   const onSelectCauses = value => dispatch(setProjectData({ social_cause: value.length ? value[0].label : '' }));
 
   const navigateStep2 = () => navigate('/create/step-2');
-  const goBack = () => navigate(-1);
-  const isEnabled = social_cause !== '' && ((country !== '' && city !== '') || selectedCardId === 'Worldwide');
+  const goBack = () => navigate('/create');
+  const isEnabled = social_cause !== '' && ((country !== '' && city !== '') || selectedCardId === 'WOLRDWIDE');
   return {
     navigateStep2,
     items,

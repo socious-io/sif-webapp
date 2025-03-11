@@ -102,7 +102,6 @@ export const blueprint: RouteObject[] = [
             loader: async ({ params }) => {
               if (params.id) {
                 const projects = await getProjectAdaptor(params.id);
-                console.log('projects : ', projects);
                 return { project: projects.data };
               }
             },

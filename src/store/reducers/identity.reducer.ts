@@ -1,8 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { CurrentIdentity } from 'src/core/api';
 
-import { currentIdentities } from '../thunks/identity.thunks';
-
 const initState = {
   entities: [],
   status: 'idle',
@@ -34,20 +32,6 @@ export const identitySlice = createSlice({
     removeIdentityList: () => {
       return initState;
     },
-  },
-  extraReducers: builder => {
-    builder
-      .addCase(currentIdentities.pending, state => {
-        state.status = 'loading';
-      })
-      .addCase(currentIdentities.fulfilled, (state, action) => {
-        state.status = 'succeeded';
-        state.entities = action.payload;
-      })
-      .addCase(currentIdentities.rejected, (state, action) => {
-        state.status = 'failed';
-        state.error = action.error.message;
-      });
   },
 });
 

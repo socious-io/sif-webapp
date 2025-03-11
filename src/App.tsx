@@ -9,7 +9,7 @@ import router from 'src/core/router';
 import { setIdentityList } from 'src/store/reducers/identity.reducer';
 
 import { identities } from './core/api';
-import store, { RootState } from './store';
+import { RootState } from './store';
 
 import 'src/core/translation/i18n';
 
@@ -19,7 +19,6 @@ function App() {
 
   const getIdentities = async () => {
     const new_identities = await identities();
-    console.log('init identities', new_identities);
     await dispatch(setIdentityList(new_identities));
   };
   useEffect(() => {

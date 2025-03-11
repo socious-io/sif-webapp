@@ -1,6 +1,7 @@
-import { CityRes, LocationRes } from './geo.types';
-import { get } from '../http';
 import { config } from 'src/config';
+
+import { CityRes, LocationRes } from './index.types';
+import { get } from '../http';
 const overwrittenConfig = {
   baseURL: config.sociousWorkBaseURL,
   withCredentials: false,
