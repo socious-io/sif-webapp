@@ -9,6 +9,8 @@
     "not-verified-text": "{{title}}を認証してください",
     "not-verified-support-text": "プラットフォームで投票や寄付を行うには、{{title}}の認証が必要です。",
     "not-verified-primary-btn": "今すぐ認証",
-    "not-verified-secondary-btn": "詳細を見る"
+    "not-verified-secondary-btn": "詳細を見る",
+    "title-organization": "組織",
+    "title-identity": "アイデンティティ"
   }
 }

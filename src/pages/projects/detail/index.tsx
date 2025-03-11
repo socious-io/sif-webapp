@@ -1,5 +1,6 @@
 import { Divider } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { translate } from 'src/core/helpers/utils';
 import AvatarLabelGroup from 'src/modules/General/components/AvatarLabelGroup';
 import BackLink from 'src/modules/General/components/BackLink';
 import Breadcrumbs from 'src/modules/General/components/Breadcrumbs';
@@ -27,11 +28,11 @@ export const ProjectDetail = () => {
       link: '/',
     },
     {
-      label: 'Explore',
+      label: translate('projects-breadcrumb-explore'),
       link: '/projects',
     },
     {
-      label: 'Round 1',
+      label: translate('projects-breadcrumb-round', { count: 1 }),
       link: '/projects',
     },
     {
@@ -39,13 +40,13 @@ export const ProjectDetail = () => {
       link: `/projects/${projectId}`,
     },
     {
-      label: 'Project Details',
+      label: translate('projects-breadcrumb-detail'),
     },
   ];
 
   const details = [
     {
-      label: 'Created by',
+      label: translate('projects-detail.created-by'),
       content: (
         <AvatarLabelGroup
           avatarSize="3rem"
@@ -54,15 +55,15 @@ export const ProjectDetail = () => {
       ),
     },
     {
-      label: 'Round',
+      label: translate('projects-detail.round'),
       content: <span className="text-base font-semibold leading-6 text-Brand-600">Empowering Change Makers</span>,
     },
     {
-      label: 'Social cause',
+      label: translate('projects-detail.social-causes'),
       content: <span className="text-base font-semibold leading-6 text-Brand-600">{detail.category}</span>,
     },
     {
-      label: 'Website',
+      label: translate('projects-detail.website'),
       content: (
         <Link to={detail.website || ''} className="text-base font-semibold leading-6 text-Brand-600">
           {detail.website}
@@ -70,10 +71,10 @@ export const ProjectDetail = () => {
       ),
     },
     {
-      label: 'Location',
+      label: translate('projects-detail.location'),
       content: (
         <div className="flex items-center gap-1.5 text-base font-semibold leading-6 text-Brand-600">
-          <Icon name="marker-pin-02" fontSize={20} color={variables.color_grey_400} />
+          {detail.location && <Icon name="marker-pin-02" fontSize={20} color={variables.color_grey_400} />}
           {detail.location}
         </div>
       ),
@@ -82,19 +83,21 @@ export const ProjectDetail = () => {
 
   const tabs = [
     {
-      label: 'Overview',
+      label: translate('projects-detail.overview'),
       content: (
         <div className="flex flex-col items-stretch gap-8 leading-6 text-Gray-light-mode-600">
-          <span className="text-2xl font-semibold leading-8 text-Gray-light-mode-900">Overview</span>
+          <span className="text-2xl font-semibold leading-8 text-Gray-light-mode-900">
+            {translate('projects-detail.overview')}
+          </span>
           {detail.overview}
         </div>
       ),
     },
     {
-      label: 'Donations',
+      label: translate('projects-detail.donations'),
       content: (
         <div className="flex flex-col items-stretch gap-8">
-          <span className="text-2xl font-semibold leading-8">Donations</span>
+          <span className="text-2xl font-semibold leading-8">{translate('projects-detail.donations')}</span>
           <DonationsList />
         </div>
       ),
@@ -108,7 +111,7 @@ export const ProjectDetail = () => {
       <img src="/images/explorer-cover.png" alt="Project Cover" width="100%" height="100%" className="rounded-2xl" />
       <div className="flex flex-col md:flex-row items-stretch justify-between gap-4">
         <div className="flex flex-col items-start gap-1">
-          {roundIsClosed && <Chip theme="warning" label="This round has ended" />}
+          {roundIsClosed && <Chip theme="warning" label={translate('home-round-closed')} />}
           <span className="text-2xl md:text-3xl font-medium">{detail.title}</span>
         </div>
         {isOwner && (
@@ -116,14 +119,14 @@ export const ProjectDetail = () => {
             <Button
               color="info"
               startIcon={<Icon name="share-02" fontSize={20} color={variables.color_grey_900} />}
-              customStyle="min-w-[6rem] !text-Gray-light-mode-900"
+              customStyle="min-w-[6rem] !text-Gray-light-mode-900 break-keep"
               fullWidth
               onClick={onShare}
             >
-              Share
+              {translate('projects-detail.share-button')}
             </Button>
-            <Button color="primary" fullWidth customStyle="min-w-[6rem]" onClick={onEditProject}>
-              Edit
+            <Button color="primary" fullWidth customStyle="min-w-[6rem] break-keep" onClick={onEditProject}>
+              {translate('projects-detail.edit-button')}
             </Button>
           </div>
         )}

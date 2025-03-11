@@ -1,56 +1,36 @@
-// import { getProjects, getProject, vote, donate } from 'src/core/api';
+import { SOCIAL_CAUSES } from 'src/constants/SOCIAL_CAUSES';
+import { getProjects, getProject, vote, donate } from 'src/core/api';
 import { IdentityType } from 'src/core/api';
+import { cleanMarkdown, convertMarkdownToJSX } from 'src/core/helpers/convert-md-to-jsx';
 
 import { AdaptorRes, DonateReq, Project, ProjectRes, SuccessRes } from '..';
+import { getIdentityMeta } from '../users/index.adaptors';
 
+//FIXME: social causes sync with Iman and add translation
 export const getProjectsAdaptor = async (page = 1, limit = 10): Promise<AdaptorRes<ProjectRes>> => {
   try {
-    //   const { items, total } = await getProjects({ page, limit });
-    //FIXME: mapping from API to adaptor
-    const projects = [
-      {
-        id: '1',
-        coverImg: '/images/explorer-cover.png',
-        category: 'Gender Equality',
-        title: 'Empowering Women Through Education',
-        description:
-          'This initiative focuses on providing access to quality education and vocational training for women in underserved communities, empowering them to break the cycle of poverty.',
-        creator: { type: 'users' as IdentityType, name: 'EduWomen Alliance', img: '' },
-      },
-      {
-        id: '2',
-        coverImg: '/images/explorer-cover.png',
-        category: 'Food Security',
-        title: 'Sustainable Farming Solutions',
-        description:
-          'This project supports small-scale farmers in adopting sustainable agriculture practices, improving food security, and reducing environmental degradation.',
-        creator: { type: 'users' as IdentityType, name: 'Alejandro Torres', img: '' },
-      },
-      {
-        id: '3',
-        coverImg: '/images/explorer-cover.png',
-        category: 'Health',
-        title: 'Accessible Healthcare for Remote Communities',
-        description:
-          'This initiative aims to establish mobile health clinics and telemedicine services in remote areas, providing access to quality healthcare for underserved populations.',
-        creator: { type: 'organizations' as IdentityType, name: 'HealthReach International', img: '' },
-      },
-      {
-        id: '4',
-        coverImg: '/images/explorer-cover.png',
-        category: 'Environment and Sustainability',
-        title: 'Clean Water for All',
-        description:
-          'This initiative aims to establish mobile health clinics and telemedicine services in remote areas, providing access to quality healthcare for underserved populations.',
-        creator: { type: 'users' as IdentityType, name: 'Maria Rodriguez', img: '' },
-      },
-    ];
+    const { results: projects, total } = await getProjects({ page, limit });
+    const items = projects.map(project => {
+      const { name, profileImage: img, type } = getIdentityMeta(project.identity);
+      return {
+        id: project.id,
+        coverImg: project.cover?.url || '',
+        category: SOCIAL_CAUSES[project.social_cause]?.label || project.social_cause,
+        title: project.title,
+        description: cleanMarkdown(project.description),
+        creator: {
+          type: type as IdentityType,
+          name,
+          img,
+        },
+      };
+    });
     return {
       data: {
-        items: projects,
+        items,
         page,
         limit,
-        total: 4,
+        total,
       },
       error: null,
     };
@@ -62,20 +42,18 @@ export const getProjectsAdaptor = async (page = 1, limit = 10): Promise<AdaptorR
 
 export const getProjectAdaptor = async (projectId: string): Promise<AdaptorRes<Project>> => {
   try {
-    //   const project = await getProject(id);
-    //FIXME: mapping from API to adaptor
+    const project = await getProject(projectId);
+    const { name, username, profileImage: img, type } = getIdentityMeta(project.identity);
     const data = {
-      id: '1',
-      coverImg: '/images/explorer-cover.png',
-      category: 'Gender Equality',
-      title: 'Empowering Women Through Education',
-      description:
-        'This initiative focuses on providing access to quality education and vocational training for women in underserved communities, empowering them to break the cycle of poverty.',
-      creator: { type: 'users' as IdentityType, name: 'EduWomen Alliance', username: '@EduWomenAlliance', img: '' },
-      website: 'empoweringwomenethiopia.org',
-      location: 'Addis Ababa, Ethiopia',
-      overview:
-        '"Empowering Ethiopia Future" is a project dedicated to providing accessible, high-quality education to children in underprivileged communities across Ethiopia. By establishing community-based learning centers, training local educators, and providing essential educational resources, we aim to bridge the education gap and create opportunities for every child to reach their full potential.',
+      id: project.id,
+      coverImg: project.cover?.url || '',
+      category: SOCIAL_CAUSES[project.social_cause]?.label || project.social_cause,
+      title: project.title,
+      description: project.description,
+      creator: { type: type as IdentityType, name, username, img },
+      website: project.website || '',
+      location: [project.city, project.country].filter(Boolean).join(', ') || 'Worldwide',
+      overview: convertMarkdownToJSX(project.description),
       roundStats: { estimatedMatch: 1240.4, donatedAmount: 24.3, votes: 2 },
       donations: [
         {

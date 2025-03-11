@@ -24,6 +24,7 @@
         font-weight: 600;
         line-height: 24px;
         color: $color-grey-500;
+        word-break: keep-all;
         cursor: pointer;
 
         &--active {

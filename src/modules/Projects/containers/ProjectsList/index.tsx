@@ -1,4 +1,5 @@
 import { Divider } from '@mui/material';
+import { translate } from 'src/core/helpers/utils';
 import Pagination from 'src/modules/General/components/Pagination';
 import PaginationMobile from 'src/modules/General/components/PaginationMobile';
 import ProjectCard from 'src/modules/Projects/components/ProjectCard';
@@ -14,7 +15,7 @@ const ProjectsList = () => {
   return (
     <>
       <div className="flex flex-col gap-8 mt-2 text-lg font-semibold">
-        All projects ({total})
+        {translate('projects-all')} ({total})
         {!!projects.length && (
           <div className="flex flex-wrap mx-[-1.5rem] text-base font-normal">
             {projects.map(project => (

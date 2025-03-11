@@ -24,7 +24,7 @@ export interface Project {
   creator: { id?: string; type: IdentityType; name: string; username?: string; img: string };
   website?: string;
   location?: string;
-  overview?: string;
+  overview?: JSX.Element;
   roundStats?: RoundStats;
   donations?: Donation[];
 }

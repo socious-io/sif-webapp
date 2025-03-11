@@ -9,6 +9,8 @@
     "not-verified-text": "Verify your {{title}}",
     "not-verified-support-text": "To vote and donate on our platform, please verify your {{title}}.",
     "not-verified-primary-btn": "Verify now",
-    "not-verified-secondary-btn": "Learn more"
+    "not-verified-secondary-btn": "Learn more",
+    "title-organization": "organization",
+    "title-identity": "identity"
   }
 }

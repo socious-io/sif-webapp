@@ -7,10 +7,10 @@ export const useProjectsList = () => {
   const { projects } = useLoaderData() as { projects: ProjectRes };
   const [currentProjects, setCurrentProjects] = useState(projects);
   const [page, setPage] = useState(1);
-  const limit = currentProjects.limit || 10;
+  const limit = currentProjects?.limit || 10;
   const total = currentProjects?.total || 0;
   const currentList = currentProjects?.items || [];
-  const totalPage = Math.ceil((currentProjects?.total || 0) / (currentProjects?.limit || limit));
+  const totalPage = Math.ceil(total / limit);
 
   const onChangePage = async (newPage: number) => {
     setPage(newPage);

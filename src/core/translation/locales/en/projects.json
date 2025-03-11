@@ -1,0 +1,26 @@
+{
+  "projects-breadcrumb-explore": "Explore",
+  "projects-breadcrumb-round": "Round {{count}}",
+  "projects-breadcrumb-detail": "Project Details",
+  "projects-all": "All projects",
+  "projects-by": "By",
+  "projects-detail": {
+    "created-by": "Created by",
+    "round": "Round",
+    "social-causes": "Social cause",
+    "website": "Website",
+    "location": "Location",
+    "overview": "Overview",
+    "donations": "Donations",
+    "share-button": "Share",
+    "edit-button": "Edit",
+    "donated-by": "Donated"
+  },
+  "projects-round-stats": {
+    "estimated-match": "estimated match in current round",
+    "donated": "donated",
+    "votes": "votes",
+    "share-button": "Share",
+    "vote-button": "Vote now"
+  }
+}
