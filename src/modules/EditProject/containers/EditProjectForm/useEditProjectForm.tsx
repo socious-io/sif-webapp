@@ -11,7 +11,7 @@ import { locationOptions } from './statics';
 interface FormData {
   name: string;
   description: string;
-  website?: string | null | undefined;
+  website?: string | null;
   city: string;
   country: string;
   social_cause: string;
@@ -22,7 +22,7 @@ interface FormData {
 const schema = yup.object().shape({
   name: yup.string().required('Name is required'),
   description: yup.string().required('Description is required'),
-  website: yup.string().nullable('Must be a valid URL'),
+  website: yup.string().url('Must be a valid URL').nullable(),
   city: yup.string().required('Location is required'),
   country: yup.string().required('Location is required'),
   social_cause: yup.string().required('Social Cause is required'),
@@ -32,7 +32,6 @@ const schema = yup.object().shape({
 export const useEditProjectForm = () => {
   const { project } = useLoaderData() as { project: Project };
 
-  console.log('detais : ', project);
   const {
     register,
     handleSubmit,
@@ -72,7 +71,6 @@ export const useEditProjectForm = () => {
   const onSelectCauses = value => setValue('social_cause', value.length ? value[0].label : '');
 
   const onSubmit = (formData: FormData) => {
-    console.log('alskdfjalksdjflksj');
     editProjectAdaptor({ ...project, ...formData });
   };
 
@@ -83,9 +81,7 @@ export const useEditProjectForm = () => {
   const social_cause = watch('social_cause');
   const wallet_address = watch('wallet_address');
 
-  console.log('the description', description);
   const goBack = () => navigate(-1);
-  console.log(errors);
   return {
     goBack,
     items,

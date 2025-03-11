@@ -23,7 +23,7 @@ export const useUploadBannerForm = () => {
   };
   const navigateStep4 = () => navigate('/create/step-4');
   const goBack = () => navigate(-1);
-  const isEnabled = cover_id !== '';
+  const isEnabled = cover_id === '';
 
   return { navigateStep4, attachments, goBack, onDropFiles, isEnabled };
 };

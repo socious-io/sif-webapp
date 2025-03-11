@@ -15,7 +15,7 @@ interface FormData {
 const schema = yup.object().shape({
   title: yup.string().required('This field is required'),
   description: yup.string().required('This field is required'),
-  website: yup.string().nullable(),
+  website: yup.string().url('Must be a valid URL').nullable(),
 });
 
 export const useNameDescriptionForm = () => {
