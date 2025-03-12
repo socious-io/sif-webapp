@@ -50,3 +50,8 @@ export interface Identity {
   created_at: Date;
   updated_at: Date;
 }
+
+export interface CurrentIdentity extends Identity {
+  current: boolean;
+  primary: boolean;
+}

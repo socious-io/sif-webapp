@@ -1,10 +1,10 @@
 import { ConnectButton as RKButton } from '@rainbow-me/rainbowkit';
 
+import styles from './index.module.scss';
 import Button from '../Button';
 import Icon from '../Icon';
-import styles from './index.module.scss';
 
-const ConnectButton = () => {
+const ConnectButton: React.FC = () => {
   return (
     <RKButton.Custom>
       {({ account, chain, openAccountModal, openChainModal, openConnectModal, authenticationStatus, mounted }) => {

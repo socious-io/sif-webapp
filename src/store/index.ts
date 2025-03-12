@@ -1,5 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 
+import { createProjectSlice } from './reducers/createProject.reducer';
+import { identitySlice } from './reducers/identity.reducer';
 import { languageSlice } from './reducers/language.reducer';
 import { notificationSlice } from './reducers/notification.reducer';
 import { spinnerSlice } from './reducers/spinner.reducer';
@@ -9,6 +11,8 @@ const store = configureStore({
     spinner: spinnerSlice.reducer,
     language: languageSlice.reducer,
     notification: notificationSlice.reducer,
+    createProject: createProjectSlice.reducer,
+    identity: identitySlice.reducer,
   },
   middleware: getDefaultMiddleware => {
     return getDefaultMiddleware({

@@ -1,3 +1,7 @@
+import { SOCIAL_CAUSES } from 'src/constants/SOCIAL_CAUSES';
+
+import { translate } from '../helpers/utils';
+
 export * from './media/index.adaptors';
 export * from './media/index.types';
 
@@ -29,4 +33,15 @@ export interface OptionType {
   value: string;
   label: string;
   icon?: string;
+}
+export function socialCausesToCategoryAdaptor() {
+  return Object.entries(SOCIAL_CAUSES).map(([, value]) => value);
+}
+export function socialCausesToCategory(categories: string[] = []) {
+  if (!categories) {
+    return [];
+  }
+  return categories.map(cat => {
+    return { label: translate(cat), value: cat };
+  });
 }

@@ -3,7 +3,7 @@
   "layout-verification": {
     "success-text": "Your {{title}} has been successfully verified",
     "success-support-text": "You can now vote and donate for projects.",
-    "success-primary-btn": "Dismiss", 
+    "success-primary-btn": "Dismiss",
     "pending-text": "Verification pending",
     "pending-support-text": "We reviewing your submitted documents, we will notify you once it is complete.",
     "not-verified-text": "Verify your {{title}}",
@@ -12,5 +12,7 @@
     "not-verified-secondary-btn": "Learn more",
     "title-organization": "organization",
     "title-identity": "identity"
-  }
+  },
+  "not-verified-secondary-btn": "Learn more",
+  "footer-copyright": "© 2024 GIobal Inc. All rights reserved."
 }
