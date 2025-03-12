@@ -13,11 +13,13 @@ export const http = axios.create({
   timeout: 1000000,
 });
 
-export async function getAuthHeaders(): Promise<{ Authorization: string }> {
-  const token = (await nonPermanentStorage.get('access_token')) || '';
-  const prefix = (await nonPermanentStorage.get('token_type')) || 'Bearer';
+export async function getAuthHeaders(): Promise<{ Authorization: string; CurrentIdentity: string }> {
+  const token = await nonPermanentStorage.get('access_token');
+  const prefix = await nonPermanentStorage.get('token_type');
+  const currentIdentity = await nonPermanentStorage.get('identity');
   return {
-    Authorization: token && prefix ? `${prefix} ${token}` : '',
+    Authorization: `${prefix} ${token}`,
+    CurrentIdentity: currentIdentity || '',
   };
 }
 
@@ -86,9 +88,10 @@ export function handleError(params?: ErrorHandlerParams) {
 
 http.interceptors.request.use(
   async function (config) {
-    const { Authorization } = await getAuthHeaders();
+    const { Authorization, CurrentIdentity } = await getAuthHeaders();
     if (Authorization) config.headers.set('Authorization', Authorization);
-    // Do something before request is sent
+    if (CurrentIdentity) config.headers.set('Current-Identity', CurrentIdentity);
+
     return config;
   },
   function (error) {

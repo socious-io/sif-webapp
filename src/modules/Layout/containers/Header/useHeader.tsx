@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { CurrentIdentity, Identity, OrgMeta, UserMeta } from 'src/core/api';
 import { RootState } from 'src/store';
 
@@ -7,6 +8,7 @@ export const useHeader = () => {
   const [accounts, setaccounts] = useState([]);
   const [userType, setUserType] = useState<'users' | 'organizations'>('users');
   const [image, setImage] = useState('');
+  const navigate = useNavigate();
 
   const identities = useSelector<RootState, Identity[]>(state => {
     return state.identity.entities;
@@ -36,5 +38,11 @@ export const useHeader = () => {
       setImage((currentIdentity.meta as UserMeta).avatar || (currentIdentity.meta as OrgMeta).image || '');
     }
   }, [currentIdentity]);
-  return { accounts, image, userType };
+  const navigateCreate = () => {
+    console.log(currentIdentity);
+    if (currentIdentity?.type === 'organizations') navigate('/create');
+    else if (currentIdentity?.type === 'users') navigate('/create/select-identity');
+    else return;
+  };
+  return { accounts, image, userType, navigateCreate };
 };
