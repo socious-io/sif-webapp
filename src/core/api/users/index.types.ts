@@ -16,6 +16,7 @@ export interface UserMeta {
   language: string | null;
   donates: number;
   impact_points: number;
+  identity_verified_at: Date | null;
   project_supported: number;
 }
 
@@ -35,7 +36,7 @@ export interface OrgMeta {
   culture?: string;
   logo?: Media;
   cover?: Media;
-  status: string;
+  status: 'NOT_ACTIVE' | 'PENDING' | 'ACTIVE';
   verifiedImpact: boolean;
   verified: boolean;
   createdAt: Date;
