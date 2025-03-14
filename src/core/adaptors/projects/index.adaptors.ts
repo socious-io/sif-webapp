@@ -2,20 +2,20 @@ import { SOCIAL_CAUSES } from 'src/constants/SOCIAL_CAUSES';
 import { createProjects, editProjects, getProject, getProjects, IdentityType } from 'src/core/api';
 import { cleanMarkdown, convertMarkdownToJSX } from 'src/core/helpers/convert-md-to-jsx';
 import { removedEmptyProps } from 'src/core/helpers/objects-arrays';
+import { translate } from 'src/core/helpers/utils';
 
 import { AdaptorRes, DonateReq, Project, ProjectRes, SuccessRes } from '..';
 import { getIdentityMeta } from '../users/index.adaptors';
 
-//FIXME: social causes sync with Iman and add translation
 export const getProjectsAdaptor = async (page = 1, limit = 10): Promise<AdaptorRes<ProjectRes>> => {
   try {
     const { results: projects, total } = await getProjects({ page, limit });
     const items = projects.map(project => {
-      const { name, profileImage: img, type } = getIdentityMeta(project.identity);
+      const { name, profileImage: img, type = 'organizations' } = getIdentityMeta(project.identity);
       return {
         id: project.id,
         coverImg: project.cover?.url || '',
-        category: SOCIAL_CAUSES[project.social_cause]?.label || project.social_cause,
+        category: translate(project.social_cause) || SOCIAL_CAUSES[project.social_cause]?.label,
         title: project.title,
         description: cleanMarkdown(project.description),
         creator: {
@@ -43,11 +43,11 @@ export const getProjectsAdaptor = async (page = 1, limit = 10): Promise<AdaptorR
 export const getProjectAdaptor = async (projectId: string): Promise<AdaptorRes<Project>> => {
   try {
     const project = await getProject(projectId);
-    const { name, username, profileImage: img, type } = getIdentityMeta(project.identity);
+    const { name, username, profileImage: img, type = 'organizations' } = getIdentityMeta(project.identity);
     const data = {
       id: project.id,
       coverImg: project.cover?.url || '',
-      category: SOCIAL_CAUSES[project.social_cause]?.label || project.social_cause,
+      category: translate(project.social_cause) || SOCIAL_CAUSES[project.social_cause]?.label,
       title: project.title,
       description: project.description,
       creator: { type: type as IdentityType, name, username, img },
