@@ -40,7 +40,6 @@ export const useHeader = () => {
   }, [currentIdentity]);
 
   const navigateCreate = () => {
-    console.log(currentIdentity);
     if (currentIdentity?.type === 'organizations') navigate('/create');
     else if (currentIdentity?.type === 'users') navigate('/create/select-identity');
     else navigate('/intro');
