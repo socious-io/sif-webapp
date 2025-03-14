@@ -13,7 +13,7 @@ const Header: React.FC = () => {
         <div className="flex items-center">
           <img src={logo} alt="logo" className="mr-2" />
           <h1 className="hidden sm:block text-[20px] font-semibold leading-[30px] text-Brand-600">
-            Socious innovation fund
+            Socious Innovation Fund
           </h1>
         </div>
         <div className="flex">
@@ -30,8 +30,8 @@ const Header: React.FC = () => {
             img={image}
             accounts={accounts}
             iconItems={[
-              { iconName: 'user-circle', label: translate('header-view-profile'), onClick: console.log },
-              { iconName: 'settings-01', label: translate('header-settings'), onClick: console.log },
+              { iconName: 'user-circle', label: translate('header-support'), onClick: console.log },
+              { iconName: 'settings-01', label: translate('header-setting'), onClick: console.log },
               { iconName: 'log-out-01', label: translate('header-logout'), onClick: console.log },
             ]}
             createItem

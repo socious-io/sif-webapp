@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { CurrentIdentity, OrgMeta, Organization, User, UserMeta, identities } from 'src/core/api';
+import { CurrentIdentity, OrgMeta, identities } from 'src/core/api';
+import { switchAccount } from 'src/core/api/auth/auth.service';
 import { nonPermanentStorage } from 'src/core/storage/non-permanent';
 import { RootState } from 'src/store';
 import { setIdentityList } from 'src/store/reducers/identity.reducer';
@@ -21,17 +22,9 @@ export const useIconDropDown = () => {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const switchAccount = async (accountId: string) => {
-    await nonPermanentStorage.set({ key: 'identity', value: accountId });
-    identities()
-      .then(resp => dispatch(setIdentityList(resp)))
-      .then(resp => {
-        const current = resp.payload.find(item => item.id === accountId);
-        const route =
-          current?.type === 'users' ? '/dashboard/user' : `/dashboard/${(current?.meta as OrgMeta).shortname}/org`;
-        navigate(route);
-      })
-      .then(() => setOpen(false));
+  const onSwitchAccount = async (accountId: string) => {
+    await switchAccount(accountId);
+    setOpen(false);
   };
 
   const navigateToOnboarding = async () => {
@@ -44,7 +37,7 @@ export const useIconDropDown = () => {
     } else {
       localStorage.setItem('registerFor', 'organization');
     }
-    navigate('/sign-up/user/onboarding');
+    navigate('#');
   };
 
   const handleClick = () => {
@@ -58,5 +51,5 @@ export const useIconDropDown = () => {
     setOpen(false);
   };
 
-  return { switchAccount, open, myProfile, handleClick, handleOpen, handleClose, navigateToOnboarding };
+  return { onSwitchAccount, open, myProfile, handleClick, handleOpen, handleClose, navigateToOnboarding };
 };

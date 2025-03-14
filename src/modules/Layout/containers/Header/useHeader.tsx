@@ -22,11 +22,11 @@ export const useHeader = () => {
       const org = i.meta as OrgMeta;
       return {
         id: i.id,
-        img: user.avatar || org.image || '',
+        img: i.type === 'users' ? user.avatar : org.logo?.url,
         type: i.type,
-        name: user.name || org.name,
+        name: i.type === 'users' ? `${user.first_name} ${user.last_name}` : org.shortname,
         username: user.username || org.shortname,
-        selected: user.id === currentIdentity?.id,
+        selected: i.id === currentIdentity?.id,
       };
     });
     setaccounts(accList);
@@ -38,11 +38,12 @@ export const useHeader = () => {
       setImage((currentIdentity.meta as UserMeta).avatar || (currentIdentity.meta as OrgMeta).image || '');
     }
   }, [currentIdentity]);
+
   const navigateCreate = () => {
     console.log(currentIdentity);
     if (currentIdentity?.type === 'organizations') navigate('/create');
     else if (currentIdentity?.type === 'users') navigate('/create/select-identity');
-    else return;
+    else navigate('/intro');
   };
   return { accounts, image, userType, navigateCreate };
 };

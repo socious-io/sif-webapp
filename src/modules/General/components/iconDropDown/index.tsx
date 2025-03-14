@@ -23,7 +23,7 @@ export const IconDropDown: React.FC<IconDropDownProps> = props => {
   } = props;
   const currentAccount = accounts.find(a => a.selected);
   const otherAccounts = accounts.filter(a => !a.selected);
-  const { open, handleOpen, handleClose, switchAccount, handleClick, navigateToOnboarding } = useIconDropDown();
+  const { open, handleOpen, handleClose, onSwitchAccount, handleClick, navigateToOnboarding } = useIconDropDown();
 
   return (
     <div className="flex flex-col items-end relative">
@@ -62,8 +62,8 @@ export const IconDropDown: React.FC<IconDropDownProps> = props => {
               className={css.menuItem}
               onFocus={handleOpen}
               onBlur={handleClose}
-              onMouseDown={() => switchAccount(a.id)}
-              onClick={() => switchAccount(a.id)}
+              onMouseDown={() => onSwitchAccount(a.id)}
+              onClick={() => onSwitchAccount(a.id)}
             >
               <AvatarLabelGroup account={a} />
             </MenuItem>
@@ -79,9 +79,7 @@ export const IconDropDown: React.FC<IconDropDownProps> = props => {
             >
               <IconListItem
                 iconName="plus"
-                label={
-                  currentAccount?.type === 'users' ? translate('header-create-org') : translate('header-create-talent')
-                }
+                label={translate('header-create-org')}
                 customIconClass="text-Brand-700"
                 customLabelClass={css.createLabel}
               />
