@@ -2,6 +2,7 @@ import { Navigate, RouteObject, createBrowserRouter } from 'react-router-dom';
 import { Layout } from 'src/modules/Layout';
 
 import { getProjectAdaptor, getProjectsAdaptor, getUserProjects } from '../adaptors';
+import { getRounds } from '../api';
 
 export const blueprint: RouteObject[] = [
   { path: '/', element: <DefaultRoute /> },
@@ -18,6 +19,10 @@ export const blueprint: RouteObject[] = [
         children: [
           {
             path: '/home',
+            loader: async () => {
+              const rounds = await getRounds();
+              return { rounds };
+            },
             async lazy() {
               const { Home } = await import('src/pages/home');
               return {
@@ -91,7 +96,7 @@ export const blueprint: RouteObject[] = [
               }
             },
             async lazy() {
-              const { UsersProjects } = await import('src/pages/usersProjects');
+              const { UsersProjects } = await import('src/pages/projects/user');
               return {
                 Component: UsersProjects,
               };
@@ -106,7 +111,7 @@ export const blueprint: RouteObject[] = [
               }
             },
             async lazy() {
-              const { EditProject } = await import('src/pages/editProject');
+              const { EditProject } = await import('src/pages/projects/edit');
               return {
                 Component: EditProject,
               };

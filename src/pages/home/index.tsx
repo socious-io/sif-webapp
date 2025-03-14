@@ -1,11 +1,17 @@
 import { useNavigate } from 'react-router-dom';
 import AvatarGroup from 'src/assets/images/sample-avatars/Avatar-group.png';
+import { convertDateFormat, getDaysUntil } from 'src/core/helpers/date-converter';
 import { translate } from 'src/core/helpers/utils';
 import Button from 'src/modules/General/components/Button';
 import Chip from 'src/modules/General/components/Chip';
 
+import { useHome } from './useHome';
+
 export const Home = () => {
   const navigate = useNavigate();
+  const {
+    roundsdetails: { pool_amount, voting_start_at, voting_end_at, name, submission_end_at, submission_start_at },
+  } = useHome();
   //FIXME: not static
   const isIdentityUser = false;
   const roundIsClosed = false;
@@ -42,9 +48,7 @@ export const Home = () => {
           <div className="flex flex-col gap-4 p-6 md:p-8">
             <div className="flex flex-col items-start gap-1">
               {roundIsClosed && <Chip theme="warning" label={translate('home-round-closed')} />}
-              <span className="text-2xl md:text-3xl font-semibold">
-                {translate('home-round', { count: 1, name: 'Empowering Change Makers' })}
-              </span>
+              <span className="text-2xl md:text-3xl font-semibold">{name}</span>
             </div>
             {!roundIsClosed &&
               (isIdentityUser ? (
@@ -52,23 +56,27 @@ export const Home = () => {
                   <div className="text-sm text-Gray-light-mode-600">
                     <span className="font-medium text-Gray-light-mode-700">{translate('home-proposal')}</span>
                     <br className="md:hidden" />
-                    2024/01/01 - 2024/01/14
+                    {convertDateFormat(submission_start_at)} - {convertDateFormat(submission_end_at)}
                   </div>
                   <div className="text-sm text-Gray-light-mode-600">
                     <span className="font-medium text-Gray-light-mode-700">{translate('home-vote-period')}</span>
                     <br className="md:hidden" />
-                    2024/01/15 - 2024/01/29
+                    {convertDateFormat(voting_start_at)} - {convertDateFormat(voting_end_at)}
                   </div>
                   <div className="text-sm text-Gray-light-mode-600">
                     <span className="font-medium text-Gray-light-mode-700">{translate('home-vote-results')}</span>
                     <br className="md:hidden" />
-                    2024/02/07
+                    GET FROM BE
                   </div>
                 </div>
               ) : (
                 <div className="flex items-center gap-4 text-sm text-Gray-light-mode-600 mt-[-0.5rem]">
-                  <span>{translate('home-starts')} 2024/01/15 00:00 UTC</span>
-                  <span>{translate('home-ends')} 2024/01/29 00:00 UTC</span>
+                  <span>
+                    {translate('home-starts')} {convertDateFormat(voting_start_at)}
+                  </span>
+                  <span>
+                    {translate('home-ends')} {convertDateFormat(voting_end_at)}
+                  </span>
                 </div>
               ))}
             <p className="mt-2 leading-6 text-Gray-light-mode-600">{translate('home-thanks', { amount: '$50,000' })}</p>
@@ -78,11 +86,11 @@ export const Home = () => {
                 {translate('home-projects')}
               </div>
               <div className="flex-1 flex flex-col gap-1 text-sm text-Gray-light-mode-600">
-                <span className="text-4xl md:text-5xl font-semibold text-Brand-700">160</span>
+                <span className="text-4xl md:text-5xl font-semibold text-Brand-700">{getDaysUntil(voting_end_at)}</span>
                 {translate('home-days-go')}
               </div>
               <div className="flex-1 flex flex-col gap-1 text-sm text-Gray-light-mode-600">
-                <span className="text-4xl md:text-5xl font-semibold text-Brand-700">$50,000</span>
+                <span className="text-4xl md:text-5xl font-semibold text-Brand-700">${pool_amount}</span>
                 {translate('home-matching-pool')}
               </div>
             </div>
