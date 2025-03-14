@@ -1,11 +1,16 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { uploadMediaWithProgressAdaptor, verifyOrganization } from 'src/core/adaptors';
+import { CurrentIdentity } from 'src/core/api';
 import { RootState } from 'src/store';
 
 import { FileState } from './index.types';
 
 export const useUploadModal = (handleOpenSuccessModal: () => void) => {
+  const currentIdentity = useSelector<RootState, CurrentIdentity | undefined>(state =>
+    state.identity.entities.find(identity => identity.current),
+  );
+  const organizationId = currentIdentity?.id;
   const [fileStates, setFileStates] = useState<FileState[]>([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -18,7 +23,6 @@ export const useUploadModal = (handleOpenSuccessModal: () => void) => {
     acc[id] = error;
     return acc;
   }, {});
-  // const orgId = useSelector<RootState, string>((state: RootState) => state.org.id);
 
   const updateFileState = (file: File, updates: Partial<Omit<FileState, 'file'>>) => {
     setFileStates(prev => prev.map(f => (f.file === file ? { ...f, ...updates } : f)));
@@ -57,11 +61,11 @@ export const useUploadModal = (handleOpenSuccessModal: () => void) => {
   };
 
   const handleContinue = async () => {
+    if (!organizationId) return;
     setError('');
     setLoading(true);
     const fileIds = fileStates.map(file => file.id).filter(Boolean);
-    //FIXME: not static uncomment orgId
-    const { error } = await verifyOrganization('deb0e215-e2cd-4d7f-9ae3-bc7141acd3cf', fileIds);
+    const { error } = await verifyOrganization(organizationId, fileIds);
     if (error) setError(error);
     else handleOpenSuccessModal();
     setLoading(false);
