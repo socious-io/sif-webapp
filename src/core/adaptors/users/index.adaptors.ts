@@ -8,7 +8,7 @@ export const getIdentityMeta = (identity: Identity | UserMeta | OrgMeta | undefi
     if (identity.type === 'users') {
       const user = identity.meta as UserMeta;
       return {
-        username: `@${user.username}`,
+        username: user.username ? `@${user.username}` : '',
         usernameVal: user.username,
         name: `${user.first_name} ${user.last_name}`,
         profileImage: user.avatar?.url || '',
@@ -17,7 +17,7 @@ export const getIdentityMeta = (identity: Identity | UserMeta | OrgMeta | undefi
     }
     const org = identity.meta as OrgMeta;
     return {
-      username: `@${org.shortname}`,
+      username: org.shortname ? `@${org.shortname}` : '',
       usernameVal: org.shortname,
       name: org.name || org.shortname,
       profileImage: org.logo?.url || '',
