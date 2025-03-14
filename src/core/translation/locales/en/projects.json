@@ -94,5 +94,12 @@
   "project-edit-back": "Back to project",
   "project-edit-title": "Edit project",
   "project-edit-cancel": "Cancel",
-  "project-edit-publish": "Publish"
+  "project-edit-publish": "Publish",
+  "select-identity-thank-you": "Thank you for your interest in creating a project on our platform. Currently, only registered organizations can create projects.",
+  "select-identity-support-projects": "As an individual, you can still support projects by:",
+  "select-identity-vote-projects": "Voting for projects that align with your values",
+  "select-identity-donate-projects": "Making a donation to amplify your support",
+  "select-identity-spread-awareness": "Spreading the word and raising awareness",
+  "select-identity-switch-org": "Switch to an organization account",
+  "back": "Back"
 }

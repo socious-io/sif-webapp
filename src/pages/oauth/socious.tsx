@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { config } from 'src/config';
 import { AuthRes } from 'src/core/adaptors';
 import { getAuthUrlAdaptor, sociousOauthAdaptor } from 'src/core/adaptors/auth/index.adaptors';
-import { setAuthParams } from 'src/core/api/auth/auth.service';
+import { setAuthParams, switchAccount } from 'src/core/api/auth/auth.service';
 // import store from 'src/store';
 // import { setUserProfile } from 'src/store/reducers/user.reducer';
 
@@ -20,7 +20,6 @@ export const SociousID = () => {
 
   async function onLoginSucceed(loginRes: AuthRes) {
     await setAuthParams(loginRes, true);
-    //FIXME: set identity later BE provide us
     navigate('/');
     return loginRes;
   }

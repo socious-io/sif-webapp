@@ -185,6 +185,15 @@ export const blueprint: RouteObject[] = [
               };
             },
           },
+          {
+            path: 'select-identity',
+            async lazy() {
+              const { SelectIdentity } = await import('src/pages/selectIdentity');
+              return {
+                Component: SelectIdentity,
+              };
+            },
+          },
         ],
       },
     ],
