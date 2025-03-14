@@ -50,7 +50,13 @@ export const ProjectDetail = () => {
       content: (
         <AvatarLabelGroup
           avatarSize="3rem"
-          account={{ id: '1', name: 'EduWomen Alliance', email: '@EduWomenAlliance', img: '', type: 'users' }}
+          account={{
+            id: detail.creator?.id || '',
+            name: detail.creator.name,
+            email: detail.creator?.username || '',
+            img: detail.creator.img,
+            type: detail.creator.type,
+          }}
         />
       ),
     },
