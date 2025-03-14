@@ -19,6 +19,7 @@ export const getProjectsAdaptor = async (page = 1, limit = 10): Promise<AdaptorR
         title: project.title,
         description: cleanMarkdown(project.description),
         creator: {
+          id: project.identity.id,
           type: type as IdentityType,
           name,
           img,
@@ -50,7 +51,7 @@ export const getProjectAdaptor = async (projectId: string): Promise<AdaptorRes<P
       category: translate(project.social_cause) || SOCIAL_CAUSES[project.social_cause]?.label,
       title: project.title,
       description: project.description,
-      creator: { type: type as IdentityType, name, username, img },
+      creator: { id: project.identity.id, type: type as IdentityType, name, img, username },
       website: project.website || '',
       location: [project.city, project.country].filter(Boolean).join(', ') || 'Worldwide',
       overview: convertMarkdownToJSX(project.description),

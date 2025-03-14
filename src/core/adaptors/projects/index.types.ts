@@ -21,7 +21,7 @@ export interface Project {
   category: string;
   title: string;
   description: string;
-  creator: { id?: string; type: IdentityType; name: string; username?: string; img: string };
+  creator: { id: string; type: IdentityType; name: string; img: string; username?: string };
   website?: string;
   location?: string;
   overview?: JSX.Element;
