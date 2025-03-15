@@ -6,6 +6,7 @@ import { nonPermanentStorage } from 'src/core/storage/non-permanent';
 import { hideSpinner, showSpinner } from 'src/store/reducers/spinner.reducer';
 
 import { removedEmptyProps } from '../helpers/objects-arrays';
+import { refreshToken } from './auth/auth.service';
 
 export const http = axios.create({
   baseURL: config.baseURL,
@@ -123,6 +124,7 @@ export function setupInterceptors(store: Store) {
       store.dispatch(hideSpinner());
       if (error?.response?.status === 401 && !error.config.url.includes('auth')) {
         try {
+          await refreshToken();
           return http.request(error.config);
         } catch {
           return Promise.reject(error);
