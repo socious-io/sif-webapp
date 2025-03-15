@@ -12,9 +12,9 @@ const Header: React.FC = () => {
       <div className="max-w-[1280px] w-full h-[72px] flex items-center justify-between mx-auto px-4">
         <div className="flex items-center">
           <img src={logo} alt="logo" className="mr-2" />
-          <h1 className="hidden sm:block text-[20px] font-semibold leading-[30px] text-Brand-600">
+          <a href="/home" className="hidden sm:block text-[20px] font-semibold leading-[30px] text-Brand-600">
             Socious Innovation Fund
-          </h1>
+          </a>
         </div>
         <div className="flex">
           <Button

@@ -14,3 +14,6 @@ export * from './verification/index.types';
 
 export * from './geo/index.api';
 export * from './geo/index.types';
+
+export * from './rounds/index.api';
+export * from './rounds/index.types';
