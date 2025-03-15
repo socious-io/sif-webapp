@@ -25,3 +25,14 @@ export interface AuthSession {
   refresh_token: string;
   token_type: 'Bearer';
 }
+
+export interface RefreshReq {
+  refresh_token: string;
+}
+
+export interface RefreshRes {
+  error?: string;
+  access_token: string;
+  refresh_token: string;
+  token_type: 'Bearer';
+}

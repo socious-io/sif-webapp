@@ -25,17 +25,19 @@ const Header: React.FC = () => {
           >
             {translate('layout-action-button')}
           </Button>
-          <IconDropDown
-            type={userType}
-            img={image}
-            accounts={accounts}
-            iconItems={[
-              { iconName: 'user-circle', label: translate('header-support'), onClick: console.log },
-              { iconName: 'settings-01', label: translate('header-setting'), onClick: console.log },
-              { iconName: 'log-out-01', label: translate('header-logout'), onClick: console.log },
-            ]}
-            createItem
-          />
+          {accounts.length > 0 && (
+            <IconDropDown
+              type={userType}
+              img={image}
+              accounts={accounts}
+              iconItems={[
+                { iconName: 'user-circle', label: translate('header-support'), onClick: console.log },
+                { iconName: 'settings-01', label: translate('header-setting'), onClick: console.log },
+                { iconName: 'log-out-01', label: translate('header-logout'), onClick: console.log },
+              ]}
+              createItem
+            />
+          )}
         </div>
       </div>
     </div>

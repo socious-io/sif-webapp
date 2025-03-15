@@ -3,7 +3,7 @@ import { nonPermanentStorage } from 'src/core/storage/non-permanent';
 import store from 'src/store';
 import { setIdentityList } from 'src/store/reducers/identity.reducer';
 
-import { identities } from './auth.api';
+import { identities, refresh } from './auth.api';
 import { AuthSession } from './auth.types';
 
 export async function setAuthParams(auth: AuthSession, keepLoggedIn?: boolean) {
@@ -30,9 +30,9 @@ export const switchAccount = async (accountId: string) => {
   await dispatch(setIdentityList(new_identities));
 };
 
-// export async function refreshToken() {
-//   const token = await nonPermanentStorage.get('refresh_token');
-//   if (!token) throw new Error('could not find refresh token');
+export async function refreshToken() {
+  const token = await nonPermanentStorage.get('refresh_token');
+  if (!token) throw new Error('could not find refresh token');
 
-//   await setAuthParams(await refresh({ refresh_token: token }));
-// }
+  await setAuthParams(await refresh({ refresh_token: token }));
+}
