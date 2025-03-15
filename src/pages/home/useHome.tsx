@@ -1,9 +1,7 @@
-import { useLoaderData } from 'react-router-dom';
-import { Round } from 'src/core/api';
+import { useSelector } from 'react-redux';
+import { RootState } from 'src/store';
 
 export const useHome = () => {
-  const { rounds: roundsdetails } = useLoaderData() as { rounds: Round };
-  return {
-    roundsdetails,
-  };
+  const round = useSelector((state: RootState) => state.round.round);
+  return { round };
 };
