@@ -1,9 +1,12 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useCallback, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 import { CURRENCIES } from 'src/constants/CURRENCIES';
 import { DonateReq } from 'src/core/adaptors';
+import { CurrentIdentity } from 'src/core/api';
 import Dapp from 'src/core/dapp';
+import { RootState } from 'src/store';
 import * as yup from 'yup';
 
 const schema = yup
@@ -20,8 +23,11 @@ const schema = yup
 
 export const useDonateProject = (onDonate: (data: DonateReq) => void) => {
   const { isConnected, Web3Connect } = Dapp.useWeb3();
-  //FIXME: not statics
-  const isUser = false;
+  const currentIdentity = useSelector<RootState, CurrentIdentity | undefined>(state => {
+    return state.identity.entities.find(i => i.current);
+  });
+  const isIdentityUser = currentIdentity?.type === 'users';
+
   const {
     register,
     setValue,
@@ -60,7 +66,7 @@ export const useDonateProject = (onDonate: (data: DonateReq) => void) => {
 
   return {
     data: {
-      isUser,
+      isIdentityUser,
       register,
       errors,
       selectedCurrency,

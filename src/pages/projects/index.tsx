@@ -1,26 +1,21 @@
 import { Divider } from '@mui/material';
+import { useSelector } from 'react-redux';
+import { convertDateFormat, getDaysUntil } from 'src/core/helpers/date-converter';
 import { translate } from 'src/core/helpers/utils';
 import Breadcrumbs from 'src/modules/General/components/Breadcrumbs';
 import Chip from 'src/modules/General/components/Chip';
 import ProjectsList from 'src/modules/Projects/containers/ProjectsList';
+import { RootState } from 'src/store';
 
 export const Projects = () => {
-  //FIXME: not static
-  const roundIsClosed = false;
+  const round = useSelector((state: RootState) => state.round.round);
+
+  const roundIsClosed = getDaysUntil(round?.voting_end_at as string) <= 0;
 
   const breadcrumbs = [
-    {
-      iconName: 'home-line',
-      label: '',
-      link: '/',
-    },
-    {
-      label: translate('projects-breadcrumb-explore'),
-      link: '/projects',
-    },
-    {
-      label: translate('projects-breadcrumb-round', { count: 1 }),
-    },
+    { iconName: 'home-line', label: '', link: '/' },
+    { label: translate('projects-breadcrumb-explore'), link: '/projects' },
+    { label: translate('projects-breadcrumb-round', { count: round?.total_projects }) },
   ];
 
   return (
@@ -31,17 +26,16 @@ export const Projects = () => {
         <div className="flex flex-col gap-2">
           <div className="flex flex-col items-start gap-1">
             {roundIsClosed && <Chip theme="warning" label={translate('home-round-closed')} />}
-            <span className="text-2xl md:text-3xl font-semibold">
-              {translate('home-round', { count: 1, name: 'Empowering Change Makers' })}
-            </span>
+            <span className="text-2xl md:text-3xl font-semibold">{round?.name}</span>
           </div>
           {!roundIsClosed && (
             <div className="flex items-center gap-4 text-sm text-Gray-light-mode-600">
               <span>
-                {translate('home-starts')} <br className="md:hidden" /> 2024/01/15 00:00 UTC
+                {translate('home-starts')} <br className="md:hidden" />
+                {round && convertDateFormat(round.voting_start_at)}
               </span>
               <span>
-                {translate('home-ends')} <br className="md:hidden" /> 2024/01/29 00:00 UTC
+                {translate('home-ends')} <br className="md:hidden" /> {round && convertDateFormat(round.voting_end_at)}
               </span>
             </div>
           )}

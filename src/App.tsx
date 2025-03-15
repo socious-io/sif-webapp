@@ -8,15 +8,15 @@ import { RouterProvider } from 'react-router-dom';
 import router from 'src/core/router';
 import { setIdentityList } from 'src/store/reducers/identity.reducer';
 
-import { identities } from './core/api';
+import { getRound, identities } from './core/api';
 import { setupInterceptors } from './core/api/http';
-import store, { RootState } from './store';
-
+import store, { AppDispatch, RootState } from './store';
 import 'src/core/translation/i18n';
+import { fetchRound } from './store/thunks/round.thunk';
 
 function App() {
   const { language } = useSelector((state: RootState) => state.language);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
     setupInterceptors(store);
   }, []);
@@ -28,6 +28,10 @@ function App() {
     i18next.changeLanguage(language);
     getIdentities();
   }, [language]);
+
+  useEffect(() => {
+    dispatch(fetchRound());
+  }, [dispatch]);
 
   return (
     <StyledEngineProvider injectFirst>

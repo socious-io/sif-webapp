@@ -17,31 +17,16 @@ import { useProjectDetail } from './useProjectDetail';
 
 export const ProjectDetail = () => {
   const {
-    data: { detail, projectId, isOwner, roundIsClosed },
+    data: { detail, projectId, isOwner, roundIsClosed, round },
     operations: { navigate, onShare, onEditProject, onVote },
   } = useProjectDetail();
 
   const breadcrumbs = [
-    {
-      iconName: 'home-line',
-      label: '',
-      link: '/',
-    },
-    {
-      label: translate('projects-breadcrumb-explore'),
-      link: '/projects',
-    },
-    {
-      label: translate('projects-breadcrumb-round', { count: 1 }),
-      link: '/projects',
-    },
-    {
-      label: detail.title,
-      link: `/projects/${projectId}`,
-    },
-    {
-      label: translate('projects-breadcrumb-detail'),
-    },
+    { iconName: 'home-line', label: '', link: '/' },
+    { label: translate('projects-breadcrumb-explore'), link: '/projects' },
+    { label: translate('projects-breadcrumb-round', { count: round?.total_projects }), link: '/projects' },
+    { label: detail.title, link: `/projects/${projectId}` },
+    { label: translate('projects-breadcrumb-detail') },
   ];
 
   const details = [
@@ -62,7 +47,7 @@ export const ProjectDetail = () => {
     },
     {
       label: translate('projects-detail.round'),
-      content: <span className="text-base font-semibold leading-6 text-Brand-600">Empowering Change Makers</span>,
+      content: <span className="text-base font-semibold leading-6 text-Brand-600">{round?.name}</span>,
     },
     {
       label: translate('projects-detail.social-causes'),

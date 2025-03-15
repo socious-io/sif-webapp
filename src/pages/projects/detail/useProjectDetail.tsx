@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import { useLoaderData, useNavigate, useParams } from 'react-router-dom';
 import { Project } from 'src/core/adaptors';
 import { CurrentIdentity } from 'src/core/api';
+import { getDaysUntil } from 'src/core/helpers/date-converter';
 import { RootState } from 'src/store';
 
 export const useProjectDetail = () => {
@@ -12,8 +13,9 @@ export const useProjectDetail = () => {
     state.identity.entities.find(identity => identity.current),
   );
   const isOwner = currentIdentity?.id === detail.creator?.id;
-  //FIXME: not static
-  const roundIsClosed = false;
+  const round = useSelector((state: RootState) => state.round.round);
+
+  const roundIsClosed = getDaysUntil(round?.voting_end_at as string) <= 0;
 
   const onShare = () => console.log('share');
 
@@ -22,17 +24,7 @@ export const useProjectDetail = () => {
   const onVote = () => navigate('vote');
 
   return {
-    data: {
-      detail,
-      projectId,
-      isOwner,
-      roundIsClosed,
-    },
-    operations: {
-      navigate,
-      onShare,
-      onEditProject,
-      onVote,
-    },
+    data: { detail, projectId, isOwner, roundIsClosed, round },
+    operations: { navigate, onShare, onEditProject, onVote },
   };
 };
