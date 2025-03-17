@@ -1,11 +1,13 @@
+import { ComponentType } from 'react';
+import { useSelector } from 'react-redux';
 import { Navigate, RouteObject, createBrowserRouter } from 'react-router-dom';
 import { Layout } from 'src/modules/Layout';
+import { RootState } from 'src/store';
 
 import { getProjectAdaptor, getProjectsAdaptor, getUserProjects } from '../adaptors';
 
 export const blueprint: RouteObject[] = [
   { path: '/', element: <DefaultRoute /> },
-
   { path: '*', element: <div>Page not found :(</div> },
   {
     path: '/',
@@ -15,7 +17,6 @@ export const blueprint: RouteObject[] = [
         children: [
           {
             path: '/home',
-
             async lazy() {
               const { Home } = await import('src/pages/home');
               return { Component: Home };
@@ -25,7 +26,7 @@ export const blueprint: RouteObject[] = [
             path: '/create',
             async lazy() {
               const { CreateProject } = await import('src/pages/projects/create/landing');
-              return { Component: CreateProject };
+              return { Component: Protect(CreateProject, 'both') };
             },
           },
           {
@@ -39,7 +40,7 @@ export const blueprint: RouteObject[] = [
                 },
                 async lazy() {
                   const { Projects } = await import('src/pages/projects');
-                  return { Component: Projects };
+                  return { Component: Protect(Projects, 'both') };
                 },
               },
               {
@@ -52,7 +53,7 @@ export const blueprint: RouteObject[] = [
                 },
                 async lazy() {
                   const { ProjectDetail } = await import('src/pages/projects/detail');
-                  return { Component: ProjectDetail };
+                  return { Component: Protect(ProjectDetail, 'both') };
                 },
               },
               {
@@ -65,7 +66,7 @@ export const blueprint: RouteObject[] = [
                 },
                 async lazy() {
                   const { VoteProject } = await import('src/pages/projects/vote');
-                  return { Component: VoteProject };
+                  return { Component: Protect(VoteProject, 'both') };
                 },
               },
             ],
@@ -80,7 +81,7 @@ export const blueprint: RouteObject[] = [
             },
             async lazy() {
               const { UsersProjects } = await import('src/pages/projects/user');
-              return { Component: UsersProjects };
+              return { Component: Protect(UsersProjects, 'both') };
             },
           },
           {
@@ -93,7 +94,7 @@ export const blueprint: RouteObject[] = [
             },
             async lazy() {
               const { EditProject } = await import('src/pages/projects/edit');
-              return { Component: EditProject };
+              return { Component: Protect(EditProject, 'both') };
             },
           },
         ],
@@ -124,42 +125,42 @@ export const blueprint: RouteObject[] = [
             path: 'step-1',
             async lazy() {
               const { CreateProjectStep1 } = await import('src/pages/projects/create/step-1');
-              return { Component: CreateProjectStep1 };
+              return { Component: Protect(CreateProjectStep1, 'organizations') };
             },
           },
           {
             path: 'step-2',
             async lazy() {
               const { CreateProjectStep2 } = await import('src/pages/projects/create/step-2');
-              return { Component: CreateProjectStep2 };
+              return { Component: Protect(CreateProjectStep2, 'organizations') };
             },
           },
           {
             path: 'step-3',
             async lazy() {
               const { CreateProjectStep3 } = await import('src/pages/projects/create/step-3');
-              return { Component: CreateProjectStep3 };
+              return { Component: Protect(CreateProjectStep3, 'organizations') };
             },
           },
           {
             path: 'step-4',
             async lazy() {
               const { CreateProjectStep4 } = await import('src/pages/projects/create/step-4');
-              return { Component: CreateProjectStep4 };
+              return { Component: Protect(CreateProjectStep4, 'organizations') };
             },
           },
           {
             path: 'publish',
             async lazy() {
               const { Publish } = await import('src/pages/projects/create/publish');
-              return { Component: Publish };
+              return { Component: Protect(Publish, 'organizations') };
             },
           },
           {
             path: 'select-identity',
             async lazy() {
               const { SelectIdentity } = await import('src/pages/selectIdentity');
-              return { Component: SelectIdentity };
+              return { Component: Protect(SelectIdentity, 'both') };
             },
           },
         ],
@@ -172,17 +173,16 @@ function DefaultRoute() {
   return <Navigate to="/home" />;
 }
 
-const isAuthenticated = async () => {
-  // const userResponse = await getUserProfileAdaptor();
-  // if (!userResponse.data) return false;
-  // else if (userResponse.data) {
-  //   store.dispatch(setUserProfile(userResponse.data));
-  //   const orgResponse = await getOrgIdAdaptor();
-  //   if (orgResponse.error == null && orgResponse.data != null) {
-  //     store.dispatch(setOrgProfile(orgResponse.data));
-  //   }
-  return true;
-  // }
-};
+function Protect<T extends object>(Component: ComponentType<T>, allowedIdentity: string): ComponentType<T> {
+  return function ProtectedRoute(props: T) {
+    const { status, entities } = useSelector((state: RootState) => state.identity);
+    const current = entities.find(identity => identity.current)?.type;
+    if (status === 'loading') return <div></div>;
+    if (status === 'failed') return <Navigate to="/intro" />;
+    if (allowedIdentity === current || (allowedIdentity === 'both' && current)) {
+      return <Component {...props} />;
+    } else return <Navigate to="/intro" />;
+  };
+}
 
 export const routes = createBrowserRouter(blueprint);
