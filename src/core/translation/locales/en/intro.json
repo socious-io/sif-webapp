@@ -8,5 +8,6 @@
   "intro-continue-button": "Continue",
   "intro-already-account": "Already have an account? ",
   "intro-login": "Log in",
-  "intro-login-with-socious": "Login with Socious ID"
+  "intro-login-with-socious": "Create or Login with Socious ID",
+  "select-identity-create-title": "Create a project"
 }

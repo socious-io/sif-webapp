@@ -59,7 +59,7 @@
   "connect-wallet-description2": "Currently, we only support Lace Wallet for connection. Lace is a user-friendly wallet developed by Input Output Global, available as a browser extension. It fully supports ADA transactions and other Cardano features necessary for interacting with our platform.",
   "connect-wallet-why-crypto": "Why are we using cryptocurrency?",
   "connect-wallet-more-lace": "More about Lace Wallet",
-  "connect-wallet-support-text": "If you have any questions, concerns, or need help with connecting your wallet, please don't hesitate to reach out to our",
+  "connect-wallet-support-text": "If you have any questions, concerns, or need help with connecting your wallet, please don't hesitate to reach out to our ",
   "connect-wallet-support-link": "support team.",
   "preview-button": "Preview",
   "publish-title": "Almost done! You’re ready to publish your project",
@@ -101,5 +101,6 @@
   "select-identity-donate-projects": "Making a donation to amplify your support",
   "select-identity-spread-awareness": "Spreading the word and raising awareness",
   "select-identity-switch-org": "Switch to an organization account",
-  "back": "Back"
+  "back": "Back",
+  "select-identity-support-affiliated": "If you are affiliated with an organization:"
 }
