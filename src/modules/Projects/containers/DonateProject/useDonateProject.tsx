@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { CURRENCIES } from 'src/constants/CURRENCIES';
 import { DonateReq } from 'src/core/adaptors';
 import { CurrentIdentity } from 'src/core/api';
-import Dapp from 'src/core/dapp';
+// import Dapp from 'src/core/dapp';
 import { RootState } from 'src/store';
 import * as yup from 'yup';
 
@@ -22,7 +22,7 @@ const schema = yup
   .required();
 
 export const useDonateProject = (onDonate: (data: DonateReq) => void) => {
-  const { isConnected, Web3Connect } = Dapp.useWeb3();
+  // const { isConnected, Web3Connect } = Dapp.useWeb3();
   const currentIdentity = useSelector<RootState, CurrentIdentity | undefined>(state => {
     return state.identity.entities.find(i => i.current);
   });
@@ -72,8 +72,8 @@ export const useDonateProject = (onDonate: (data: DonateReq) => void) => {
       selectedCurrency,
       selectedCurrencyLabel,
       donateValueConversion,
-      isConnected,
-      Web3Connect,
+      isConnected: true,
+      Web3Connect: {},
     },
     operations: {
       onSelectCurrency,

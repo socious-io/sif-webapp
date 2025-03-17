@@ -179,9 +179,9 @@ function Protect<T extends object>(Component: ComponentType<T>, allowedIdentity:
     const current = entities.find(identity => identity.current)?.type;
     if (status === 'loading') return <div></div>;
     if (status === 'failed') return <Navigate to="/intro" />;
-    if (allowedIdentity === current || (allowedIdentity === 'both' && current)) {
+    if (allowedIdentity) {
       return <Component {...props} />;
-    } else return <Navigate to="/intro" />;
+    }
   };
 }
 
