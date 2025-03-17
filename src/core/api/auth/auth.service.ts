@@ -1,7 +1,7 @@
 import { config } from 'src/config';
 import { nonPermanentStorage } from 'src/core/storage/non-permanent';
 import store from 'src/store';
-import { setIdentityList } from 'src/store/reducers/identity.reducer';
+import { removeIdentityList, setIdentityList } from 'src/store/reducers/identity.reducer';
 
 import { identities, refresh } from './auth.api';
 import { AuthSession } from './auth.types';
@@ -36,3 +36,10 @@ export async function refreshToken() {
 
   await setAuthParams(await refresh({ refresh_token: token }));
 }
+
+export const logout = async () => {
+  await nonPermanentStorage.remove('access_token');
+  await nonPermanentStorage.remove('refresh_token');
+  await nonPermanentStorage.remove('token_type');
+  await dispatch(removeIdentityList());
+};

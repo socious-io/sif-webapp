@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { CurrentIdentity, Identity, OrgMeta, UserMeta } from 'src/core/api';
+import { logout } from 'src/core/api/auth/auth.service';
 import { RootState } from 'src/store';
 
 export const useHeader = () => {
@@ -44,5 +45,9 @@ export const useHeader = () => {
     else if (currentIdentity?.type === 'users') navigate('/create/select-identity');
     else navigate('/intro');
   };
-  return { accounts, image, userType, navigateCreate };
+  const onLogout = () => {
+    logout();
+    navigate('/intro');
+  };
+  return { accounts, image, userType, navigateCreate, onLogout };
 };
