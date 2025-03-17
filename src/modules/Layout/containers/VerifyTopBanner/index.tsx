@@ -1,14 +1,13 @@
 import { translate } from 'src/core/helpers/utils';
 import TopBanner from 'src/modules/General/components/TopBanner';
 import KYB from 'src/modules/Verification/containers/KYB';
-import KYC from 'src/modules/Verification/containers/KYC';
 
 import { useVerifyTopBanner } from './useVerifyTopBanner';
 
 const VerifyTopBanner = () => {
   const {
-    data: { type, verified, hideVerifyBanner, pendingOrgVerification, connectUrl, openVerifyModal },
-    operations: { onDismiss, setConnectUrl, onVerifyIdentity, setOpenVerifyModal },
+    data: { type, verified, hideVerifyBanner, pendingOrgVerification, openVerifyModal },
+    operations: { onDismiss, onVerifyIdentity, setOpenVerifyModal },
   } = useVerifyTopBanner();
   const title =
     type === 'users'
@@ -45,15 +44,10 @@ const VerifyTopBanner = () => {
           }}
           primaryButton={{
             children: translate('layout-verification.not-verified-primary-btn'),
-            onClick: () =>
-              type === 'users' ? onVerifyIdentity(setConnectUrl, setOpenVerifyModal) : setOpenVerifyModal(true),
+            onClick: () => (type === 'users' ? onVerifyIdentity() : setOpenVerifyModal(true)),
           }}
         />
-        {type === 'users' ? (
-          <KYC open={openVerifyModal} handleClose={() => setOpenVerifyModal(false)} connectUrl={connectUrl} />
-        ) : (
-          <KYB open={openVerifyModal} setOpen={setOpenVerifyModal} />
-        )}
+        {type === 'organizations' && <KYB open={openVerifyModal} setOpen={setOpenVerifyModal} />}
       </>
     );
   }
