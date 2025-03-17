@@ -12,7 +12,7 @@ import DonateProject from '../DonateProject';
 
 const VoteDonateCard = () => {
   const {
-    data: { detail, selectedCard, isVoteChoice, isUser, openSuccessModal, voteInfo, donateInfo },
+    data: { detail, selectedCard, isVoteChoice, isIdentityUser, openSuccessModal, voteInfo, donateInfo },
     operations: { setSelectedCard, onVoteOrDonate, setOpenSuccessModal, onContinue },
   } = useVoteDonateCard();
 
@@ -95,7 +95,7 @@ const VoteDonateCard = () => {
         <Divider />
         {isVoteChoice ? (
           <>
-            <VoteInfo estimatedMatch="$23.50" impactPoints={isUser ? 272 : undefined} />
+            <VoteInfo estimatedMatch="$23.50" impactPoints={isIdentityUser ? 272 : undefined} />
             <Button type="button" color="primary" onClick={() => onVoteOrDonate()}>
               Vote now
             </Button>

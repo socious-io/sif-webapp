@@ -11,7 +11,7 @@ import { useDonateProject } from './useDonateProject';
 const DonateProject: React.FC<DonateProjectProps> = ({ onDonate }) => {
   const {
     data: {
-      isUser,
+      isIdentityUser,
       register,
       errors,
       selectedCurrency,
@@ -46,7 +46,7 @@ const DonateProject: React.FC<DonateProjectProps> = ({ onDonate }) => {
         hintCustomClass="!text-right"
         errors={errors.donate?.message ? [errors.donate.message.toString()] : undefined}
       />
-      <VoteInfo estimatedMatch="$10.00" impactPoints={isUser ? 272 : undefined} totalContribution="$10.00" />
+      <VoteInfo estimatedMatch="$10.00" impactPoints={isIdentityUser ? 272 : undefined} totalContribution="$10.00" />
       <Divider />
       <div className="flex flex-col items-stretch gap-5 text-lg font-medium leading-7">
         Payment method

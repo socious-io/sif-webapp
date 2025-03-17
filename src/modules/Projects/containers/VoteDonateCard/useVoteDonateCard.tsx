@@ -1,6 +1,9 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import { DonateReq, Project, voteOrDonateProjectAdaptor } from 'src/core/adaptors';
+import { CurrentIdentity } from 'src/core/api';
+import { RootState } from 'src/store';
 
 export const useVoteDonateCard = () => {
   const navigate = useNavigate();
@@ -8,8 +11,11 @@ export const useVoteDonateCard = () => {
   const [selectedCard, setSelectedCard] = useState('vote');
   const [openSuccessModal, setOpenSuccessModal] = useState(false);
   const isVoteChoice = selectedCard === 'vote';
-  //FIXME: not statics
-  const isUser = false;
+  const currentIdentity = useSelector<RootState, CurrentIdentity | undefined>(state => {
+    return state.identity.entities.find(i => i.current);
+  });
+  const isIdentityUser = currentIdentity?.type === 'users';
+
   const voteInfo = selectedCard === 'vote' ? { receivedAmount: '$23.50' } : undefined;
   const donateInfo =
     selectedCard === 'donate'
@@ -38,7 +44,7 @@ export const useVoteDonateCard = () => {
       detail,
       selectedCard,
       isVoteChoice,
-      isUser,
+      isIdentityUser,
       openSuccessModal,
       voteInfo,
       donateInfo,

@@ -1,0 +1,14 @@
+import { useSelector } from 'react-redux';
+import { CurrentIdentity } from 'src/core/api';
+import { getDaysUntil } from 'src/core/helpers/date-converter';
+import { RootState } from 'src/store';
+
+export const useHome = () => {
+  const round = useSelector((state: RootState) => state.round.round);
+  const currentIdentity = useSelector<RootState, CurrentIdentity | undefined>(state => {
+    return state.identity.entities.find(i => i.current);
+  });
+  const isIdentityUser = currentIdentity?.type === 'users';
+  const roundIsClosed = getDaysUntil(round?.voting_end_at as string) <= 0;
+  return { round, isIdentityUser, roundIsClosed };
+};

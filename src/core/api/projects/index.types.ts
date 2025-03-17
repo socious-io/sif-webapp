@@ -12,7 +12,6 @@ export interface Project {
   social_cause: string;
   identity: Identity;
   cover: Media;
-  website?: string;
   wallet_address: string;
   website?: string;
   wallet_env: string;
