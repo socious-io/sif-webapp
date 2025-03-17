@@ -50,7 +50,7 @@ const DonateProject: React.FC<DonateProjectProps> = ({ onDonate }) => {
       <Divider />
       <div className="flex flex-col items-stretch gap-5 text-lg font-medium leading-7">
         Payment method
-        <Web3Connect />
+        {/* <Web3Connect /> */}
         <Checkbox
           id="preventDisplayName"
           name="preventDisplayName"
