@@ -24,7 +24,6 @@ export const IconDropDown: React.FC<IconDropDownProps> = props => {
   const currentAccount = accounts.find(a => a.selected);
   const otherAccounts = accounts.filter(a => !a.selected);
   const { open, handleOpen, handleClose, onSwitchAccount, handleClick, navigateToOnboarding } = useIconDropDown();
-
   return (
     <div className="flex flex-col items-end relative">
       <IconButton

@@ -177,10 +177,23 @@ function Protect<T extends object>(Component: ComponentType<T>, allowedIdentity:
   return function ProtectedRoute(props: T) {
     const { status, entities } = useSelector((state: RootState) => state.identity);
     const current = entities.find(identity => identity.current)?.type;
-    if (status === 'loading') return <div></div>;
-    if (status === 'failed') return <Navigate to="/intro" />;
-    if (allowedIdentity) {
+
+    if (status === 'loading') {
+      return <div></div>;
+    }
+
+    if (status === 'failed') {
+      return <Navigate to="/intro" />;
+    }
+
+    if (!current) {
+      return <div></div>;
+    }
+
+    if (allowedIdentity === current || allowedIdentity === 'both') {
       return <Component {...props} />;
+    } else {
+      return <Navigate to="/intro" />;
     }
   };
 }

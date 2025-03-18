@@ -27,13 +27,13 @@ const LocationCauseForm: React.FC = () => {
     <div>
       <form>
         <div>
-          <label className="text-[18px] font-medium leading-[28px] text-secondary-900">
+          <label className="text-[18px] font-medium leading-7 text-Gray-light-mode-700">
             {translate('location-label')}*
           </label>
         </div>
-        <span className="text-[16px] font-normal leading-[24px] text-tertiary-600">
+        <div className="text-[16px] font-normal leading-6 text-tertiary-600 mb-5">
           {translate('location-description')}
-        </span>
+        </div>
         <CardRadioButton
           customStyle="flex flex-row w-full mt-5px] mb-[32px]"
           items={options}
@@ -52,11 +52,11 @@ const LocationCauseForm: React.FC = () => {
         )}
         <div className="mb-12">
           <div>
-            <label className="text-[18px] font-medium leading-[28px] text-secondary-900">
+            <label className="text-[18px] font-medium leading-7 text-Gray-light-mode-700">
               {translate('social-cause-label')}*
             </label>
           </div>
-          <span className="text-[16px] font-normal leading-[24px] text-tertiary-600">
+          <span className="text-[16px] font-normal leading-6 text-tertiary-600">
             {translate('social-cause-description')}
           </span>
           <div className="mt-5">

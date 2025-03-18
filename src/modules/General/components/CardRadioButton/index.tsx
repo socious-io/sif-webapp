@@ -28,15 +28,6 @@ const CardRadioButton: React.FC<CardRadioButtonProps> = ({
           ${item.disabled && styles['container--disabled']} 
           ${containerClassName}`}
         >
-          <div className={`${styles['wrapper']} ${isColDirection && styles['wrapper--col']}`}>
-            {item.icon}
-            <div className={styles['content']}>
-              <div className={`${styles['content__title']} ${titleClassName}`}>{item.title}</div>
-              {item.description && (
-                <div className={styles['content__desc']}>{item.description && item.description}</div>
-              )}
-            </div>
-          </div>
           <Radio
             id={item.id}
             value={item.value}
@@ -46,6 +37,15 @@ const CardRadioButton: React.FC<CardRadioButtonProps> = ({
             size={item?.radioSize || 'medium'}
             className={`p-0 ${isColDirection && styles['radio']}`}
           />
+          <div className={`${styles['wrapper']} ${isColDirection && styles['wrapper--col']}`}>
+            {item.icon}
+            <div className={styles['content']}>
+              <div className={`${styles['content__title']} ${titleClassName}`}>{item.title}</div>
+              {item.description && (
+                <div className={styles['content__desc']}>{item.description && item.description}</div>
+              )}
+            </div>
+          </div>
         </div>
       ))}
     </RadioGroup>

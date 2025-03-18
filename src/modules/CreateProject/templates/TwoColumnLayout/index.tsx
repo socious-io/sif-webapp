@@ -11,7 +11,7 @@ interface TwoColumnLayoutProps {
 const TwoColumnLayout: React.FC<TwoColumnLayoutProps> = ({ title, description, children }) => {
   return (
     <div className="flex flex-col md:flex-row w-full h-screen ">
-      <div className="hidden md:flex md:w-1/3 bg-[#F9FAFB] p-8 flex-col justify-center relative p-x-12 ">
+      <div className="hidden md:flex md:w-1/3 bg-Gray-light-mode-50 p-8 flex-col justify-center relative p-x-12 ">
         <img className="w-[43px] absolute top-16 left-16 h-auto" src={logo} />
 
         <div className="mb-3">
@@ -19,7 +19,7 @@ const TwoColumnLayout: React.FC<TwoColumnLayoutProps> = ({ title, description, c
         </div>
 
         <div className="w-max-[352px]">
-          <div className="text-[16px] font-normal leading-[24px] text-tertiary-600 mb-3">{description}</div>
+          <div className="text-[16px] font-normal leading-6 text-tertiary-600 mb-3">{description}</div>
         </div>
       </div>
 
@@ -27,7 +27,7 @@ const TwoColumnLayout: React.FC<TwoColumnLayoutProps> = ({ title, description, c
         <div className="w-full max-w-[560px] max-h-[680px] px-4 my-12 h-full">
           <img className="w-[43px] mb-8 block md:hidden" src={logo} />
           <div className="mb-8 block md:hidden">
-            <h1 className="text-[24px] font-medium  text-primary-900">{title}</h1>
+            <h1 className="text-6 font-medium  text-primary-900">{title}</h1>
           </div>
 
           {children}

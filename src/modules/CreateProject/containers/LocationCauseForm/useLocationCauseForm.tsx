@@ -24,7 +24,7 @@ export const useLocationCauseForm = () => {
   });
 
   const onSelectLocation = location => dispatch(setProjectData({ city: location.city, country: location.country }));
-  const onSelectCauses = value => dispatch(setProjectData({ social_cause: value.length ? value[0].label : '' }));
+  const onSelectCauses = value => dispatch(setProjectData({ social_cause: value.length ? value[0].value : '' }));
 
   const navigateStep2 = () => navigate('/create/step-2');
   const goBack = () => navigate('/create');

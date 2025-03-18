@@ -1,60 +1,34 @@
-import { ConnectButton as RKButton } from '@rainbow-me/rainbowkit';
+import { BrowserWallet } from '@meshsdk/core';
+import { useState } from 'react';
 
-import styles from './index.module.scss';
 import Button from '../Button';
-import Icon from '../Icon';
 
-const ConnectButton: React.FC = () => {
-  return (
-    <RKButton.Custom>
-      {({ account, chain, openAccountModal, openChainModal, openConnectModal, authenticationStatus, mounted }) => {
-        const ready = mounted && authenticationStatus !== 'loading';
-        const connected =
-          ready && account && chain && (!authenticationStatus || authenticationStatus === 'authenticated');
+const Connect = () => {
+  const [address, setAddress] = useState('');
+  const [connected, setConnected] = useState(false);
 
-        return (
-          <div
-            {...(!ready && {
-              'aria-hidden': true,
-              style: {
-                opacity: 0,
-                pointerEvents: 'none',
-                userSelect: 'none',
-              },
-            })}
-          >
-            {(() => {
-              if (!connected) {
-                return (
-                  <Button type="button" color="info" variant="outlined" fullWidth onClick={openConnectModal}>
-                    Connect Wallet
-                  </Button>
-                );
-              }
+  const onClick = async () => {
+    const wallets = await BrowserWallet.getAvailableWallets();
+    if (wallets.length < 1) {
+      alert('no available wallet');
+      return;
+    }
+    const wallet = await BrowserWallet.enable(wallets[0].name);
+    setAddress(await wallet.getChangeAddress());
+    setConnected(true);
+  };
 
-              return (
-                <Button type="button" color="info" variant="outlined" fullWidth>
-                  <div onClick={openChainModal} className={styles['chain']}>
-                    {chain.hasIcon && chain.iconUrl && (
-                      <img src={chain.iconUrl} width={18} height={18} alt={chain.name || 'Chain icon'} />
-                    )}
-                    <Icon name="chevron-down" cursor="pointer" />
-                  </div>
-                  <div onClick={openAccountModal} className={styles['account']}>
-                    {account.displayBalance && (
-                      <span className={styles['account__balance']}>{account.displayBalance}</span>
-                    )}
-                    {account.ensAvatar && <img src={account.ensAvatar} width={18} height={18} alt="Wallet Avatar" />}
-                    {account.displayName}
-                  </div>
-                </Button>
-              );
-            })()}
-          </div>
-        );
-      }}
-    </RKButton.Custom>
+  const ConnectButton: React.FC = () => (
+    <Button color={connected ? 'secondary' : 'info'} onClick={onClick} block>
+      {connected ? `${address.slice(0, 5)}...${address.slice(-5)}` : 'Connect wallet'}
+    </Button>
   );
+
+  return {
+    ConnectButton,
+    address,
+    connected,
+  };
 };
 
-export default ConnectButton;
+export default Connect;

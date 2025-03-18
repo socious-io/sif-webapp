@@ -1,28 +1,30 @@
 import { translate } from 'src/core/helpers/utils';
 import Button from 'src/modules/General/components/Button';
-import ConnectButton from 'src/modules/General/components/ConnectButton';
 
 import { useConnectWalletForm } from './useConnectWalletForm';
 const ConnectWalletForm: React.FC = () => {
-  const { navigatePublish, goBack, isEnabled } = useConnectWalletForm();
+  const { navigatePublish, goBack, isEnabled, ConnectButton } = useConnectWalletForm();
 
   return (
     <div>
       <div className="">
-        <h2 className="text-lg font-medium leading-7 text-gray-700">{translate('connect-wallet-title')}</h2>
-        <p className="text-base font-normal leading-6 text-gray-600">{translate('connect-wallet-description1')}</p>
+        <h2 className="text-lg font-medium leading-7 text-Brand-700">{translate('connect-wallet-title')}</h2>
+        <p className="text-base font-normal leading-6 text-Gray-light-mode-600">
+          {translate('connect-wallet-description1')}
+        </p>
         <br />
-        <p className="text-base font-normal leading-6 text-gray-600">{translate('connect-wallet-description2')}</p>
+        <p className="text-base font-normal leading-6 text-Gray-light-mode-600">
+          {translate('connect-wallet-description2')}
+        </p>
         <div className="mt-2xl mb-4xl">
-          {/* <ConnectButton /> */}
-          <Button color="secondary">Connect wallet</Button>
+          <ConnectButton />
         </div>
       </div>
       <div>
         <div className="mb-4 mt-8">
           <a
             href="#"
-            className="text-[16px] font-semibold leading-[24px] underline underline-offset-2 decoration-solid"
+            className="text-[16px] font-semibold leading-6 underline underline-offset-2 decoration-solid text-Brand-700"
           >
             {translate('connect-wallet-why-crypto')}
           </a>
@@ -30,16 +32,16 @@ const ConnectWalletForm: React.FC = () => {
         <div className="mb-8">
           <a
             href="#"
-            className="text-[16px] font-semibold leading-[24px] underline underline-offset-2 decoration-solid"
+            className="text-[16px] font-semibold leading-6 underline underline-offset-2 decoration-solid text-Brand-700"
           >
             {translate('connect-wallet-more-lace')}
           </a>
         </div>
-        <div>
-          {translate('connect-wallet-support-text')}{' '}
+        <div className="text-base font-normal leading-6 text-Gray-light-mode-600">
+          {translate('connect-wallet-support-text')}
           <a
             href="#"
-            className="text-[16px] font-semibold leading-[24px] underline underline-offset-2 decoration-solid"
+            className="text-[16px] font-semibold leading-6 underline underline-offset-2 decoration-solid text-Brand-700"
           >
             {translate('connect-wallet-support-link')}
           </a>
