@@ -10,7 +10,9 @@ const UploadBannerForm: React.FC = () => {
     <div className="flex flex-col justify-between md:h-[560px] h-full ">
       <div className="hidden md:block" />
       <div>
-        <div className="text-secondary-700 text-[16px] font-semibold mb-[6px]">{translate('cover-photo-label')}</div>
+        <div className="text-Gray-light-mode-700 text-[16px] font-semibold mb-[6px]">
+          {translate('cover-photo-label')}
+        </div>
         <FileUploader
           files={attachments}
           onDropFiles={onDropFiles}

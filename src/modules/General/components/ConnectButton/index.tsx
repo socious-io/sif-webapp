@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import Button from '../Button';
 import { BrowserWallet } from '@meshsdk/core';
+import { useState } from 'react';
 
+import Button from '../Button';
 
 const Connect = () => {
   const [address, setAddress] = useState('');
@@ -16,21 +16,19 @@ const Connect = () => {
     const wallet = await BrowserWallet.enable(wallets[0].name);
     setAddress(await wallet.getChangeAddress());
     setConnected(true);
-  }
+  };
 
   const ConnectButton: React.FC = () => (
-      <Button color={connected ? 'secondary' : 'info'} onClick={onClick}>
-        {connected ? `${address.slice(0, 5)}...${address.slice(-5)}` : 'Connect wallet'}
-      </Button>
+    <Button color={connected ? 'secondary' : 'info'} onClick={onClick}>
+      {connected ? `${address.slice(0, 5)}...${address.slice(-5)}` : 'Connect wallet'}
+    </Button>
   );
 
   return {
     ConnectButton,
     address,
     connected,
-  }
-  
+  };
 };
 
 export default Connect;
-

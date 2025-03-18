@@ -13,7 +13,7 @@ const CreateProjectForm: React.FC = () => {
   return (
     <div className="flex flex-col md:grid md:grid-cols-2 items-center max-w-[1280px] mx-auto px-4 pb-16">
       <div className="w-full max-w-md">
-        <h1 className="text-[36px] md:text-[60px] font-semibold leading-[44px] md:leading-[72px] text-primary-900">
+        <h1 className="text-[36px] md:text-[60px] font-semibold leading-11 md:leading-[72px] text-primary-900">
           {translate('create-project-title')}
         </h1>
         <div className="mt-3xl">{translate('create-project-subtitle')}</div>
