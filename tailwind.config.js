@@ -134,6 +134,7 @@ export default {
       Wild_blue: {
         100: '#eaf0f9',
         500: '#a1b2d9',
+        900: '#0B182A',
       },
       Dark_vanilla: {
         100: '#f2f4ec',

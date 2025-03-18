@@ -23,7 +23,7 @@ export const useHeader = () => {
       const org = i.meta as OrgMeta;
       return {
         id: i.id,
-        img: i.type === 'users' ? user.avatar : org.logo?.url,
+        img: i.type === 'users' ? user.avatar?.url : org.logo?.url,
         type: i.type,
         name: i.type === 'users' ? `${user.first_name} ${user.last_name}` : org.shortname,
         username: user.username || org.shortname,
@@ -36,7 +36,7 @@ export const useHeader = () => {
   useEffect(() => {
     if (currentIdentity) {
       setUserType(currentIdentity.type);
-      setImage((currentIdentity.meta as UserMeta).avatar || (currentIdentity.meta as OrgMeta).image || '');
+      setImage((currentIdentity.meta as UserMeta).avatar?.url || (currentIdentity.meta as OrgMeta).image || '');
     }
   }, [currentIdentity]);
 

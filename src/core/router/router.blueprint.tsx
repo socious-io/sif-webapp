@@ -190,7 +190,6 @@ function Protect<T extends object>(Component: ComponentType<T>, allowedIdentity:
       return <div></div>;
     }
 
-
     if (allowedIdentity === current || allowedIdentity === 'both') {
       return <Component {...props} />;
     } else {
