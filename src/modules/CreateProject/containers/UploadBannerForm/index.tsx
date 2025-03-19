@@ -19,6 +19,7 @@ const UploadBannerForm: React.FC = () => {
           fileTypes={['PNG', 'JPG', 'GIF']}
           maxSize={2}
           showFileName={false}
+          showPreviewImages
         />
       </div>
       <div>
