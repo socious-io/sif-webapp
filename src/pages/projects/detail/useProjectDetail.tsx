@@ -19,7 +19,7 @@ export const useProjectDetail = () => {
 
   const onShare = () => console.log('share');
 
-  const onEditProject = () => console.log('edit project:', projectId);
+  const onEditProject = () => navigate(`/${projectId}/edit`);
 
   const onVote = () => navigate('vote');
 
