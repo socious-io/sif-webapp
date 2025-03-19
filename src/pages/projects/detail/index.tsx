@@ -84,15 +84,15 @@ export const ProjectDetail = () => {
         </div>
       ),
     },
-    {
-      label: translate('projects-detail.donations'),
-      content: (
-        <div className="flex flex-col items-stretch gap-8">
-          <span className="text-2xl font-semibold leading-8">{translate('projects-detail.donations')}</span>
-          <DonationsList />
-        </div>
-      ),
-    },
+    // {
+    //   label: translate('projects-detail.donations'),
+    //   content: (
+    //     <div className="flex flex-col items-stretch gap-8">
+    //       <span className="text-2xl font-semibold leading-8">{translate('projects-detail.donations')}</span>
+    //       <DonationsList />
+    //     </div>
+    //   ),
+    // },
   ];
 
   return (

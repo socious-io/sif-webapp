@@ -63,8 +63,9 @@ export const useEditProjectForm = () => {
   };
   const onSelectCauses = value => setValue('social_cause', value.length ? value[0].label : '');
 
-  const onSubmit = (formData: FormData) => {
-    editProjectAdaptor({ ...project, ...formData });
+  const onSubmit = async (formData: FormData) => {
+    await editProjectAdaptor({ ...project, ...formData });
+    navigate(`projects/${project.id}`);
   };
 
   const description = watch('description') || '';
