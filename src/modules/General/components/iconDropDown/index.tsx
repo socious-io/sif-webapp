@@ -1,5 +1,6 @@
 import { Divider, IconButton, MenuItem, MenuList } from '@mui/material';
 import React from 'react';
+import { config } from 'src/config';
 import { translate } from 'src/core/helpers/utils';
 
 import css from './iconDropDown.module.scss';
@@ -73,16 +74,15 @@ export const IconDropDown: React.FC<IconDropDownProps> = props => {
               className={css.menuItem}
               onFocus={handleOpen}
               onBlur={handleClose}
-              onMouseDown={navigateToOnboarding}
-              onClick={navigateToOnboarding}
+              onMouseDown={() => (window.location.href = `${config.sociousIDBaseURL}/organizations/register/pre`)}
+              onClick={() => (window.location.href = `${config.sociousIDBaseURL}/organizations/register/pre`)}
             >
-              {/* <IconListItem
+              <IconListItem
                 iconName="plus"
                 label={translate('header-create-org')}
                 customIconClass="text-Brand-700"
                 customLabelClass={css.createLabel}
-                // onClick={() => (window.location.href = 'https://id.socious.io/organizations/register/pre')}
-              /> */}
+              />
             </MenuItem>
           )}
           {iconItems.length ? <Divider className="!m-0" /> : ''}
