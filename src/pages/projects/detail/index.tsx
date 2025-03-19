@@ -20,7 +20,6 @@ export const ProjectDetail = () => {
     data: { detail, projectId, isOwner, roundIsClosed, round },
     operations: { navigate, onShare, onEditProject, onVote },
   } = useProjectDetail();
-
   const breadcrumbs = [
     { iconName: 'home-line', label: '', link: '/' },
     { label: translate('projects-breadcrumb-explore'), link: '/projects' },

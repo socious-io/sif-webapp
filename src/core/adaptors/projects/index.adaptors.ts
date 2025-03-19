@@ -55,7 +55,7 @@ export const getProjectAdaptor = async (projectId: string): Promise<AdaptorRes<P
       website: project.website || '',
       location: [project.city, project.country].filter(Boolean).join(', ') || 'Worldwide',
       overview: convertMarkdownToJSX(project.description),
-      roundStats: { estimatedMatch: 1240.4, donatedAmount: 24.3, votes: 2 },
+      roundStats: { estimatedMatch: 1240.4, donatedAmount: project.total_donations, votes: project.total_votes },
       donations: [
         {
           id: '1',

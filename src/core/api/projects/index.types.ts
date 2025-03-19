@@ -19,6 +19,8 @@ export interface Project {
   updated_at: Date;
   expires_at: Date | null;
   deleted_at: Date | null;
+  total_donations: string;
+  total_votes: string;
 }
 
 export type ProjectsRes = PaginateRes<Project>;
