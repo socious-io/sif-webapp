@@ -20,7 +20,6 @@ const schema = yup.object().shape({
 });
 export const useEditProjectForm = () => {
   const { project } = useLoaderData() as { project: Project };
-  console.log('pro3', project);
   const {
     register,
     handleSubmit,
@@ -36,11 +35,10 @@ export const useEditProjectForm = () => {
       city: project.city,
       country: project.country,
       social_cause: project.social_cause,
-      cover_id: project.cover_id || '',
+      cover_id: project.cover.url || '',
       wallet_address: project.wallet_address,
     },
   });
-
   const navigate = useNavigate();
   const [selectedCardId, setSelectedCardId] = useState('');
   const items = socialCausesToCategoryAdaptor();

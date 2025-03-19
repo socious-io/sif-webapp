@@ -31,8 +31,12 @@ const Header: React.FC = () => {
               img={image}
               accounts={accounts}
               iconItems={[
-                { iconName: 'user-circle', label: translate('header-support'), onClick: console.log },
-                { iconName: 'settings-01', label: translate('header-setting'), onClick: console.log },
+                {
+                  iconName: 'user-circle',
+                  label: translate('header-support'),
+                  onClick: () => (window.location.href = 'https://socious.org/#faq'),
+                },
+                // { iconName: 'settings-01', label: translate('header-setting'), onClick: console.log },
                 { iconName: 'log-out-01', label: translate('header-logout'), onClick: onLogout },
               ]}
               createItem
