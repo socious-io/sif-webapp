@@ -7,7 +7,7 @@ import SuccessModal from 'src/modules/General/SuccessModal';
 import { useCreatePreview } from './useCreatePreview';
 
 const styles = {
-  banner: 'w-full h-[120px] rounded-[16px]',
+  banner: 'w-full rounded-[16px]',
   titles: 'text-[14px] font-medium mt-[20px] mb-2',
   values: 'text-[16px] font-medium flex',
 };

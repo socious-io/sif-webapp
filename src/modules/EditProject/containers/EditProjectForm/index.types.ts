@@ -6,5 +6,6 @@ export interface FormData {
   country: string;
   social_cause: string;
   cover_id: string;
+  cover_url: string;
   wallet_address: string;
 }

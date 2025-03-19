@@ -16,6 +16,7 @@ const schema = yup.object().shape({
   country: yup.string().required('Location is required'),
   social_cause: yup.string().required('Social Cause is required'),
   cover_id: yup.string().nullable(),
+  cover_url: yup.string().nullable(),
   wallet_address: yup.string().required(),
 });
 export const useEditProjectForm = () => {
@@ -35,7 +36,8 @@ export const useEditProjectForm = () => {
       city: project.city,
       country: project.country,
       social_cause: project.social_cause,
-      cover_id: project.cover.url || '',
+      cover_url: project.cover.url || '',
+      cover_id: project.cover.id || '',
       wallet_address: project.wallet_address,
     },
   });
@@ -47,7 +49,9 @@ export const useEditProjectForm = () => {
   const onDropFiles = async (newFiles: File[]) => {
     newFiles.forEach(async (file: File) => {
       const { error, data } = await uploadMediaAdaptor(file);
-      setValue('cover_id', data?.url as string);
+      setValue('cover_id', data?.id as string);
+      setValue('cover_url', data?.url as string);
+
       if (error) return;
       data && setAttachments([{ id: data.id, url: data.url }]);
     });
@@ -64,7 +68,8 @@ export const useEditProjectForm = () => {
   };
 
   const description = watch('description') || '';
-  const imagePreview = watch('cover_id');
+  const imagePreview = watch('cover_url');
+
   const city = watch('city');
   const country = watch('country');
   const social_cause = watch('social_cause');
