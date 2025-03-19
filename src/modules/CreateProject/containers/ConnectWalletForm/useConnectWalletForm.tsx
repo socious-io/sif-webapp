@@ -13,7 +13,7 @@ export const useConnectWalletForm = () => {
   const goBack = () => navigate('/create/step-3');
   useEffect(() => {
     dispatch(setProjectData({ wallet_address: address }));
-  }, []);
+  }, [address]);
   const isEnabled = !!connected;
   return { navigatePublish, goBack, isEnabled, ConnectButton };
 };

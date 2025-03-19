@@ -15,7 +15,7 @@ export const Projects = () => {
   const breadcrumbs = [
     { iconName: 'home-line', label: '', link: '/' },
     { label: translate('projects-breadcrumb-explore'), link: '/projects' },
-    { label: translate('projects-breadcrumb-round', { count: round?.total_projects }) },
+    { label: round?.name },
   ];
 
   return (
