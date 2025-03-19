@@ -76,12 +76,13 @@ export const IconDropDown: React.FC<IconDropDownProps> = props => {
               onMouseDown={navigateToOnboarding}
               onClick={navigateToOnboarding}
             >
-              <IconListItem
+              {/* <IconListItem
                 iconName="plus"
                 label={translate('header-create-org')}
                 customIconClass="text-Brand-700"
                 customLabelClass={css.createLabel}
-              />
+                // onClick={() => (window.location.href = 'https://id.socious.io/organizations/register/pre')}
+              /> */}
             </MenuItem>
           )}
           {iconItems.length ? <Divider className="!m-0" /> : ''}
