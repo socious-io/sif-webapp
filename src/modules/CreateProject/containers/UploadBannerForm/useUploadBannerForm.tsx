@@ -20,9 +20,14 @@ export const useUploadBannerForm = () => {
       data && setAttachments([{ id: data.id, url: data.url }]);
     });
   };
+  const onDeleteFiles = (deletedId: string) => {
+    const filteredFiles = attachments.filter(attachment => attachment.id !== deletedId);
+    setAttachments(filteredFiles);
+  };
+
   const navigateStep4 = () => navigate('/create/step-4');
   const goBack = () => navigate('/create/step-2');
   const isEnabled = cover_id === '';
 
-  return { navigateStep4, attachments, goBack, onDropFiles, isEnabled };
+  return { navigateStep4, attachments, goBack, onDropFiles, isEnabled, onDeleteFiles };
 };

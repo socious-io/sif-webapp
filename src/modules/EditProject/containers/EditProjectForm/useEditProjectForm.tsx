@@ -12,15 +12,15 @@ const schema = yup.object().shape({
   name: yup.string().required('Name is required'),
   description: yup.string().required('Description is required'),
   website: yup.string().url('Must be a valid URL').nullable(),
-  city: yup.string().required('Location is required'),
-  country: yup.string().required('Location is required'),
+  city: yup.string().nullable(),
+  country: yup.string().nullable(),
   social_cause: yup.string().required('Social Cause is required'),
   cover_id: yup.string().nullable(),
+  cover_url: yup.string().nullable(),
   wallet_address: yup.string().required(),
 });
 export const useEditProjectForm = () => {
   const { project } = useLoaderData() as { project: Project };
-  console.log('pro3', project);
   const {
     register,
     handleSubmit,
@@ -36,11 +36,11 @@ export const useEditProjectForm = () => {
       city: project.city,
       country: project.country,
       social_cause: project.social_cause,
-      cover_id: project.cover_id || '',
+      cover_url: project.cover.url || '',
+      cover_id: project.cover.id || '',
       wallet_address: project.wallet_address,
     },
   });
-
   const navigate = useNavigate();
   const [selectedCardId, setSelectedCardId] = useState('');
   const items = socialCausesToCategoryAdaptor();
@@ -49,7 +49,9 @@ export const useEditProjectForm = () => {
   const onDropFiles = async (newFiles: File[]) => {
     newFiles.forEach(async (file: File) => {
       const { error, data } = await uploadMediaAdaptor(file);
-      setValue('cover_id', data?.url as string);
+      setValue('cover_id', data?.id as string);
+      setValue('cover_url', data?.url as string);
+
       if (error) return;
       data && setAttachments([{ id: data.id, url: data.url }]);
     });
@@ -61,12 +63,14 @@ export const useEditProjectForm = () => {
   };
   const onSelectCauses = value => setValue('social_cause', value.length ? value[0].label : '');
 
-  const onSubmit = (formData: FormData) => {
-    editProjectAdaptor({ ...project, ...formData });
+  const onSubmit = async (formData: FormData) => {
+    await editProjectAdaptor({ ...project, ...formData });
+    navigate(`projects/${project.id}`);
   };
 
   const description = watch('description') || '';
-  const imagePreview = watch('cover_id');
+  const imagePreview = watch('cover_url');
+
   const city = watch('city');
   const country = watch('country');
   const social_cause = watch('social_cause');

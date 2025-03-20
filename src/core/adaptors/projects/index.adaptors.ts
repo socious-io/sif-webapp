@@ -5,8 +5,8 @@ import { removedEmptyProps } from 'src/core/helpers/objects-arrays';
 import { translate } from 'src/core/helpers/utils';
 
 import { AdaptorRes, DonateReq, Project, ProjectRes, SuccessRes } from '..';
+import { Project as ProjectRaw } from '../../api/projects/index.types';
 import { getIdentityMeta } from '../users/index.adaptors';
-
 export const getProjectsAdaptor = async (page = 1, limit = 10): Promise<AdaptorRes<ProjectRes>> => {
   try {
     const { results: projects, total } = await getProjects({ page, limit });
@@ -55,7 +55,7 @@ export const getProjectAdaptor = async (projectId: string): Promise<AdaptorRes<P
       website: project.website || '',
       location: [project.city, project.country].filter(Boolean).join(', ') || 'Worldwide',
       overview: convertMarkdownToJSX(project.description),
-      roundStats: { estimatedMatch: 1240.4, donatedAmount: 24.3, votes: 2 },
+      roundStats: { estimatedMatch: 1240.4, donatedAmount: project.total_donations, votes: project.total_votes },
       donations: [
         {
           id: '1',
@@ -120,6 +120,18 @@ export const getUserProjects = async (page = 1, limit = 10): Promise<AdaptorRes<
     return { data: { items: results, page, limit, total }, error: null };
   } catch (error) {
     console.error('Error in editing project: ', error);
+    return { data: null, error: 'Error in editing project' };
+  }
+};
+
+export const getRawProjectAdaptor = async (projectId: string): Promise<AdaptorRes<ProjectRaw>> => {
+  try {
+    const data = await getProject(projectId);
+    return {
+      data,
+      error: null,
+    };
+  } catch (error) {
     return { data: null, error: 'Error in editing project' };
   }
 };

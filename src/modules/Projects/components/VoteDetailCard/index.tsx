@@ -10,12 +10,12 @@ const VoteDetailCard: React.FC<VoteDetailCardProps> = ({ roundStats, isOwner = f
 
   return (
     <div className="w-full md:w-[22.5rem] flex flex-col items-stretch gap-4 p-6 bg-Gray-light-mode-50 rounded-xl">
-      <div className="flex flex-col gap-1 text-sm leading-5 text-Gray-light-mode-600">
+      {/* <div className="flex flex-col gap-1 text-sm leading-5 text-Gray-light-mode-600">
         <span className="text-3xl font-semibold leading-8 text-Gray-light-mode-900">
           ${estimatedMatch.toLocaleString('en-US', { minimumFractionDigits: 2 })}
         </span>
         {translate('projects-round-stats.estimated-match')}
-      </div>
+      </div> */}
       <div className="flex flex-col gap-1 text-sm leading-5 text-Gray-light-mode-600">
         <span className="text-3xl font-semibold leading-8 text-Gray-light-mode-900">
           ${donatedAmount.toLocaleString('en-US', { minimumFractionDigits: 2 })}

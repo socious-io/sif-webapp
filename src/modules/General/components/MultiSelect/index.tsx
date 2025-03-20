@@ -28,7 +28,6 @@ const MultiSelect: React.FC<MultiSelectProps> = props => {
   const [chipItems, setChipItems] = useState(items);
   const [searchVal, setSearchVal] = useState('');
   const inputRef = useRef<HTMLTextAreaElement>();
-
   function filterItems(val: string) {
     setSearchVal(val);
     setChipItems(

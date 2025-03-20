@@ -20,11 +20,10 @@ export const ProjectDetail = () => {
     data: { detail, projectId, isOwner, roundIsClosed, round },
     operations: { navigate, onShare, onEditProject, onVote },
   } = useProjectDetail();
-
   const breadcrumbs = [
     { iconName: 'home-line', label: '', link: '/' },
     { label: translate('projects-breadcrumb-explore'), link: '/projects' },
-    { label: translate('projects-breadcrumb-round', { count: round?.total_projects }), link: '/projects' },
+    { label: round?.name, link: '/projects' },
     { label: detail.title, link: `/projects/${projectId}` },
     { label: translate('projects-breadcrumb-detail') },
   ];
@@ -84,22 +83,28 @@ export const ProjectDetail = () => {
         </div>
       ),
     },
-    {
-      label: translate('projects-detail.donations'),
-      content: (
-        <div className="flex flex-col items-stretch gap-8">
-          <span className="text-2xl font-semibold leading-8">{translate('projects-detail.donations')}</span>
-          <DonationsList />
-        </div>
-      ),
-    },
+    // {
+    //   label: translate('projects-detail.donations'),
+    //   content: (
+    //     <div className="flex flex-col items-stretch gap-8">
+    //       <span className="text-2xl font-semibold leading-8">{translate('projects-detail.donations')}</span>
+    //       <DonationsList />
+    //     </div>
+    //   ),
+    // },
   ];
 
   return (
     <div className="flex flex-col gap-6 px-4 py-8 md:p-8 container">
       <BackLink title="Back" onBack={() => navigate('/projects')} customStyle="md:!hidden !justify-start !p-0" />
       <Breadcrumbs items={breadcrumbs} />
-      <img src="/images/explorer-cover.png" alt="Project Cover" width="100%" height="100%" className="rounded-2xl" />
+      <img
+        src={detail.coverImg || '/images/explorer-cover.png'}
+        alt="Project Cover"
+        width="100%"
+        height="100%"
+        className="rounded-2xl"
+      />
       <div className="flex flex-col md:flex-row items-stretch justify-between gap-4">
         <div className="flex flex-col items-start gap-1">
           {roundIsClosed && <Chip theme="warning" label={translate('home-round-closed')} />}

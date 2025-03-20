@@ -23,16 +23,20 @@ const ConnectWalletForm: React.FC = () => {
       <div>
         <div className="mb-4 mt-8">
           <a
-            href="#"
+            target="_blank"
+            href="https://socious.org/#faq"
             className="text-[16px] font-semibold leading-6 underline underline-offset-2 decoration-solid text-Brand-700"
+            rel="noreferrer"
           >
             {translate('connect-wallet-why-crypto')}
           </a>
         </div>
         <div className="mb-8">
           <a
-            href="#"
+            href="https://www.lace.io/"
+            target="_blank"
             className="text-[16px] font-semibold leading-6 underline underline-offset-2 decoration-solid text-Brand-700"
+            rel="noreferrer"
           >
             {translate('connect-wallet-more-lace')}
           </a>
@@ -40,8 +44,10 @@ const ConnectWalletForm: React.FC = () => {
         <div className="text-base font-normal leading-6 text-Gray-light-mode-600">
           {translate('connect-wallet-support-text')}
           <a
-            href="#"
+            target="_blank"
+            href="https://socious.org/#faq"
             className="text-[16px] font-semibold leading-6 underline underline-offset-2 decoration-solid text-Brand-700"
+            rel="noreferrer"
           >
             {translate('connect-wallet-support-link')}
           </a>

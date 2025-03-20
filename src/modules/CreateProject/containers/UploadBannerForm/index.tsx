@@ -5,7 +5,7 @@ import FileUploader from 'src/modules/General/components/FileUploader';
 import { useUploadBannerForm } from './useUploadBannerForm';
 
 const UploadBannerForm: React.FC = () => {
-  const { attachments, navigateStep4, goBack, onDropFiles, isEnabled } = useUploadBannerForm();
+  const { attachments, navigateStep4, goBack, onDropFiles, isEnabled, onDeleteFiles } = useUploadBannerForm();
   return (
     <div className="flex flex-col justify-between md:h-[560px] h-full ">
       <div className="hidden md:block" />
@@ -19,6 +19,8 @@ const UploadBannerForm: React.FC = () => {
           fileTypes={['PNG', 'JPG', 'GIF']}
           maxSize={2}
           showFileName={false}
+          showPreviewImages
+          onDeleteFiles={onDeleteFiles}
         />
       </div>
       <div>
