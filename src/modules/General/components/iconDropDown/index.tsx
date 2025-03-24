@@ -74,8 +74,8 @@ export const IconDropDown: React.FC<IconDropDownProps> = props => {
               className={css.menuItem}
               onFocus={handleOpen}
               onBlur={handleClose}
-              onMouseDown={() => (window.location.href = `${config.sociousIDBaseURL}/organizations/register/pre`)}
-              onClick={() => (window.location.href = `${config.sociousIDBaseURL}/organizations/register/pre`)}
+              onMouseDown={() => (window.location.href = `${config.sociousIDBaseURL}/organizations/register/pre?next=${config.appBaseURL}/home`)}
+              onClick={() => (window.location.href = `${config.sociousIDBaseURL}/organizations/register/pre?next=${config.appBaseURL}/home`)}
             >
               <IconListItem
                 iconName="plus"
