@@ -6,6 +6,7 @@ import Button from '../Button';
 const Connect = () => {
   const [address, setAddress] = useState('');
   const [connected, setConnected] = useState(false);
+  const [wallet, setWallet] = useState<BrowserWallet>();
 
   const onClick = async () => {
     const wallets = await BrowserWallet.getAvailableWallets();
@@ -13,8 +14,9 @@ const Connect = () => {
       alert('no available wallet');
       return;
     }
-    const wallet = await BrowserWallet.enable(wallets[0].name);
-    setAddress(await wallet.getChangeAddress());
+    const w = await BrowserWallet.enable(wallets[0].name);
+    setWallet(w);
+    setAddress(await w.getChangeAddress());
     setConnected(true);
   };
 
@@ -28,6 +30,7 @@ const Connect = () => {
     ConnectButton,
     address,
     connected,
+    wallet,
   };
 };
 

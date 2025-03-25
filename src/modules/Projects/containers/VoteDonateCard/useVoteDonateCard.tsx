@@ -30,6 +30,7 @@ export const useVoteDonateCard = () => {
 
   const onVoteOrDonate = async (donatePayload?: DonateReq) => {
     console.log('donate: ', donatePayload);
+    
     const { error, data } = await voteOrDonateProjectAdaptor(detail.id, donatePayload);
     if (error) return;
     else if (data) {

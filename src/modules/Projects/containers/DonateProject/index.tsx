@@ -18,7 +18,7 @@ const DonateProject: React.FC<DonateProjectProps> = ({ onDonate }) => {
       selectedCurrencyLabel,
       donateValueConversion,
       isConnected,
-      Web3Connect,
+      ConnectButton,
     },
     operations: { onSelectCurrency, onPreventDisplayName, handleSubmit, onSubmit },
   } = useDonateProject(onDonate);
@@ -50,7 +50,7 @@ const DonateProject: React.FC<DonateProjectProps> = ({ onDonate }) => {
       <Divider />
       <div className="flex flex-col items-stretch gap-5 text-lg font-medium leading-7">
         Payment method
-        {/* <Web3Connect /> */}
+        <ConnectButton />
         <Checkbox
           id="preventDisplayName"
           name="preventDisplayName"

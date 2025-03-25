@@ -6,6 +6,8 @@ import { translate } from 'src/core/helpers/utils';
 
 import { AdaptorRes, DonateReq, Project, ProjectRes, SuccessRes } from '..';
 import { Project as ProjectRaw } from '../../api/projects/index.types';
+import { donate, vote } from 'src/core/api';
+import { DonationReq as DonateReqRaw } from '../../api/projects/index.types';
 import { getIdentityMeta } from '../users/index.adaptors';
 export const getProjectsAdaptor = async (page = 1, limit = 10): Promise<AdaptorRes<ProjectRes>> => {
   try {
@@ -82,9 +84,15 @@ export const voteOrDonateProjectAdaptor = async (
 ): Promise<AdaptorRes<SuccessRes>> => {
   try {
     if (donatePayload) {
-      // await donate(projectId, payload)
+      const payload: DonateReqRaw = {
+        amount: parseFloat(donatePayload.donate),
+        txid: donatePayload.transactionHash,
+        currency: donatePayload.currency,
+        wallet_address: donatePayload.wallet_address
+      }
+      await donate(projectId, payload);
     } else {
-      // await vote(projectId)
+      await vote(projectId);
     }
     return { data: { message: 'succeed' }, error: null };
   } catch (error) {
