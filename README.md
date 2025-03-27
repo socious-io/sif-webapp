@@ -1,4 +1,4 @@
-# Project Title: SIF
+# Project Title: Socious Fund
 
 ---
 
@@ -56,4 +56,3 @@ Use the package manager [npm](https://www.npmjs.com/) to install the app. The ap
 ```bash
 npm install
 ```
- 

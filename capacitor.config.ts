@@ -8,7 +8,7 @@ function defineHostname() {
 
 const config: CapacitorConfig = {
   appId: 'jp.socious.network',
-  appName: 'SIF',
+  appName: 'Socious Fund',
   webDir: 'dist',
   bundledWebRuntime: false,
   server: {
