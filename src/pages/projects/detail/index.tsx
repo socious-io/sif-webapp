@@ -10,7 +10,6 @@ import HorizontalTabs from 'src/modules/General/components/HorizontalTabs';
 import Icon from 'src/modules/General/components/Icon';
 import VerticalTabs from 'src/modules/General/components/VerticalTabs';
 import VoteDetailCard from 'src/modules/Projects/components/VoteDetailCard';
-import DonationsList from 'src/modules/Projects/containers/DonationsList';
 import variables from 'src/styles/constants/_exports.module.scss';
 
 import { useProjectDetail } from './useProjectDetail';
@@ -23,7 +22,7 @@ export const ProjectDetail = () => {
   const breadcrumbs = [
     { iconName: 'home-line', label: '', link: '/' },
     { label: translate('projects-breadcrumb-explore'), link: '/projects' },
-    { label: round?.name, link: '/projects' },
+    { label: round?.name || '', link: '/projects' },
     { label: detail.title, link: `/projects/${projectId}` },
     { label: translate('projects-breadcrumb-detail') },
   ];
@@ -144,7 +143,13 @@ export const ProjectDetail = () => {
         <VerticalTabs tabs={tabs} containerCustomStyle="!hidden md:!flex md:!gap-16 md:flex-1" />
         <HorizontalTabs tabs={tabs} containerCustomStyle="md:!hidden" leftAligned={false} />
         {detail.roundStats && (
-          <VoteDetailCard roundStats={detail.roundStats} isOwner={isOwner} onShare={onShare} onVote={onVote} />
+          <VoteDetailCard
+            roundStats={detail.roundStats}
+            isOwner={isOwner}
+            alreadyVoted={detail.voted}
+            onShare={onShare}
+            onVote={onVote}
+          />
         )}
       </div>
     </div>

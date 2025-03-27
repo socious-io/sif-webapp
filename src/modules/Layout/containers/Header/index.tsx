@@ -13,7 +13,7 @@ const Header: React.FC = () => {
         <div className="flex items-center">
           <img src={logo} alt="logo" className="mr-2" />
           <a href="/home" className="hidden sm:block text-[20px] font-semibold leading-[30px] text-Brand-600">
-            Socious Innovation Fund
+            {translate('socious-fund')}
           </a>
         </div>
         <div className="flex">

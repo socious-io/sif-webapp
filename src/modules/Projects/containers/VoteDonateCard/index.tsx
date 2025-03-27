@@ -1,4 +1,5 @@
-import { Divider } from '@mui/material';
+import { CircularProgress, Divider } from '@mui/material';
+import { translate } from 'src/core/helpers/utils';
 import Button from 'src/modules/General/components/Button';
 import CardRadioButton from 'src/modules/General/components/CardRadioButton';
 import Icon from 'src/modules/General/components/Icon';
@@ -12,7 +13,7 @@ import DonateProject from '../DonateProject';
 
 const VoteDonateCard = () => {
   const {
-    data: { detail, selectedCard, isVoteChoice, isIdentityUser, openSuccessModal, voteInfo, donateInfo },
+    data: { detail, selectedCard, isVoteChoice, userImpactPoints, openSuccessModal, voteInfo, donateInfo, loading },
     operations: { setSelectedCard, onVoteOrDonate, setOpenSuccessModal, onContinue },
   } = useVoteDonateCard();
 
@@ -28,8 +29,8 @@ const VoteDonateCard = () => {
           className="p-[0.625rem] bg-Brand-100 rounded-full"
         />
       ),
-      title: 'Vote without donation',
-      description: 'Support the project with your vote.',
+      title: translate('vote-donate.option-1-title'),
+      description: translate('vote-donate.option-1-desc'),
     },
     {
       id: '2',
@@ -42,8 +43,8 @@ const VoteDonateCard = () => {
           className="p-[0.625rem] bg-Brand-100 rounded-full"
         />
       ),
-      title: 'Vote with a donation',
-      description: 'Amplify your impact by making a donation in addition to your vote.',
+      title: translate('vote-donate.option-2-title'),
+      description: translate('vote-donate.option-2-desc'),
     },
   ];
 
@@ -52,7 +53,7 @@ const VoteDonateCard = () => {
       <div className="flex flex-col gap-6 md:p-6 bg-Base-White md:rounded-xl md:shadow-sm text-sm leading-5 text-Gray-light-mode-600">
         <div className="flex flex-col md:flex-row items-stretch md:items-start gap-5">
           <img
-            src="/images/explorer-cover.png"
+            src={detail.coverImg}
             alt="Project Cover"
             width={160}
             height={100}
@@ -60,28 +61,28 @@ const VoteDonateCard = () => {
           />
           <div className="flex flex-col gap-1 text-sm leading-5 text-Gray-light-mode-600">
             <span className="text-xl font-medium leading-8 text-Gray-light-mode-900">
-              <span className="font-normal">Vote for</span> {detail.title}
+              <span className="font-normal">{translate('vote-donate.vote-for')}</span> {detail.title}
             </span>
-            Your vote will help this project gain visibility and increases its chances of receiving funding from our
-            community-driven platform.
+            {translate('vote-donate.help-visibility-funding')}
           </div>
         </div>
         <Divider />
-        <p>
-          While voting is free, you have the option to make a donation to amplify your impact. Donations are securely
-          processed using ADA cryptocurrency on the Cardano network to ensure transparency, accountability and a fair
-          allocation of matching funds.
-        </p>
-        <p>
-          Currently, we only support Lace Wallet for connection. Lace is a user-friendly wallet developed by Input
-          Output Global, available as a browser extension.
-        </p>
+        <p>{translate('vote-donate.impact-cardano')}</p>
+        <p>{translate('vote-donate.supported-wallet-lace')}</p>
         <div className="flex flex-col gap-2">
-          <Link label="Why using cryptocurrency?" customStyle="!font-semibold !underline cursor-pointer" />
-          <Link label="More about Lace Wallet" customStyle="!font-semibold !underline cursor-pointer" />
+          <Link
+            label={translate('vote-donate.why-cryptocurrency-link')}
+            customStyle="!font-semibold !underline cursor-pointer"
+          />
+          <Link
+            label={translate('vote-donate.more-about-lace-link')}
+            href="https://lace.io"
+            target="_blank"
+            customStyle="!font-semibold !underline cursor-pointer"
+          />
         </div>
         <div className="flex flex-col items-stretch gap-5 text-lg font-medium leading-7">
-          To vote:
+          {translate('vote-donate.to-vote')}
           <CardRadioButton
             items={voteChoices}
             selectedValue={selectedCard}
@@ -95,13 +96,14 @@ const VoteDonateCard = () => {
         <Divider />
         {isVoteChoice ? (
           <>
-            {/* @FIXME: <VoteInfo estimatedMatch="$23.50" impactPoints={isIdentityUser ? 272 : undefined} />} */}
-            <Button type="button" color="primary" onClick={() => onVoteOrDonate()}>
-              Vote now
+            <VoteInfo impactPoints={userImpactPoints} />
+            <Button type="button" color="primary" onClick={() => onVoteOrDonate()} disabled={loading}>
+              {loading && <CircularProgress size="16px" sx={{ color: variables.color_white }} />}
+              {translate('vote-donate.vote-now-btn')}
             </Button>
           </>
         ) : (
-          <DonateProject onDonate={onVoteOrDonate} />
+          <DonateProject onDonate={onVoteOrDonate} isLoading={loading} />
         )}
       </div>
       <SuccessModal
