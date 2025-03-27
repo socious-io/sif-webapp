@@ -19,7 +19,7 @@
   "plugins": ["@typescript-eslint", "react", "import", "jsdoc", "i18next"],
   "ignorePatterns": ["node_modules/", "dist/"],
   "rules": {
-    // "i18next/no-literal-string": "error",
+    "i18next/no-literal-string": "error",
     "semi": "error",
     "eol-last": ["error", "always"],
     "react/react-in-jsx-scope": "off",

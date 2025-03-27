@@ -1,5 +1,5 @@
+import { PaginateRes } from '..';
 import { Media } from '../media/index.types';
-import { PaginateRes } from '../types';
 import { Identity } from '../users/index.types';
 
 export interface Project {
@@ -19,18 +19,16 @@ export interface Project {
   updated_at: Date;
   expires_at: Date | null;
   deleted_at: Date | null;
-  total_donations: string;
-  total_votes: string;
+  total_donations: number;
+  total_votes: number;
+  user_voted: boolean;
 }
 
 export type ProjectsRes = PaginateRes<Project>;
 
-
 export type DonationReq = {
-  wallet_address: string;
   amount: number;
-  descriotion?: string;
-  txid: string;
   currency: string;
-  meta?: any;
-}
+  txid: string;
+  wallet_address: string;
+};

@@ -17,3 +17,10 @@ export * from './geo/index.types';
 
 export * from './rounds/index.api';
 export * from './rounds/index.types';
+
+export interface PaginateRes<T> {
+  page: number;
+  limit: number;
+  total: number;
+  results: T[];
+}

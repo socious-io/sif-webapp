@@ -1,12 +1,19 @@
 import { translate } from 'src/core/helpers/utils';
+import AlertMessage from 'src/modules/General/components/AlertMessage';
 import Button from 'src/modules/General/components/Button';
 import Icon from 'src/modules/General/components/Icon';
 import variables from 'src/styles/constants/_exports.module.scss';
 
 import { VoteDetailCardProps } from './index.types';
 
-const VoteDetailCard: React.FC<VoteDetailCardProps> = ({ roundStats, isOwner = false, onShare, onVote }) => {
-  const { estimatedMatch, donatedAmount, votes } = roundStats || {};
+const VoteDetailCard: React.FC<VoteDetailCardProps> = ({
+  roundStats,
+  isOwner = false,
+  alreadyVoted = false,
+  onShare,
+  onVote,
+}) => {
+  const { donatedAmount, votes } = roundStats || {};
 
   return (
     <div className="w-full md:w-[22.5rem] flex flex-col items-stretch gap-4 p-6 bg-Gray-light-mode-50 rounded-xl">
@@ -36,9 +43,13 @@ const VoteDetailCard: React.FC<VoteDetailCardProps> = ({ roundStats, isOwner = f
           >
             {translate('projects-round-stats.share-button')}
           </Button>
-          <Button color="primary" onClick={onVote}>
-            {translate('projects-round-stats.vote-button')}
-          </Button>
+          {!alreadyVoted ? (
+            <Button color="primary" onClick={onVote} disabled={alreadyVoted}>
+              {translate('projects-round-stats.vote-button')}
+            </Button>
+          ) : (
+            <AlertMessage theme="warning" iconName="alert-circle" title={translate('vote-donate.already-voted')} />
+          )}
         </div>
       )}
     </div>

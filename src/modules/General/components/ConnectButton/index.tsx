@@ -21,7 +21,7 @@ const Connect = () => {
   };
 
   const ConnectButton: React.FC = () => (
-    <Button color={connected ? 'secondary' : 'info'} onClick={onClick} block>
+    <Button color="info" onClick={onClick} block>
       {connected ? `${address.slice(0, 5)}...${address.slice(-5)}` : 'Connect wallet'}
     </Button>
   );

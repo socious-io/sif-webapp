@@ -1,14 +1,15 @@
 import { SOCIAL_CAUSES } from 'src/constants/SOCIAL_CAUSES';
 import { createProjects, editProjects, getProject, getProjects, IdentityType } from 'src/core/api';
+import { donate, vote } from 'src/core/api';
+import { Project as ProjectRaw } from 'src/core/api/projects/index.types';
+import { DonationReq as DonateReqRaw } from 'src/core/api/projects/index.types';
 import { cleanMarkdown, convertMarkdownToJSX } from 'src/core/helpers/convert-md-to-jsx';
 import { removedEmptyProps } from 'src/core/helpers/objects-arrays';
 import { translate } from 'src/core/helpers/utils';
 
 import { AdaptorRes, DonateReq, Project, ProjectRes, SuccessRes } from '..';
-import { Project as ProjectRaw } from '../../api/projects/index.types';
-import { donate, vote } from 'src/core/api';
-import { DonationReq as DonateReqRaw } from '../../api/projects/index.types';
 import { getIdentityMeta } from '../users/index.adaptors';
+
 export const getProjectsAdaptor = async (page = 1, limit = 10): Promise<AdaptorRes<ProjectRes>> => {
   try {
     const { results: projects, total } = await getProjects({ page, limit });
@@ -57,7 +58,8 @@ export const getProjectAdaptor = async (projectId: string): Promise<AdaptorRes<P
       website: project.website || '',
       location: [project.city, project.country].filter(Boolean).join(', ') || 'Worldwide',
       overview: convertMarkdownToJSX(project.description),
-      roundStats: { estimatedMatch: 1240.4, donatedAmount: project.total_donations, votes: project.total_votes },
+      voted: project.user_voted,
+      roundStats: { donatedAmount: project.total_donations, votes: project.total_votes },
       donations: [
         {
           id: '1',
@@ -86,10 +88,10 @@ export const voteOrDonateProjectAdaptor = async (
     if (donatePayload) {
       const payload: DonateReqRaw = {
         amount: parseFloat(donatePayload.donate),
-        txid: donatePayload.transactionHash,
         currency: donatePayload.currency,
-        wallet_address: donatePayload.wallet_address
-      }
+        txid: donatePayload.transactionHash,
+        wallet_address: donatePayload.wallet_address,
+      };
       await donate(projectId, payload);
     } else {
       await vote(projectId);
@@ -121,7 +123,7 @@ export const editProjectAdaptor = async (project): Promise<AdaptorRes<SuccessRes
   }
 };
 
-//Fix should be filtered by identity
+//FIXME: ohhhh gooood please seee type errors -_- should be filtered by identity
 export const getUserProjects = async (page = 1, limit = 10): Promise<AdaptorRes<ProjectRes>> => {
   try {
     const { results, page, limit, total } = await getProjects({});

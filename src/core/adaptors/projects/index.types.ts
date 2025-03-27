@@ -3,7 +3,7 @@ import { IdentityType } from 'src/core/api';
 import { PaginateRes } from '..';
 
 export type RoundStats = {
-  estimatedMatch: number;
+  estimatedMatch?: number;
   donatedAmount: number;
   votes: number;
 };
@@ -27,6 +27,7 @@ export interface Project {
   overview?: JSX.Element;
   roundStats?: RoundStats;
   donations?: Donation[];
+  voted?: boolean;
 }
 
 export type ProjectRes = PaginateRes<Project>;
@@ -34,7 +35,7 @@ export type ProjectRes = PaginateRes<Project>;
 export type DonateReq = {
   donate: string;
   currency: string;
-  transactionHash: string;
   preventDisplayName: boolean;
+  transactionHash: string;
   wallet_address: string;
 };
