@@ -95,7 +95,7 @@ const VoteDonateCard = () => {
         <Divider />
         {isVoteChoice ? (
           <>
-            <VoteInfo estimatedMatch="$23.50" impactPoints={isIdentityUser ? 272 : undefined} />
+            {/* @FIXME: <VoteInfo estimatedMatch="$23.50" impactPoints={isIdentityUser ? 272 : undefined} />} */}
             <Button type="button" color="primary" onClick={() => onVoteOrDonate()}>
               Vote now
             </Button>

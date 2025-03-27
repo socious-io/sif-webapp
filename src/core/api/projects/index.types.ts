@@ -24,3 +24,13 @@ export interface Project {
 }
 
 export type ProjectsRes = PaginateRes<Project>;
+
+
+export type DonationReq = {
+  wallet_address: string;
+  amount: number;
+  descriotion?: string;
+  txid: string;
+  currency: string;
+  meta?: any;
+}

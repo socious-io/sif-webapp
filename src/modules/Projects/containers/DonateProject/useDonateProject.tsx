@@ -5,9 +5,12 @@ import { useSelector } from 'react-redux';
 import { CURRENCIES } from 'src/constants/CURRENCIES';
 import { DonateReq } from 'src/core/adaptors';
 import { CurrentIdentity } from 'src/core/api';
-// import Dapp from 'src/core/dapp';
+import Connect from 'src/modules/General/components/ConnectButton';
 import { RootState } from 'src/store';
 import * as yup from 'yup';
+
+import { Transaction } from '@meshsdk/core';
+import { config } from 'src/config';
 
 const schema = yup
   .object()
@@ -27,6 +30,8 @@ export const useDonateProject = (onDonate: (data: DonateReq) => void) => {
     return state.identity.entities.find(i => i.current);
   });
   const isIdentityUser = currentIdentity?.type === 'users';
+
+  const { ConnectButton, connected, wallet, address } = Connect();
 
   const {
     register,
@@ -62,7 +67,22 @@ export const useDonateProject = (onDonate: (data: DonateReq) => void) => {
 
   const onPreventDisplayName = (checked: boolean) => setValue('preventDisplayName', checked);
 
-  const onSubmit = (data: DonateReq) => onDonate(data);
+  const onSubmit = async (data: DonateReq) => {
+    if (!connected ||!wallet) return;
+
+    const tx = new Transaction({ initiator: wallet })
+      .sendLovelace(
+        config.payoutDonationsAddress,
+        `${BigInt(data.donate) * 1000000n}`
+      );
+
+    const unsignedTx = await tx.build();
+    const signedTx = await wallet.signTx(unsignedTx);
+    const txHash = await wallet.submitTx(signedTx);
+    data.transactionHash = txHash;
+    data.wallet_address = address;
+    return onDonate(data);
+  }
 
   return {
     data: {
@@ -72,8 +92,8 @@ export const useDonateProject = (onDonate: (data: DonateReq) => void) => {
       selectedCurrency,
       selectedCurrencyLabel,
       donateValueConversion,
-      isConnected: true,
-      Web3Connect: {},
+      isConnected: connected,
+      ConnectButton,
     },
     operations: {
       onSelectCurrency,
