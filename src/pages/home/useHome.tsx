@@ -10,5 +10,6 @@ export const useHome = () => {
   });
   const isIdentityUser = currentIdentity?.type === 'users';
   const roundIsClosed = getDaysUntil(round?.voting_end_at as string) <= 0;
+
   return { round, isIdentityUser, roundIsClosed };
 };
