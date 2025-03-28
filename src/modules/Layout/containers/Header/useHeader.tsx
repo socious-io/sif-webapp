@@ -6,7 +6,7 @@ import { logout } from 'src/core/api/auth/auth.service';
 import { RootState } from 'src/store';
 
 export const useHeader = () => {
-  const [accounts, setaccounts] = useState([]);
+  const [accounts, setAccounts] = useState([]);
   const [userType, setUserType] = useState<'users' | 'organizations'>('users');
   const [image, setImage] = useState('');
   const navigate = useNavigate();
@@ -26,11 +26,12 @@ export const useHeader = () => {
         img: i.type === 'users' ? user.avatar?.url : org.logo?.url,
         type: i.type,
         name: i.type === 'users' ? `${user.first_name} ${user.last_name}` : org.shortname,
-        username: user.username || org.shortname,
+        email: `@${user.username || org.shortname}`,
         selected: i.id === currentIdentity?.id,
       };
     });
-    setaccounts(accList);
+    //FIXME: type error issue -___________-
+    setAccounts(accList);
   }, [identities]);
 
   useEffect(() => {
