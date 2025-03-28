@@ -1,12 +1,13 @@
 import { requestKYB } from 'src/core/api';
 
-import { AdaptorRes, SuccessRes } from '..';
+import { AdaptorRes } from '..';
+import { VerificationRes } from './index.types';
 
-export const verifyOrganization = async (orgId: string, documents: string[]): Promise<AdaptorRes<SuccessRes>> => {
+export const verifyOrganization = async (orgId: string, documents: string[]): Promise<AdaptorRes<VerificationRes>> => {
   try {
-    await requestKYB(orgId, { documents });
+    const data = await requestKYB(orgId, { documents });
     return {
-      data: { message: 'succeed' },
+      data: { message: 'succeed', status: data.status },
       error: null,
     };
   } catch {
