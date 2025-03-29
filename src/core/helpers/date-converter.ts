@@ -12,5 +12,6 @@ export const getDaysUntil = (targetDate: string): number => {
   const today = new Date();
   const target = new Date(targetDate);
   const diffMs = target.getTime() - today.getTime();
-  return Math.floor(diffMs / (1000 * 60 * 60 * 24));
+  const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+  return days < 0 ? 0 : days; 
 };
