@@ -93,7 +93,9 @@ export const Home = () => {
                 {translate('home-days-left-to-vote')}
               </div>
               <div className="flex-1 flex flex-col gap-1 text-sm text-Gray-light-mode-600">
-                <span className="text-4xl md:text-5xl font-semibold text-Brand-700">${round?.pool_amount || 0}</span>
+                <span className="text-4xl md:text-5xl font-semibold text-Brand-700">
+                  ${new Intl.NumberFormat('en-US').format(round?.pool_amount || 0)}
+                </span>
                 {translate('home-matching-pool')}
               </div>
             </div>
