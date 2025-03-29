@@ -1,4 +1,4 @@
-import { PaginateRes } from '..';
+import { PaginateResV3, Round } from '..';
 import { Media } from '../media/index.types';
 import { Identity } from '../users/index.types';
 
@@ -22,9 +22,10 @@ export interface Project {
   total_donations: number;
   total_votes: number;
   user_voted: boolean;
+  round: Round;
 }
 
-export type ProjectsRes = PaginateRes<Project>;
+export type ProjectsRes = PaginateResV3<Project>;
 
 export type DonationReq = {
   amount: number;

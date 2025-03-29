@@ -7,7 +7,7 @@ import { useVerifyTopBanner } from './useVerifyTopBanner';
 const VerifyTopBanner = () => {
   const {
     data: { type, verified, hideVerifyBanner, pendingOrgVerification, openVerifyModal },
-    operations: { onDismiss, onVerifyIdentity, setOpenVerifyModal },
+    operations: { onDismiss, setOpenVerifyModal },
   } = useVerifyTopBanner();
   const title =
     type === 'users'
@@ -33,22 +33,25 @@ const VerifyTopBanner = () => {
         supportingText={translate('layout-verification.pending-support-text')}
       />
     ) : (
-      <>
-        <TopBanner
-          theme="warning"
-          text={translate('layout-verification.not-verified-text', { title })}
-          supportingText={translate('layout-verification.not-verified-support-text', { title })}
-          secondaryButton={{
-            children: translate('layout-verification.not-verified-secondary-btn'),
-            href: 'https://socious.io/verified-credentials',
-          }}
-          primaryButton={{
-            children: translate('layout-verification.not-verified-primary-btn'),
-            onClick: () => (type === 'users' ? onVerifyIdentity() : setOpenVerifyModal(true)),
-          }}
-        />
-        {type === 'organizations' && <KYB open={openVerifyModal} setOpen={setOpenVerifyModal} />}
-      </>
+      // for now just KYB
+      type === 'organizations' && (
+        <>
+          <TopBanner
+            theme="warning"
+            text={translate('layout-verification.not-verified-text', { title })}
+            supportingText={translate('layout-verification.not-verified-support-text', { title })}
+            secondaryButton={{
+              children: translate('layout-verification.not-verified-secondary-btn'),
+              href: 'https://socious.io/verified-credentials',
+            }}
+            primaryButton={{
+              children: translate('layout-verification.not-verified-primary-btn'),
+              onClick: () => setOpenVerifyModal(true),
+            }}
+          />
+          {type === 'organizations' && <KYB open={openVerifyModal} setOpen={setOpenVerifyModal} />}
+        </>
+      )
     );
   }
 };

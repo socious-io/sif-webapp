@@ -4,6 +4,7 @@ export interface VoteDetailCardProps {
   roundStats: RoundStats;
   isOwner?: boolean;
   alreadyVoted?: boolean;
+  voteEnded?: boolean;
   onShare?: () => void;
   onVote?: () => void;
 }

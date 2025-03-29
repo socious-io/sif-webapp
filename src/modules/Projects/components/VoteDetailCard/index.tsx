@@ -10,6 +10,7 @@ const VoteDetailCard: React.FC<VoteDetailCardProps> = ({
   roundStats,
   isOwner = false,
   alreadyVoted = false,
+  voteEnded = false,
   onShare,
   onVote,
 }) => {
@@ -43,12 +44,16 @@ const VoteDetailCard: React.FC<VoteDetailCardProps> = ({
           >
             {translate('projects-round-stats.share-button')}
           </Button>
-          {!alreadyVoted ? (
+          {!alreadyVoted || !voteEnded ? (
             <Button color="primary" onClick={onVote} disabled={alreadyVoted}>
               {translate('projects-round-stats.vote-button')}
             </Button>
           ) : (
-            <AlertMessage theme="warning" iconName="alert-circle" title={translate('vote-donate.already-voted')} />
+            <AlertMessage
+              theme="warning"
+              iconName="alert-circle"
+              title={alreadyVoted ? translate('vote-donate.already-voted') : translate('vote-donate.end-voted')}
+            />
           )}
         </div>
       )}

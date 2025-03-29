@@ -1,5 +1,5 @@
+import { FilterReq, PaginateReq } from '..';
 import { get, post, patch } from '../http';
-import { FilterReq, PaginateReq } from '../types';
 import { DonationReq, Project, ProjectsRes } from './index.types';
 
 export async function getProjects(params: PaginateReq, filters?: FilterReq): Promise<ProjectsRes> {
