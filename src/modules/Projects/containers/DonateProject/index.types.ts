@@ -1,7 +1,7 @@
 import { DonateReq } from 'src/core/adaptors';
 
 export type Form = {
-  donate: string;
+  donate: number;
   currency: string;
   preventDisplayName: boolean;
 };

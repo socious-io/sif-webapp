@@ -17,8 +17,6 @@ const DonateProject: React.FC<DonateProjectProps> = ({ isLoading, onDonate }) =>
       register,
       errors,
       donateValue,
-      sociousFee,
-      donateWithFee,
       totalPay,
       selectedCurrency,
       selectedCurrencyLabel,
@@ -72,22 +70,22 @@ const DonateProject: React.FC<DonateProjectProps> = ({ isLoading, onDonate }) =>
           <div className="flex items-center justify-between text-sm font-medium leading-5 text-Gray-light-mode-700">
             {translate('vote-donate.your-donate')}
             <span className="text-base font-medium leading-6 text-Gray-light-mode-600">
-              {donateValue.toFixed(2)} {selectedCurrencyLabel}
+              {donateValue} {selectedCurrencyLabel}
             </span>
           </div>
-          <div className="flex items-center justify-between text-sm font-medium leading-5 text-Gray-light-mode-700">
+          {/* <div className="flex items-center justify-between text-sm font-medium leading-5 text-Gray-light-mode-700">
             {translate('vote-donate.socious-fee')} ({sociousFee}%)
             <span className="text-base font-medium leading-6 text-Gray-light-mode-600">
               {donateWithFee.toFixed(2)} {selectedCurrencyLabel}
             </span>
-          </div>
+          </div> */}
         </div>
       </div>
       <Divider />
       <div className="flex items-center justify-between text-sm font-medium leading-5 text-Gray-light-mode-700">
         {translate('vote-donate.total-pay')}
         <span className="text-lg font-semibold leading-7 text-Gray-light-mode-900">
-          {totalPay.toFixed(2)} {selectedCurrencyLabel}
+          {totalPay} {selectedCurrencyLabel}
         </span>
       </div>
       <Button type="submit" color="primary" disabled={!isConnected || isLoading}>

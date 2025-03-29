@@ -33,7 +33,7 @@ export interface Project {
 export type ProjectRes = PaginateRes<Project>;
 
 export type DonateReq = {
-  donate: string;
+  donate: number;
   currency: string;
   preventDisplayName: boolean;
   transactionHash: string;

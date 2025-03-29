@@ -18,8 +18,10 @@ const schema = yup
   .object()
   .shape({
     donate: yup
-      .string()
-      .matches(/^(?!0(\.0+)?$)\d+(\.\d+)?$/, translate('vote-donate.enter-donation-positive-error'))
+      .number()
+      .typeError(translate('vote-donate.enter-donation-positive-error'))
+      .positive(translate('vote-donate.enter-donation-positive-error'))
+      .integer(translate('vote-donate.enter-donation-positive-error'))
       .required(translate('vote-donate.error-donation-required-error')),
     preventDisplayName: yup.boolean().default(false),
     currency: yup.string().required(translate('vote-donate.error-donation-required-error')),
@@ -43,16 +45,17 @@ export const useDonateProject = (onDonate: (data: DonateReq) => void) => {
   } = useForm<Form>({ mode: 'all', resolver: yupResolver(schema) });
   const selectedCurrency = watch('currency');
   const selectedCurrencyLabel = CURRENCIES.find(currency => currency.value === selectedCurrency)?.label;
-  const donateValue = Number(watch('donate')) || 0;
+  const donateValue = watch('donate') || 0;
   //FIXME: convert selected currency to $ (for now 1 -> 1)
   const donateValueConversion = donateValue;
-  const sociousFee = 2;
-  const donateWithFee = (sociousFee / 100) * donateValue;
-  const totalPay = donateValue + donateWithFee;
+  // FIXME: socious fee later added to donate value
+  // const sociousFee = 2;
+  // const donateWithFee = (sociousFee / 100) * donateValue;
+  const totalPay = donateValue;
 
   const initializeValues = useCallback(() => {
     const initialVal = {
-      donate: '',
+      donate: undefined,
       preventDisplayName: false,
       currency: CURRENCIES[0].value,
     };
@@ -72,7 +75,7 @@ export const useDonateProject = (onDonate: (data: DonateReq) => void) => {
 
     const tx = new Transaction({ initiator: wallet }).sendLovelace(
       config.payoutDonationsAddress,
-      `${BigInt(Math.round(Number(data.donate))) * 1000000n}`,
+      `${BigInt(data.donate) * 1000000n}`,
     );
 
     const unsignedTx = await tx.build();
@@ -87,8 +90,6 @@ export const useDonateProject = (onDonate: (data: DonateReq) => void) => {
       register,
       errors,
       donateValue,
-      sociousFee,
-      donateWithFee,
       totalPay,
       selectedCurrency,
       selectedCurrencyLabel,

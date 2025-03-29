@@ -87,7 +87,7 @@ export const voteOrDonateProjectAdaptor = async (
   try {
     if (donatePayload) {
       const payload: DonateReqRaw = {
-        amount: parseFloat(donatePayload.donate),
+        amount: donatePayload.donate,
         currency: donatePayload.currency,
         txid: donatePayload.transactionHash,
         wallet_address: donatePayload.wallet_address,
