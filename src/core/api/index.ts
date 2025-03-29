@@ -18,7 +18,27 @@ export * from './geo/index.types';
 export * from './rounds/index.api';
 export * from './rounds/index.types';
 
-export interface PaginateRes<T> {
+export interface PaginateReq {
+  page?: number;
+  limit?: number;
+}
+
+export interface FilterReq extends PaginateReq {
+  [key: string]: any;
+}
+
+export interface SuccessRes {
+  message: string;
+}
+
+export interface PaginateRes {
+  page: number;
+  limit: number;
+  total_count: number;
+  items: any[];
+}
+
+export interface PaginateResV3<T> {
   page: number;
   limit: number;
   total: number;

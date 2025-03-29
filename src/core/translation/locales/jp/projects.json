@@ -134,6 +134,7 @@
     "total-pay": "合計支払い額",
     "donate-now-btn": "今すぐ寄付",
     "already-voted": "あなたはすでにこのプロジェクトに投票しました。",
+    "end-voted": "このプロジェクトの投票は終了しました。ご支援いただきありがとうございます！",
     "success-modal": {
       "continue-btn": "続ける",
       "vote-or-contribution": "あなたの{{title}}対象",

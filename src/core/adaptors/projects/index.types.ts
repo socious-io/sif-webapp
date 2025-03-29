@@ -28,6 +28,7 @@ export interface Project {
   roundStats?: RoundStats;
   donations?: Donation[];
   voted?: boolean;
+  voteEnded?: boolean;
 }
 
 export type ProjectRes = PaginateRes<Project>;

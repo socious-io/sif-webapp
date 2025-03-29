@@ -134,6 +134,7 @@
     "total-pay": "Total to pay",
     "donate-now-btn": "Donate now",
     "already-voted": "You have already voted for this project.",
+    "end-voted": "Voting for this project has ended. Thank you for your support!",
     "success-modal": {
       "continue-btn": "Continue",
       "vote-or-contribution": "Your {{title}} to",

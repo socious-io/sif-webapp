@@ -35,6 +35,7 @@ export interface OptionType {
   label: string;
   icon?: string;
 }
+
 export function socialCausesToCategoryAdaptor() {
   return Object.entries(SOCIAL_CAUSES).map(([, value]) => value);
 }

@@ -147,6 +147,7 @@ export const ProjectDetail = () => {
             roundStats={detail.roundStats}
             isOwner={isOwner}
             alreadyVoted={detail.voted}
+            voteEnded={detail.voteEnded}
             onShare={onShare}
             onVote={onVote}
           />
