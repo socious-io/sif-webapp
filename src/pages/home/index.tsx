@@ -118,7 +118,15 @@ export const Home = () => {
             </span>
             {translate('home-contact-subtitle')}
           </div>
-          <Button color="primary">{translate('home-contact-button')}</Button>
+          <Button
+            component="a"
+            href="https://socious.io/contact"
+            target="_blank"
+            rel="noopener noreferrer"
+            color="primary"
+          >
+            {translate('home-contact-button')}
+          </Button>
         </div>
       </div>
     </>
