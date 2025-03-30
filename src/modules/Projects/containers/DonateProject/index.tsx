@@ -16,7 +16,6 @@ const DonateProject: React.FC<DonateProjectProps> = ({ isLoading, onDonate }) =>
       userImpactPoints,
       register,
       errors,
-      donateValue,
       totalPay,
       selectedCurrency,
       selectedCurrencyLabel,
@@ -43,11 +42,11 @@ const DonateProject: React.FC<DonateProjectProps> = ({ isLoading, onDonate }) =>
         placeholder="0"
         postfixDropdown={{
           options: CURRENCIES,
-          value: CURRENCIES.find(currency => currency.value === selectedCurrency),
+          value: selectedCurrency,
           onChange: onSelectCurrency,
         }}
         noBorderPostfix
-        hints={[{ hint: `$ ${donateValueConversion}`, hide: !!errors.donate }]}
+        hints={[{ hint: `~ $ ${donateValueConversion}`, hide: !!errors.donate }]}
         hintCustomClass="!text-right"
         errors={errors.donate?.message ? [errors.donate.message.toString()] : undefined}
       />
@@ -63,7 +62,7 @@ const DonateProject: React.FC<DonateProjectProps> = ({ isLoading, onDonate }) =>
           onChange={(_, checked) => onPreventDisplayName(checked)}
         />
       </div>
-      <Divider />
+      {/* <Divider />
       <div className="flex flex-col items-stretch gap-5 text-lg font-medium leading-7">
         {translate('vote-donate.donation-section')}
         <div className="flex flex-col items-stretch gap-2">
@@ -73,14 +72,14 @@ const DonateProject: React.FC<DonateProjectProps> = ({ isLoading, onDonate }) =>
               {donateValue} {selectedCurrencyLabel}
             </span>
           </div>
-          {/* <div className="flex items-center justify-between text-sm font-medium leading-5 text-Gray-light-mode-700">
+          <div className="flex items-center justify-between text-sm font-medium leading-5 text-Gray-light-mode-700">
             {translate('vote-donate.socious-fee')} ({sociousFee}%)
             <span className="text-base font-medium leading-6 text-Gray-light-mode-600">
               {donateWithFee.toFixed(2)} {selectedCurrencyLabel}
             </span>
-          </div> */}
+          </div>
         </div>
-      </div>
+      </div> */}
       <Divider />
       <div className="flex items-center justify-between text-sm font-medium leading-5 text-Gray-light-mode-700">
         {translate('vote-donate.total-pay')}

@@ -1,15 +1,12 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Transaction } from '@meshsdk/core';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useSelector } from 'react-redux';
 import { config } from 'src/config';
 import { CURRENCIES } from 'src/constants/CURRENCIES';
 import { DonateReq } from 'src/core/adaptors';
-import { CurrentIdentity, UserMeta } from 'src/core/api';
 import { translate } from 'src/core/helpers/utils';
 import Connect from 'src/modules/General/components/ConnectButton';
-import { RootState } from 'src/store';
 import * as yup from 'yup';
 
 import { Form } from './index.types';
@@ -30,11 +27,8 @@ const schema = yup
 
 export const useDonateProject = (onDonate: (data: DonateReq) => void) => {
   const { ConnectButton, connected, wallet, address } = Connect();
-  const currentIdentity = useSelector<RootState, CurrentIdentity | undefined>(state => {
-    return state.identity.entities.find(i => i.current);
-  });
-  const isIdentityUser = currentIdentity?.type === 'users';
-  const userImpactPoints = isIdentityUser ? (currentIdentity.meta as UserMeta).impact_points : undefined;
+  const [donateValueConversion, setDonationValueConversion] = useState(0);
+  const [userImpactPoints, setUserImpactPoints] = useState(0);
   const {
     register,
     setValue,
@@ -43,11 +37,10 @@ export const useDonateProject = (onDonate: (data: DonateReq) => void) => {
     handleSubmit,
     reset,
   } = useForm<Form>({ mode: 'all', resolver: yupResolver(schema) });
-  const selectedCurrency = watch('currency');
-  const selectedCurrencyLabel = CURRENCIES.find(currency => currency.value === selectedCurrency)?.label;
+  const selectedCurrencyValue = watch('currency');
+  const selectedCurrency = CURRENCIES.find(currency => currency.value === selectedCurrencyValue);
+  const selectedCurrencyLabel = selectedCurrency?.label;
   const donateValue = watch('donate') || 0;
-  //FIXME: convert selected currency to $ (for now 1 -> 1)
-  const donateValueConversion = donateValue;
   // FIXME: socious fee later added to donate value
   // const sociousFee = 2;
   // const donateWithFee = (sociousFee / 100) * donateValue;
@@ -65,6 +58,18 @@ export const useDonateProject = (onDonate: (data: DonateReq) => void) => {
   useEffect(() => {
     initializeValues();
   }, [initializeValues]);
+
+  useEffect(() => {
+    if (!selectedCurrency?.rateConversionFunc) return;
+
+    const fetchConversion = async () => {
+      const convertedValue = await selectedCurrency.rateConversionFunc(donateValue);
+      setDonationValueConversion(convertedValue);
+      setUserImpactPoints(Math.round(convertedValue));
+    };
+
+    fetchConversion();
+  }, [donateValue, selectedCurrency]);
 
   const onSelectCurrency = (value: string) => setValue('currency', value, { shouldValidate: true });
 
@@ -89,7 +94,6 @@ export const useDonateProject = (onDonate: (data: DonateReq) => void) => {
       userImpactPoints,
       register,
       errors,
-      donateValue,
       totalPay,
       selectedCurrency,
       selectedCurrencyLabel,
