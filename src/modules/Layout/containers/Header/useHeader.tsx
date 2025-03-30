@@ -52,6 +52,6 @@ export const useHeader = () => {
   };
   const navigateIntro = () => navigate('/intro');
   const disabledCreate = currentIdentity?.type === 'organizations' && currentIdentity?.meta?.verified;
-  // console.log((currentIdentity?.type === 'organizations'), currentIdentity.meta.verified);
-  return { accounts, image, userType, navigateCreate, onLogout, navigateIntro };
+
+  return { accounts, image, userType, navigateCreate, onLogout, navigateIntro, disabledCreate };
 };

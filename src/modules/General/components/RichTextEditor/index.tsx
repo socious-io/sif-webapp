@@ -77,7 +77,10 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
       italic: { HTMLAttributes: { class: 'italic' } },
     }),
     Underline.configure({ HTMLAttributes: { class: 'underline' } }),
-    Image,
+    Image.configure({
+      inline: true,
+      allowBase64: true,
+    }),
   ];
 
   const editor = useEditor({

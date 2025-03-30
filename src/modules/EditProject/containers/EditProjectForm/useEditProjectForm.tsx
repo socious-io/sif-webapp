@@ -65,7 +65,7 @@ export const useEditProjectForm = () => {
 
   const onSubmit = async (formData: FormData) => {
     await editProjectAdaptor({ ...project, ...formData });
-    navigate(`projects/${project.id}`);
+    navigate(`/projects/${project.id}`);
   };
 
   const description = watch('description') || '';
