@@ -9,6 +9,7 @@ export const useHeader = () => {
   const [accounts, setAccounts] = useState([]);
   const [userType, setUserType] = useState<'users' | 'organizations'>('users');
   const [image, setImage] = useState('');
+  const [openVerifyModal, setOpenVerifyModal] = useState(false);
   const navigate = useNavigate();
 
   const identities = useSelector<RootState, Identity[]>(state => {
@@ -41,17 +42,27 @@ export const useHeader = () => {
     }
   }, [currentIdentity]);
 
-  const navigateCreate = () => {
-    if (currentIdentity?.type === 'organizations') navigate('/create');
-    else if (currentIdentity?.type === 'users') navigate('/create/select-identity');
-    else navigate('/intro');
+  const onCreate = () => {
+    if (currentIdentity?.type === 'users') navigate('/create/select-identity');
+    if (currentIdentity?.type === 'organizations') {
+      if (currentIdentity.meta.verified) navigate('/create');
+      else setOpenVerifyModal(true);
+    }
   };
   const onLogout = () => {
     logout();
     navigate('/intro');
   };
   const navigateIntro = () => navigate('/intro');
-  const disabledCreate = currentIdentity?.type === 'organizations' && currentIdentity?.meta?.verified;
 
-  return { accounts, image, userType, navigateCreate, onLogout, navigateIntro, disabledCreate };
+  return {
+    accounts,
+    image,
+    userType,
+    onCreate,
+    onLogout,
+    navigateIntro,
+    openVerifyModal,
+    setOpenVerifyModal,
+  };
 };

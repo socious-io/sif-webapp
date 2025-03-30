@@ -1,5 +1,3 @@
-import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import { translate } from 'src/core/helpers/utils';
 import AlertMessage from 'src/modules/General/components/AlertMessage';
 import Button from 'src/modules/General/components/Button';
@@ -7,6 +5,7 @@ import Icon from 'src/modules/General/components/Icon';
 import variables from 'src/styles/constants/_exports.module.scss';
 
 import { VoteDetailCardProps } from './index.types';
+import { useVoteDetailCard } from './useVoteDetailCard';
 
 const VoteDetailCard: React.FC<VoteDetailCardProps> = ({
   roundStats,
@@ -16,19 +15,7 @@ const VoteDetailCard: React.FC<VoteDetailCardProps> = ({
   onVote,
 }) => {
   const { donatedAmount, votes } = roundStats || {};
-  const [isShared, setIsShared] = useState(false);
-  const location = useLocation();
-  const handleCopy = async () => {
-    try {
-      const currentUrl = window.location.origin + location.pathname;
-
-      await navigator.clipboard.writeText(currentUrl);
-
-      setIsShared(true);
-    } catch (err) {
-      console.error('Failed to copy text: ', err);
-    }
-  };
+  const { isShared, handleCopy } = useVoteDetailCard();
   return (
     <div className="w-full md:w-[22.5rem] flex flex-col items-stretch gap-4 p-6 bg-Gray-light-mode-50 rounded-xl">
       {/* <div className="flex flex-col gap-1 text-sm leading-5 text-Gray-light-mode-600">
