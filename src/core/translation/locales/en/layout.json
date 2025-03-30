@@ -1,5 +1,6 @@
 {
   "socious-fund": "Socious Fund",
+  "header-login": "Login",
   "layout-action-button": " Create a Project",
   "layout-verification": {
     "success-text": "Your {{title}} has been successfully verified",
