@@ -27,7 +27,7 @@ const CreatePreview: React.FC = () => {
   } = useCreatePreview();
   return (
     <>
-      <div>
+      <div className="pb-12">
         <img src={cover_url} alt="banner" className={styles.banner} />
         <div className="text-[20px] font-medium my-5 border-b border-b-Gray-light-mode-300 border-solid border-t-0 border-l-0 border-r-0 pb-5">
           {title}
