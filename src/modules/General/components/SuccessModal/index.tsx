@@ -1,12 +1,9 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
 import FeaturedIcon from 'src/modules/General/components/FeaturedIcon';
 import Modal from 'src/modules/General/components/Modal';
 
 import { SuccessModalProps } from './index.type';
 
 const SuccessModal: React.FC<SuccessModalProps> = ({ open, handleClose, title, message }) => {
-  const { t: translate } = useTranslation();
   return (
     <Modal
       open={open}

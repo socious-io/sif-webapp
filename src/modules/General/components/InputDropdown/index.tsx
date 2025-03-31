@@ -1,8 +1,7 @@
-import React from 'react';
 import Select, { components } from 'react-select';
 import Icon from 'src/modules/General/components/Icon';
 
-import css from './index.module.scss';
+import styles from './index.module.scss';
 import { InputDropdownProps } from './index.types';
 
 const InputDropdown: React.FC<InputDropdownProps> = ({
@@ -21,7 +20,7 @@ const InputDropdown: React.FC<InputDropdownProps> = ({
     //FIXME: ts errors
     return (
       <components.Control {...props}>
-        {icon && <Icon className={css.startIcon} name={icon} fontSize={20} color="#667085" />}
+        {icon && <Icon className={styles['startIcon']} name={icon} fontSize={20} color="#667085" />}
         {children}
       </components.Control>
     );
@@ -30,7 +29,7 @@ const InputDropdown: React.FC<InputDropdownProps> = ({
     const { innerProps, label, data, ...rest } = props;
     const selected = value && value.label ? value.label === label : false;
     return (
-      <div {...innerProps} className={`${css.option} ${selected ? `${css.selecetdOption}` : ''}`}>
+      <div {...innerProps} className={`${styles['option']} ${selected ? `${styles['selecetdOption']}` : ''}`}>
         {selected && <Icon name="check" fontSize={20} color="#667085" />}
         <span>{data.icon}</span>
         {label}
@@ -42,7 +41,7 @@ const InputDropdown: React.FC<InputDropdownProps> = ({
       <components.SingleValue {...props}>
         <div className="flex ">
           {children}
-          {data.description && <div className={css.description}>{data.description}</div>}
+          {data.description && <div className={styles['description']}>{data.description}</div>}
         </div>
       </components.SingleValue>
     );
@@ -53,12 +52,12 @@ const InputDropdown: React.FC<InputDropdownProps> = ({
     <Select
       options={options}
       noOptionsMessage={() => null}
-      className={css.container}
+      className={styles['container']}
       components={{
         Option: props => <CustomOption {...props} value={selectedVal} />,
         Control: props => <CustomControl {...props} />,
         DropdownIndicator: () => (
-          <div className={css.dropdown}>
+          <div className={styles['dropdown']}>
             <Icon name="chevron-down" fontSize={20} color="#667085" />
           </div>
         ),

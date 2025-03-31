@@ -2,7 +2,7 @@ import marker from 'src/assets/icons/location-marker.svg';
 import { convertMarkdownToJSX } from 'src/core/convert-md-to-jsx';
 import { translate } from 'src/core/helpers/utils';
 import Button from 'src/modules/General/components/Button';
-import SuccessModal from 'src/modules/General/SuccessModal';
+import SuccessModal from 'src/modules/General/components/SuccessModal';
 
 import { useCreatePreview } from './useCreatePreview';
 

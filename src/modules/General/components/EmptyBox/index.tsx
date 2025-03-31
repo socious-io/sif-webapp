@@ -1,15 +1,15 @@
 import Button from 'src/modules/General/components/Button';
 
-import css from './index.module.scss';
+import styles from './index.module.scss';
 import { EmptyBoxProps } from './index.types';
 
 const EmptyBox: React.FC<EmptyBoxProps> = ({ icon, title, subtitle = '', button }) => {
   return (
-    <div className={css['container']}>
+    <div className={styles['container']}>
       {icon}
-      <div className={css['content']}>
+      <div className={styles['content']}>
         {title}
-        {subtitle && <span className={css['content__subtitle']}>{subtitle}</span>}
+        {subtitle && <span className={styles['content__subtitle']}>{subtitle}</span>}
       </div>
       {button && <Button {...button} />}
     </div>

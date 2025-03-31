@@ -6,6 +6,7 @@ import css from './index.module.scss';
 
 const Spinner = () => {
   const spinnerVisibility = useSelector<RootState>(state => state.spinner);
+
   return (
     <div
       className={css['container']}
@@ -13,7 +14,7 @@ const Spinner = () => {
         opacity: spinnerVisibility ? 1 : 0,
       }}
     >
-      <LinearProgress />
+      <LinearProgress color="primary" />
     </div>
   );
 };

@@ -1,6 +1,4 @@
-import React from 'react';
-
-import css from './index.module.scss';
+import styles from './index.module.scss';
 import { CustomChipProps } from './index.types';
 
 const Chip: React.FC<CustomChipProps> = props => {
@@ -12,13 +10,13 @@ const Chip: React.FC<CustomChipProps> = props => {
   };
   return (
     <div
-      className={`${css.chip} ${customStyle}`}
+      className={`${styles['chip']} ${customStyle}`}
       style={{ borderColor: borderColor ? borderColor : '', backgroundColor: bgColor || '' }}
       onClick={() => onClick(label)}
       onKeyDown={handleEnter}
       tabIndex={0}
     >
-      <span className={`${css.chipLabel} !font-medium`} style={{ color: fontColor || '' }}>
+      <span className={`${styles['chipLabel']} !font-medium`} style={{ color: fontColor || '' }}>
         {label}
       </span>
       <div style={{ marginRight: 0, marginLeft: 'auto' }}>{icon}</div>

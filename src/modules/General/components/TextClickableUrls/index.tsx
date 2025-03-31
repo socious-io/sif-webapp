@@ -1,6 +1,4 @@
-import React from 'react';
-
-import css from './index.module.scss';
+import styles from './index.module.scss';
 import { TextClickableUrlsProps } from './index.types';
 
 const TextClickableURLs: React.FC<TextClickableUrlsProps> = ({ text }) => {
@@ -17,7 +15,7 @@ const TextClickableURLs: React.FC<TextClickableUrlsProps> = ({ text }) => {
             key={index}
             href={includesProtocols.test(word) ? word : `https://${word}`}
             target="_blank"
-            className={css.link}
+            className={styles['link']}
             rel="noreferrer"
           >
             {' '}

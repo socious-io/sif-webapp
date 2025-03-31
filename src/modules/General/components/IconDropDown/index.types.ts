@@ -1,7 +1,13 @@
 import { ReactNode } from 'react';
 import { CurrentIdentity } from 'src/core/adaptors';
 
-import { IconListItemProps } from '../avatarDropDown/iconListItem';
+export interface IconListItemProps {
+  iconName?: string;
+  label: string;
+  onClick?: () => void;
+  customIconClass?: string;
+  customLabelClass?: string;
+}
 
 export interface IconDropDownProps {
   type: 'organizations' | 'users';
