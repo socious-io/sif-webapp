@@ -8,7 +8,7 @@ import { RouterProvider } from 'react-router-dom';
 import router from 'src/core/router';
 
 import { setupInterceptors } from './core/api/http';
-import Spinner from './modules/General/components/Spinner';
+import RequestLoading from './modules/General/components/RequestLoading';
 import store, { AppDispatch, RootState } from './store';
 import 'src/core/translation/i18n';
 import { currentIdentities } from './store/thunks/identity,thunk';
@@ -35,7 +35,7 @@ function App() {
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
         <RouterProvider router={router.routes} />
-        <Spinner />
+        <RequestLoading />
       </ThemeProvider>
     </StyledEngineProvider>
   );
