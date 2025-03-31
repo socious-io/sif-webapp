@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { useLoaderData, useNavigate, useParams } from 'react-router-dom';
 import { Project } from 'src/core/adaptors';
-import { CurrentIdentity } from 'src/core/api';
+import { CurrentIdentity } from 'src/core/adaptors';
 import { getDaysUntil } from 'src/core/helpers/date-converter';
 import { RootState } from 'src/store';
 

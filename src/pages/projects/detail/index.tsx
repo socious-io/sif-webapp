@@ -36,7 +36,7 @@ export const ProjectDetail = () => {
           account={{
             id: detail.creator?.id || '',
             name: detail.creator.name,
-            email: detail.creator?.username || '',
+            username: detail.creator?.username || '',
             img: detail.creator.img,
             type: detail.creator.type,
           }}
@@ -148,7 +148,6 @@ export const ProjectDetail = () => {
             isOwner={isOwner}
             alreadyVoted={detail.voted}
             voteEnded={detail.voteEnded}
-            onShare={onShare}
             onVote={onVote}
           />
         )}

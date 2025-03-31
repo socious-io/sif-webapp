@@ -19,7 +19,7 @@ const AvatarLabelGroup: React.FC<AvatarLabelGroupProps> = props => {
         <Typography variant="subtitle2" color={variables.color_grey_900}>
           {account.name}
         </Typography>
-        <div className={css['subtitle']}>{account.email}</div>
+        <div className={css['subtitle']}>{account.username}</div>
       </div>
     </div>
   );

@@ -8,8 +8,7 @@ import { isCurrentDateInRange } from 'src/core/helpers/date-converter';
 import { removedEmptyProps } from 'src/core/helpers/objects-arrays';
 import { translate } from 'src/core/helpers/utils';
 
-import { AdaptorRes, DonateReq, Project, ProjectRes, SuccessRes } from '..';
-import { getIdentityMeta } from '../users/index.adaptors';
+import { AdaptorRes, DonateReq, getIdentityMeta, Project, ProjectRes, SuccessRes } from '..';
 
 export const getProjectsAdaptor = async (page = 1, limit = 10): Promise<AdaptorRes<ProjectRes>> => {
   try {
