@@ -1,5 +1,6 @@
-import { socialLinks } from './statics';
 import { translate } from 'src/core/helpers/utils';
+
+import { socialLinks } from './statics';
 
 const Footer: React.FC = () => {
   return (

@@ -5,17 +5,17 @@ import Icon from 'src/modules/General/components/Icon';
 import variables from 'src/styles/constants/_exports.module.scss';
 
 import { VoteDetailCardProps } from './index.types';
+import { useVoteDetailCard } from './useVoteDetailCard';
 
 const VoteDetailCard: React.FC<VoteDetailCardProps> = ({
   roundStats,
   isOwner = false,
   alreadyVoted = false,
   voteEnded = false,
-  onShare,
   onVote,
 }) => {
   const { donatedAmount, votes } = roundStats || {};
-
+  const { isShared, handleCopy } = useVoteDetailCard();
   return (
     <div className="w-full md:w-[22.5rem] flex flex-col items-stretch gap-4 p-6 bg-Gray-light-mode-50 rounded-xl">
       {/* <div className="flex flex-col gap-1 text-sm leading-5 text-Gray-light-mode-600">
@@ -40,9 +40,10 @@ const VoteDetailCard: React.FC<VoteDetailCardProps> = ({
             color="info"
             startIcon={<Icon name="share-02" fontSize={20} color={variables.color_grey_900} />}
             customStyle="!text-Gray-light-mode-900"
-            onClick={onShare}
+            onClick={handleCopy}
+            disabled={isShared}
           >
-            {translate('projects-round-stats.share-button')}
+            {isShared ? translate('projects-round-stats.link-copied') : translate('projects-round-stats.share-button')}
           </Button>
           {!alreadyVoted || !voteEnded ? (
             <Button color="primary" onClick={onVote} disabled={alreadyVoted}>
