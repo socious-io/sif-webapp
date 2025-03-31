@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { AvatarGroupProps } from './index.types';
 import Avatar from '../Avatar';
 

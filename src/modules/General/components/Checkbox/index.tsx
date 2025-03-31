@@ -1,9 +1,8 @@
 import { FormControlLabel, Checkbox as MUICheckbox } from '@mui/material';
-import React from 'react';
 import { Controller } from 'react-hook-form';
 import variables from 'src/styles/constants/_exports.module.scss';
 
-import css from './index.module.scss';
+import styles from './index.module.scss';
 import { CheckboxProps } from './index.types';
 import Icon from '../Icon';
 
@@ -21,8 +20,8 @@ const Checkbox: React.FC<CheckboxProps> = ({
   const fontSize = size === 'small' ? 12 : 14;
 
   return (
-    <div className={css['container']}>
-      <div className={`${css['checkbox']} ${errors ? css['checkbox--error'] : css['checkbox--normal']}`}>
+    <div className={styles['container']}>
+      <div className={`${styles['checkbox']} ${errors ? styles['checkbox--error'] : styles['checkbox--normal']}`}>
         {control ? (
           <FormControlLabel
             control={
@@ -36,7 +35,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
                     disableRipple
                     color="default"
                     checkedIcon={
-                      <div className={`${checkboxSize} ${css[type]} ${css[`${type}--checked`]}`}>
+                      <div className={`${checkboxSize} ${styles[type]} ${styles[`${type}--checked`]}`}>
                         <Icon
                           name="check"
                           color={type === 'square' ? variables.color_primary_600 : 'white'}
@@ -44,7 +43,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
                         />
                       </div>
                     }
-                    icon={<div className={`${checkboxSize} ${css[type]} ${css[`${type}--checked`]}`} />}
+                    icon={<div className={`${checkboxSize} ${styles[type]} ${styles[`${type}--checked`]}`} />}
                     sx={{ padding: '0' }}
                     checked={value}
                     onChange={onChange}
@@ -54,7 +53,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
             }
             label={
               label && (
-                <label htmlFor={id} className={`${css['label']} ml-2`} aria-describedby={id}>
+                <label htmlFor={id} className={`${styles['label']} ml-2`} aria-describedby={id}>
                   {label}
                 </label>
               )
@@ -67,7 +66,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
               disableRipple
               color="default"
               checkedIcon={
-                <div className={`${checkboxSize} ${css[type]} ${css[`${type}--checked`]}`}>
+                <div className={`${checkboxSize} ${styles[type]} ${styles[`${type}--checked`]}`}>
                   <Icon
                     name="check"
                     color={type === 'square' ? variables.color_primary_600 : 'white'}
@@ -75,12 +74,12 @@ const Checkbox: React.FC<CheckboxProps> = ({
                   />
                 </div>
               }
-              icon={<div className={`${checkboxSize} ${css[type]} ${css[`${type}--checked`]}`} />}
+              icon={<div className={`${checkboxSize} ${styles[type]} ${styles[`${type}--checked`]}`} />}
               sx={{ padding: '0' }}
               {...props}
             />
             {label && (
-              <label htmlFor={id} className={css.label} aria-describedby={id}>
+              <label htmlFor={id} className={styles['label']} aria-describedby={id}>
                 {label}
               </label>
             )}
@@ -89,7 +88,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
       </div>
       {errors &&
         errors.map((e, index) => (
-          <p key={index} className={css['error']}>
+          <p key={index} className={styles['error']}>
             {e}
           </p>
         ))}

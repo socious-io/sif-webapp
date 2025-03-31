@@ -1,14 +1,13 @@
 import { Divider, IconButton, MenuItem, MenuList } from '@mui/material';
-import React from 'react';
 import { config } from 'src/config';
 import { translate } from 'src/core/helpers/utils';
 
-import css from './iconDropDown.module.scss';
+import styles from './index.module.scss';
 import { IconDropDownProps } from './index.types';
 import { useIconDropDown } from './useIconDropDown';
 import Avatar from '../Avatar';
-import { IconListItem } from '../avatarDropDown/iconListItem';
 import AvatarLabelGroup from '../AvatarLabelGroup';
+import IconListItem from './IconListItem';
 
 const IconDropDown: React.FC<IconDropDownProps> = props => {
   const {
@@ -29,7 +28,7 @@ const IconDropDown: React.FC<IconDropDownProps> = props => {
   return (
     <div className="flex flex-col items-end relative">
       <IconButton
-        className={`${css.avatarBtn} ${open && `${css.avatarBtnOpen}`}`}
+        className={`${styles['avatarBtn']} ${open && `${styles['avatarBtnOpen']}`}`}
         disableRipple
         onClick={handleClick}
         aria-label="icon-button"
@@ -43,11 +42,11 @@ const IconDropDown: React.FC<IconDropDownProps> = props => {
         />
       </IconButton>
       {open && (
-        <MenuList autoFocusItem className={`${css.menuList} ${customStyle}`} onMouseLeave={handleClose}>
+        <MenuList autoFocusItem className={`${styles['menuList']} ${customStyle}`} onMouseLeave={handleClose}>
           {!!currentAccount && (
             <MenuItem
               key={currentAccount.id}
-              className={css.menuItem}
+              className={styles['menuItem']}
               onFocus={handleOpen}
               onBlur={handleClose}
               onMouseDown={handleClose}
@@ -60,7 +59,7 @@ const IconDropDown: React.FC<IconDropDownProps> = props => {
           {otherAccounts.map(a => (
             <MenuItem
               key={a.id}
-              className={css.menuItem}
+              className={styles['menuItem']}
               onFocus={handleOpen}
               onBlur={handleClose}
               onMouseDown={() => onSwitchAccount(a.id)}
@@ -72,7 +71,7 @@ const IconDropDown: React.FC<IconDropDownProps> = props => {
           {createItem && (
             <MenuItem
               key="create-account"
-              className={css.menuItem}
+              className={styles['menuItem']}
               onFocus={handleOpen}
               onBlur={handleClose}
               onMouseDown={() =>
@@ -86,7 +85,7 @@ const IconDropDown: React.FC<IconDropDownProps> = props => {
                 iconName="plus"
                 label={translate('header-create-org')}
                 customIconClass="text-Brand-700"
-                customLabelClass={css.createLabel}
+                customLabelClass={styles['createLabel']}
               />
             </MenuItem>
           )}
@@ -94,7 +93,7 @@ const IconDropDown: React.FC<IconDropDownProps> = props => {
           {iconItems.map(i => (
             <MenuItem
               key={i.label}
-              className={css.menuItem}
+              className={styles['menuItem']}
               onFocus={handleOpen}
               onBlur={handleClose}
               onMouseDown={i.onClick}
@@ -109,7 +108,7 @@ const IconDropDown: React.FC<IconDropDownProps> = props => {
             <MenuItem
               key={index}
               sx={{ padding: '0' }}
-              className={css.menuItem}
+              className={styles['menuItem']}
               onFocus={handleOpen}
               onBlur={handleClose}
             >

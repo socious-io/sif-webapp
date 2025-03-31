@@ -1,5 +1,4 @@
 import { IconButton, Snackbar, SnackbarContent } from '@mui/material';
-import React from 'react';
 import Icon from 'src/modules/General/components/Icon';
 
 import styles from './index.module.scss';

@@ -1,4 +1,3 @@
-import React from 'react';
 import { convertMarkdownToJSX } from 'src/core/convert-md-to-jsx';
 
 import styles from './index.module.scss';

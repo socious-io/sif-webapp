@@ -1,8 +1,7 @@
-import React from 'react';
 import Button from 'src/modules/General/components/Button';
 import Modal from 'src/modules/General/components/Modal';
 
-import css from './index.module.scss';
+import styles from './index.module.scss';
 import { ConfirmModalProps } from './index.types';
 
 const ConfirmModal: React.FC<ConfirmModalProps> = ({
@@ -22,15 +21,15 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
       handleClose={handleClose}
       headerDivider={headerDivider}
       mobileCentered={mobileCentered}
-      contentClassName={`${css['content']} ${contentClassName}`}
+      contentClassName={`${styles['content']} ${contentClassName}`}
       {...props}
     >
       <div className="flex flex-col gap-1">
-        <span className={css['content__title']}>{confirmHeader}</span>
-        <span className={css['content__subtitle']}>{confirmSubheader}</span>
+        <span className={styles['content__title']}>{confirmHeader}</span>
+        <span className={styles['content__subtitle']}>{confirmSubheader}</span>
       </div>
       {!!buttons.length && (
-        <div className={css['content__buttons']}>
+        <div className={styles['content__buttons']}>
           {buttons.map((button, index) => (
             <Button key={index} {...button} />
           ))}

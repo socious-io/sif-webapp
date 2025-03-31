@@ -2,11 +2,11 @@ import { Pagination as MUIPagination, PaginationItem, PaginationProps } from '@m
 import { translate } from 'src/core/helpers/utils';
 import variables from 'src/styles/constants/_exports.module.scss';
 
-import css from './index.module.scss';
+import styles from './index.module.scss';
 
 const SimplePagination: React.FC<PaginationProps> = props => {
   return (
-    <div className={css['container']}>
+    <div className={styles['container']}>
       <MUIPagination
         page={props.page}
         shape="rounded"
@@ -39,15 +39,15 @@ const SimplePagination: React.FC<PaginationProps> = props => {
         renderItem={item => (
           <PaginationItem
             slots={{
-              previous: () => <div className={css['button']}>{translate('general-pagination.prev')}</div>,
-              next: () => <div className={css['button']}>{translate('general-pagination.next')}</div>,
+              previous: () => <div className={styles['button']}>{translate('general-pagination.prev')}</div>,
+              next: () => <div className={styles['button']}>{translate('general-pagination.next')}</div>,
             }}
             {...item}
           />
         )}
         {...props}
       />
-      <div className={css['label']}>
+      <div className={styles['label']}>
         {translate('general-pagination.page')} {props.page} {translate('general-pagination.of')} {props.count}
       </div>
     </div>

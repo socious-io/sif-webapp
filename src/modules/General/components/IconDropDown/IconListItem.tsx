@@ -1,22 +1,9 @@
 import { Typography } from '@mui/material';
-import React from 'react';
 
 import Icon from '../Icon';
+import { IconListItemProps } from './index.types';
 
-export interface IconListItemProps {
-  iconName?: string;
-  label: string;
-  onClick?: () => void;
-  customIconClass?: string;
-  customLabelClass?: string;
-}
-export const IconListItem: React.FC<IconListItemProps> = ({
-  iconName,
-  label,
-  onClick,
-  customIconClass,
-  customLabelClass,
-}) => {
+const IconListItem: React.FC<IconListItemProps> = ({ iconName, label, onClick, customIconClass, customLabelClass }) => {
   return (
     <div className="w-full h-[50px] flex py-[13px] px-[10px] gap-3 cursor-pointer" onClick={onClick}>
       {iconName && <Icon name={iconName} fontSize={16} className={`text-Gray (light mode)-700 ${customIconClass}`} />}
@@ -26,3 +13,5 @@ export const IconListItem: React.FC<IconListItemProps> = ({
     </div>
   );
 };
+
+export default IconListItem;

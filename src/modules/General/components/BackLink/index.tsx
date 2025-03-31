@@ -1,7 +1,6 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import css from './index.module.scss';
+import styles from './index.module.scss';
 import { BackLinkProps } from './index.types';
 import Button from '../Button';
 import Icon from '../Icon';
@@ -24,7 +23,7 @@ const BackLink: React.FC<BackLinkProps> = props => {
       onClick={onClick}
       block={block}
       fullWidth
-      className={`${css['button']} ${customStyle}`}
+      className={`${styles['button']} ${customStyle}`}
     >
       <Icon name="arrow-left" fontSize={20} className="text-Gray-light-mode-600" />
       {title}
