@@ -4,13 +4,13 @@ import { config } from 'src/config';
 import { translate } from 'src/core/helpers/utils';
 
 import css from './iconDropDown.module.scss';
-import { IconDropDownProps } from './iconDropDown.types';
+import { IconDropDownProps } from './index.types';
 import { useIconDropDown } from './useIconDropDown';
 import Avatar from '../Avatar';
 import { IconListItem } from '../avatarDropDown/iconListItem';
 import AvatarLabelGroup from '../AvatarLabelGroup';
 
-export const IconDropDown: React.FC<IconDropDownProps> = props => {
+const IconDropDown: React.FC<IconDropDownProps> = props => {
   const {
     size = '40px',
     type,
@@ -22,9 +22,10 @@ export const IconDropDown: React.FC<IconDropDownProps> = props => {
     customItems = [],
     createItem = false,
   } = props;
-  const currentAccount = accounts.find(a => a.selected);
-  const otherAccounts = accounts.filter(a => !a.selected);
-  const { open, handleOpen, handleClose, onSwitchAccount, handleClick, navigateToOnboarding } = useIconDropDown();
+  const { open, handleOpen, handleClose, onSwitchAccount, handleClick } = useIconDropDown();
+  const currentAccount = accounts.find(a => a.current);
+  const otherAccounts = accounts.filter(a => !a.current);
+
   return (
     <div className="flex flex-col items-end relative">
       <IconButton
@@ -120,3 +121,5 @@ export const IconDropDown: React.FC<IconDropDownProps> = props => {
     </div>
   );
 };
+
+export default IconDropDown;

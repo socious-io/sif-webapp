@@ -6,30 +6,27 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RouterProvider } from 'react-router-dom';
 import router from 'src/core/router';
-import { setIdentityList } from 'src/store/reducers/identity.reducer';
 
-import { getRound, identities } from './core/api';
 import { setupInterceptors } from './core/api/http';
 import store, { AppDispatch, RootState } from './store';
 import 'src/core/translation/i18n';
+import { currentIdentities } from './store/thunks/identity,thunk';
 import { fetchRound } from './store/thunks/round.thunk';
 
 function App() {
   const { language } = useSelector((state: RootState) => state.language);
   const dispatch = useDispatch<AppDispatch>();
-  useEffect(() => {
-    setupInterceptors(store);
-  }, []);
-  const getIdentities = async () => {
-    const new_identities = await identities();
-    await dispatch(setIdentityList(new_identities));
-  };
+
   useEffect(() => {
     i18next.changeLanguage(language);
-    getIdentities();
   }, [language]);
 
   useEffect(() => {
+    setupInterceptors(store);
+  }, []);
+
+  useEffect(() => {
+    dispatch(currentIdentities());
     dispatch(fetchRound());
   }, [dispatch]);
 

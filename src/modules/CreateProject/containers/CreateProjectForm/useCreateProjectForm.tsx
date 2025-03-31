@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { CurrentIdentity } from 'src/core/api';
+import { CurrentIdentity } from 'src/core/adaptors';
 import { RootState } from 'src/store';
 
 export const useCreateProjectForm = () => {
@@ -14,7 +14,7 @@ export const useCreateProjectForm = () => {
   const onCreate = () => {
     if (currentIdentity?.type === 'users') navigate('/create/select-identity');
     if (currentIdentity?.type === 'organizations') {
-      if (currentIdentity.meta.verified) navigate('/create/step-1');
+      if (currentIdentity.verified) navigate('/create/step-1');
       else setOpenVerifyModal(true);
     }
   };

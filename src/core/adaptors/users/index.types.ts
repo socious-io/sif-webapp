@@ -1,4 +1,4 @@
-import { IdentityType } from 'src/core/api';
+import { IdentityType, VerificationStatus } from 'src/core/api';
 
 export interface IdentityMetaRes {
   username: string;
@@ -6,4 +6,16 @@ export interface IdentityMetaRes {
   name: string;
   profileImage: string;
   type: IdentityType | '';
+}
+
+export interface CurrentIdentity {
+  id: string;
+  name: string;
+  username: string;
+  img: string;
+  type: IdentityType;
+  current: boolean;
+  verified: boolean;
+  status?: VerificationStatus;
+  impact_points?: number;
 }

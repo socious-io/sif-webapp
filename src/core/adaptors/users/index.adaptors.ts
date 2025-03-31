@@ -1,6 +1,31 @@
-import { Identity, OrgMeta, UserMeta } from 'src/core/api';
+import { Identity, identities, IdentityType, OrgMeta, UserMeta } from 'src/core/api';
 
-import { IdentityMetaRes } from './index.types';
+import { AdaptorRes } from '..';
+import { CurrentIdentity, IdentityMetaRes } from './index.types';
+
+export const getIdentitiesAdaptor = async (): Promise<AdaptorRes<CurrentIdentity[]>> => {
+  try {
+    const { identities: currentIdentities } = await identities();
+    const data = currentIdentities.map(identity => {
+      const { name = '', username = '', type = 'users', profileImage = '' } = getIdentityMeta(identity);
+      return {
+        id: identity.id,
+        name,
+        username,
+        img: profileImage,
+        type: type as IdentityType,
+        current: identity.current || false,
+        verified:
+          type === 'users' ? !!(identity.meta as UserMeta).identity_verified_at : (identity.meta as OrgMeta).verified,
+        status: type === 'organizations' ? (identity.meta as OrgMeta).status : undefined,
+        impact_points: type === 'users' ? (identity.meta as UserMeta).impact_points : undefined,
+      };
+    });
+    return { data, error: null };
+  } catch {
+    return { data: null, error: 'Error is getting Identities' };
+  }
+};
 
 export const getIdentityMeta = (identity: Identity | UserMeta | OrgMeta | undefined): IdentityMetaRes => {
   if (identity && 'meta' in identity) {

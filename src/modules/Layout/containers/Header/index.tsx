@@ -1,7 +1,7 @@
 import logo from 'src/assets/logo/logo.svg';
 import { translate } from 'src/core/helpers/utils';
 import Button from 'src/modules/General/components/Button';
-import { IconDropDown } from 'src/modules/General/components/iconDropDown';
+import IconDropDown from 'src/modules/General/components/IconDropDown';
 import KYB from 'src/modules/Verification/containers/KYB';
 
 import { useHeader } from './useHeader';

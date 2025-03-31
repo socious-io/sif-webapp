@@ -14,6 +14,9 @@ export * from './auth/index.types';
 export * from './verification/index.adaptors';
 export * from './verification/index.types';
 
+export * from './users/index.adaptors';
+export * from './users/index.types';
+
 export interface SuccessRes {
   message?: string;
 }
