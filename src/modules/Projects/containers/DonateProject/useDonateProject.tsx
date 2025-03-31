@@ -80,7 +80,7 @@ export const useDonateProject = (onDonate: (data: DonateReq) => void) => {
 
     const tx = new Transaction({ initiator: wallet }).sendLovelace(
       config.payoutDonationsAddress,
-      `${BigInt(data.donate) * 1000000n}`,
+      `${BigInt(donateValue) * 1000000n}`,
     );
 
     const unsignedTx = await tx.build();
