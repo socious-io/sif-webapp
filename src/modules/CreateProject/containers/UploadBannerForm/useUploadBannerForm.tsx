@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { uploadMediaAdaptor } from 'src/core/adaptors';
@@ -9,7 +9,7 @@ import { setProjectData } from 'src/store/reducers/createProject.reducer';
 export const useUploadBannerForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { cover_id } = useSelector((state: RootState) => state.createProject);
+  const { cover_id, cover_url } = useSelector((state: RootState) => state.createProject);
   const [attachments, setAttachments] = useState<Files[]>([]);
 
   const onDropFiles = async (newFiles: File[]) => {
@@ -20,6 +20,12 @@ export const useUploadBannerForm = () => {
       data && setAttachments([{ id: data.id, url: data.url }]);
     });
   };
+  // if user reloads the page fill preview data from redux persist
+  useEffect(() => {
+    if (cover_id !== '') {
+      setAttachments([{ id: cover_id, url: cover_url }]);
+    }
+  }, []);
   const onDeleteFiles = (deletedId: string) => {
     const filteredFiles = attachments.filter(attachment => attachment.id !== deletedId);
     setAttachments(filteredFiles);

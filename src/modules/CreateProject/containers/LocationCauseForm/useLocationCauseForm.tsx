@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { socialCausesToCategoryAdaptor } from 'src/core/adaptors';
@@ -10,8 +10,10 @@ import { locationOptions } from './statics';
 
 export const useLocationCauseForm = () => {
   const navigate = useNavigate();
-  const [selectedCardId, setSelectedCardId] = useState('');
   const { city, country, social_cause } = useSelector((state: RootState) => state.createProject);
+  const [selectedCardId, setSelectedCardId] = useState(() =>
+    city === '' && country === '' ? 'WOLRDWIDE' : 'COUNTRY_CITY',
+  );
   const dispatch = useDispatch();
   const items = socialCausesToCategoryAdaptor();
   const options: CardRadioButtonItem[] = locationOptions.map(option => {
@@ -22,6 +24,12 @@ export const useLocationCauseForm = () => {
       disabled: false,
     };
   });
+
+  useEffect(() => {
+    if (selectedCardId === 'WOLRDWIDE') {
+      dispatch(setProjectData({ city: '', country: '' }));
+    }
+  }, [selectedCardId]);
 
   const onSelectLocation = location => dispatch(setProjectData({ city: location.city, country: location.country }));
   const onSelectCauses = value => dispatch(setProjectData({ social_cause: value.length ? value[0].value : '' }));

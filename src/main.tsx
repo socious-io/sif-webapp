@@ -2,11 +2,12 @@ import { defineCustomElements } from '@ionic/pwa-elements/loader';
 import ReactDOM from 'react-dom/client';
 import { Helmet } from 'react-helmet';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import App from './App';
 import './styles/main.scss';
 import { translate } from './core/helpers/utils';
-import store from './store';
+import store, { persistor } from './store';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <>
@@ -17,7 +18,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     </Helmet>
     {/* <ErrorBoundary fallback={<FallBack />} onError={logError}> */}
     <Provider store={store}>
-      <App />
+      <PersistGate loading={null} persistor={persistor}>
+        <App />
+      </PersistGate>
     </Provider>
     {/* </ErrorBoundary> */}
   </>,
