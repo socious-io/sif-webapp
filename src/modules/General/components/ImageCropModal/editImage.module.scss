@@ -1,36 +1,36 @@
 @import 'src/styles/constants/_primitives.scss';
 
-.cropContainer {
+.edit-image__crop-container {
     width: 100%;
-    height: 560px;
+    height: 35rem;
     position: relative;
     background-color: $color-grey-900;
-    @media screen and (min-width: 600px) {
-        width: 640px;
-        height: 480px;
+    @media screen and (min-width: 37.5rem) {
+        width: 40rem;
+        height: 30rem;
     }
 }
 
-.cropAbsolute {
+.edit-image__crop-absolute {
     width: 100%;
-    height: 375px;
-    top: 90px;
+    height: 23.4375rem;
+    top: 5.625rem;
     left: 0;
-    @media screen and (min-width: 600px) {
-        width: 560px;
-        height: 400px;
-        left: 40px;
-        top: 32px;
+    @media screen and (min-width: 37.5rem) {
+        width: 35rem;
+        height: 25rem;
+        left: 2.5rem;
+        top: 2rem;
         margin-bottom: 0;
     }
 }
 
-.errorMsg {
-    font-size: 14px;
+.edit-image__error-msg {
+    font-size: 0.875rem;
     font-weight: 400;
-    line-height: 20px;
-    letter-spacing: 0em;
+    line-height: 1.25rem;
+    letter-spacing: 0;
     text-align: left;
-    margin-top: 6px;
+    margin-top: 0.375rem;
     color: $color-error-500;
 }

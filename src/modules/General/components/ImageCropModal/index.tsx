@@ -23,7 +23,7 @@ const EditImageModal: React.FC<{
 
   const modalFooterJsx = (
     <div className="w-full flex flex-col gap-3 px-4 py-4 md:px-6 md:py-6">
-      {uploadError && <span className={css.errorMsg}>{uploadError}</span>}
+      {uploadError && <span className={css['edit-image__error-msg']}>{uploadError}</span>}
       <div className="w-full flex flex-col md:flex-row-reverse gap-3 md:justify-start">
         <Button customStyle="w-full md:w-fit" variant="contained" color="primary" onClick={saveImage}>
           {translate('general-image-editor.save')}
@@ -35,9 +35,9 @@ const EditImageModal: React.FC<{
     </div>
   );
 
-  const cropperContentJsx = imageURL ? (
-    <div className={css.cropContainer}>
-      <div className={css.cropAbsolute}>
+  const cropperContentJsx = imageURL && (
+    <div className={css['edit-image__crop-container']}>
+      <div className={css['edit-image__crop-absolute']}>
         <Cropper
           image={imageURL}
           crop={crop}
@@ -49,7 +49,7 @@ const EditImageModal: React.FC<{
         />
       </div>
     </div>
-  ) : null;
+  );
 
   return (
     <Modal

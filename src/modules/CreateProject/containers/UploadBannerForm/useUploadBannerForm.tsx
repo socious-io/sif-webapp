@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { uploadMediaAdaptor } from 'src/core/adaptors';
-import { Files } from 'src/core/api';
+import { Files, uploadMediaAdaptor } from 'src/core/adaptors';
 import { RootState } from 'src/store';
 import { setProjectData } from 'src/store/reducers/createProject.reducer';
 

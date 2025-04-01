@@ -17,7 +17,7 @@ export const useEditImage = (
     if (file) {
       const url = URL.createObjectURL(file);
       setImageURL(url);
-      return () => URL.revokeObjectURL(url); // Cleanup
+      return () => URL.revokeObjectURL(url);
     }
     setImageURL('');
   }, [file]);

@@ -1,4 +1,4 @@
-import { Files } from 'src/core/api';
+import { Files } from 'src/core/adaptors';
 
 export interface EditImageModalProps {
   open: boolean;
