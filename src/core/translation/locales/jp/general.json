@@ -14,5 +14,11 @@
     "page": "ページ",
     "of": "/"
   },
-  "general-copy-link": "コピー"
+  "general-copy-link": "コピー",
+  "general-image-editor": {
+    "save": "保存",
+    "cancel": "キャンセル",
+    "title": "画像を編集",
+    "subtitle": "画像を希望のサイズにトリミングしてください。"
+  }
 }
