@@ -10,9 +10,13 @@ import { translate } from 'src/core/helpers/utils';
 
 import { AdaptorRes, DonateReq, getIdentityMeta, Project, ProjectRes, SuccessRes } from '..';
 
-export const getProjectsAdaptor = async (page = 1, limit = 10): Promise<AdaptorRes<ProjectRes>> => {
+export const getProjectsAdaptor = async (
+  page = 1,
+  limit = 10,
+  filters?: { identity_id: string },
+): Promise<AdaptorRes<ProjectRes>> => {
   try {
-    const { results: projects, total } = await getProjects({ page, limit });
+    const { results: projects, total } = await getProjects({ page, limit }, filters);
     const items = projects.map(project => {
       const { name, profileImage: img, type = 'organizations' } = getIdentityMeta(project.identity);
       return {
@@ -118,17 +122,6 @@ export const editProjectAdaptor = async (project): Promise<AdaptorRes<SuccessRes
   try {
     await editProjects(project.id, removedEmptyProps(project) as Partial<Project>);
     return { data: { message: 'succeed' }, error: null };
-  } catch (error) {
-    console.error('Error in editing project: ', error);
-    return { data: null, error: 'Error in editing project' };
-  }
-};
-
-//FIXME: ohhhh gooood please seee type errors -_- should be filtered by identity
-export const getUserProjects = async (page = 1, limit = 10): Promise<AdaptorRes<ProjectRes>> => {
-  try {
-    const { results, page, limit, total } = await getProjects({});
-    return { data: { items: results, page, limit, total }, error: null };
   } catch (error) {
     console.error('Error in editing project: ', error);
     return { data: null, error: 'Error in editing project' };
