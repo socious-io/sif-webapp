@@ -147,5 +147,9 @@
       "meaningful-difference": "Your generosity and commitment to this cause are greatly appreciated. Together, we are making a meaningful difference in the lives of those who need it most.",
       "thank-you": "Thank you for being a part of our community and helping us drive positive change."
     }
+  },
+  "your-projects": {
+    "title": "Your Projects",
+    "create-new": "Create New Project"
   }
 }

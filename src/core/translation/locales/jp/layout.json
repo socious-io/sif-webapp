@@ -14,5 +14,12 @@
     "not-verified-secondary-btn": "詳細を見る",
     "title-organization": "組織",
     "title-identity": "アイデンティティ"
-  }
+  },
+  "not-verified-secondary-btn": "詳細を見る",
+  "footer-copyright": "© 2025 Socious Global Inc. 無断複製・転載を禁じます。",
+  "header-your-impact": "あなたの影響",
+  "header-setting": "設定",
+  "header-logout": "ログアウト",
+  "header-support": "サポート",
+  "header-create-org": "組織を作成"
 }
