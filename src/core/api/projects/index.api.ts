@@ -1,6 +1,6 @@
+import { FilterReq, PaginateReq } from '..';
 import { get, post, patch } from '../http';
-import { FilterReq, PaginateReq } from '../types';
-import { Project, ProjectsRes } from './index.types';
+import { DonationReq, Project, ProjectsRes } from './index.types';
 
 export async function getProjects(params: PaginateReq, filters?: FilterReq): Promise<ProjectsRes> {
   return (await get<ProjectsRes>('projects', { params }, filters)).data;
@@ -11,11 +11,11 @@ export async function getProject(id: string): Promise<Project> {
 }
 
 export async function vote(id: string): Promise<any> {
-  return (await post<any>(`projects/${id}/vote`, {})).data;
+  return (await post<any>(`projects/${id}/votes`, {})).data;
 }
 
-export async function donate(id: string, payload: any): Promise<any> {
-  return (await post<any>(`projects/${id}/donate`, payload)).data;
+export async function donate(id: string, payload: DonationReq): Promise<any> {
+  return (await post<any>(`projects/${id}/donates`, payload)).data;
 }
 
 export async function createProjects(payload: Partial<Project>): Promise<any> {

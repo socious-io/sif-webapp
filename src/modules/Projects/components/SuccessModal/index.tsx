@@ -1,3 +1,4 @@
+import { translate } from 'src/core/helpers/utils';
 import Button from 'src/modules/General/components/Button';
 import FeaturedIcon from 'src/modules/General/components/FeaturedIcon';
 import Modal from 'src/modules/General/components/Modal';
@@ -15,7 +16,7 @@ const SuccessModal: React.FC<SuccessModalProps> = ({
 }) => {
   const footerJsx = (
     <Button color="primary" variant="text" customStyle="!h-auto !py-0 !underline" onClick={onContinue}>
-      Continue
+      {translate('vote-donate.success-modal.continue-btn')}
     </Button>
   );
 
@@ -27,9 +28,9 @@ const SuccessModal: React.FC<SuccessModalProps> = ({
       title={`Thank you for your ${voteInfo ? 'vote' : 'donation'}!`}
       subTitle={
         <>
-          Your {voteInfo ? 'vote' : 'contribution'} to
+          {translate('vote-donate.success-modal.vote-or-contribution', { title: voteInfo ? 'vote' : 'contribution' })}
           <span className="font-medium text-Gray-light-mode-900"> {projectTitle} </span>
-          has been successfully processed.
+          {translate('vote-donate.success-modal.processed')}
         </>
       }
       footer={footerJsx}
@@ -43,32 +44,23 @@ const SuccessModal: React.FC<SuccessModalProps> = ({
     >
       {voteInfo && (
         <p>
-          Thanks to your vote, the project is expected to receive
-          <span className="font-medium text-Gray-light-mode-900"> {voteInfo.receivedAmount} </span>from the matching
-          pool (this amount may change based on future votes). Your support to this cause is greatly appreciated.
-          Together, we are making a meaningful difference in the world.
+          {translate('vote-donate.success-modal.thanks-to-vote-project-support')}
+          <p className="mt-4">{translate('vote-donate.success-modal.meaningful-change')}</p>
         </p>
       )}
       {donateInfo && (
         <>
           <p>
-            Your donation of
+            {translate('vote-donate.success-modal.your-donation-of')}
             <span className="font-medium text-Gray-light-mode-900">
               {` ${donateInfo.donate} ${donateInfo.currency} `}
             </span>
-            ({donateInfo.donateConversion}) will be matched by an estimated
-            <span className="font-medium text-Gray-light-mode-900"> {donateInfo.estimatedMatch} </span>(this amount may
-            change based on future voting results), resulting in a total contribution of
-            <span className="font-medium text-Gray-light-mode-900"> {donateInfo.totalContribution} </span>to support
-            this project.
+            ({donateInfo.donateConversion}) {translate('vote-donate.success-modal.meaningful-impact')}
           </p>
-          <p className="mt-4">
-            Your generosity and commitment to this cause are greatly appreciated. Together, we are making a meaningful
-            difference in the lives of those who need it most.
-          </p>
+          <p className="mt-4">{translate('vote-donate.success-modal.meaningful-difference')}</p>
         </>
       )}
-      <p className="mt-4">Thank you for being a part of our community and helping us drive positive change.</p>
+      <p className="mt-4">{translate('vote-donate.success-modal.thank-you')}</p>
     </Modal>
   );
 };

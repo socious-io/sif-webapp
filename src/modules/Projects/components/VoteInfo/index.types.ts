@@ -1,5 +1,5 @@
 export interface VoteInfoProps {
-  estimatedMatch: string;
+  estimatedMatch?: string;
   impactPoints?: number;
   totalContribution?: string;
 }

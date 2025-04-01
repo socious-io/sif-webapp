@@ -1,4 +1,6 @@
 {
+  "socious-fund": "Socious Fund",
+  "header-login": "Login",
   "layout-action-button": " Create a Project",
   "layout-verification": {
     "success-text": "Your {{title}} has been successfully verified",
@@ -14,7 +16,7 @@
     "title-identity": "identity"
   },
   "not-verified-secondary-btn": "Learn more",
-  "footer-copyright": "© 2024 GIobal Inc. All rights reserved.",
+  "footer-copyright": "© 2025 Socious Global Inc. All rights reserved.",
   "header-your-impact": "Your impact",
   "header-setting": "Setting",
   "header-logout": "Logout",

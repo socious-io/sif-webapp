@@ -74,7 +74,7 @@ export const Home = () => {
                   </span>
                 </div>
               ))}
-            <p className="mt-2 leading-6 text-Gray-light-mode-600">{translate('home-thanks', { amount: '$50,000' })}</p>
+            <p className="mt-2 leading-6 text-Gray-light-mode-600">{translate('home-thanks', { amount: '$10,000' })}</p>
             <div className="flex flex-col items-stretch md:flex-row md:items-center gap-4 pt-2 md:py-4">
               <div className="flex-1 flex flex-col gap-1 text-sm text-Gray-light-mode-600">
                 <span className="text-4xl md:text-5xl font-semibold text-Brand-700">{round?.total_projects}</span>
@@ -82,18 +82,22 @@ export const Home = () => {
               </div>
               <div className="flex-1 flex flex-col gap-1 text-sm text-Gray-light-mode-600">
                 <span className="text-4xl md:text-5xl font-semibold text-Brand-700">
-                  {roundIsClosed ? 0 : getDaysUntil(round?.submission_end_at as string)}
+                  {getDaysUntil(round?.submission_end_at as string) > 0
+                    ? getDaysUntil(round?.submission_end_at as string)
+                    : 0}
                 </span>
-                days until submition close
+                {translate('home-days-left-to-submit')}
               </div>
               <div className="flex-1 flex flex-col gap-1 text-sm text-Gray-light-mode-600">
                 <span className="text-4xl md:text-5xl font-semibold text-Brand-700">
-                  {roundIsClosed ? 0 : getDaysUntil(round?.voting_end_at as string)}
+                  {getDaysUntil(round?.voting_end_at as string) > 0 ? getDaysUntil(round?.voting_end_at as string) : 0}
                 </span>
-                days until voting close
+                {translate('home-days-left-to-vote')}
               </div>
               <div className="flex-1 flex flex-col gap-1 text-sm text-Gray-light-mode-600">
-                <span className="text-4xl md:text-5xl font-semibold text-Brand-700">${round?.pool_amount || 0}</span>
+                <span className="text-4xl md:text-5xl font-semibold text-Brand-700">
+                  ${new Intl.NumberFormat('en-US').format(round?.pool_amount || 0)}
+                </span>
                 {translate('home-matching-pool')}
               </div>
             </div>
@@ -118,7 +122,15 @@ export const Home = () => {
             </span>
             {translate('home-contact-subtitle')}
           </div>
-          <Button color="primary">{translate('home-contact-button')}</Button>
+          <Button
+            component="a"
+            href="https://socious.io/contact"
+            target="_blank"
+            rel="noopener noreferrer"
+            color="primary"
+          >
+            {translate('home-contact-button')}
+          </Button>
         </div>
       </div>
     </>

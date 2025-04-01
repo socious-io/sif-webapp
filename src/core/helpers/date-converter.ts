@@ -12,5 +12,13 @@ export const getDaysUntil = (targetDate: string): number => {
   const today = new Date();
   const target = new Date(targetDate);
   const diffMs = target.getTime() - today.getTime();
-  return Math.floor(diffMs / (1000 * 60 * 60 * 24));
+  return Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+};
+
+export const isCurrentDateInRange = (startAt: string, endAt: string) => {
+  const now = new Date();
+  const startDate = new Date(startAt);
+  const endDate = new Date(endAt);
+
+  return now >= startDate && now < endDate;
 };

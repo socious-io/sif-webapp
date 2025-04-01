@@ -51,7 +51,7 @@ export const Intro = () => {
       <div className="relative flex-1 flex items-center justify-center">
         <div className="h-full max-w-[22.5rem]ّ flex flex-col justify-between md:justify-center">
           <div className="flex flex-col items-center justify-center gap-6">
-            <img src="logo.svg" alt="SIF Logo" width={60} height={60} />
+            <img src="logo.svg" alt="Socious Fund Logo" width={60} height={60} />
             <div className="flex flex-col items-center gap-3 mb-2 leading-6 text-Gray-light-mode-600 text-center">
               <span className="text-2xl md:text-3xl font-semibold leading-8 md:leading-9 text-Gray-light-mode-900">
                 {translate('intro-create-account-header')}
@@ -80,7 +80,7 @@ export const Intro = () => {
         </div>
       </div>
       <div className="flex-1 hidden md:block overflow-hidden rounded-2xl">
-        <img src="/images/intro.svg" alt="SIF Intro" width="100%" height="100%" className="object-cover" />
+        <img src="/images/intro.svg" alt="Socious Fund Intro" width="100%" height="100%" className="object-cover" />
       </div>
     </div>
   );

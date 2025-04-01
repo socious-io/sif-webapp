@@ -1,15 +1,16 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { uploadMediaWithProgressAdaptor, verifyOrganization } from 'src/core/adaptors';
 import { CurrentIdentity } from 'src/core/api';
 import { RootState } from 'src/store';
+import { setIdentityList } from 'src/store/reducers/identity.reducer';
 
 import { FileState } from './index.types';
 
 export const useUploadModal = (handleOpenSuccessModal: () => void) => {
-  const currentIdentity = useSelector<RootState, CurrentIdentity | undefined>(state =>
-    state.identity.entities.find(identity => identity.current),
-  );
+  const dispatch = useDispatch();
+  const identities = useSelector<RootState, CurrentIdentity[] | undefined>(state => state.identity.entities) || [];
+  const currentIdentity = identities.find(identity => identity.current);
   const organizationId = currentIdentity?.id;
   const [fileStates, setFileStates] = useState<FileState[]>([]);
   const [error, setError] = useState('');
@@ -43,6 +44,7 @@ export const useUploadModal = (handleOpenSuccessModal: () => void) => {
         updateFileState(file, { progress });
       }),
     );
+    setLoading(true);
     const results = await Promise.all(uploadPromises);
     results.forEach((result, index) => {
       const file = newFiles[index];
@@ -54,6 +56,7 @@ export const useUploadModal = (handleOpenSuccessModal: () => void) => {
         updateFileState(file, { id: resultId });
       }
     });
+    setLoading(false);
   };
 
   const onDeleteFiles = (fileId: string) => {
@@ -65,9 +68,23 @@ export const useUploadModal = (handleOpenSuccessModal: () => void) => {
     setError('');
     setLoading(true);
     const fileIds = fileStates.map(file => file.id).filter(Boolean);
-    const { error } = await verifyOrganization(organizationId, fileIds);
+    const { error, data } = await verifyOrganization(organizationId, fileIds);
     if (error) setError(error);
-    else handleOpenSuccessModal();
+    if (data) {
+      const updatedIdentity = identities.map(identity =>
+        identity.id === currentIdentity.id
+          ? {
+              ...identity,
+              meta: {
+                ...identity.meta,
+                status: data.status,
+              },
+            }
+          : identity,
+      );
+      dispatch(setIdentityList({ identities: updatedIdentity }));
+      handleOpenSuccessModal();
+    }
     setLoading(false);
   };
 

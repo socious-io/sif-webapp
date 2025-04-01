@@ -6,9 +6,10 @@ import { logout } from 'src/core/api/auth/auth.service';
 import { RootState } from 'src/store';
 
 export const useHeader = () => {
-  const [accounts, setaccounts] = useState([]);
+  const [accounts, setAccounts] = useState([]);
   const [userType, setUserType] = useState<'users' | 'organizations'>('users');
   const [image, setImage] = useState('');
+  const [openVerifyModal, setOpenVerifyModal] = useState(false);
   const navigate = useNavigate();
 
   const identities = useSelector<RootState, Identity[]>(state => {
@@ -26,11 +27,12 @@ export const useHeader = () => {
         img: i.type === 'users' ? user.avatar?.url : org.logo?.url,
         type: i.type,
         name: i.type === 'users' ? `${user.first_name} ${user.last_name}` : org.shortname,
-        username: user.username || org.shortname,
+        email: `@${user.username || org.shortname}`,
         selected: i.id === currentIdentity?.id,
       };
     });
-    setaccounts(accList);
+    //FIXME: type error issue -___________-
+    setAccounts(accList);
   }, [identities]);
 
   useEffect(() => {
@@ -40,14 +42,27 @@ export const useHeader = () => {
     }
   }, [currentIdentity]);
 
-  const navigateCreate = () => {
-    if (currentIdentity?.type === 'organizations') navigate('/create');
-    else if (currentIdentity?.type === 'users') navigate('/create/select-identity');
-    else navigate('/intro');
+  const onCreate = () => {
+    if (currentIdentity?.type === 'users') navigate('/create/select-identity');
+    if (currentIdentity?.type === 'organizations') {
+      if (currentIdentity.meta.verified) navigate('/create');
+      else setOpenVerifyModal(true);
+    }
   };
   const onLogout = () => {
     logout();
     navigate('/intro');
   };
-  return { accounts, image, userType, navigateCreate, onLogout };
+  const navigateIntro = () => navigate('/intro');
+
+  return {
+    accounts,
+    image,
+    userType,
+    onCreate,
+    onLogout,
+    navigateIntro,
+    openVerifyModal,
+    setOpenVerifyModal,
+  };
 };

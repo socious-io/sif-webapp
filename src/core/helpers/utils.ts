@@ -13,3 +13,5 @@ export const removeEmptyArrays = (obj: null | undefined | Record<string | number
     return prev;
   }, {});
 };
+
+export const checkNullish = value => value !== null && value !== undefined;

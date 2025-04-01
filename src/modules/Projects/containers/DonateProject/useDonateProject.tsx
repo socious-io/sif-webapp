@@ -1,33 +1,34 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useCallback, useEffect } from 'react';
+import { Transaction } from '@meshsdk/core';
+import { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useSelector } from 'react-redux';
+import { config } from 'src/config';
 import { CURRENCIES } from 'src/constants/CURRENCIES';
 import { DonateReq } from 'src/core/adaptors';
-import { CurrentIdentity } from 'src/core/api';
-// import Dapp from 'src/core/dapp';
-import { RootState } from 'src/store';
+import { translate } from 'src/core/helpers/utils';
+import Connect from 'src/modules/General/components/ConnectButton';
 import * as yup from 'yup';
+
+import { Form } from './index.types';
 
 const schema = yup
   .object()
   .shape({
     donate: yup
-      .string()
-      .matches(/^(?!0(\.0+)?$)\d+(\.\d+)?$/, 'Value must be a positive number')
-      .required('This field is required'),
+      .number()
+      .typeError(translate('vote-donate.enter-donation-positive-error'))
+      .positive(translate('vote-donate.enter-donation-positive-error'))
+      .integer(translate('vote-donate.enter-donation-positive-error'))
+      .required(translate('vote-donate.error-donation-required-error')),
     preventDisplayName: yup.boolean().default(false),
-    currency: yup.string().required('This field is required'),
+    currency: yup.string().required(translate('vote-donate.error-donation-required-error')),
   })
   .required();
 
 export const useDonateProject = (onDonate: (data: DonateReq) => void) => {
-  // const { isConnected, Web3Connect } = Dapp.useWeb3();
-  const currentIdentity = useSelector<RootState, CurrentIdentity | undefined>(state => {
-    return state.identity.entities.find(i => i.current);
-  });
-  const isIdentityUser = currentIdentity?.type === 'users';
-
+  const { ConnectButton, connected, wallet, address } = Connect();
+  const [donateValueConversion, setDonationValueConversion] = useState(0);
+  const [userImpactPoints, setUserImpactPoints] = useState(0);
   const {
     register,
     setValue,
@@ -35,19 +36,19 @@ export const useDonateProject = (onDonate: (data: DonateReq) => void) => {
     formState: { errors },
     handleSubmit,
     reset,
-  } = useForm<DonateReq>({
-    mode: 'all',
-    resolver: yupResolver(schema),
-  });
-  const selectedCurrency = watch('currency');
-  const selectedCurrencyLabel = CURRENCIES.find(currency => currency.value === selectedCurrency)?.label;
+  } = useForm<Form>({ mode: 'all', resolver: yupResolver(schema) });
+  const selectedCurrencyValue = watch('currency');
+  const selectedCurrency = CURRENCIES.find(currency => currency.value === selectedCurrencyValue);
+  const selectedCurrencyLabel = selectedCurrency?.label;
   const donateValue = watch('donate') || 0;
-  //FIXME: convert selected currency to $
-  const donateValueConversion = donateValue;
+  // FIXME: socious fee later added to donate value
+  // const sociousFee = 2;
+  // const donateWithFee = (sociousFee / 100) * donateValue;
+  const totalPay = donateValue;
 
   const initializeValues = useCallback(() => {
     const initialVal = {
-      donate: '',
+      donate: undefined,
       preventDisplayName: false,
       currency: CURRENCIES[0].value,
     };
@@ -58,28 +59,48 @@ export const useDonateProject = (onDonate: (data: DonateReq) => void) => {
     initializeValues();
   }, [initializeValues]);
 
+  useEffect(() => {
+    if (!selectedCurrency?.rateConversionFunc) return;
+
+    const fetchConversion = async () => {
+      const convertedValue = await selectedCurrency.rateConversionFunc(donateValue);
+      setDonationValueConversion(convertedValue);
+      setUserImpactPoints(Math.round(convertedValue));
+    };
+
+    fetchConversion();
+  }, [donateValue, selectedCurrency]);
+
   const onSelectCurrency = (value: string) => setValue('currency', value, { shouldValidate: true });
 
   const onPreventDisplayName = (checked: boolean) => setValue('preventDisplayName', checked);
 
-  const onSubmit = (data: DonateReq) => onDonate(data);
+  const onSubmit = async (data: Form) => {
+    if (!connected || !wallet) return;
+
+    const tx = new Transaction({ initiator: wallet }).sendLovelace(
+      config.payoutDonationsAddress,
+      `${BigInt(data.donate) * 1000000n}`,
+    );
+
+    const unsignedTx = await tx.build();
+    const signedTx = await wallet.signTx(unsignedTx);
+    const txHash = await wallet.submitTx(signedTx);
+    return onDonate({ ...data, transactionHash: txHash, wallet_address: address });
+  };
 
   return {
     data: {
-      isIdentityUser,
+      userImpactPoints,
       register,
       errors,
+      totalPay,
       selectedCurrency,
       selectedCurrencyLabel,
       donateValueConversion,
-      isConnected: true,
-      Web3Connect: {},
+      isConnected: connected,
+      ConnectButton,
     },
-    operations: {
-      onSelectCurrency,
-      onPreventDisplayName,
-      handleSubmit,
-      onSubmit,
-    },
+    operations: { onSelectCurrency, onPreventDisplayName, handleSubmit, onSubmit },
   };
 };

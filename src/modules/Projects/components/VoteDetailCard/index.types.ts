@@ -3,6 +3,7 @@ import { RoundStats } from 'src/core/adaptors';
 export interface VoteDetailCardProps {
   roundStats: RoundStats;
   isOwner?: boolean;
-  onShare?: () => void;
+  alreadyVoted?: boolean;
+  voteEnded?: boolean;
   onVote?: () => void;
 }

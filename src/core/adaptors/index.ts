@@ -12,6 +12,7 @@ export * from './auth/index.adaptors';
 export * from './auth/index.types';
 
 export * from './verification/index.adaptors';
+export * from './verification/index.types';
 
 export interface SuccessRes {
   message?: string;
@@ -34,6 +35,7 @@ export interface OptionType {
   label: string;
   icon?: string;
 }
+
 export function socialCausesToCategoryAdaptor() {
   return Object.entries(SOCIAL_CAUSES).map(([, value]) => value);
 }

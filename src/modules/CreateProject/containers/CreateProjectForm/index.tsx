@@ -1,15 +1,18 @@
 import Rating from '@mui/material/Rating';
+import { useState } from 'react';
 import bg from 'src/assets/images/create-hero.jpeg';
 import { translate } from 'src/core/helpers/utils';
 import AvatarGroup from 'src/modules/General/components/avatarGroup';
 import AvatarLabelGroup from 'src/modules/General/components/AvatarLabelGroup';
 import Button from 'src/modules/General/components/Button';
 import Icon from 'src/modules/General/components/Icon';
+import KYB from 'src/modules/Verification/containers/KYB';
 
 import { accounts } from './statics';
 import { useCreateProjectForm } from './useCreateProjectForm';
 const CreateProjectForm: React.FC = () => {
-  const { navigateCreateProject } = useCreateProjectForm();
+  const { openVerifyModal, setOpenVerifyModal, onCreate } = useCreateProjectForm();
+
   return (
     <div className="flex flex-col md:grid md:grid-cols-2 items-center max-w-[1280px] mx-auto px-4 pb-16">
       <div className="w-full max-w-md">
@@ -17,7 +20,7 @@ const CreateProjectForm: React.FC = () => {
           {translate('create-project-title')}
         </h1>
         <div className="mt-3xl">{translate('create-project-subtitle')}</div>
-        <Button onClick={navigateCreateProject} customStyle="my-6xl" color="primary">
+        <Button onClick={onCreate} customStyle="my-6xl" color="primary">
           {translate('create-project-button')}
         </Button>
         <div className="flex">
@@ -43,6 +46,7 @@ const CreateProjectForm: React.FC = () => {
           className="w-full md:w-[592px] h-[540px] object-cover md:min-w-[592px] "
         />
       </div>
+      <KYB open={openVerifyModal} setOpen={setOpenVerifyModal} />
     </div>
   );
 };

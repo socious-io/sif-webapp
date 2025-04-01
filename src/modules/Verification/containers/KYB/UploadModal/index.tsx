@@ -20,7 +20,7 @@ const UploadModal: React.FC<UploadModalProps> = ({ open, handleClose, handleOpen
         color="primary"
         fullWidth
         onClick={handleContinue}
-        disabled={!files.length || !!Object.values(uploadedErrors).some(Boolean)}
+        disabled={!files.length || !!Object.values(uploadedErrors).some(Boolean) || loading}
       >
         {translate('verification-kyb.continue-button')}
       </Button>
@@ -55,7 +55,6 @@ const UploadModal: React.FC<UploadModalProps> = ({ open, handleClose, handleOpen
           maxSize={2}
           maxFiles={10}
           error={error}
-          loading={loading}
           customStyle="w-full h-[126px]"
         />
       </div>

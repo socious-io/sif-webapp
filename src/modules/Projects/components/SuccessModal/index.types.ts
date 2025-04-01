@@ -8,8 +8,8 @@ export type DonateInfo = {
   donate: string;
   currency: string;
   donateConversion: string;
-  estimatedMatch: string;
-  totalContribution: string;
+  estimatedMatch?: string;
+  totalContribution?: string;
 };
 
 export interface SuccessModalProps extends ModalProps {
