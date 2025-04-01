@@ -21,6 +21,9 @@ export async function setAuthParams(auth: AuthSession, keepLoggedIn?: boolean) {
     { key: 'token_type', value: auth.token_type },
     keepLoggedIn ? Number(config.refreshExpire) : undefined,
   );
+  const { error, data } = await getIdentitiesAdaptor();
+  if (error) return;
+  if (data) dispatch(setIdentityList(data));
 }
 
 export const switchAccount = async (accountId: string) => {
