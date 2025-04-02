@@ -23,20 +23,6 @@ const CreateProjectForm: React.FC = () => {
         <Button onClick={onCreate} customStyle="my-6xl" color="primary">
           {translate('create-project-button')}
         </Button>
-        <div className="flex">
-          <AvatarGroup accounts={accounts} length={3} />
-          <div className="flex flex-col ml-4">
-            <div className="flex">
-              <Rating
-                value={5}
-                readOnly
-                icon={<Icon name="star-filled" className="mr-1 text-Warning-300" fontSize={20} />}
-              />
-              <span>{translate('rating-score')}</span>
-            </div>
-            <span>{translate('rating-reviews')}</span>
-          </div>
-        </div>
       </div>
 
       <div className="w-full flex justify-center mt-8 md:mt-0 mx-4">
