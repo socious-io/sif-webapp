@@ -4,13 +4,12 @@ import { config } from 'src/config';
 import { AuthRes } from 'src/core/adaptors';
 import { getAuthUrlAdaptor, sociousOauthAdaptor } from 'src/core/adaptors/auth/index.adaptors';
 import { setAuthParams, switchAccount } from 'src/core/api/auth/auth.service';
-// import store from 'src/store';
-// import { setUserProfile } from 'src/store/reducers/user.reducer';
 
 export const SociousID = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const code = searchParams.get('code');
+  const identityId = searchParams.get('identity_id');
 
   const fetchAuthURL = async () => {
     const { error, data } = await getAuthUrlAdaptor(config.appBaseURL + '/oauth/socious');
@@ -20,6 +19,7 @@ export const SociousID = () => {
 
   async function onLoginSucceed(loginRes: AuthRes) {
     await setAuthParams(loginRes, true);
+    if (typeof identityId === 'string') switchAccount(identityId);
     navigate('/');
     return loginRes;
   }
