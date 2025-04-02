@@ -72,6 +72,8 @@ const VoteDonateCard = () => {
         <div className="flex flex-col gap-2">
           <Link
             label={translate('vote-donate.why-cryptocurrency-link')}
+            href="https://socious.org/#faq"
+            target="_blank"
             customStyle="!font-semibold !underline cursor-pointer"
           />
           <Link
