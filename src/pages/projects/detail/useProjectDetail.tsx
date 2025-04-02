@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useLoaderData, useNavigate, useParams } from 'react-router-dom';
 import { Project } from 'src/core/adaptors';
@@ -14,17 +15,25 @@ export const useProjectDetail = () => {
   );
   const isOwner = currentIdentity?.id === detail.creator?.id;
   const round = useSelector((state: RootState) => state.round.round);
-
   const roundIsClosed = getDaysUntil(round?.voting_end_at as string) <= 0;
+  const [isShared, setIsShared] = useState(false);
 
-  const onShare = () => console.log('share');
+  const onShare = async () => {
+    try {
+      const currentUrl = window.location.origin + location.pathname;
+      await navigator.clipboard.writeText(currentUrl);
+      setIsShared(true);
+    } catch (err) {
+      console.error('Failed to copy text: ', err);
+    }
+  };
 
   const onEditProject = () => navigate(`/${projectId}/edit`);
 
   const onVote = () => navigate('vote');
 
   return {
-    data: { detail, projectId, isOwner, roundIsClosed, round },
+    data: { detail, projectId, isOwner, roundIsClosed, round, isShared },
     operations: { navigate, onShare, onEditProject, onVote },
   };
 };

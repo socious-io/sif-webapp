@@ -16,7 +16,7 @@ import { useProjectDetail } from './useProjectDetail';
 
 export const ProjectDetail = () => {
   const {
-    data: { detail, projectId, isOwner, roundIsClosed, round },
+    data: { detail, projectId, isOwner, roundIsClosed, round, isShared },
     operations: { navigate, onShare, onEditProject, onVote },
   } = useProjectDetail();
   const breadcrumbs = [
@@ -117,13 +117,13 @@ export const ProjectDetail = () => {
             <Button
               color="info"
               startIcon={<Icon name="share-02" fontSize={20} color={variables.color_grey_900} />}
-              customStyle="min-w-[6rem] !text-Gray-light-mode-900 break-keep"
-              fullWidth
+              customStyle="flex-1 min-w-[10rem] !text-Gray-light-mode-900 break-keep"
               onClick={onShare}
+              disabled={isShared}
             >
-              {translate('projects-detail.share-button')}
+              {isShared ? translate('projects-detail.link-copied') : translate('projects-detail.share-button')}
             </Button>
-            <Button color="primary" fullWidth customStyle="min-w-[6rem] break-keep" onClick={onEditProject}>
+            <Button color="primary" fullWidth customStyle="flex-1 min-w-[10rem] break-keep" onClick={onEditProject}>
               {translate('projects-detail.edit-button')}
             </Button>
           </div>
