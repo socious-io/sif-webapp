@@ -1,0 +1,25 @@
+{
+  "socious-fund": "소셔스 펀드",
+  "header-login": "로그인",
+  "layout-action-button": "프로젝트 만들기",
+  "layout-verification": {
+    "success-text": "귀하의 {{title}}가 성공적으로 인증되었습니다",
+    "success-support-text": "이제 프로젝트에 투표하고 기부할 수 있습니다.",
+    "success-primary-btn": "닫기",
+    "pending-text": "인증 대기 중",
+    "pending-support-text": "제출된 문서를 검토 중이며, 완료되면 알려드리겠습니다.",
+    "not-verified-text": "귀하의 {{title}}를 인증하세요",
+    "not-verified-support-text": "우리 플랫폼에서 투표하고 기부하려면, {{title}}를 인증해 주세요.",
+    "not-verified-primary-btn": "지금 인증하기",
+    "not-verified-secondary-btn": "자세히 알아보기",
+    "title-organization": "조직",
+    "title-identity": "신원"
+  },
+  "not-verified-secondary-btn": "자세히 알아보기",
+  "footer-copyright": "© 2025 Socious Global Inc. 모든 권리 보유.",
+  "header-your-impact": "당신의 영향력",
+  "header-setting": "설정",
+  "header-logout": "로그아웃",
+  "header-support": "지원",
+  "header-create-org": "조직 만들기"
+}

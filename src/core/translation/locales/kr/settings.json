@@ -1,0 +1,13 @@
+{
+  "settings-tabs": {
+    "language": "언어"
+  },
+  "setting-title": "설정",
+  "setting-language": "언어",
+  "setting-language-change": "언어 변경",
+  "setting-language-select": "기본 언어를 선택하세요.",
+  "setting-buttons": {
+    "save": "저장",
+    "cancel": "취소"
+  }
+}

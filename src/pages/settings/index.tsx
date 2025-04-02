@@ -4,7 +4,7 @@ import HorizontalTabs from 'src/modules/General/components/HorizontalTabs';
 import SearchDropdown from 'src/modules/General/components/SearchDropdown';
 import Language from 'src/modules/Settings/components/Language';
 export const Settings = () => {
-  const [content, setContent] = useState<ReactNode>();
+  const [content, setContent] = useState<ReactNode>(<Language />);
 
   const tabs = [
     {
@@ -16,9 +16,7 @@ export const Settings = () => {
   const setValue = value => {
     if (value.value === 'Language') return setContent(<Language />);
   };
-  useEffect(() => {
-    setValue({ label: translate('settings.items.account'), value: 'Language' });
-  }, []);
+
   // tabs will be added later
   // const items: any[] = [
   // ];
