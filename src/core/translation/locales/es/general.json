@@ -1,0 +1,18 @@
+{
+  "general-file-uploader": {
+    "click": "Haz clic para subir",
+    "drag": "o arrastra y suelta",
+    "or": "o",
+    "max": "máximo",
+    "max-error": "{{name}} excede el tamaño máximo de {{max}}MB",
+    "limit-error": "Puedes subir un máximo de {{limit}} archivos. Por favor, selecciona menos archivos."
+  },
+  "general-multi-select-popular": "Popular",
+  "general-pagination": {
+    "next": "Siguiente",
+    "prev": "Anterior",
+    "page": "Página",
+    "of": "de"
+  },
+  "general-copy-link": "Copiar"
+}

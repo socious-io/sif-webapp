@@ -1,0 +1,18 @@
+{
+  "verification-kyb": {
+    "desc-title": "Verifica tu organización",
+    "desc-subtitle": "Verifica tu organización para emitir credenciales.",
+    "desc-step1-title": "Envía los detalles de tu organización",
+    "desc-step1-subtitle": "Envía un documento de registro de la empresa, como un certificado de empresa o equivalente, junto con el nombre de tu organización.",
+    "desc-step2-title": "Espera el procesamiento",
+    "desc-step2-subtitle": "Nuestro equipo de verificación tardará de 1 a 3 días en procesar tu solicitud de verificación.",
+    "desc-step3-title": "Verificación completada",
+    "desc-step3-subtitle": "Se te enviará un correo electrónico y una notificación cuando la verificación sea exitosa, y luego podrás emitir credenciales.",
+    "upload-title": "Envía los detalles de tu organización",
+    "upload-subtitle": "Por favor, sube tu documento de registro de la empresa, como un certificado o equivalente.",
+    "success-title": "Tus documentos han sido enviados",
+    "success-subtitle": "Nuestro equipo de verificación tardará de 1 a 3 días en procesar tu solicitud de verificación. Se te enviará un correo electrónico y una notificación cuando la verificación sea exitosa, y luego podrás emitir credenciales.",
+    "continue-button": "Continuar",
+    "cancel-button": "Cancelar"
+  }
+}

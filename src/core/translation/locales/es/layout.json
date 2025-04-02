@@ -1,0 +1,25 @@
+{
+  "socious-fund": "Socious Fund",
+  "header-login": "Login",
+  "layout-action-button": " Create a Project",
+  "layout-verification": {
+    "success-text": "Your {{title}} has been successfully verified",
+    "success-support-text": "You can now vote and donate for projects.",
+    "success-primary-btn": "Dismiss",
+    "pending-text": "Verification pending",
+    "pending-support-text": "We reviewing your submitted documents, we will notify you once it is complete.",
+    "not-verified-text": "Verify your {{title}}",
+    "not-verified-support-text": "To vote and donate on our platform, please verify your {{title}}.",
+    "not-verified-primary-btn": "Verify now",
+    "not-verified-secondary-btn": "Learn more",
+    "title-organization": "organization",
+    "title-identity": "identity"
+  },
+  "not-verified-secondary-btn": "Learn more",
+  "footer-copyright": "© 2025 Socious Global Inc. All rights reserved.",
+  "header-your-impact": "Your impact",
+  "header-setting": "Setting",
+  "header-logout": "Logout",
+  "header-support": "Support",
+  "header-create-org": "Create an organization"
+}

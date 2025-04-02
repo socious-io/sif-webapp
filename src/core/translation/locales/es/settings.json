@@ -1,0 +1,13 @@
+{
+  "settings-tabs": {
+    "language": "idioma"
+  },
+  "setting-title": "Configuración",
+  "setting-language": "idioma",
+  "setting-language-change": "Cambiar idioma",
+  "setting-language-select": "Selecciona tu idioma predeterminado.",
+  "setting-buttons": {
+    "save": "guardar",
+    "cancel": "cancelar"
+  }
+}
