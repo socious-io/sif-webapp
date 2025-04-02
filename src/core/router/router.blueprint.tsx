@@ -97,6 +97,13 @@ export const blueprint: RouteObject[] = [
               return { Component: Protect(EditProject, 'both') };
             },
           },
+          {
+            path: 'settings',
+            async lazy() {
+              const { Settings } = await import('src/pages/settings');
+              return { Component: Protect(Settings, 'both') };
+            },
+          },
         ],
       },
       {
