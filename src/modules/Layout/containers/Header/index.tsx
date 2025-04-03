@@ -7,8 +7,17 @@ import KYB from 'src/modules/Verification/containers/KYB';
 import { useHeader } from './useHeader';
 
 const Header: React.FC = () => {
-  const { accounts, image, userType, onCreate, onLogout, navigateIntro, openVerifyModal, setOpenVerifyModal } =
-    useHeader();
+  const {
+    accounts,
+    image,
+    userType,
+    onCreate,
+    onLogout,
+    navigateIntro,
+    openVerifyModal,
+    setOpenVerifyModal,
+    navigateSettings,
+  } = useHeader();
   return (
     <div className="w-full border-b border-b-Gray-light-mode-300 border-solid border-t-0 border-l-0 border-r-0">
       <div className="max-w-[1280px] w-full h-[72px] flex items-center justify-between mx-auto px-4">
@@ -38,7 +47,7 @@ const Header: React.FC = () => {
                   label: translate('header-support'),
                   onClick: () => (window.location.href = 'https://socious.org/#faq'),
                 },
-                // { iconName: 'settings-01', label: translate('header-setting'), onClick: console.log },
+                { iconName: 'settings-01', label: translate('header-setting'), onClick: navigateSettings },
                 { iconName: 'log-out-01', label: translate('header-logout'), onClick: onLogout },
               ]}
               createItem

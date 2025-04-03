@@ -1,0 +1,18 @@
+{
+  "verification-kyb": {
+    "desc-title": "조직 인증",
+    "desc-subtitle": "자격 증명을 발급할 수 있도록 조직을 인증하세요.",
+    "desc-step1-title": "조직 정보 제출",
+    "desc-step1-subtitle": "회사 증명서 또는 이에 준하는 등록 문서와 조직 이름을 제출하세요.",
+    "desc-step2-title": "처리 대기",
+    "desc-step2-subtitle": "우리의 검증 팀이 귀하의 인증 요청을 처리하는 데 1~3일이 소요됩니다.",
+    "desc-step3-title": "인증 완료",
+    "desc-step3-subtitle": "인증이 완료되면 이메일과 알림을 통해 알려드리며, 이후 자격 증명을 발급할 수 있습니다.",
+    "upload-title": "조직 정보 제출",
+    "upload-subtitle": "회사 증명서 또는 이에 준하는 등록 문서를 업로드하세요.",
+    "success-title": "문서가 제출되었습니다",
+    "success-subtitle": "우리의 검증 팀이 귀하의 인증 요청을 처리하는 데 1~3일이 소요됩니다. 인증이 완료되면 이메일과 알림을 통해 알려드리며, 이후 자격 증명을 발급할 수 있습니다.",
+    "continue-button": "계속하기",
+    "cancel-button": "취소"
+  }
+}

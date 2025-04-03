@@ -1,0 +1,13 @@
+{
+  "settings-tabs": {
+    "language": "言語"
+  },
+  "setting-title": "設定",
+  "setting-language": "言語",
+  "setting-language-change": "言語を変更",
+  "setting-language-select": "デフォルトの言語を選択してください。",
+  "setting-buttons": {
+    "save": "保存",
+    "cancel": "キャンセル"
+  }
+}

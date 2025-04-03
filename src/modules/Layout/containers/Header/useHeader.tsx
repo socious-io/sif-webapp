@@ -54,7 +54,7 @@ export const useHeader = () => {
     navigate('/intro');
   };
   const navigateIntro = () => navigate('/intro');
-
+  const navigateSettings = () => navigate('/settings');
   return {
     accounts,
     image,
@@ -64,5 +64,6 @@ export const useHeader = () => {
     navigateIntro,
     openVerifyModal,
     setOpenVerifyModal,
+    navigateSettings,
   };
 };
