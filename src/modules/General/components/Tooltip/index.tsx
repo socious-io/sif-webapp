@@ -1,7 +1,6 @@
 import { Tooltip as MUITooltip } from '@mui/material';
-import React from 'react';
 
-import css from './index.module.scss';
+import styles from './index.module.scss';
 import { TooltipProps } from './index.types';
 
 const Tooltip: React.FC<TooltipProps> = ({ children, offset, onClickTooltip, customStyle = '', ...props }) => {
@@ -20,7 +19,7 @@ const Tooltip: React.FC<TooltipProps> = ({ children, offset, onClickTooltip, cus
           ],
         },
         tooltip: {
-          className: `${css['tooltip']} ${customStyle}`,
+          className: `${styles['tooltip']} ${customStyle}`,
         },
       }}
       {...props}

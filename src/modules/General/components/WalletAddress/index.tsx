@@ -1,4 +1,3 @@
-import React from 'react';
 import { truncateFromMiddle } from 'src/core/helpers/texts';
 
 import styles from './index.module.scss';

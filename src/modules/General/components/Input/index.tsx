@@ -1,10 +1,10 @@
 import { TextField, InputAdornment, IconButton } from '@mui/material';
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import Icon from 'src/modules/General/components/Icon';
 import InputDropdown from 'src/modules/General/components/InputDropdown';
 import variables from 'src/styles/constants/_exports.module.scss';
 
-import css from './index.module.scss';
+import styles from './index.module.scss';
 import { InputProps, Option } from './index.types';
 
 const Input: React.FC<InputProps> = ({
@@ -38,14 +38,14 @@ const Input: React.FC<InputProps> = ({
     else if (props.type === 'password' && showPassword && showEyeIcon) {
       setInputType('text');
       setEndIcon(
-        <IconButton disableRipple className={css.iconBtn} onClick={() => setShowPassword(false)}>
+        <IconButton disableRipple className={styles['iconBtn']} onClick={() => setShowPassword(false)}>
           <Icon name="eye-off" color={variables.color_grey_500} fontSize={24} />
         </IconButton>,
       );
     } else if (props.type === 'password' && !showPassword && showEyeIcon) {
       setInputType('password');
       setEndIcon(
-        <IconButton disableRipple className={css.iconBtn} onClick={() => setShowPassword(true)}>
+        <IconButton disableRipple className={styles['iconBtn']} onClick={() => setShowPassword(true)}>
           <Icon name="eye" color={variables.color_grey_500} fontSize={24} />
         </IconButton>,
       );
@@ -74,7 +74,7 @@ const Input: React.FC<InputProps> = ({
     <>
       {endIcon && <InputAdornment position="end">{endIcon}</InputAdornment>}
       {postfix && (
-        <InputAdornment position="start" className={noBorderPostfix ? css['postfix-no-border'] : css.postfix}>
+        <InputAdornment position="start" className={noBorderPostfix ? styles['postfix-no-border'] : styles['postfix']}>
           {postfix}
         </InputAdornment>
       )}
@@ -92,8 +92,8 @@ const Input: React.FC<InputProps> = ({
   return (
     <div className={containerClassName}>
       {label && (
-        <div className={css.labelContainer}>
-          <label htmlFor={id} className={css.label} aria-describedby={id}>
+        <div className={styles['labelContainer']}>
+          <label htmlFor={id} className={styles['label']} aria-describedby={id}>
             {label}
           </label>
         </div>
@@ -102,7 +102,7 @@ const Input: React.FC<InputProps> = ({
       <TextField
         id={id}
         variant="outlined"
-        className={`${css.default} ${errors ? css.errorColor : css.defaultColor}`}
+        className={`${styles['default']} ${errors ? styles['errorColor'] : styles['defaultColor']}`}
         fullWidth
         onKeyDown={handleKeydown}
         InputProps={{
@@ -113,7 +113,7 @@ const Input: React.FC<InputProps> = ({
           endAdornment: endAdornmentJSX,
 
           startAdornment: prefix ? (
-            <InputAdornment position="start" className={noBorderPrefix ? css['prefix-no-border'] : css.prefix}>
+            <InputAdornment position="start" className={noBorderPrefix ? styles['prefix-no-border'] : styles['prefix']}>
               {prefix}
             </InputAdornment>
           ) : startIcon ? (
@@ -133,17 +133,17 @@ const Input: React.FC<InputProps> = ({
       />
       {errors &&
         errors.map((e, index) => (
-          <p key={index} className={`${css.errorMsg} ${css.msg}`}>
+          <p key={index} className={`${styles['errorMsg']} ${styles['msg']}`}>
             {e}
           </p>
         ))}
       {hints &&
         hints.map((hint, index) => (
-          <p key={index} className={`${css.hintMsg} ${css.msg} ${hintCustomClass}`}>
+          <p key={index} className={`${styles['hintMsg']} ${styles['msg']} ${hintCustomClass}`}>
             {!hint.hide && hint.hint}
           </p>
         ))}
-      {isValid && validMessage && <p className={`${css.successMsg} ${css.msg}`}>{validMessage}</p>}
+      {isValid && validMessage && <p className={`${styles['successMsg']} ${styles['msg']}`}>{validMessage}</p>}
     </div>
   );
 };

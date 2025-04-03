@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { convertMarkdownToJSX } from 'src/core/helpers/convert-md-to-jsx';
 
-import css from './index.module.scss';
+import styles from './index.module.scss';
 import { ExpandableTextProps } from './index.types';
 import TextClickableURLs from '../TextClickableUrls';
 
@@ -50,10 +50,10 @@ const ExpandableText: React.FC<ExpandableTextProps> = ({
   };
 
   return (
-    <div className={`${css.expect} ${customStyle}`}>
+    <div className={`${styles['expect']} ${customStyle}`}>
       {renderText()}
       {seeMoreButton && shouldViewMore && (
-        <span className={css.expect__seeMore} onClick={toggleExpect}>
+        <span className={styles['expect__seeMore']} onClick={toggleExpect}>
           {seeMoreText}
         </span>
       )}

@@ -1,11 +1,13 @@
 import { config } from 'src/config';
+import { getIdentitiesAdaptor } from 'src/core/adaptors';
 import { nonPermanentStorage } from 'src/core/storage/non-permanent';
 import store from 'src/store';
 import { removeIdentityList, setIdentityList } from 'src/store/reducers/identity.reducer';
 
-import { identities, refresh } from './auth.api';
+import { refresh } from './auth.api';
 import { AuthSession } from './auth.types';
 
+const dispatch = store.dispatch;
 export async function setAuthParams(auth: AuthSession, keepLoggedIn?: boolean) {
   await nonPermanentStorage.set(
     { key: 'access_token', value: auth.access_token },
@@ -19,15 +21,16 @@ export async function setAuthParams(auth: AuthSession, keepLoggedIn?: boolean) {
     { key: 'token_type', value: auth.token_type },
     keepLoggedIn ? Number(config.refreshExpire) : undefined,
   );
-  //when user logs in first time we set the identity to the first identity
-  const new_identities = await identities();
-  await dispatch(setIdentityList(new_identities));
+  const { error, data } = await getIdentitiesAdaptor();
+  if (error) return;
+  if (data) dispatch(setIdentityList(data));
 }
-const dispatch = store.dispatch;
+
 export const switchAccount = async (accountId: string) => {
   await nonPermanentStorage.set({ key: 'identity', value: accountId });
-  const new_identities = await identities();
-  await dispatch(setIdentityList(new_identities));
+  const { error, data } = await getIdentitiesAdaptor();
+  if (error) return;
+  if (data) dispatch(setIdentityList(data));
 };
 
 export async function refreshToken() {

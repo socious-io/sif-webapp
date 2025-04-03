@@ -1,7 +1,7 @@
 import logo from 'src/assets/logo/logo.svg';
 import { translate } from 'src/core/helpers/utils';
 import Button from 'src/modules/General/components/Button';
-import { IconDropDown } from 'src/modules/General/components/iconDropDown';
+import IconDropDown from 'src/modules/General/components/IconDropDown';
 import KYB from 'src/modules/Verification/containers/KYB';
 
 import { useHeader } from './useHeader';
@@ -22,7 +22,7 @@ const Header: React.FC = () => {
     <div className="w-full border-b border-b-Gray-light-mode-300 border-solid border-t-0 border-l-0 border-r-0">
       <div className="max-w-[1280px] w-full h-[72px] flex items-center justify-between mx-auto px-4">
         <div className="flex items-center">
-          <img src={logo} alt="logo" className="mr-2" />
+          <img src={logo} alt="Socious Fund Logo" className="mr-2" />
           <a href="/home" className="hidden sm:block text-[20px] font-semibold leading-[30px] text-Brand-600">
             {translate('socious-fund')}
           </a>

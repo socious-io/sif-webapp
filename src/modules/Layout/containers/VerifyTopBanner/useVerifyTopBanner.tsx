@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { CurrentIdentity } from 'src/core/api';
-import { OrgMeta, UserMeta } from 'src/core/api';
+import { CurrentIdentity } from 'src/core/adaptors';
 import { RootState } from 'src/store';
 
 export const useVerifyTopBanner = () => {
@@ -9,11 +8,8 @@ export const useVerifyTopBanner = () => {
     state.identity.entities.find(identity => identity.current),
   );
   const type = currentIdentity?.type;
-  const verified =
-    type === 'users'
-      ? (currentIdentity?.meta as UserMeta).identity_verified_at
-      : (currentIdentity?.meta as OrgMeta)?.verified;
-  const isPendingStatus = (currentIdentity?.meta as OrgMeta)?.status === 'PENDING';
+  const verified = currentIdentity?.verified;
+  const isPendingStatus = currentIdentity?.status === 'PENDING';
   const pendingOrgVerification = type === 'organizations' && isPendingStatus;
   const [hideVerifyBanner, setHideVerifyBanner] = useState(localStorage.getItem('hideVerifiedBanner') === 'true');
   const [openVerifyModal, setOpenVerifyModal] = useState(false);

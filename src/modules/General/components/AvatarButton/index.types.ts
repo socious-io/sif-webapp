@@ -1,6 +1,6 @@
-import { AccountItem } from '../avatarDropDown/avatarDropDown.types';
+import { Account } from '../AvatarLabelGroup/index.types';
 
 export interface AvatarButtonProps {
-  account: AccountItem;
+  account: Account;
   onClick: (account: any) => void;
 }

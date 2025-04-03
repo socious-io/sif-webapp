@@ -1,9 +1,7 @@
 import Rating from '@mui/material/Rating';
-import { useState } from 'react';
 import bg from 'src/assets/images/create-hero.jpeg';
 import { translate } from 'src/core/helpers/utils';
-import AvatarGroup from 'src/modules/General/components/avatarGroup';
-import AvatarLabelGroup from 'src/modules/General/components/AvatarLabelGroup';
+import AvatarGroup from 'src/modules/General/components/AvatarGroup';
 import Button from 'src/modules/General/components/Button';
 import Icon from 'src/modules/General/components/Icon';
 import KYB from 'src/modules/Verification/containers/KYB';

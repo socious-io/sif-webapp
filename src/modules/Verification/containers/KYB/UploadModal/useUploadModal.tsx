@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { uploadMediaWithProgressAdaptor, verifyOrganization } from 'src/core/adaptors';
-import { CurrentIdentity } from 'src/core/api';
+import { CurrentIdentity } from 'src/core/adaptors';
 import { RootState } from 'src/store';
 import { setIdentityList } from 'src/store/reducers/identity.reducer';
 
@@ -75,14 +75,11 @@ export const useUploadModal = (handleOpenSuccessModal: () => void) => {
         identity.id === currentIdentity.id
           ? {
               ...identity,
-              meta: {
-                ...identity.meta,
-                status: data.status,
-              },
+              status: data.status,
             }
           : identity,
       );
-      dispatch(setIdentityList({ identities: updatedIdentity }));
+      dispatch(setIdentityList(updatedIdentity));
       handleOpenSuccessModal();
     }
     setLoading(false);

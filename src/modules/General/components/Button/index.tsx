@@ -1,7 +1,6 @@
 import { Button as MaterialButton } from '@mui/material';
-import * as React from 'react';
 
-import css from './index.module.scss';
+import styles from './index.module.scss';
 import { ButtonProps } from './index.types';
 
 const Button: React.FC<ButtonProps> = ({
@@ -12,12 +11,12 @@ const Button: React.FC<ButtonProps> = ({
   block,
   ...props
 }) => {
-  const size = block ? css['block'] : null;
+  const size = block ? styles['block'] : null;
 
   return (
     <MaterialButton
       disableRipple
-      className={`${css['default']} ${css[color]} ${size} ${customStyle}`}
+      className={`${styles['default']} ${styles[color]} ${size} ${customStyle}`}
       color={color}
       variant={variant}
       {...props}

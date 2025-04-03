@@ -1,5 +1,4 @@
 import { Divider } from '@mui/material';
-import { Link } from 'react-router-dom';
 import { translate } from 'src/core/helpers/utils';
 import AvatarLabelGroup from 'src/modules/General/components/AvatarLabelGroup';
 import BackLink from 'src/modules/General/components/BackLink';
@@ -8,6 +7,7 @@ import Button from 'src/modules/General/components/Button';
 import Chip from 'src/modules/General/components/Chip';
 import HorizontalTabs from 'src/modules/General/components/HorizontalTabs';
 import Icon from 'src/modules/General/components/Icon';
+import Link from 'src/modules/General/components/Link';
 import VerticalTabs from 'src/modules/General/components/VerticalTabs';
 import VoteDetailCard from 'src/modules/Projects/components/VoteDetailCard';
 import variables from 'src/styles/constants/_exports.module.scss';
@@ -16,7 +16,7 @@ import { useProjectDetail } from './useProjectDetail';
 
 export const ProjectDetail = () => {
   const {
-    data: { detail, projectId, isOwner, roundIsClosed, round },
+    data: { detail, projectId, isOwner, roundIsClosed, round, isShared },
     operations: { navigate, onShare, onEditProject, onVote },
   } = useProjectDetail();
   const breadcrumbs = [
@@ -36,7 +36,7 @@ export const ProjectDetail = () => {
           account={{
             id: detail.creator?.id || '',
             name: detail.creator.name,
-            email: detail.creator?.username || '',
+            username: detail.creator?.username || '',
             img: detail.creator.img,
             type: detail.creator.type,
           }}
@@ -54,9 +54,12 @@ export const ProjectDetail = () => {
     {
       label: translate('projects-detail.website'),
       content: (
-        <Link to={detail.website || ''} className="text-base font-semibold leading-6 text-Brand-600">
-          {detail.website}
-        </Link>
+        <Link
+          label={detail?.website || ''}
+          href={detail.website || ''}
+          target="_blank"
+          className="text-base font-semibold leading-6 text-Brand-600"
+        />
       ),
     },
     {
@@ -114,13 +117,13 @@ export const ProjectDetail = () => {
             <Button
               color="info"
               startIcon={<Icon name="share-02" fontSize={20} color={variables.color_grey_900} />}
-              customStyle="min-w-[6rem] !text-Gray-light-mode-900 break-keep"
-              fullWidth
+              customStyle="flex-1 min-w-[10rem] !text-Gray-light-mode-900 break-keep"
               onClick={onShare}
+              disabled={isShared}
             >
-              {translate('projects-detail.share-button')}
+              {isShared ? translate('projects-detail.link-copied') : translate('projects-detail.share-button')}
             </Button>
-            <Button color="primary" fullWidth customStyle="min-w-[6rem] break-keep" onClick={onEditProject}>
+            <Button color="primary" fullWidth customStyle="flex-1 min-w-[10rem] break-keep" onClick={onEditProject}>
               {translate('projects-detail.edit-button')}
             </Button>
           </div>
@@ -148,7 +151,6 @@ export const ProjectDetail = () => {
             isOwner={isOwner}
             alreadyVoted={detail.voted}
             voteEnded={detail.voteEnded}
-            onShare={onShare}
             onVote={onVote}
           />
         )}

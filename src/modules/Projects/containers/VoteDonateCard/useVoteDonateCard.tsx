@@ -2,8 +2,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import { CURRENCIES } from 'src/constants/CURRENCIES';
-import { DonateReq, Project, voteOrDonateProjectAdaptor } from 'src/core/adaptors';
-import { CurrentIdentity, UserMeta } from 'src/core/api';
+import { CurrentIdentity, DonateReq, Project, voteOrDonateProjectAdaptor } from 'src/core/adaptors';
 import { RootState } from 'src/store';
 
 export const useVoteDonateCard = () => {
@@ -17,8 +16,7 @@ export const useVoteDonateCard = () => {
   const currentIdentity = useSelector<RootState, CurrentIdentity | undefined>(state => {
     return state.identity.entities.find(i => i.current);
   });
-  const isIdentityUser = currentIdentity?.type === 'users';
-  const userImpactPoints = isIdentityUser ? (currentIdentity.meta as UserMeta).impact_points : undefined;
+  const userImpactPoints = currentIdentity?.impact_points;
   const voteInfo = selectedCard === 'vote' ? { receivedAmount: '' } : undefined;
   const donateInfo =
     selectedCard === 'donate'

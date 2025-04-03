@@ -1,6 +1,6 @@
 import { Media } from '../media/index.types';
 
-export type VerificationStatus = 'PENDING' | 'APPROVED' | 'REJECTED' | 'CREATED';
+export type VerificationStatus = 'NOT_ACTIVE' | 'PENDING' | 'ACTIVE';
 
 export interface KYBReq {
   documents: string[];
