@@ -3,6 +3,7 @@ import { translate } from 'src/core/helpers/utils';
 import AlertMessage from 'src/modules/General/components/AlertMessage';
 import Button from 'src/modules/General/components/Button';
 import FileUploader from 'src/modules/General/components/FileUploader';
+import EditImageModal from 'src/modules/General/components/ImageCropModal';
 import Input from 'src/modules/General/components/Input';
 import MultiSelect from 'src/modules/General/components/MultiSelect';
 import RichTextEditor from 'src/modules/General/components/RichTextEditor';
@@ -33,7 +34,12 @@ const EditProjectForm: React.FC = () => {
     wallet_address,
     attachments,
     onDropFiles,
+    showEditModal,
+    handleModalClose,
+    uneditedAttachment,
+    handleEditComplete,
   } = useEditProjectForm();
+
   return (
     <form className="container px-4 pt-12 pb-24 md:pb-16">
       <ProjectEditHeader onDiscard={goBack} onPublish={handleSubmit(onSubmit)} disabled={false} />
@@ -102,13 +108,14 @@ const EditProjectForm: React.FC = () => {
       </FormColumnTemplate>
       <FormColumnTemplate title={translate('edit-project-cover-photo')} isLarge>
         <>
-          <img className="w-full rounded-lg mb-8" alt="banner" src={imagePreview} />
+          {imagePreview && <img className="w-full rounded-lg mb-8" alt="banner" src={imagePreview} />}
           <FileUploader
             files={attachments}
             onDropFiles={onDropFiles}
             fileTypes={['PNG', 'JPG', 'GIF']}
             maxSize={2}
             showFileName={false}
+            showPreviewImages={false}
           />
         </>
       </FormColumnTemplate>
@@ -129,7 +136,16 @@ const EditProjectForm: React.FC = () => {
           {translate('edit-project-publish')}
         </Button>
       </div>
+
+      <EditImageModal
+        open={showEditModal}
+        handleClose={handleModalClose}
+        aspectRatio={205 / 78}
+        onSave={handleEditComplete}
+        file={uneditedAttachment}
+      />
     </form>
   );
 };
+
 export default EditProjectForm;

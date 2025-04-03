@@ -4,3 +4,9 @@ export interface UploadMediaRes {
   url: string;
   date: string;
 }
+
+export type Files = {
+  id: string;
+  url?: string;
+  name?: string;
+};

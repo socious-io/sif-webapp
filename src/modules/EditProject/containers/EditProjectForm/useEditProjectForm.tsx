@@ -8,6 +8,7 @@ import { Files } from 'src/modules/General/components/ProgressFileUploader/index
 import * as yup from 'yup';
 
 import { FormData } from './index.types';
+
 const schema = yup.object().shape({
   title: yup.string().required('Name is required'),
   description: yup.string().required('Description is required'),
@@ -19,6 +20,7 @@ const schema = yup.object().shape({
   cover_url: yup.string().nullable(),
   wallet_address: yup.string().required(),
 });
+
 export const useEditProjectForm = () => {
   const { project } = useLoaderData() as { project: Project };
   const {
@@ -43,24 +45,39 @@ export const useEditProjectForm = () => {
   });
   const navigate = useNavigate();
   const [selectedCardId, setSelectedCardId] = useState('');
-  const items = socialCausesToCategoryAdaptor();
   const [attachments, setAttachments] = useState<Files[]>([]);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [uneditedAttachment, setUneditedAttachment] = useState<File | null>(null);
 
   const onDropFiles = async (newFiles: File[]) => {
-    newFiles.forEach(async (file: File) => {
-      const { error, data } = await uploadMediaAdaptor(file);
-      setValue('cover_id', data?.id as string);
-      setValue('cover_url', data?.url as string);
+    if (newFiles.length > 0) {
+      const file = newFiles[0];
+      setUneditedAttachment(file);
+      setShowEditModal(true);
+    }
+  };
 
-      if (error) return;
-      data && setAttachments([{ id: data.id, url: data.url }]);
-    });
+  const handleEditComplete = async (editedFile: File) => {
+    const { error, data } = await uploadMediaAdaptor(editedFile);
+    if (!error && data) {
+      setValue('cover_id', data.id);
+      setValue('cover_url', data.url);
+      setAttachments([{ id: data.id, url: data.url, name: editedFile.name }]);
+    }
+    setUneditedAttachment(null);
+    setShowEditModal(false);
+  };
+
+  const handleModalClose = () => {
+    setShowEditModal(false);
+    setUneditedAttachment(null);
   };
 
   const onSelectLocation = ({ city, country }) => {
     setValue('city', city);
     setValue('country', country);
   };
+
   const onSelectCauses = value => setValue('social_cause', value.length ? value[0].label : '');
 
   const onSubmit = async (formData: FormData) => {
@@ -70,16 +87,16 @@ export const useEditProjectForm = () => {
 
   const description = watch('description') || '';
   const imagePreview = watch('cover_url');
-
   const city = watch('city');
   const country = watch('country');
   const social_cause = watch('social_cause');
   const wallet_address = watch('wallet_address');
 
   const goBack = () => navigate(-1);
+
   return {
     goBack,
-    items,
+    items: socialCausesToCategoryAdaptor(),
     selectedCardId,
     setSelectedCardId,
     onSelectCauses,
@@ -98,5 +115,9 @@ export const useEditProjectForm = () => {
     wallet_address,
     attachments,
     onDropFiles,
+    showEditModal,
+    handleModalClose,
+    uneditedAttachment,
+    handleEditComplete,
   };
 };
