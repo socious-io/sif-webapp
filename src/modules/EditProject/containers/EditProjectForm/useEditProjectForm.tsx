@@ -9,7 +9,7 @@ import * as yup from 'yup';
 
 import { FormData } from './index.types';
 const schema = yup.object().shape({
-  name: yup.string().required('Name is required'),
+  title: yup.string().required('Name is required'),
   description: yup.string().required('Description is required'),
   website: yup.string().url('Must be a valid URL').nullable(),
   city: yup.string().nullable(),
@@ -30,7 +30,7 @@ export const useEditProjectForm = () => {
   } = useForm<FormData>({
     resolver: yupResolver(schema),
     defaultValues: {
-      name: project.title || '',
+      title: project.title || '',
       description: project.description || '',
       website: project.website || '',
       city: project.city,

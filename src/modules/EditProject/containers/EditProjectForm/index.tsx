@@ -69,7 +69,7 @@ const EditProjectForm: React.FC = () => {
         <Input
           placeholder={translate('edit-project-name-placeholder')}
           register={register}
-          name="name"
+          name="title"
           required
           errors={errors['name']?.message ? [errors['name']?.message.toString()] : undefined}
         />

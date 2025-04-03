@@ -1,5 +1,5 @@
 export interface FormData {
-  name: string;
+  title: string;
   description: string;
   website?: string | null;
   city: string;
