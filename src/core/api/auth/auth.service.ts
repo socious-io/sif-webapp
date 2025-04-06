@@ -31,10 +31,14 @@ export const switchAccount = async (accountId: string) => {
 };
 
 export async function refreshToken() {
-  const token = await nonPermanentStorage.get('refresh_token');
-  if (!token) throw new Error('could not find refresh token');
+  try {
+    const token = await nonPermanentStorage.get('refresh_token');
+    if (!token) throw new Error('could not find refresh token');
 
-  await setAuthParams(await refresh({ refresh_token: token }));
+    await setAuthParams(await refresh({ refresh_token: token }));
+  } catch (error) {
+    logout();
+  }
 }
 
 export const logout = async () => {

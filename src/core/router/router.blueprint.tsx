@@ -194,7 +194,7 @@ function Protect<T extends object>(Component: ComponentType<T>, allowedIdentity:
     }
 
     if (!current) {
-      return <div></div>;
+      return <Navigate to="/intro" />;
     }
 
     if (allowedIdentity === current || allowedIdentity === 'both') {
