@@ -1,12 +1,11 @@
-import React from 'react';
 import Icon from 'src/modules/General/components/Icon';
 
-import css from './index.module.scss';
+import styles from './index.module.scss';
 import { CloseButtonProps } from './index.types';
 
 const CloseButton: React.FC<CloseButtonProps> = ({ handleClose, customStyle }) => {
   return (
-    <button className={`${css.btn} ${customStyle}`} onClick={handleClose}>
+    <button className={`${styles['btn']} ${customStyle}`} onClick={handleClose}>
       <Icon
         name="x-close"
         fontSize={20}

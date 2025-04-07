@@ -1,10 +1,9 @@
 import { Autocomplete, TextField, Typography } from '@mui/material';
-import React, { useEffect, useRef, useState } from 'react';
-import { translate } from 'src/core/helpers/utils';
+import { useEffect, useRef, useState } from 'react';
 import Icon from 'src/modules/General/components/Icon';
 
 import Chip from './chip';
-import css from './index.module.scss';
+import styles from './index.module.scss';
 import { MultiSelectItem, MultiSelectProps } from './index.types';
 
 const MultiSelect: React.FC<MultiSelectProps> = props => {
@@ -66,8 +65,8 @@ const MultiSelect: React.FC<MultiSelectProps> = props => {
   }, [componentValue]);
 
   return (
-    <div className={css.container}>
-      <label htmlFor={id} aria-describedby={id} className={css.searchTitle}>
+    <div className={styles['container']}>
+      <label htmlFor={id} aria-describedby={id} className={styles['searchTitle']}>
         {searchTitle}
       </label>
       <Autocomplete
@@ -98,7 +97,7 @@ const MultiSelect: React.FC<MultiSelectProps> = props => {
         onInputChange={(e, newValue) => filterItems(newValue)}
         renderInput={params => {
           return (
-            <div className={css.inputContainer}>
+            <div className={styles['inputContainer']}>
               <TextField
                 variant="outlined"
                 label=""
@@ -113,27 +112,30 @@ const MultiSelect: React.FC<MultiSelectProps> = props => {
           );
         }}
       />
-      <div className={css.captionDiv}>
+      <div className={styles['captionDiv']}>
         {errors &&
           errors.map((e, index) => (
-            <p key={index} className={`${css.errorMsg}`}>
+            <p key={index} className={`${styles['errorMsg']}`}>
               {e}
             </p>
           ))}
-        <Typography variant="subtitle1" className={css.popularLabel}>
+        <Typography variant="subtitle1" className={styles['popularLabel']}>
           {maxLabel}
         </Typography>
       </div>
 
       {/* {displayDefaultBadges && (
-        <div className={css.popularDiv}>
-          <Typography variant="caption" className={css.popularLabel}>
+        <div className={styles['popularDiv']}>
+          <Typography variant="caption" className={styles['popularLabel']}>
             {translate('general-multi-select-popular')}
           </Typography>
         </div>
       )} */}
       {(displayDefaultBadges || searchVal) && (
-        <div className={css.chipContainer} style={customHeight ? { height: customHeight, overflowY: 'auto' } : {}}>
+        <div
+          className={styles['chipContainer']}
+          style={customHeight ? { height: customHeight, overflowY: 'auto' } : {}}
+        >
           {chipItems?.map(i => (
             <Chip
               key={i.value}
