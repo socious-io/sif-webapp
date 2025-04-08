@@ -40,7 +40,7 @@ export const blueprint: RouteObject[] = [
                 },
                 async lazy() {
                   const { Projects } = await import('src/pages/projects');
-                  return { Component: Protect(Projects, 'both') };
+                  return { Component: Projects };
                 },
               },
               {
@@ -53,7 +53,7 @@ export const blueprint: RouteObject[] = [
                 },
                 async lazy() {
                   const { ProjectDetail } = await import('src/pages/projects/detail');
-                  return { Component: Protect(ProjectDetail, 'both') };
+                  return { Component: ProjectDetail };
                 },
               },
               {
