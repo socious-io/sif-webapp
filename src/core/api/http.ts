@@ -6,7 +6,7 @@ import { nonPermanentStorage } from 'src/core/storage/non-permanent';
 import { showLoading, hideLoading } from 'src/store/reducers/loading.reducer';
 
 import { removedEmptyProps } from '../helpers/objects-arrays';
-import { refreshToken } from './auth/auth.service';
+import { logout, refreshToken } from './auth/auth.service';
 
 export const http = axios.create({
   baseURL: config.baseURL,
@@ -124,8 +124,11 @@ export function setupInterceptors(store: Store) {
       store.dispatch(hideLoading());
       if (error?.response?.status === 401 && !error.config.url.includes('auth')) {
         try {
-          await refreshToken();
-          return http.request(error.config);
+          const refresh = await nonPermanentStorage.get('refresh_token');
+          if (refresh) {
+            await refreshToken();
+            return http.request(error.config);
+          } else logout();
         } catch {
           return Promise.reject(error);
         }
