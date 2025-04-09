@@ -2,9 +2,8 @@ import { Checkbox, FormGroup } from '@mui/material';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
-import React from 'react';
 
-import css from './index.module.scss';
+import styles from './index.module.scss';
 import { CheckboxGroupProps, Item } from './index.types';
 
 const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
@@ -18,7 +17,7 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
 }) => {
   return (
     <FormControl>
-      <FormLabel id={id} className={`${css.label} ${labelClassName}`}>
+      <FormLabel id={id} className={`${styles['label']} ${labelClassName}`}>
         {label}
       </FormLabel>
       <FormGroup>
@@ -42,13 +41,13 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
                   }}
                 />
               }
-              label={<span className={css.optionsText}>{item.label}</span>}
+              label={<span className={styles['optionsText']}>{item.label}</span>}
             />
           ))}
       </FormGroup>
       {errors &&
         errors.map((e: string, index: number) => (
-          <p key={index} className={`${css.errorMsg} ${css.msg}`}>
+          <p key={index} className={`${styles['errorMsg']} ${styles['msg']}`}>
             {e}
           </p>
         ))}

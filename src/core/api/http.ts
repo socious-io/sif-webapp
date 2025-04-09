@@ -3,10 +3,10 @@ import axios, { AxiosRequestConfig, AxiosError, AxiosResponse } from 'axios';
 import { config } from 'src/config';
 import { dialog } from 'src/core/dialog/dialog';
 import { nonPermanentStorage } from 'src/core/storage/non-permanent';
-import { hideSpinner, showSpinner } from 'src/store/reducers/spinner.reducer';
+import { showLoading, hideLoading } from 'src/store/reducers/loading.reducer';
 
 import { removedEmptyProps } from '../helpers/objects-arrays';
-import { refreshToken } from './auth/auth.service';
+import { logout, refreshToken } from './auth/auth.service';
 
 export const http = axios.create({
   baseURL: config.baseURL,
@@ -104,28 +104,31 @@ http.interceptors.request.use(
 export function setupInterceptors(store: Store) {
   http.interceptors.request.use(
     async function (config) {
-      store.dispatch(showSpinner());
+      store.dispatch(showLoading());
       // Do something before request is sent
       return config;
     },
     function (error) {
-      store.dispatch(hideSpinner());
+      store.dispatch(hideLoading());
       // Do something with request error
       return Promise.reject(error);
     },
   );
   http.interceptors.response.use(
     function (response) {
-      store.dispatch(hideSpinner());
+      store.dispatch(hideLoading());
       // Any status code that lie within the range of 2xx cause this function to trigger
       return response;
     },
     async function (error) {
-      store.dispatch(hideSpinner());
+      store.dispatch(hideLoading());
       if (error?.response?.status === 401 && !error.config.url.includes('auth')) {
         try {
-          await refreshToken();
-          return http.request(error.config);
+          const refresh = await nonPermanentStorage.get('refresh_token');
+          if (refresh) {
+            await refreshToken();
+            return http.request(error.config);
+          } else logout();
         } catch {
           return Promise.reject(error);
         }

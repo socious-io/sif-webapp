@@ -16,6 +16,7 @@ const VoteDetailCard: React.FC<VoteDetailCardProps> = ({
 }) => {
   const { donatedAmount, votes } = roundStats || {};
   const { isShared, handleCopy } = useVoteDetailCard();
+
   return (
     <div className="w-full md:w-[22.5rem] flex flex-col items-stretch gap-4 p-6 bg-Gray-light-mode-50 rounded-xl">
       {/* <div className="flex flex-col gap-1 text-sm leading-5 text-Gray-light-mode-600">
@@ -45,16 +46,16 @@ const VoteDetailCard: React.FC<VoteDetailCardProps> = ({
           >
             {isShared ? translate('projects-round-stats.link-copied') : translate('projects-round-stats.share-button')}
           </Button>
-          {!alreadyVoted || !voteEnded ? (
-            <Button color="primary" onClick={onVote} disabled={alreadyVoted}>
-              {translate('projects-round-stats.vote-button')}
-            </Button>
-          ) : (
+          {voteEnded || alreadyVoted ? (
             <AlertMessage
               theme="warning"
               iconName="alert-circle"
-              title={alreadyVoted ? translate('vote-donate.already-voted') : translate('vote-donate.end-voted')}
+              title={voteEnded ? translate('vote-donate.end-voted') : translate('vote-donate.already-voted')}
             />
+          ) : (
+            <Button color="primary" onClick={onVote}>
+              {translate('projects-round-stats.vote-button')}
+            </Button>
           )}
         </div>
       )}

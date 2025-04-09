@@ -1,5 +1,4 @@
-import React from 'react';
-
+import styles from './index.module.scss';
 import { PaginationDotGroupProps } from './index.types';
 
 const PaginationDotGroup: React.FC<PaginationDotGroupProps> = props => {
@@ -15,11 +14,11 @@ const PaginationDotGroup: React.FC<PaginationDotGroupProps> = props => {
     customStyle = '',
   } = props;
   return (
-    <div className={`${css['container']} ${transparent && 'bg-transparent'} ${containerClassName}`}>
+    <div className={`${styles['container']} ${transparent && 'bg-transparent'} ${containerClassName}`}>
       {[...Array(count)].map((e, n) => (
-        <div key={n} className={`${css['step']} ${css[`step--${shape}`]} ${customStyle}`}>
+        <div key={n} className={`${styles['step']} ${styles[`step--${shape}`]} ${customStyle}`}>
           <div
-            className={`${css['indicator']} ${css[`indicator--${size}`]} ${highlightPrevSteps ? n <= active && css['indicator--active'] : n === active && css['indicator--active']}`}
+            className={`${styles['indicator']} ${styles[`indicator--${size}`]} ${highlightPrevSteps ? n <= active && styles['indicator--active'] : n === active && styles['indicator--active']}`}
           />
           {titles[n]}
         </div>

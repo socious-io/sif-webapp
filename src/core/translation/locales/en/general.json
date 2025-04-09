@@ -14,5 +14,11 @@
     "page": "Page",
     "of": "of"
   },
-  "general-copy-link": "Copy"
+  "general-copy-link": "Copy",
+  "general-image-editor": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "title": "Edit Image",
+    "subtitle": "Crop your image to the desired dimensions."
+  }
 }

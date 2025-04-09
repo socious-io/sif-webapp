@@ -2,7 +2,7 @@ import marker from 'src/assets/icons/location-marker.svg';
 import { convertMarkdownToJSX } from 'src/core/convert-md-to-jsx';
 import { translate } from 'src/core/helpers/utils';
 import Button from 'src/modules/General/components/Button';
-import SuccessModal from 'src/modules/General/SuccessModal';
+import SuccessModal from 'src/modules/General/components/SuccessModal';
 
 import { useCreatePreview } from './useCreatePreview';
 
@@ -27,14 +27,14 @@ const CreatePreview: React.FC = () => {
   } = useCreatePreview();
   return (
     <>
-      <div>
+      <div className="pb-12">
         <img src={cover_url} alt="banner" className={styles.banner} />
         <div className="text-[20px] font-medium my-5 border-b border-b-Gray-light-mode-300 border-solid border-t-0 border-l-0 border-r-0 pb-5">
           {title}
         </div>
         <div className={styles.titles}>{translate('create-preview-social-cause')}</div>
         <div className={styles.values}>
-          <span>{social_cause}</span>
+          <span>{translate(social_cause)}</span>
         </div>
         <div className={styles.titles}>{translate('create-preview-website')}</div>
         <div className={styles.values}>{website}</div>

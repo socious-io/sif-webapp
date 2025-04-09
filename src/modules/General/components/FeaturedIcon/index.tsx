@@ -1,8 +1,7 @@
-import React from 'react';
 import Icon from 'src/modules/General/components/Icon';
 import variables from 'src/styles/constants/_exports.module.scss';
 
-import css from './index.module.scss';
+import styles from './index.module.scss';
 import { FeaturedIconProps } from './index.types';
 
 const FeaturedIcon: React.FC<FeaturedIconProps> = ({ type, theme, size, iconName }) => {
@@ -23,9 +22,9 @@ const FeaturedIcon: React.FC<FeaturedIconProps> = ({ type, theme, size, iconName
   if (type === 'modern') iconColor = variables.color_grey_700;
   return (
     <div
-      className={`${css.container} ${css[`container-${size}`]} ${css[type]} ${css[`container-${type}-${theme}`]} ${
-        css[`container-${type}-${size}`]
-      } ${type === 'modern' ? `${css.modern} ${css[`modern-${size}`]}` : ''}    
+      className={`${styles['container']} ${styles[`container-${size}`]} ${styles[type]} ${styles[`container-${type}-${theme}`]} ${
+        styles[`container-${type}-${size}`]
+      } ${type === 'modern' ? `${styles['modern']} ${styles[`modern-${size}`]}` : ''}    
       `}
     >
       <Icon name={iconName} fontSize={iconSize} color={iconColor} />

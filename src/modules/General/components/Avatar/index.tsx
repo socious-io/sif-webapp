@@ -1,7 +1,7 @@
-import React, { CSSProperties, useEffect, useState } from 'react';
+import { CSSProperties, useEffect, useState } from 'react';
 import variables from 'src/styles/constants/_exports.module.scss';
 
-import css from './index.module.scss';
+import styles from './index.module.scss';
 import { AvatarProps } from './index.types';
 import Icon from '../Icon';
 
@@ -40,25 +40,25 @@ const Avatar: React.FC<AvatarProps> = props => {
     <div
       onClick={onClick}
       style={{ width: size, height: size, minWidth: size, minHeight: size }}
-      className={`${css['container']} ${hasBorder && css['container__border']} ${customStyle} `}
+      className={`${styles['container']} ${hasBorder && styles['container__border']} ${customStyle} `}
     >
-      <div onClick={onClick} style={style} className={css['avatar']}>
+      <div onClick={onClick} style={style} className={styles['avatar']}>
         {img ? (
-          <img className={`${css['avatar__img']} ${iconCustomStyle}`} src={img} alt="" />
+          <img className={`${styles['avatar__img']} ${iconCustomStyle}`} src={img} alt="" />
         ) : (
           <Icon name={icon} fontSize={iconSize || 24} color={variables.color_grey_600} className={iconCustomStyle} />
         )}
       </div>
       {badge && (
         <div
-          className={css['badge']}
+          className={styles['badge']}
           style={{ backgroundColor: badge.color, width: badge.width, height: badge.height }}
         >
-          <img className={css['badge__img']} src={badge.image} alt="badge" />
+          <img className={styles['badge__img']} src={badge.image} alt="badge" />
         </div>
       )}
       {isVerified && (
-        <div className={css['badge--verified']}>
+        <div className={styles['badge--verified']}>
           <Icon name="check-verified-02-filled" color="#0788F5" fontSize={20} />
         </div>
       )}

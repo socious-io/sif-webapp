@@ -1,8 +1,10 @@
 import { Media } from '../media/index.types';
+import { VerificationStatus } from '../verification/index.types';
 
 export type IdentityType = 'users' | 'organizations';
 
 export interface UserMeta {
+  id: string;
   first_name: string;
   last_name: string;
   username: string;
@@ -36,7 +38,7 @@ export interface OrgMeta {
   culture?: string;
   logo?: Media;
   cover?: Media;
-  status: 'NOT_ACTIVE' | 'PENDING' | 'ACTIVE';
+  status: VerificationStatus;
   verifiedImpact: boolean;
   verified: boolean;
   createdAt: Date;
@@ -52,7 +54,6 @@ export interface Identity {
   updated_at: Date;
 }
 
-export interface CurrentIdentity extends Identity {
-  current: boolean;
-  primary: boolean;
+export interface IdentitiesRes {
+  identities: Identity[];
 }

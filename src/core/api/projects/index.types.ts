@@ -1,6 +1,5 @@
-import { PaginateResV3, Round } from '..';
+import { Identity, PaginateResV3, Round } from '..';
 import { Media } from '../media/index.types';
-import { Identity } from '../users/index.types';
 
 export interface Project {
   id: string;

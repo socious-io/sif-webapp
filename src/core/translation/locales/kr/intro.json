@@ -1,0 +1,13 @@
+{
+  "intro-individual": "개인",
+  "intro-individual-desc": "프로젝트에 투표하고 기부하세요",
+  "intro-organization": "기관",
+  "intro-organization-desc": "몇 분 안에 프로젝트를 만들고 자금을 확보하세요",
+  "intro-create-account-header": "계정 만들기",
+  "intro-create-account-subheader": "모두에게 변화를 만들 기회를 제공합니다",
+  "intro-continue-button": "계속하기",
+  "intro-already-account": "이미 계정이 있나요? ",
+  "intro-login": "로그인",
+  "intro-login-with-socious": "소셔스 ID로 생성 또는 로그인",
+  "select-identity-create-title": "프로젝트 생성"
+}
