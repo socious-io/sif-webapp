@@ -34,7 +34,7 @@ const CreatePreview: React.FC = () => {
         </div>
         <div className={styles.titles}>{translate('create-preview-social-cause')}</div>
         <div className={styles.values}>
-          <span>{social_cause}</span>
+          <span>{translate(social_cause)}</span>
         </div>
         <div className={styles.titles}>{translate('create-preview-website')}</div>
         <div className={styles.values}>{website}</div>
