@@ -27,7 +27,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             text={description}
             isMarkdown
             seeMoreButton={false}
-            customStyle="mt-3 leading-6 text-Gray-light-mode-600"
+            customStyle="mt-3 leading-8 text-Gray-light-mode-600 line-clamp-3"
           />
         </div>
         <div className="flex items-center justify-between">
