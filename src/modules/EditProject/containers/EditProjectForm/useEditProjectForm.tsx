@@ -1,9 +1,10 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import { editProjectAdaptor, socialCausesToCategoryAdaptor, uploadMediaAdaptor } from 'src/core/adaptors';
 import { Project } from 'src/core/api';
+import Connect from 'src/modules/General/components/ConnectButton';
 import { Files } from 'src/modules/General/components/ProgressFileUploader/index.types';
 import * as yup from 'yup';
 
@@ -48,6 +49,7 @@ export const useEditProjectForm = () => {
   const [attachments, setAttachments] = useState<Files[]>([]);
   const [showEditModal, setShowEditModal] = useState(false);
   const [uneditedAttachment, setUneditedAttachment] = useState<File | null>(null);
+  const { ConnectButton, address } = Connect();
 
   const onDropFiles = async (newFiles: File[]) => {
     if (newFiles.length > 0) {
@@ -84,6 +86,11 @@ export const useEditProjectForm = () => {
     await editProjectAdaptor({ ...project, ...formData });
     navigate(`/projects/${project.id}`);
   };
+  useEffect(() => {
+    if (address) {
+      setValue('wallet_address', address);
+    }
+  }, [address]);
 
   const description = watch('description') || '';
   const imagePreview = watch('cover_url');
@@ -119,5 +126,6 @@ export const useEditProjectForm = () => {
     handleModalClose,
     uneditedAttachment,
     handleEditComplete,
+    ConnectButton,
   };
 };
