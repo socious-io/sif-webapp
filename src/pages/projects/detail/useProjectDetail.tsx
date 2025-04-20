@@ -30,7 +30,9 @@ export const useProjectDetail = () => {
 
   const onEditProject = () => navigate(`/${projectId}/edit`);
 
-  const onVote = () => navigate('vote');
+  const onVote = () => {
+    currentIdentity ? navigate('vote') : navigate('/intro');
+  };
 
   return {
     data: { detail, projectId, isOwner, roundIsClosed, round, isShared },
