@@ -5,15 +5,13 @@ import { RootState } from 'src/store';
 
 import { SelectedEmoji } from '../index.types';
 
-// import { useFeedsContext } from '../contexts/feeds.context';
-
 export const useReplies = (postId: string, commentId: string, list: Comment[]) => {
   const currentIdentity = useSelector<RootState, CurrentIdentity | undefined>(state => {
     return state.identity.entities.find(identity => identity.current);
   });
   const currentIdentityId = currentIdentity?.id;
   // const { state, dispatch } = useFeedsContext();
-  const { replies } = state || {};
+  // const { replies } = state || {};
   const [openEmojiPicker, setOpenEmojiPicker] = useState('');
   const [emojis, setEmojis] = useState<Record<string, SelectedEmoji[]>>({});
   const defaultRecommendedEmojis = [
@@ -22,35 +20,35 @@ export const useReplies = (postId: string, commentId: string, list: Comment[]) =
     { emoji: '🙂', identities: [] },
   ];
 
-  useEffect(() => {
-    const repliesWithEmojisMap: Record<string, SelectedEmoji[]> = {};
-    list.forEach(reply => {
-      const replyId = reply.id;
-      const existingEmojis: SelectedEmoji[] = [];
-      (reply.emojis || []).forEach(emoji => {
-        if (!emoji.identity) {
-          return { emoji: emoji.emoji, identities: [] };
-        }
-        const index = existingEmojis.findIndex(item => item.emoji === emoji.emoji);
-        if (index !== -1) {
-          existingEmojis[index].identities.push(emoji.identity);
-        } else {
-          existingEmojis.push({ emoji: emoji.emoji, identities: [emoji.identity] });
-        }
-      });
-      const mergedEmojis = defaultRecommendedEmojis.map(defaultEmoji => {
-        const existingEmoji = existingEmojis.find(emoji => emoji.emoji === defaultEmoji.emoji);
-        return existingEmoji ? { ...defaultEmoji, identities: existingEmoji.identities } : defaultEmoji;
-      });
-      existingEmojis.forEach(existingEmoji => {
-        if (!mergedEmojis.find(emoji => emoji.emoji === existingEmoji.emoji)) {
-          mergedEmojis.push(existingEmoji);
-        }
-      });
-      repliesWithEmojisMap[replyId] = mergedEmojis;
-    });
-    setEmojis(repliesWithEmojisMap);
-  }, [list]);
+  // useEffect(() => {
+  //   const repliesWithEmojisMap: Record<string, SelectedEmoji[]> = {};
+  //   list.forEach(reply => {
+  //     const replyId = reply.id;
+  //     const existingEmojis: SelectedEmoji[] = [];
+  //     (reply.emojis || []).forEach(emoji => {
+  //       if (!emoji.identity) {
+  //         return { emoji: emoji.emoji, identities: [] };
+  //       }
+  //       const index = existingEmojis.findIndex(item => item.emoji === emoji.emoji);
+  //       if (index !== -1) {
+  //         existingEmojis[index].identities.push(emoji.identity);
+  //       } else {
+  //         existingEmojis.push({ emoji: emoji.emoji, identities: [emoji.identity] });
+  //       }
+  //     });
+  //     const mergedEmojis = defaultRecommendedEmojis.map(defaultEmoji => {
+  //       const existingEmoji = existingEmojis.find(emoji => emoji.emoji === defaultEmoji.emoji);
+  //       return existingEmoji ? { ...defaultEmoji, identities: existingEmoji.identities } : defaultEmoji;
+  //     });
+  //     existingEmojis.forEach(existingEmoji => {
+  //       if (!mergedEmojis.find(emoji => emoji.emoji === existingEmoji.emoji)) {
+  //         mergedEmojis.push(existingEmoji);
+  //       }
+  //     });
+  //     repliesWithEmojisMap[replyId] = mergedEmojis;
+  //   });
+  //   setEmojis(repliesWithEmojisMap);
+  // }, [list]);
 
   const reactedCurrentIdentity = (emojiName: string, replyId: string) => {
     const findIdentity = emojis[replyId]?.find(emoji => {

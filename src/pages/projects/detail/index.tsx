@@ -9,8 +9,8 @@ import HorizontalTabs from 'src/modules/General/components/HorizontalTabs';
 import Icon from 'src/modules/General/components/Icon';
 import Link from 'src/modules/General/components/Link';
 import VerticalTabs from 'src/modules/General/components/VerticalTabs';
-import Comments from 'src/modules/Projects/components/Comments';
 import VoteDetailCard from 'src/modules/Projects/components/VoteDetailCard';
+import CommentSection from 'src/modules/Projects/containers/CommentSection';
 import variables from 'src/styles/constants/_exports.module.scss';
 
 import { useProjectDetail } from './useProjectDetail';
@@ -156,78 +156,7 @@ export const ProjectDetail = () => {
           />
         )}
       </div>
-      <Comments
-        postId="post123"
-        list={[
-          {
-            id: 'comment1',
-            post_id: 'post123',
-            content: 'This is a great post!',
-            reply_id: undefined,
-            replied: false,
-            likes: 5,
-            reported: false,
-            liked: true,
-            identity_meta: {
-              name: 'John Doe',
-              avatar: 'https://example.com/avatar1.jpg',
-            },
-            identity_type: 'users',
-            created_at: new Date('2025-04-01T10:00:00Z'),
-            updated_at: new Date('2025-04-01T10:00:00Z'),
-            emojis: [
-              { emoji: '👍', count: 3 },
-              { emoji: '❤️', count: 2 },
-            ],
-          },
-          {
-            id: 'comment2',
-            post_id: 'post123',
-            content: 'Interesting perspective',
-            reply_id: undefined,
-            replied: true,
-            likes: 3,
-            reported: false,
-            liked: false,
-            identity_meta: {
-              name: 'Jane Smith',
-              avatar: 'https://example.com/avatar2.jpg',
-            },
-            identity_type: 'users',
-            created_at: new Date('2025-04-01T11:00:00Z'),
-            updated_at: new Date('2025-04-01T11:00:00Z'),
-          },
-        ]}
-        onReply={userInfo => console.log(`Replying to comment ${userInfo.commentId} by ${userInfo.replyTo}`)}
-        replies={{
-          comment2: {
-            items: [
-              {
-                id: 'reply1',
-                post_id: 'post123',
-                content: 'I agree with you!',
-                reply_id: 'comment2',
-                replied: false,
-                likes: 2,
-                reported: false,
-                liked: false,
-                identity_meta: {
-                  name: 'Bob Wilson',
-                  avatar: 'https://example.com/avatar3.jpg',
-                },
-                identity_type: 'users',
-                created_at: new Date('2025-04-01T11:30:00Z'),
-                updated_at: new Date('2025-04-01T11:30:00Z'),
-              },
-            ],
-            total_count: 1,
-          },
-        }}
-        onShowReplies={commentId => console.log(`Showing replies for comment ${commentId}`)}
-        showSeeMoreComments={2 < 5} // 2 items vs 5 total
-        onSeeMoreCommentsClick={() => console.log('Loading more comments...')}
-        onSeeMoreRepliesClick={commentId => console.log(`Loading more replies for comment ${commentId}`)}
-      />
+      <CommentSection projectId={projectId} />
     </div>
   );
 };

@@ -4,23 +4,19 @@ import { Comment, CurrentIdentity } from 'src/core/api';
 import { RootState } from 'src/store';
 
 import { SelectedEmoji } from './index.types';
-// import { useFeedsContext } from '../contexts/feeds.context';
 
-export const useComments = (postId: string, list: Comment[]) => {
+export const useComments = (postId: string, list: Comment[], reactProjectComment) => {
   const currentIdentity = useSelector<RootState, CurrentIdentity | undefined>(state => {
     return state.identity.entities.find(identity => identity.current);
   });
   const currentIdentityId = currentIdentity?.id;
-  // const { state, dispatch } = useFeedsContext();
-  // const { comments } = state || {};
-  // const { comments } = state || {};
 
   const [openEmojiPicker, setOpenEmojiPicker] = useState('');
   const [emojis, setEmojis] = useState<Record<string, SelectedEmoji[]>>({});
   const defaultRecommendedEmojis = [
-    { emoji: '❤️', identities: [] },
-    { emoji: '👌', identities: [] },
-    { emoji: '🙂', identities: [] },
+    { emoji: '❤️', count: 0 },
+    { emoji: '👌', count: 0 },
+    { emoji: '🙂', count: 0 },
   ];
 
   useEffect(() => {
@@ -28,20 +24,20 @@ export const useComments = (postId: string, list: Comment[]) => {
     list.forEach(comment => {
       const commentId = comment.id;
       const existingEmojis: SelectedEmoji[] = [];
-      (comment.emojis || []).forEach(emoji => {
-        if (!emoji.identity) {
-          return { emoji: emoji.emoji, identities: [] };
+      (comment.reactions || []).forEach(reaction => {
+        if (!reaction.count) {
+          return { emoji: reaction.reaction, count: 0 };
         }
-        const index = existingEmojis.findIndex(item => item.emoji === emoji.emoji);
+        const index = existingEmojis.findIndex(item => item.emoji === reaction.reaction);
         if (index !== -1) {
-          existingEmojis[index].identities.push(emoji.identity);
+          existingEmojis[index].count++;
         } else {
-          existingEmojis.push({ emoji: emoji.emoji, identities: [emoji.identity] });
+          existingEmojis.push({ emoji: reaction.reaction, count: reaction.count });
         }
       });
       const mergedEmojis = defaultRecommendedEmojis.map(defaultEmoji => {
         const existingEmoji = existingEmojis.find(emoji => emoji.emoji === defaultEmoji.emoji);
-        return existingEmoji ? { ...defaultEmoji, identities: existingEmoji.identities } : defaultEmoji;
+        return existingEmoji ? { ...defaultEmoji, count: existingEmoji.count } : defaultEmoji;
       });
       existingEmojis.forEach(existingEmoji => {
         if (!mergedEmojis.find(emoji => emoji.emoji === existingEmoji.emoji)) {
@@ -50,18 +46,21 @@ export const useComments = (postId: string, list: Comment[]) => {
       });
       commentsWithEmojisMap[commentId] = mergedEmojis;
     });
+    console.log(commentsWithEmojisMap, 'MMM');
     setEmojis(commentsWithEmojisMap);
   }, [list]);
 
   const reactedCurrentIdentity = (emojiName: string, commentId: string) => {
-    const findIdentity = emojis[commentId]?.find(emoji => {
-      if (emojiName === emoji.emoji) {
-        return emoji.identities.findIndex(identity => identity.id === currentIdentityId) !== -1;
-      } else {
-        return false;
-      }
-    });
-    return findIdentity;
+    // const findIdentity = emojis[commentId]?.find(emoji => {
+    //   //if user identity reaction is same -- otherwise none
+    //   if (emojiName === emoji.emoji) {
+    //     return emoji.reac.findIndex(identity => identity.id === currentIdentityId) !== -1;
+    //   } else {
+    //     return false;
+    //   }
+    // });
+    // return findIdentity;
+    return;
   };
 
   const updateCommentWithEmojis = (commentId: string, newEmojis: SelectedEmoji[]) => {
@@ -105,7 +104,7 @@ export const useComments = (postId: string, list: Comment[]) => {
         setEmojis({ ...emojis, [commentId]: updatedEmojis });
         updateCommentWithEmojis(commentId, updatedEmojis);
       } else {
-        // await reactPostComment(postId, commentId, emojiName);
+        await reactProjectComment(commentId, emojiName);
         const updatedEmojis = (emojis[commentId] || []).map(emoji => {
           if (emoji.emoji === emojiName) {
             return { ...emoji, identities: [...emoji.identities, { id: currentIdentityId }] };

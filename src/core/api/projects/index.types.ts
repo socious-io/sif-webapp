@@ -42,17 +42,21 @@ export interface Comment {
   likes: number;
   reported: boolean;
   liked: boolean;
-  identity_meta: Identity['meta'];
+  identity: Identity;
   identity_type: Identity['type'];
   created_at: Date;
   updated_at: Date;
-  emojis?: Emoji[];
+  reactions?: Reaction[];
+  children?: Comment[];
 }
 
-export interface Emoji {
-  created_at: Date;
-  emoji: string;
-  id: string;
-  identity: Identity;
+export interface Reaction {
+  count: number;
+  reaction: string;
 }
 export type CommentsRes = PaginateResV3<Comment>;
+
+export interface CommentReq {
+  content: string;
+  parent_id?: string;
+}

@@ -4,7 +4,7 @@ export type ReplyInfo = { replyTo: string; commentId: string };
 
 export type SelectedEmoji = {
   emoji: string;
-  identities: Partial<Identity>[];
+  count: number;
 };
 
 export interface CommentsProps {
@@ -13,7 +13,6 @@ export interface CommentsProps {
   onReply: (userInfo: ReplyInfo) => void;
   onShowReplies?: (commentId: string) => void;
   replies?: Record<string, CommentsRes>;
-  showSeeMoreComments?: boolean;
-  onSeeMoreCommentsClick?: () => void;
   onSeeMoreRepliesClick?: (commentId: string) => void;
+  reactProjectComment: (commentId: string, reaction: string) => void;
 }

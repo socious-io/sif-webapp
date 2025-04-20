@@ -17,18 +17,19 @@ const Comments: React.FC<CommentsProps> = ({
   onReply,
   onShowReplies,
   replies = [],
-  showSeeMoreComments = false,
-  onSeeMoreCommentsClick,
   onSeeMoreRepliesClick,
+  reactProjectComment,
 }) => {
   const {
     data: { emojis, openEmojiPicker },
     operations: { setOpenEmojiPicker, onPreviewClick, onEmojiSelect },
-  } = useComments(postId, list);
+  } = useComments(postId, list, reactProjectComment);
+  console.log('comments list', list);
   return (
     <>
       {list.map(item => {
-        const { type, name, profileImage } = getIdentityMeta(item.identity_meta);
+        const { type, name, profileImage } = getIdentityMeta(item.identity);
+        console.log('item', item.children);
         return (
           <div key={item.id} className="flex gap-3 items-start">
             <Avatar type={type || 'users'} size="2rem" img={(profileImage as string) || ''} />
@@ -60,7 +61,7 @@ const Comments: React.FC<CommentsProps> = ({
                       className="emoji-font cursor-pointer bg-Gray-light-mode-50 py-1 px-2 rounded-xl text-sm text-Gray-light-mode-600"
                       onClick={() => onPreviewClick(emoji.emoji, item.id)}
                     >
-                      {!!emoji?.identities?.length && emoji?.identities?.length}
+                      {!!emoji?.count && emoji?.count}
                       {emoji.emoji}
                     </div>
                   ))}
@@ -79,12 +80,12 @@ const Comments: React.FC<CommentsProps> = ({
                   customStyle="top-[-212px]"
                 />
               )}
-              {replies[item.id] && replies[item.id].showed ? (
+              {item.children ? (
                 <Replies
                   postId={postId}
                   commentId={item.id}
-                  list={replies[item.id].items}
-                  showSeeMore={replies[item.id].items.length < replies[item.id].total_count}
+                  list={item.children}
+                  showSeeMore={true}
                   onSeeMoreClick={() => onSeeMoreRepliesClick?.(item.id)}
                 />
               ) : (
@@ -98,11 +99,6 @@ const Comments: React.FC<CommentsProps> = ({
           </div>
         );
       })}
-      {showSeeMoreComments && (
-        <span className="see-more text-center" onClick={onSeeMoreCommentsClick}>
-          {translate('feeds-see-more')}
-        </span>
-      )}
     </>
   );
 };

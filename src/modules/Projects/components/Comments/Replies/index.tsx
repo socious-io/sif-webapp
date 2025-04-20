@@ -14,7 +14,7 @@ const Replies: React.FC<RepliesProps> = ({ postId, commentId, list, showSeeMore,
     data: { emojis, openEmojiPicker },
     operations: { setOpenEmojiPicker, onPreviewClick, onEmojiSelect },
   } = useReplies(postId, commentId, list);
-
+  console.log('replies list', list);
   return (
     <>
       {list.map(item => {
