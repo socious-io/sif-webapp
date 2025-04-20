@@ -38,6 +38,7 @@ const EditProjectForm: React.FC = () => {
     handleModalClose,
     uneditedAttachment,
     handleEditComplete,
+    ConnectButton,
   } = useEditProjectForm();
 
   return (
@@ -120,7 +121,13 @@ const EditProjectForm: React.FC = () => {
         </>
       </FormColumnTemplate>
       <FormColumnTemplate title={translate('edit-project-wallet')}>
-        <WalletAddress address={wallet_address} />
+        {wallet_address ? (
+          <WalletAddress address={wallet_address} />
+        ) : (
+          <div className="mt-2xl mb-4xl">
+            <ConnectButton />
+          </div>
+        )}
         <AlertMessage
           theme="warning"
           iconName="alert-circle"
