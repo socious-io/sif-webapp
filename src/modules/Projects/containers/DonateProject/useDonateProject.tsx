@@ -83,6 +83,12 @@ export const useDonateProject = (onDonate: (data: DonateReq) => void) => {
       `${BigInt(data.donate) * 1000000n}`,
     );
 
+    console.log(`
+      Source wallet address: ${address}
+      Payout destination ${config.payoutDonationsAddress}
+      donation amount: ${data.donate} (${BigInt(data.donate) * 1000000n} lovelace)
+    `);
+
     const unsignedTx = await tx.build();
     const signedTx = await wallet.signTx(unsignedTx);
     const txHash = await wallet.submitTx(signedTx);
