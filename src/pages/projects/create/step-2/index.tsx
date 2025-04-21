@@ -1,3 +1,4 @@
+import { config } from 'src/config';
 import { translate } from 'src/core/helpers/utils';
 import NameDescriptionForm from 'src/modules/CreateProject/containers/NameDescriptionForm';
 import TwoColumnLayout from 'src/modules/CreateProject/templates/TwoColumnLayout';
@@ -12,9 +13,9 @@ export const CreateProjectStep2 = () => {
         <li>{translate('create-project-step2-question3')}</li>
       </ul>
       <p className="mt-3">
-        Use our project description template{' '}
-        <a href={process.env.PUBLIC_URL + '/document.pdf'} download="MyGoogleDoc.pdf" className="download-button">
-          here
+        {translate('create-project-step2-template')}{' '}
+        <a className="underline" href={config.appBaseURL + '/docs/template.docx'} download="template.docx">
+          {translate('create-project-step2-link')}
         </a>
       </p>
     </>
