@@ -1,4 +1,5 @@
 import { IdentityType } from 'src/core/api';
+import { DateRangeStatus } from 'src/core/helpers/date-converter';
 
 import { PaginateRes } from '..';
 
@@ -28,7 +29,7 @@ export interface Project {
   roundStats?: RoundStats;
   donations?: Donation[];
   voted?: boolean;
-  voteEnded?: boolean;
+  roundStatus?: DateRangeStatus;
 }
 
 export type ProjectRes = PaginateRes<Project>;

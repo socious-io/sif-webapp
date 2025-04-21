@@ -22,3 +22,26 @@ export const isCurrentDateInRange = (startAt: string, endAt: string) => {
 
   return now >= startDate && now < endDate;
 };
+
+export enum DateRangeStatus {
+  BEFORE = 'BEFORE',
+  DURING = 'DURING',
+  AFTER = 'AFTER',
+}
+
+export const getDateRangeStatus = (startDate: Date, endDate: Date): DateRangeStatus => {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const start = new Date(startDate);
+  start.setHours(0, 0, 0, 0);
+  const end = new Date(endDate);
+  end.setHours(0, 0, 0, 0);
+
+  if (end < today) {
+    return DateRangeStatus.AFTER;
+  } else if (start > today) {
+    return DateRangeStatus.BEFORE;
+  } else {
+    return DateRangeStatus.DURING;
+  }
+};
