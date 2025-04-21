@@ -11,6 +11,12 @@ export const CreateProjectStep2 = () => {
         <li>{translate('create-project-step2-question2')}</li>
         <li>{translate('create-project-step2-question3')}</li>
       </ul>
+      <p className="mt-3">
+        Use our project description template{' '}
+        <a href={process.env.PUBLIC_URL + '/document.pdf'} download="MyGoogleDoc.pdf" className="download-button">
+          here
+        </a>
+      </p>
     </>
   );
   return (
