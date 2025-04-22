@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { config } from 'src/config';
 import { CurrentIdentity } from 'src/core/adaptors';
 import { RootState } from 'src/store';
 
@@ -14,7 +15,10 @@ export const useVerifyTopBanner = () => {
   const [hideVerifyBanner, setHideVerifyBanner] = useState(localStorage.getItem('hideVerifiedBanner') === 'true');
   const [openVerifyModal, setOpenVerifyModal] = useState(false);
 
-  const onVerifyIdentity = () => console.log('verify identity and navigate to account center');
+  const onVerifyIdentity = () => {
+    if (type === 'organizations') setOpenVerifyModal(true);
+    else window.open(config.accountCenterURL + '/verification', '_blank');
+  };
 
   const onDismiss = () => {
     localStorage.setItem('hideVerifiedBanner', 'true');
@@ -23,6 +27,7 @@ export const useVerifyTopBanner = () => {
 
   return {
     data: {
+      isAuthenticated: !!currentIdentity,
       type,
       verified,
       hideVerifyBanner,
