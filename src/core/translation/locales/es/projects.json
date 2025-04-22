@@ -44,6 +44,8 @@
   "create-project-step2-question1": "¿Quién eres y para qué estás recaudando fondos?",
   "create-project-step2-question2": "¿Por qué es importante esta causa para ti?",
   "create-project-step2-question3": "¿Cómo se utilizarán los fondos?",
+  "create-project-step2-template": "Usa nuestra plantilla de descripción del proyecto",
+  "create-project-step2-link": "aquí",
   "project-name-label": "Nombre del proyecto",
   "project-name-placeholder": "¿Cuál es el nombre de tu proyecto?",
   "project-website-label": "Sitio web (opcional)",

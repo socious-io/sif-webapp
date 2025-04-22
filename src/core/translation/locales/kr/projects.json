@@ -44,6 +44,8 @@
   "create-project-step2-question1": "당신은 누구이며 무엇을 위해 자금을 모으고 있나요?",
   "create-project-step2-question2": "이 원인이 당신에게 왜 중요한가요?",
   "create-project-step2-question3": "자금은 어떻게 사용될 예정인가요?",
+  "create-project-step2-template": "우리의 프로젝트 설명 템플릿을 사용하세요",
+  "create-project-step2-link": "여기",
   "project-name-label": "프로젝트 이름",
   "project-name-placeholder": "당신의 프로젝트 이름은 무엇인가요?",
   "project-website-label": "웹사이트 (선택 사항)",

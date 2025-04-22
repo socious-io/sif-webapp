@@ -45,6 +45,8 @@
   "create-project-step2-question1": "あなたは誰で、何のために資金を集めていますか？",
   "create-project-step2-question2": "この目的があなたにとって重要な理由は？",
   "create-project-step2-question3": "資金はどのように使われますか？",
+  "create-project-step2-template": "プロジェクト説明のテンプレートを使用してください",
+  "create-project-step2-link": "こちら",
   "project-name-label": "プロジェクト名",
   "project-name-placeholder": "プロジェクト名は？",
   "project-website-label": "ウェブサイト（任意）",
