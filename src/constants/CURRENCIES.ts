@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { config } from 'src/config';
 
 export type CurrencyType = {
   label: string;
@@ -20,7 +21,8 @@ export const CURRENCIES: CurrencyType[] = [
       if (cachedRate && cachedTime && Number(cachedTime) > now - cacheExpireTime) {
         return Math.round(amount * Number(cachedRate) * 100) / 100;
       }
-      const api = 'https://api.coincap.io/v2/rates/cardano';
+
+      const api = config.rates.ada;
       const { status, data } = await axios.get(api);
       if (status !== 200) {
         console.log(`Error ${status} in fetching ${api} to get ADA rate`);
