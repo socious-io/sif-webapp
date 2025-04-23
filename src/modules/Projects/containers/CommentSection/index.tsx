@@ -1,18 +1,15 @@
 import { Skeleton, Box } from '@mui/material';
 import { translate } from 'src/core/helpers/utils';
+import Comments from 'src/modules/Projects/components/Comments';
+import SendBox from 'src/modules/Projects/components/sendBox';
 
 import { useCommentSection } from './useCommentSection';
-import Comments from '../../components/Comments';
-import SendBox from '../../components/sendBox';
 
 const CommentSection = ({ projectId }: { projectId: string }) => {
   const {
     commentList,
-    repliesByComment,
-    toggleReplyVisibility,
-    state,
     avatarImage,
-    reactProjectComment,
+    reactToComment,
     onReplyClick,
     showReplySection,
     showMore,
@@ -27,13 +24,13 @@ const CommentSection = ({ projectId }: { projectId: string }) => {
     handleSendComment,
     handleSendReply,
     replyCommentId,
+    unreactToComment,
+    loading,
   } = useCommentSection(projectId);
-
-  const isLoading = state.comments.length === 0;
 
   return (
     <div className="mt-10 flex flex-col gap-6">
-      {isLoading ? (
+      {loading ? (
         <Box>
           {[...Array(3)].map((_, index) => (
             <Skeleton key={index} variant="rectangular" height={80} sx={{ marginBottom: 2, borderRadius: 1 }} />
@@ -46,12 +43,8 @@ const CommentSection = ({ projectId }: { projectId: string }) => {
           onReply={userInfo => {
             onReplyClick(userInfo);
           }}
-          replies={repliesByComment}
-          onShowReplies={commentId => {
-            toggleReplyVisibility(commentId);
-          }}
-          onSeeMoreRepliesClick={commentId => {}}
-          reactProjectComment={reactProjectComment}
+          reactProjectComment={reactToComment}
+          unreactProjectComment={unreactToComment}
         />
       )}
       {showMore && (

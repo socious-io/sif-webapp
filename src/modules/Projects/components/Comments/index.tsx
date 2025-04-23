@@ -2,14 +2,14 @@ import React from 'react';
 import { getIdentityMeta } from 'src/core/adaptors/users/index.adaptors';
 import { toRelativeTime } from 'src/core/helpers/relative-time';
 import { translate } from 'src/core/helpers/utils';
+import Avatar from 'src/modules/General/components/Avatar';
+import CustomEmojiPicker from 'src/modules/General/components/EmojiPicker';
+import ExpandableText from 'src/modules/General/components/ExpandableText';
+import Icon from 'src/modules/General/components/Icon';
 
 import { CommentsProps } from './index.types';
 import Replies from './Replies';
 import { useComments } from './useComments';
-import Avatar from '../../../General/components/Avatar';
-import CustomEmojiPicker from '../../../General/components/EmojiPicker';
-import ExpandableText from '../../../General/components/ExpandableText';
-import Icon from '../../../General/components/Icon';
 
 const Comments: React.FC<CommentsProps> = ({
   postId,
@@ -19,17 +19,16 @@ const Comments: React.FC<CommentsProps> = ({
   replies = [],
   onSeeMoreRepliesClick,
   reactProjectComment,
+  unreactProjectComment,
 }) => {
   const {
     data: { emojis, openEmojiPicker },
     operations: { setOpenEmojiPicker, onPreviewClick, onEmojiSelect },
-  } = useComments(postId, list, reactProjectComment);
-  console.log('comments list', list);
+  } = useComments(list, reactProjectComment, unreactProjectComment);
   return (
     <>
       {list.map(item => {
         const { type, name, profileImage } = getIdentityMeta(item.identity);
-        console.log('item', item.children);
         return (
           <div key={item.id} className="flex gap-3 items-start">
             <Avatar type={type || 'users'} size="2rem" img={(profileImage as string) || ''} />
@@ -52,7 +51,7 @@ const Comments: React.FC<CommentsProps> = ({
                   className="text-Gray-light-mode-500"
                   cursor="pointer"
                   containerClass="cursor-pointer bg-Gray-light-mode-50 py-1 px-2 rounded-xl"
-                  onClick={() => setOpenEmojiPicker(item.id)}
+                  onClick={() => setOpenEmojiPicker(true)}
                 />
                 {!!emojis[item.id]?.length &&
                   emojis[item.id].map(emoji => (
@@ -72,11 +71,11 @@ const Comments: React.FC<CommentsProps> = ({
                   {translate('feeds-reply')}
                 </span>
               </div>
-              {openEmojiPicker === item.id && (
+              {openEmojiPicker && (
                 <CustomEmojiPicker
                   open={!!openEmojiPicker}
-                  handleClose={() => setOpenEmojiPicker('')}
-                  onEmojiSelect={emoji => onEmojiSelect(emoji.native, item.id)}
+                  handleClose={() => setOpenEmojiPicker(false)}
+                  onEmojiSelect={({ native }) => onEmojiSelect(native, item.id)}
                   customStyle="top-[-212px]"
                 />
               )}
@@ -87,6 +86,7 @@ const Comments: React.FC<CommentsProps> = ({
                   list={item.children}
                   showSeeMore={true}
                   onSeeMoreClick={() => onSeeMoreRepliesClick?.(item.id)}
+                  reactProjectComment={reactProjectComment}
                 />
               ) : (
                 (replies[item.id] || item.replied) && (

@@ -2,7 +2,6 @@ import { useEffect, useReducer, useState } from 'react';
 import { useSelector } from 'react-redux';
 import {
   addComment,
-  CommentsRes,
   getComments,
   Comment,
   CurrentIdentity,
@@ -14,17 +13,14 @@ import { RootState } from 'src/store';
 
 type StateType = {
   comments: Comment[];
-  replies: Record<string, Comment & { showed?: boolean }>;
 };
 
-type ActionType = { type: 'comments'; value: StateType['comments'] } | { type: 'replies'; value: StateType['replies'] };
+type ActionType = { type: 'comments'; value: StateType['comments'] };
 
 const feedReducer = (state: StateType, action: ActionType): StateType => {
   switch (action.type) {
     case 'comments':
       return { ...state, comments: action.value };
-    case 'replies':
-      return { ...state, replies: action.value };
     default:
       throw new Error();
   }
@@ -42,15 +38,14 @@ export const useCommentSection = (projectId: string) => {
   const [replyText, setReplyText] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
   const limit = 5;
 
   const [state, dispatch] = useReducer(feedReducer, {
     comments: [],
-    replies: {},
   });
 
   const postComment = async (postId: string, content: string, parentId?: string) => {
-    console.log('parent', parentId);
     const newComment = await addComment(postId, { content, ...(parentId && { parent_id: parentId }) });
     dispatch({
       type: 'comments',
@@ -59,30 +54,216 @@ export const useCommentSection = (projectId: string) => {
     return newComment;
   };
 
-  const addReply = (reply: CommentsRes & { showed?: boolean }) => {
-    dispatch({
-      type: 'replies',
-      value: { ...state.replies, [reply.id]: reply },
-    });
-  };
-
-  const toggleReplyVisibility = (replyId: string) => {
-    dispatch({
-      type: 'replies',
-      value: {
-        ...state.replies,
-        [replyId]: { ...state.replies[replyId], showed: !state.replies[replyId].showed },
-      },
-    });
-  };
-
   const fetchComments = async (projectId: string, pageNum = 1) => {
-    const comments = await getComments(projectId, { page: pageNum, limit });
-    dispatch({
-      type: 'comments',
-      value: pageNum === 1 ? comments.results : [...state.comments, ...comments.results],
-    });
-    setShowMore(comments.results.length > 0 && state.comments.length + comments.results.length < (comments.total || 0));
+    setLoading(true);
+    try {
+      const comments = await getComments(projectId, { page: pageNum, limit });
+      dispatch({
+        type: 'comments',
+        value: pageNum === 1 ? comments.results : [...state.comments, ...comments.results],
+      });
+      setShowMore(
+        comments.results.length > 0 && state.comments.length + comments.results.length < (comments.total || 0),
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const reactToComment = async (commentId: string, reaction: string, replyId?: string) => {
+    try {
+      if (replyId) {
+        const parentComment = state.comments.find(c => c.id === commentId);
+        const reply = parentComment?.children?.find(r => r.id === replyId);
+        if (!reply) return;
+        if (reply.identity_reaction === reaction) {
+          await unreactProjectComment(commentId);
+          const updatedComments = state.comments.map(c => {
+            if (c.id === replyId) {
+              return {
+                ...c,
+                children: (c.children || []).map(r =>
+                  r.id === commentId
+                    ? {
+                        ...r,
+                        reactions: (r.reactions || [])
+                          .map(re => (re.reaction === reaction ? { ...re, count: re.count - 1 } : re))
+                          .filter(re => re.count > 0),
+                        identity_reaction: undefined,
+                        liked: false,
+                      }
+                    : r,
+                ),
+              };
+            }
+            return c;
+          });
+          dispatch({
+            type: 'comments',
+            value: updatedComments,
+          });
+        } else {
+          await reactProjectComment(commentId, reaction);
+          const updatedComments = state.comments.map(c => {
+            if (c.id === replyId) {
+              return {
+                ...c,
+                children: (c.children || []).map(r =>
+                  r.id === commentId
+                    ? {
+                        ...r,
+                        reactions: (() => {
+                          let updatedReactions = r.reactions || [];
+                          if (r.identity_reaction) {
+                            updatedReactions = updatedReactions
+                              .map(re => (re.reaction === r.identity_reaction ? { ...re, count: re.count - 1 } : re))
+                              .filter(re => re.count > 0);
+                          }
+                          const reactionExists = updatedReactions.find(re => re.reaction === reaction);
+                          if (reactionExists) {
+                            updatedReactions = updatedReactions.map(re =>
+                              re.reaction === reaction ? { ...re, count: re.count + 1 } : re,
+                            );
+                          } else {
+                            updatedReactions = [...updatedReactions, { reaction, count: 1 }];
+                          }
+                          return updatedReactions;
+                        })(),
+                        identity_reaction: reaction,
+                        liked: reaction === 'LIKE',
+                      }
+                    : r,
+                ),
+              };
+            }
+            return c;
+          });
+          dispatch({
+            type: 'comments',
+            value: updatedComments,
+          });
+        }
+      } else {
+        const comment = state.comments.find(c => c.id === commentId);
+        if (!comment) return;
+
+        if (comment.identity_reaction === reaction) {
+          await unreactProjectComment(commentId);
+          const updatedComments = state.comments.map(c => {
+            if (c.id === commentId) {
+              const updatedReactions = (c.reactions || [])
+                .map(r => (r.reaction === reaction ? { ...r, count: r.count - 1 } : r))
+                .filter(r => r.count > 0);
+              return {
+                ...c,
+                reactions: updatedReactions,
+                identity_reaction: undefined,
+                liked: false,
+              };
+            }
+            return c;
+          });
+          dispatch({
+            type: 'comments',
+            value: updatedComments,
+          });
+        } else {
+          await reactProjectComment(commentId, reaction);
+          const updatedComments = state.comments.map(c => {
+            if (c.id === commentId) {
+              let updatedReactions = c.reactions || [];
+              if (c.identity_reaction) {
+                updatedReactions = updatedReactions
+                  .map(r => (r.reaction === c.identity_reaction ? { ...r, count: r.count - 1 } : r))
+                  .filter(r => r.count > 0);
+              }
+              const reactionExists = updatedReactions.find(r => r.reaction === reaction);
+              if (reactionExists) {
+                updatedReactions = updatedReactions.map(r =>
+                  r.reaction === reaction ? { ...r, count: r.count + 1 } : r,
+                );
+              } else {
+                updatedReactions = [...updatedReactions, { reaction, count: 1 }];
+              }
+              return {
+                ...c,
+                reactions: updatedReactions,
+                identity_reaction: reaction,
+                liked: reaction === 'LIKE',
+              };
+            }
+            return c;
+          });
+          dispatch({
+            type: 'comments',
+            value: updatedComments,
+          });
+        }
+      }
+    } catch (error) {
+      setError(translate('feeds-comment-reaction-error'));
+    }
+  };
+
+  const unreactToComment = async (commentId: string, replyId?: string) => {
+    try {
+      if (replyId) {
+        const parentComment = state.comments.find(c => c.id === replyId);
+        const reply = parentComment?.children?.find(r => r.id === commentId);
+        if (!reply || !reply.identity_reaction) return;
+
+        await unreactProjectComment(commentId);
+        const updatedComments = state.comments.map(c => {
+          if (c.id === replyId) {
+            return {
+              ...c,
+              children: (c.children || []).map(r =>
+                r.id === commentId
+                  ? {
+                      ...r,
+                      reactions: (r.reactions || [])
+                        .map(re => (re.reaction === r.identity_reaction ? { ...re, count: re.count - 1 } : re))
+                        .filter(re => re.count > 0),
+                      identity_reaction: undefined,
+                      liked: false,
+                    }
+                  : r,
+              ),
+            };
+          }
+          return c;
+        });
+        dispatch({
+          type: 'comments',
+          value: updatedComments,
+        });
+      } else {
+        const comment = state.comments.find(c => c.id === commentId);
+        if (!comment || !comment.identity_reaction) return;
+
+        await unreactProjectComment(commentId);
+        const updatedComments = state.comments.map(c => {
+          if (c.id === commentId) {
+            const updatedReactions = (c.reactions || [])
+              .map(r => (r.reaction === comment.identity_reaction ? { ...r, count: r.count - 1 } : r))
+              .filter(r => r.count > 0);
+            return {
+              ...c,
+              reactions: updatedReactions,
+              identity_reaction: undefined,
+              liked: false,
+            };
+          }
+          return c;
+        });
+        dispatch({
+          type: 'comments',
+          value: updatedComments,
+        });
+      }
+    } catch (error) {
+      setError(translate('feeds-comment-unreaction-error'));
+    }
   };
 
   const seeMore = () => {
@@ -91,7 +272,6 @@ export const useCommentSection = (projectId: string) => {
   };
 
   const onReplyClick = userInfo => {
-    console.log('userInfo', userInfo.commentId);
     setReplyCommentId(userInfo.commentId);
     setShowReplySection(true);
   };
@@ -116,7 +296,6 @@ export const useCommentSection = (projectId: string) => {
   };
 
   const handleSendReply = async () => {
-    console.log('handleSendReply', replyCommentId);
     if (!replyText.trim()) {
       setError(translate('feeds-empty-comment-error'));
       return;
@@ -126,7 +305,20 @@ export const useCommentSection = (projectId: string) => {
     setError(null);
 
     try {
-      await postComment(projectId, replyText, replyCommentId);
+      const newReply = await postComment(projectId, replyText, replyCommentId);
+      const updatedComments = state.comments.map(comment => {
+        if (comment.id === replyCommentId) {
+          return {
+            ...comment,
+            children: [...(comment.children || []), newReply],
+          };
+        }
+        return comment;
+      });
+      dispatch({
+        type: 'comments',
+        value: updatedComments,
+      });
       setReplyText('');
       setShowReplySection(false);
     } catch (error) {
@@ -143,30 +335,16 @@ export const useCommentSection = (projectId: string) => {
   }, [projectId]);
 
   const commentList = state.comments;
-
-  const repliesByComment = Object.values(state.replies).reduce((acc, reply) => {
-    if (reply.reply_id) {
-      acc[reply.reply_id] = {
-        items: [...(acc[reply.reply_id]?.items || []), reply],
-        total_count: (acc[reply.reply_id]?.total_count || 0) + 1,
-      };
-    }
-    return acc;
-  }, {});
-
-  const avatarImage = currentIdentity?.type === 'organizations' ? currentIdentity.meta.logo.url : '';
+  const avatarImage = currentIdentity?.img;
 
   return {
     state,
     postComment,
-    addReply,
-    toggleReplyVisibility,
     fetchComments,
     commentList,
-    repliesByComment,
     avatarImage,
-    reactProjectComment,
-    unreactProjectComment,
+    reactToComment,
+    unreactToComment,
     onReplyClick,
     showReplySection,
     setShowReplySection,
@@ -183,5 +361,6 @@ export const useCommentSection = (projectId: string) => {
     handleSendComment,
     handleSendReply,
     replyCommentId,
+    loading,
   };
 };

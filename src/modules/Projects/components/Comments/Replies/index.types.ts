@@ -11,4 +11,5 @@ export interface RepliesProps {
   list: Comment[];
   showSeeMore?: boolean;
   onSeeMoreClick?: () => void;
+  reactProjectComment: (commentId: string, reaction: string) => void;
 }

@@ -154,5 +154,9 @@
   "your-projects": {
     "title": "あなたのプロジェクト",
     "create-new": "新しいプロジェクトを作成"
-  }
+  },
+  "feeds-see-more": "もっと見る",
+  "feeds-reply": "返信",
+  "feeds-reply-to": "{{name}}に返信...",
+  "feeds-action-comment": "コメント"
 }

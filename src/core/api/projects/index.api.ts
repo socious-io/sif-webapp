@@ -1,5 +1,5 @@
 import { FilterReq, PaginateReq } from '..';
-import { get, post, patch } from '../http';
+import { get, post, patch, del } from '../http';
 import { CommentReq, CommentsRes, DonationReq, Project, ProjectsRes, Comment } from './index.types';
 
 export async function getProjects(params: PaginateReq, filters?: FilterReq): Promise<ProjectsRes> {
@@ -38,10 +38,6 @@ export async function reactProjectComment(commentId: string, reaction: string): 
   return (await post<CommentsRes>(`projects/comments/${commentId}/reactions`, { reaction })).data;
 }
 
-export async function unreactProjectComment(commentId: string, reaction: string): Promise<CommentsRes> {
-  return (await post<CommentsRes>(`projects/comments/${commentId}/reactions`, { reaction })).data;
+export async function unreactProjectComment(commentId: string): Promise<CommentsRes> {
+  return (await del<CommentsRes>(`projects/comments/${commentId}/reactions`)).data;
 }
-
-// export async function getReplies(projectId: string): Promise<CommentsRes> {
-//   return (await get<CommentsRes>(`projects/${projectId}/comments`)).data;
-// }

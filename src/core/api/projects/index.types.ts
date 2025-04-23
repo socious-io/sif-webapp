@@ -41,6 +41,7 @@ export interface Comment {
   replied: boolean;
   likes: number;
   reported: boolean;
+  identity_reaction?: string;
   liked: boolean;
   identity: Identity;
   identity_type: Identity['type'];

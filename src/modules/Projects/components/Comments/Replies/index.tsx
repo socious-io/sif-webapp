@@ -9,16 +9,15 @@ import CustomEmojiPicker from '../../../../General/components/EmojiPicker';
 import ExpandableText from '../../../../General/components/ExpandableText';
 import Icon from '../../../../General/components/Icon';
 
-const Replies: React.FC<RepliesProps> = ({ postId, commentId, list, showSeeMore, onSeeMoreClick }) => {
+const Replies: React.FC<RepliesProps> = ({ postId, commentId, list, reactProjectComment }) => {
   const {
     data: { emojis, openEmojiPicker },
     operations: { setOpenEmojiPicker, onPreviewClick, onEmojiSelect },
-  } = useReplies(postId, commentId, list);
-  console.log('replies list', list);
+  } = useReplies(postId, commentId, list, reactProjectComment);
   return (
     <>
       {list.map(item => {
-        const { profileImage, type, name } = getIdentityMeta(item.identity_meta);
+        const { profileImage, type, name } = getIdentityMeta(item.identity);
         return (
           <div key={item.id} className="flex gap-3 mt-1 items-start">
             <Avatar type={type || 'users'} size="2rem" img={(profileImage as string) || ''} />
@@ -35,42 +34,38 @@ const Replies: React.FC<RepliesProps> = ({ postId, commentId, list, showSeeMore,
                 customStyle="bg-Gray-light-mode-100 py-2 px-3 rounded-default emoji-font break-all"
               />
               <div className="flex items-center gap-1">
-                <Icon
+                {/* <Icon
                   name="face-smile"
                   fontSize={19}
                   className="text-Gray-light-mode-500"
                   cursor="pointer"
                   containerClass="cursor-pointer bg-Gray-light-mode-50 py-1 px-2 rounded-xl"
-                  onClick={() => setOpenEmojiPicker(item.id)}
-                />
-                {!!emojis[item.id]?.length &&
+                  onClick={() => setOpenEmojiPicker(true)}
+                /> */}
+                {/* {!!emojis[item.id]?.length &&
                   emojis[item.id].map(emoji => (
                     <div
                       key={emoji.emoji}
                       className="emoji-font cursor-pointer bg-Gray-light-mode-50 py-1 px-2 rounded-xl text-sm text-Gray-light-mode-600"
                       onClick={() => onPreviewClick(emoji.emoji, item.id)}
                     >
-                      {!!emoji?.identities?.length && emoji?.identities?.length}
+                      {!!emoji?.count && emoji?.count}
                       {emoji.emoji}
                     </div>
-                  ))}
+                  ))} */}
               </div>
-              {openEmojiPicker === item.id && (
+              {/* {openEmojiPicker && (
                 <CustomEmojiPicker
                   open={!!openEmojiPicker}
-                  handleClose={() => setOpenEmojiPicker('')}
-                  onEmojiSelect={emoji => onEmojiSelect(emoji.native, item.id)}
+                  handleClose={() => setOpenEmojiPicker(false)}
+                  onEmojiSelect={({ native }) => onEmojiSelect(native, item.id)}
+                  customStyle="top-[-212px]"
                 />
-              )}
+              )} */}
             </div>
           </div>
         );
       })}
-      {showSeeMore && (
-        <span className="see-more text-center" onClick={onSeeMoreClick}>
-          See more replies
-        </span>
-      )}
     </>
   );
 };

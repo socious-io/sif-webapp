@@ -15,4 +15,5 @@ export interface CommentsProps {
   replies?: Record<string, CommentsRes>;
   onSeeMoreRepliesClick?: (commentId: string) => void;
   reactProjectComment: (commentId: string, reaction: string) => void;
+  unreactProjectComment: (commentId: string) => void;
 }
