@@ -19,7 +19,7 @@ const schema = yup.object().shape({
   social_cause: yup.string().required('Social Cause is required'),
   cover_id: yup.string().nullable(),
   cover_url: yup.string().nullable(),
-  wallet_address: yup.string().required(),
+  wallet_address: yup.string(),
 });
 
 export const useEditProjectForm = () => {
