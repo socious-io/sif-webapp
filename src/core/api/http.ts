@@ -130,6 +130,7 @@ export function setupInterceptors(store: Store) {
             return http.request(error.config);
           } else logout();
         } catch {
+          logout();
           return Promise.reject(error);
         }
       }

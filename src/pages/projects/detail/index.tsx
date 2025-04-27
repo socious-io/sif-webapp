@@ -10,6 +10,7 @@ import Icon from 'src/modules/General/components/Icon';
 import Link from 'src/modules/General/components/Link';
 import VerticalTabs from 'src/modules/General/components/VerticalTabs';
 import VoteDetailCard from 'src/modules/Projects/components/VoteDetailCard';
+import CommentSection from 'src/modules/Projects/containers/CommentSection';
 import variables from 'src/styles/constants/_exports.module.scss';
 
 import { useProjectDetail } from './useProjectDetail';
@@ -155,6 +156,7 @@ export const ProjectDetail = () => {
           />
         )}
       </div>
+      <CommentSection projectId={projectId} />
     </div>
   );
 };

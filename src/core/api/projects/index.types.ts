@@ -32,3 +32,32 @@ export type DonationReq = {
   txid: string;
   wallet_address: string;
 };
+
+export interface Comment {
+  id: string;
+  post_id: string;
+  content: string;
+  reply_id?: string;
+  replied: boolean;
+  likes: number;
+  reported: boolean;
+  identity_reaction?: string;
+  liked: boolean;
+  identity: Identity;
+  identity_type: Identity['type'];
+  created_at: Date;
+  updated_at: Date;
+  reactions?: Reaction[];
+  children?: Comment[];
+}
+
+export interface Reaction {
+  count: number;
+  reaction: string;
+}
+export type CommentsRes = PaginateResV3<Comment>;
+
+export interface CommentReq {
+  content: string;
+  parent_id?: string;
+}
