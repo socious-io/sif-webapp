@@ -17,7 +17,7 @@ import { useProjectDetail } from './useProjectDetail';
 
 export const ProjectDetail = () => {
   const {
-    data: { detail, projectId, isOwner, roundIsClosed, round, isShared },
+    data: { detail, projectId, isOwner, roundIsClosed, round, isShared, currentIdentity },
     operations: { navigate, onShare, onEditProject, onVote },
   } = useProjectDetail();
   const breadcrumbs = [
@@ -157,7 +157,7 @@ export const ProjectDetail = () => {
           />
         )}
       </div>
-      <CommentSection projectId={projectId} />
+      {projectId && currentIdentity && <CommentSection projectId={projectId} />}
     </div>
   );
 };

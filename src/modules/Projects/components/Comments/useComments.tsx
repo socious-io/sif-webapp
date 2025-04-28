@@ -4,7 +4,7 @@ import { Comment } from 'src/core/api';
 import { SelectedEmoji } from './index.types';
 
 export const useComments = (list: Comment[], reactProjectComment, unreactProjectComment) => {
-  const [openEmojiPicker, setOpenEmojiPicker] = useState(false);
+  const [activeEmojiPickerCommentId, setActiveEmojiPickerCommentId] = useState<string | null>(null);
   const [emojis, setEmojis] = useState<Record<string, SelectedEmoji[]>>({});
   const defaultRecommendedEmojis = [
     { emoji: '❤️', count: 0 },
@@ -46,11 +46,11 @@ export const useComments = (list: Comment[], reactProjectComment, unreactProject
 
   const onEmojiSelect = async (emojiName: string, commentId: string) => {
     await reactProjectComment(commentId, emojiName);
-    setOpenEmojiPicker(false);
+    setActiveEmojiPickerCommentId(null);
   };
 
   return {
-    data: { emojis, openEmojiPicker },
-    operations: { setOpenEmojiPicker, onPreviewClick, onEmojiSelect },
+    data: { emojis, activeEmojiPickerCommentId },
+    operations: { setActiveEmojiPickerCommentId, onPreviewClick, onEmojiSelect },
   };
 };
