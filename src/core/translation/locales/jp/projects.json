@@ -139,6 +139,7 @@
     "donate-now-btn": "今すぐ寄付",
     "already-voted": "あなたはすでにこのプロジェクトに投票しました。",
     "end-voted": "このプロジェクトの投票は終了しました。ご支援いただきありがとうございます！",
+    "not-started": "投票は次で始まります",
     "success-modal": {
       "continue-btn": "続ける",
       "vote-or-contribution": "あなたの{{title}}対象",
@@ -154,5 +155,9 @@
   "your-projects": {
     "title": "あなたのプロジェクト",
     "create-new": "新しいプロジェクトを作成"
-  }
+  },
+  "feeds-see-more": "もっと見る",
+  "feeds-reply": "返信",
+  "feeds-reply-to": "{{name}}に返信...",
+  "feeds-action-comment": "コメント"
 }

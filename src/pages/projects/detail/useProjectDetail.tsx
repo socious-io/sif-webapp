@@ -15,7 +15,7 @@ export const useProjectDetail = () => {
   );
   const isOwner = currentIdentity?.id === detail.creator?.id;
   const round = useSelector((state: RootState) => state.round.round);
-  const roundIsClosed = getDaysUntil(round?.voting_end_at as string) <= 0;
+  const roundIsClosed = getDaysUntil(round?.voting_end_at as Date) <= 0;
   const [isShared, setIsShared] = useState(false);
 
   const onShare = async () => {
@@ -35,7 +35,7 @@ export const useProjectDetail = () => {
   };
 
   return {
-    data: { detail, projectId, isOwner, roundIsClosed, round, isShared },
+    data: { detail, projectId, isOwner, roundIsClosed, round, isShared, currentIdentity },
     operations: { navigate, onShare, onEditProject, onVote },
   };
 };

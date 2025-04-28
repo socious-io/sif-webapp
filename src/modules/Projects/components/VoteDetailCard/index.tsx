@@ -1,3 +1,5 @@
+import { formatVotingStartMessage } from 'src/core/convert-md-to-jsx';
+import { DateRangeStatus } from 'src/core/helpers/date-converter';
 import { translate } from 'src/core/helpers/utils';
 import AlertMessage from 'src/modules/General/components/AlertMessage';
 import Button from 'src/modules/General/components/Button';
@@ -11,12 +13,12 @@ const VoteDetailCard: React.FC<VoteDetailCardProps> = ({
   roundStats,
   isOwner = false,
   alreadyVoted = false,
-  voteEnded = false,
+  roundStatus = DateRangeStatus.AFTER,
+  votingStartAt,
   onVote,
 }) => {
   const { donatedAmount, votes } = roundStats || {};
   const { isShared, handleCopy } = useVoteDetailCard();
-
   return (
     <div className="w-full md:w-[22.5rem] flex flex-col items-stretch gap-4 p-6 bg-Gray-light-mode-50 rounded-xl">
       {/* <div className="flex flex-col gap-1 text-sm leading-5 text-Gray-light-mode-600">
@@ -46,11 +48,17 @@ const VoteDetailCard: React.FC<VoteDetailCardProps> = ({
           >
             {isShared ? translate('projects-round-stats.link-copied') : translate('projects-round-stats.share-button')}
           </Button>
-          {voteEnded || alreadyVoted ? (
+          {roundStatus !== DateRangeStatus.DURING || alreadyVoted ? (
             <AlertMessage
               theme="warning"
               iconName="alert-circle"
-              title={voteEnded ? translate('vote-donate.end-voted') : translate('vote-donate.already-voted')}
+              title={
+                roundStatus === DateRangeStatus.AFTER
+                  ? translate('vote-donate.end-voted')
+                  : roundStatus === DateRangeStatus.BEFORE
+                    ? `${translate('vote-donate.not-started')} ${formatVotingStartMessage(votingStartAt)}`
+                    : translate('vote-donate.already-voted')
+              }
             />
           ) : (
             <Button color="primary" onClick={onVote}>

@@ -138,6 +138,7 @@
     "donate-now-btn": "지금 기부",
     "already-voted": "당신은 이미 이 프로젝트에 투표했습니다.",
     "end-voted": "이 프로젝트에 대한 투표가 종료되었습니다. 지원해 주셔서 감사합니다!",
+    "not-started": "투표는 다음에 시작됩니다",
     "success-modal": {
       "continue-btn": "계속",
       "vote-or-contribution": "당신의 {{title}}이(가)",
@@ -149,5 +150,9 @@
       "meaningful-difference": "이 원인에 대한 당신의 관대함과 헌신은 매우 감사드립니다. 우리는 함께 가장 필요한 사람들의 삶에 의미 있는 차이를 만들고 있습니다.",
       "thank-you": "우리 커뮤니티의 일원이 되어 긍정적인 변화를 이끄는 데 도움을 주셔서 감사합니다."
     }
-  }
+  },
+  "feeds-see-more": "더 보기",
+  "feeds-reply": "답글",
+  "feeds-reply-to": "{{name}}에게 답글...",
+  "feeds-action-comment": "댓글"
 }

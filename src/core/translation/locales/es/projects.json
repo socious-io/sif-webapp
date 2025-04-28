@@ -138,6 +138,7 @@
     "donate-now-btn": "Donar ahora",
     "already-voted": "Ya has votado por este proyecto.",
     "end-voted": "La votación para este proyecto ha terminado. ¡Gracias por tu apoyo!",
+    "not-started": "La votación comienza el",
     "success-modal": {
       "continue-btn": "Continuar",
       "vote-or-contribution": "Tu {{title}} a",
@@ -149,5 +150,9 @@
       "meaningful-difference": "Tu generosidad y compromiso con esta causa son muy apreciados. Juntos, estamos marcando una diferencia significativa en las vidas de quienes más lo necesitan.",
       "thank-you": "Gracias por ser parte de nuestra comunidad y ayudarnos a impulsar un cambio positivo."
     }
-  }
+  },
+  "feeds-see-more": "Ver más",
+  "feeds-reply": "Responder",
+  "feeds-reply-to": "Responder a {{name}}...",
+  "feeds-action-comment": "Comentar"
 }
