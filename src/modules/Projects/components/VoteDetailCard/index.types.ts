@@ -7,5 +7,5 @@ export interface VoteDetailCardProps {
   alreadyVoted?: boolean;
   roundStatus?: DateRangeStatus;
   onVote?: () => void;
-  votingStartAt: Date;
+  votingStartAt?: Date;
 }

@@ -22,8 +22,8 @@ const Comments: React.FC<CommentsProps> = ({
   unreactProjectComment,
 }) => {
   const {
-    data: { emojis, openEmojiPicker },
-    operations: { setOpenEmojiPicker, onPreviewClick, onEmojiSelect },
+    data: { emojis, activeEmojiPickerCommentId },
+    operations: { setActiveEmojiPickerCommentId, onPreviewClick, onEmojiSelect },
   } = useComments(list, reactProjectComment, unreactProjectComment);
   return (
     <>
@@ -51,7 +51,7 @@ const Comments: React.FC<CommentsProps> = ({
                   className="text-Gray-light-mode-500"
                   cursor="pointer"
                   containerClass="cursor-pointer bg-Gray-light-mode-50 py-1 px-2 rounded-xl"
-                  onClick={() => setOpenEmojiPicker(true)}
+                  onClick={() => setActiveEmojiPickerCommentId(item.id)}
                 />
                 {!!emojis[item.id]?.length &&
                   emojis[item.id].map(emoji => (
@@ -60,7 +60,7 @@ const Comments: React.FC<CommentsProps> = ({
                       className="emoji-font cursor-pointer bg-Gray-light-mode-50 py-1 px-2 rounded-xl text-sm text-Gray-light-mode-600"
                       onClick={() => onPreviewClick(emoji.emoji, item.id)}
                     >
-                      {!!emoji?.count && emoji?.count}
+                      {!!emoji?.count && emoji.count}
                       {emoji.emoji}
                     </div>
                   ))}
@@ -71,10 +71,10 @@ const Comments: React.FC<CommentsProps> = ({
                   {translate('feeds-reply')}
                 </span>
               </div>
-              {openEmojiPicker && (
+              {activeEmojiPickerCommentId === item.id && (
                 <CustomEmojiPicker
-                  open={!!openEmojiPicker}
-                  handleClose={() => setOpenEmojiPicker(false)}
+                  open={activeEmojiPickerCommentId === item.id}
+                  handleClose={() => setActiveEmojiPickerCommentId(null)}
                   onEmojiSelect={({ native }) => onEmojiSelect(native, item.id)}
                   customStyle="top-[-212px]"
                 />

@@ -78,7 +78,7 @@ const CommentSection = ({ projectId }: { projectId: string }) => {
             setReplyText(value);
             setError(null);
           }}
-          onEmojiSelect={emoji => setReplyText(prev => prev + emoji)}
+          onEmojiSelect={emoji => setCommentText(prev => prev + emoji)}
           onSend={handleSendReply}
           disabled={isSubmitting}
         />
