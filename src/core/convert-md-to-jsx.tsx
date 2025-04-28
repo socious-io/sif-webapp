@@ -34,3 +34,21 @@ export function convertMarkdownToJSX(value: string): JSX.Element {
     return <pre>{modifiedVal}</pre>;
   }
 }
+
+// turns 2025-03-28T00:00:00Z to  March 28, 2025
+export const formatVotingStartMessage = (isoDate: Date, locale = 'en-US'): string => {
+  const date = new Date(isoDate);
+
+  if (isNaN(date.getTime())) {
+    throw new Error('Invalid date');
+  }
+
+  const formatter = new Intl.DateTimeFormat(locale, {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+
+  const formattedDate = formatter.format(date);
+  return formattedDate;
+};

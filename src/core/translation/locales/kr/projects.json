@@ -138,6 +138,7 @@
     "donate-now-btn": "지금 기부",
     "already-voted": "당신은 이미 이 프로젝트에 투표했습니다.",
     "end-voted": "이 프로젝트에 대한 투표가 종료되었습니다. 지원해 주셔서 감사합니다!",
+    "not-started": "투표는 다음에 시작됩니다",
     "success-modal": {
       "continue-btn": "계속",
       "vote-or-contribution": "당신의 {{title}}이(가)",

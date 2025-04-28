@@ -138,6 +138,7 @@
     "donate-now-btn": "Donar ahora",
     "already-voted": "Ya has votado por este proyecto.",
     "end-voted": "La votación para este proyecto ha terminado. ¡Gracias por tu apoyo!",
+    "not-started": "La votación comienza el",
     "success-modal": {
       "continue-btn": "Continuar",
       "vote-or-contribution": "Tu {{title}} a",
