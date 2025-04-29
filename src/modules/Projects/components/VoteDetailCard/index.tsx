@@ -16,6 +16,7 @@ const VoteDetailCard: React.FC<VoteDetailCardProps> = ({
   roundStatus = DateRangeStatus.AFTER,
   votingStartAt,
   onVote,
+  showResult = true,
 }) => {
   const { donatedAmount, votes } = roundStats || {};
   const { isShared, handleCopy } = useVoteDetailCard();
@@ -27,16 +28,20 @@ const VoteDetailCard: React.FC<VoteDetailCardProps> = ({
         </span>
         {translate('projects-round-stats.estimated-match')}
       </div> */}
-      <div className="flex flex-col gap-1 text-sm leading-5 text-Gray-light-mode-600">
-        <span className="text-3xl font-semibold leading-8 text-Gray-light-mode-900">
-          ${donatedAmount.toLocaleString('en-US', { minimumFractionDigits: 2 })}
-        </span>
-        {translate('projects-round-stats.donated')}
-      </div>
-      <div className="flex flex-col gap-1 text-sm leading-5 text-Gray-light-mode-600">
-        <span className="text-3xl font-semibold leading-8 text-Gray-light-mode-900">{votes}</span>
-        {translate('projects-round-stats.votes')}
-      </div>
+      {showResult && (
+        <>
+          <div className="flex flex-col gap-1 text-sm leading-5 text-Gray-light-mode-600">
+            <span className="text-3xl font-semibold leading-8 text-Gray-light-mode-900">
+              ${donatedAmount.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+            </span>
+            {translate('projects-round-stats.donated')}
+          </div>
+          <div className="flex flex-col gap-1 text-sm leading-5 text-Gray-light-mode-600">
+            <span className="text-3xl font-semibold leading-8 text-Gray-light-mode-900">{votes}</span>
+            {translate('projects-round-stats.votes')}
+          </div>
+        </>
+      )}
       {!isOwner && (
         <div className="flex flex-col gap-3 mt-4">
           <Button

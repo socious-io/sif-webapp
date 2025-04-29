@@ -154,6 +154,7 @@ export const ProjectDetail = () => {
             roundStatus={detail.roundStatus}
             onVote={onVote}
             votingStartAt={round?.voting_start_at}
+            showResult={isOwner}
           />
         )}
       </div>
