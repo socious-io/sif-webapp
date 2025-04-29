@@ -8,4 +8,5 @@ export interface VoteDetailCardProps {
   roundStatus?: DateRangeStatus;
   onVote?: () => void;
   votingStartAt?: Date;
+  showResult: boolean;
 }
