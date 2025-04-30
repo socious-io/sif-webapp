@@ -15,7 +15,8 @@
     "share-button": "共有",
     "link-copied": "リンクがコピーされました",
     "edit-button": "編集",
-    "donated-by": "寄付者"
+    "donated-by": "寄付者",
+    "remove-button": "削除"
   },
   "projects-round-stats": {
     "estimated-match": "現在のラウンドでの推定マッチング",
@@ -159,5 +160,14 @@
   "feeds-see-more": "もっと見る",
   "feeds-reply": "返信",
   "feeds-reply-to": "{{name}}に返信...",
-  "feeds-action-comment": "コメント"
+  "feeds-action-comment": "コメント",
+  "remove-modal": {
+    "title": "プロジェクトを削除しますか？",
+    "confirmHeader": "このプロジェクトを削除してもよろしいですか？",
+    "confirmSubheader": "この操作は元に戻せません。すべてのプロジェクトデータが完全に削除されます。",
+    "buttons": {
+      "cancel": "プロジェクトを保持",
+      "confirm": "プロジェクトを削除"
+    }
+  }
 }

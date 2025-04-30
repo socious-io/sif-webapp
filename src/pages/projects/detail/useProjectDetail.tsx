@@ -3,11 +3,13 @@ import { useSelector } from 'react-redux';
 import { useLoaderData, useNavigate, useParams } from 'react-router-dom';
 import { Project } from 'src/core/adaptors';
 import { CurrentIdentity } from 'src/core/adaptors';
+import { removeProjects } from 'src/core/api';
 import { getDaysUntil } from 'src/core/helpers/date-converter';
 import { RootState } from 'src/store';
 
 export const useProjectDetail = () => {
   const navigate = useNavigate();
+  const [openVerifyModal, setOpenVerifyModal] = useState(false);
   const { id: projectId } = useParams();
   const { projectDetail: detail } = useLoaderData() as { projectDetail: Project };
   const currentIdentity = useSelector<RootState, CurrentIdentity | undefined>(state =>
@@ -33,9 +35,22 @@ export const useProjectDetail = () => {
   const onVote = () => {
     currentIdentity ? navigate('vote') : navigate('/intro');
   };
-
+  const removeProject = async () => {
+    setOpenVerifyModal(false);
+    await removeProjects(projectId as string);
+    navigate('/projects');
+  };
   return {
-    data: { detail, projectId, isOwner, roundIsClosed, round, isShared, currentIdentity },
-    operations: { navigate, onShare, onEditProject, onVote },
+    data: {
+      detail,
+      projectId,
+      isOwner,
+      roundIsClosed,
+      round,
+      isShared,
+      currentIdentity,
+      openVerifyModal,
+    },
+    operations: { navigate, onShare, onEditProject, onVote, removeProject, setOpenVerifyModal },
   };
 };
