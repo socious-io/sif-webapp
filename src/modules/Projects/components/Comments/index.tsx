@@ -42,6 +42,7 @@ const Comments: React.FC<CommentsProps> = ({
               <ExpandableText
                 text={item.content}
                 expectedLength={100}
+                isMarkdown
                 customStyle="bg-Gray-light-mode-100 py-2 px-3 rounded-default emoji-font break-all"
               />
               <div className="flex items-center gap-1">
