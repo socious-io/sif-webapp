@@ -25,6 +25,7 @@ const CommentSection = ({ projectId }: { projectId: string }) => {
     handleSendReply,
     replyCommentId,
     unreactToComment,
+    replyToName,
     loading,
   } = useCommentSection(projectId);
 
@@ -55,7 +56,7 @@ const CommentSection = ({ projectId }: { projectId: string }) => {
       <SendBox
         name="comment"
         buttonText={translate('feeds-reply')}
-        userImg={avatarImage}
+        userImg={avatarImage as string}
         placeholder={translate('feeds-action-comment')}
         value={commentText}
         onChange={value => {
@@ -71,8 +72,8 @@ const CommentSection = ({ projectId }: { projectId: string }) => {
         <SendBox
           name="comment"
           buttonText={translate('feeds-reply')}
-          userImg={avatarImage}
-          placeholder={translate('feeds-reply-to', { name: 'Iman' })}
+          userImg={avatarImage as string}
+          placeholder={translate('feeds-reply-to', { name: replyToName })}
           value={replyText}
           onChange={value => {
             setReplyText(value);
