@@ -1,5 +1,6 @@
 .expect {
     word-wrap: break-word;
+    white-space: pre-wrap;
 
     :where(:not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)) {
         all: revert;

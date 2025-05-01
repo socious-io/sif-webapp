@@ -1,12 +1,14 @@
 import { useEffect, useReducer, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { CurrentIdentity } from 'src/core/adaptors';
 import {
   addComment,
   getComments,
   Comment,
-  CurrentIdentity,
   reactProjectComment,
   unreactProjectComment,
+  UserMeta,
+  OrgMeta,
 } from 'src/core/api';
 import { translate } from 'src/core/helpers/utils';
 import { RootState } from 'src/store';
@@ -336,7 +338,11 @@ export const useCommentSection = (projectId: string) => {
 
   const commentList = state.comments;
   const avatarImage = currentIdentity?.img;
-
+  const comment = state.comments.find(c => c.id === replyCommentId);
+  const replyToName =
+    comment?.identity.type === 'users'
+      ? (comment?.identity.meta as UserMeta)?.username
+      : (comment?.identity.meta as OrgMeta)?.shortname;
   return {
     state,
     postComment,
@@ -362,5 +368,6 @@ export const useCommentSection = (projectId: string) => {
     handleSendReply,
     replyCommentId,
     loading,
+    replyToName,
   };
 };

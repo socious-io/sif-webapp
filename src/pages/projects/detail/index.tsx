@@ -5,6 +5,7 @@ import BackLink from 'src/modules/General/components/BackLink';
 import Breadcrumbs from 'src/modules/General/components/Breadcrumbs';
 import Button from 'src/modules/General/components/Button';
 import Chip from 'src/modules/General/components/Chip';
+import ConfirmModal from 'src/modules/General/components/ConfirmModal';
 import HorizontalTabs from 'src/modules/General/components/HorizontalTabs';
 import Icon from 'src/modules/General/components/Icon';
 import Link from 'src/modules/General/components/Link';
@@ -17,8 +18,8 @@ import { useProjectDetail } from './useProjectDetail';
 
 export const ProjectDetail = () => {
   const {
-    data: { detail, projectId, isOwner, roundIsClosed, round, isShared, currentIdentity },
-    operations: { navigate, onShare, onEditProject, onVote },
+    data: { detail, projectId, isOwner, roundIsClosed, round, isShared, currentIdentity, openVerifyModal },
+    operations: { navigate, onShare, onEditProject, onVote, removeProject, setOpenVerifyModal },
   } = useProjectDetail();
   const breadcrumbs = [
     { iconName: 'home-line', label: '', link: '/' },
@@ -127,6 +128,15 @@ export const ProjectDetail = () => {
             <Button color="primary" fullWidth customStyle="flex-1 min-w-[10rem] break-keep" onClick={onEditProject}>
               {translate('projects-detail.edit-button')}
             </Button>
+            <Button
+              color="error"
+              variant="outlined"
+              fullWidth
+              customStyle="flex-1 min-w-[10rem] break-keep"
+              onClick={() => setOpenVerifyModal(true)}
+            >
+              {translate('projects-detail.remove-button')}
+            </Button>
           </div>
         )}
       </div>
@@ -154,10 +164,35 @@ export const ProjectDetail = () => {
             roundStatus={detail.roundStatus}
             onVote={onVote}
             votingStartAt={round?.voting_start_at}
+            showResult={isOwner}
           />
         )}
       </div>
       {projectId && currentIdentity && <CommentSection projectId={projectId} />}
+      <ConfirmModal
+        open={openVerifyModal}
+        handleClose={() => setOpenVerifyModal(false)}
+        title={translate('remove-modal.title')}
+        confirmHeader={translate('remove-modal.confirmHeader')}
+        confirmSubheader={translate('remove-modal.confirmSubheader')}
+        buttons={[
+          {
+            children: translate('remove-modal.buttons.cancel'),
+            color: 'info',
+            variant: 'outlined',
+            onClick: () => setOpenVerifyModal(false),
+            customStyle: 'w-full',
+          },
+          {
+            children: translate('remove-modal.buttons.confirm'),
+            color: 'error',
+            variant: 'contained',
+            onClick: removeProject,
+            customStyle: 'w-full',
+          },
+        ]}
+        customStyle="md:max-w-[400px]"
+      />
     </div>
   );
 };
