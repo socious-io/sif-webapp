@@ -24,7 +24,10 @@ const SendBox: React.FC<SendBoxProps> = ({
   const [openEmojiPicker, setOpenEmojiPicker] = useState(false);
 
   const onEnter = (e: React.KeyboardEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    if ('key' in e && e.key === 'Enter') onSend();
+    if ('key' in e && e.key === 'Enter') {
+      e.preventDefault();
+      onChange?.(value + ' \n ');
+    }
   };
 
   return (
@@ -38,6 +41,8 @@ const SendBox: React.FC<SendBoxProps> = ({
           placeholder={placeholder}
           disabled={disabled}
           inputProps={{ style: { padding: 0 } }}
+          multiline
+          minRows={2}
           onKeyDown={onEnter}
         />
         <div className="w-full flex gap-4 justify-end">
