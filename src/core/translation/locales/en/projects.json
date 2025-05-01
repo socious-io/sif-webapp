@@ -15,14 +15,15 @@
     "share-button": "Share",
     "link-copied": "Link copied",
     "edit-button": "Edit",
-    "donated-by": "Donated"
+    "donated-by": "Donated",
+    "remove-button": "Remove"
   },
   "projects-round-stats": {
     "estimated-match": "estimated match in current round",
     "donated": "donated",
     "votes": "votes",
-    "share-button": "Share",
     "link-copied": "Link copied",
+    "share-button": "Share",
     "vote-button": "Vote now"
   },
   "create-project-title": "Bring your project to life.",
@@ -159,5 +160,14 @@
   "feeds-see-more": "See more",
   "feeds-reply": "Reply",
   "feeds-reply-to": "Reply to {{name}}...",
-  "feeds-action-comment": "Comment"
+  "feeds-action-comment": "Comment",
+  "remove-modal": {
+    "title": "Delete Project?",
+    "confirmHeader": "Are you sure you want to delete this project?",
+    "confirmSubheader": "This action cannot be undone. All project data will be permanently removed.",
+    "buttons": {
+      "cancel": "Keep Project",
+      "confirm": "Delete Project"
+    }
+  }
 }

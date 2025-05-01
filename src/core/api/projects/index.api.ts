@@ -1,4 +1,4 @@
-import { FilterReq, PaginateReq } from '..';
+import { FilterReq, PaginateReq, SuccessRes } from '..';
 import { get, post, patch, del } from '../http';
 import { CommentReq, CommentsRes, DonationReq, Project, ProjectsRes, Comment } from './index.types';
 
@@ -20,6 +20,9 @@ export async function donate(id: string, payload: DonationReq): Promise<any> {
 
 export async function createProjects(payload: Partial<Project>): Promise<any> {
   return (await post<any>('projects', payload)).data;
+}
+export async function removeProjects(id: string): Promise<SuccessRes> {
+  return (await del<any>(`projects/${id}`)).data;
 }
 
 export async function editProjects(id: string, payload: Partial<Project>): Promise<any> {

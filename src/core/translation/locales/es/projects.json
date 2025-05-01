@@ -13,8 +13,10 @@
     "overview": "Resumen",
     "donations": "Donaciones",
     "share-button": "Compartir",
+    "link-copied": "Enlace copiado",
     "edit-button": "Editar",
-    "donated-by": "Donado"
+    "donated-by": "Donado",
+    "remove-button": "Eliminar"
   },
   "projects-round-stats": {
     "estimated-match": "coincidencia estimada en la ronda actual",
@@ -151,8 +153,21 @@
       "thank-you": "Gracias por ser parte de nuestra comunidad y ayudarnos a impulsar un cambio positivo."
     }
   },
+  "your-projects": {
+    "title": "Tus proyectos",
+    "create-new": "Crear nuevo proyecto"
+  },
   "feeds-see-more": "Ver más",
   "feeds-reply": "Responder",
   "feeds-reply-to": "Responder a {{name}}...",
-  "feeds-action-comment": "Comentar"
+  "feeds-action-comment": "Comentar",
+  "remove-modal": {
+    "title": "¿Eliminar proyecto?",
+    "confirmHeader": "¿Estás seguro de que deseas eliminar este proyecto?",
+    "confirmSubheader": "Esta acción no se puede deshacer. Todos los datos del proyecto se eliminarán permanentemente.",
+    "buttons": {
+      "cancel": "Conservar proyecto",
+      "confirm": "Eliminar proyecto"
+    }
+  }
 }
