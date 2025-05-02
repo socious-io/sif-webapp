@@ -15,7 +15,8 @@
     "share-button": "공유",
     "edit-button": "편집",
     "donated-by": "기부자",
-    "remove-button": "제거"
+    "remove-button": "제거",
+    "submissions-closed": "제출 마감"
   },
   "projects-round-stats": {
     "estimated-match": "현재 라운드에서 예상 매칭",
