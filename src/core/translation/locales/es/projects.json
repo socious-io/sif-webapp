@@ -16,7 +16,8 @@
     "link-copied": "Enlace copiado",
     "edit-button": "Editar",
     "donated-by": "Donado",
-    "remove-button": "Eliminar"
+    "remove-button": "Eliminar",
+    "submissions-closed": "Presentaciones cerradas"
   },
   "projects-round-stats": {
     "estimated-match": "coincidencia estimada en la ronda actual",
