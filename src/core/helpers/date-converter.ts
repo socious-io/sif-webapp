@@ -8,7 +8,7 @@ export const convertDateFormat = (isoDate: string): string => {
   return `${year}/${month}/${day} ${hours}:${minutes} UTC`;
 };
 
-export const getDaysUntil = (targetDate: string): number => {
+export const getDaysUntil = (targetDate: string | Date): number => {
   const today = new Date();
   const target = new Date(targetDate);
   const diffMs = target.getTime() - today.getTime();

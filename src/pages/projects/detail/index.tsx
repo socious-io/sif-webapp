@@ -18,7 +18,17 @@ import { useProjectDetail } from './useProjectDetail';
 
 export const ProjectDetail = () => {
   const {
-    data: { detail, projectId, isOwner, roundIsClosed, round, isShared, currentIdentity, openVerifyModal },
+    data: {
+      detail,
+      projectId,
+      isOwner,
+      roundIsClosed,
+      round,
+      isShared,
+      currentIdentity,
+      openVerifyModal,
+      isSubmissionOver,
+    },
     operations: { navigate, onShare, onEditProject, onVote, removeProject, setOpenVerifyModal },
   } = useProjectDetail();
   const breadcrumbs = [
@@ -87,15 +97,6 @@ export const ProjectDetail = () => {
         </div>
       ),
     },
-    // {
-    //   label: translate('projects-detail.donations'),
-    //   content: (
-    //     <div className="flex flex-col items-stretch gap-8">
-    //       <span className="text-2xl font-semibold leading-8">{translate('projects-detail.donations')}</span>
-    //       <DonationsList />
-    //     </div>
-    //   ),
-    // },
   ];
 
   return (
@@ -125,9 +126,23 @@ export const ProjectDetail = () => {
             >
               {isShared ? translate('projects-detail.link-copied') : translate('projects-detail.share-button')}
             </Button>
-            <Button color="primary" fullWidth customStyle="flex-1 min-w-[10rem] break-keep" onClick={onEditProject}>
-              {translate('projects-detail.edit-button')}
-            </Button>
+            <div className="flex flex-col items-stretch gap-1">
+              <Button
+                color="primary"
+                fullWidth
+                customStyle="flex-1 min-w-[10rem] break-keep"
+                onClick={onEditProject}
+                disabled={isSubmissionOver}
+              >
+                {translate('projects-detail.edit-button')}
+              </Button>
+              {isSubmissionOver && (
+                <div className="flex items-center justify-center gap-1 text-sm font-medium text-Warning-600 mt-2">
+                  <Icon name="lock-01" fontSize={16} color={variables.color_grey_400} />
+                  <span>{translate('projects-detail.submissions-closed')}</span>
+                </div>
+              )}
+            </div>
             <Button
               color="error"
               variant="outlined"

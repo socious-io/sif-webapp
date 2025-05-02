@@ -16,7 +16,8 @@
     "link-copied": "リンクがコピーされました",
     "edit-button": "編集",
     "donated-by": "寄付者",
-    "remove-button": "削除"
+    "remove-button": "削除",
+    "submissions-closed": "提出は締め切られました"
   },
   "projects-round-stats": {
     "estimated-match": "現在のラウンドでの推定マッチング",

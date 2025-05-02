@@ -40,6 +40,8 @@ export const useProjectDetail = () => {
     await removeProjects(projectId as string);
     navigate('/projects');
   };
+  const isSubmissionOver = getDaysUntil(round?.submission_end_at as string) <= 0;
+
   return {
     data: {
       detail,
@@ -50,6 +52,7 @@ export const useProjectDetail = () => {
       isShared,
       currentIdentity,
       openVerifyModal,
+      isSubmissionOver,
     },
     operations: { navigate, onShare, onEditProject, onVote, removeProject, setOpenVerifyModal },
   };
