@@ -1,4 +1,5 @@
 import { ThemeProvider } from '@emotion/react';
+import { BrowserWallet } from '@meshsdk/core';
 import { StyledEngineProvider } from '@mui/material';
 import i18next from 'i18next';
 import { theme } from 'material.theme';
@@ -25,7 +26,17 @@ function App() {
   useEffect(() => {
     setupInterceptors(store);
   }, []);
-
+  useEffect(() => {
+    const fetchWallets = async () => {
+      try {
+        const availableWallets = await BrowserWallet.getInstalledWallets();
+        console.log(availableWallets);
+        // Check for persisted wallet
+        const savedWallet = localStorage.getItem('selectedWallet');
+      } catch (err) {}
+    };
+    fetchWallets();
+  }, []);
   useEffect(() => {
     dispatch(currentIdentities());
     dispatch(fetchRound());
