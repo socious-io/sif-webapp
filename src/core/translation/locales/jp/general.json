@@ -19,6 +19,10 @@
     "save": "保存",
     "cancel": "キャンセル",
     "title": "画像を編集",
-    "subtitle": "画像を希望のサイズにトリミングしてください。"
+    "subtitle": "画像を希望のサイズにトリミングしてください。",
+    "connect-wallet": "ウォレットを接続",
+    "disconnect": "切断",
+    "copy-address": "アドレスをコピー",
+    "no-wallet-alert": "Cardanoウォレットが検出されませんでした。Lace、Eternl、またはYoroiなどのCardanoウォレットをインストールしてください。"
   }
 }

@@ -26,17 +26,7 @@ function App() {
   useEffect(() => {
     setupInterceptors(store);
   }, []);
-  useEffect(() => {
-    const fetchWallets = async () => {
-      try {
-        const availableWallets = await BrowserWallet.getInstalledWallets();
-        console.log(availableWallets);
-        // Check for persisted wallet
-        const savedWallet = localStorage.getItem('selectedWallet');
-      } catch (err) {}
-    };
-    fetchWallets();
-  }, []);
+
   useEffect(() => {
     dispatch(currentIdentities());
     dispatch(fetchRound());
