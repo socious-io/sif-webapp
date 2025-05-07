@@ -1,4 +1,5 @@
 import { ThemeProvider } from '@emotion/react';
+import { BrowserWallet } from '@meshsdk/core';
 import { StyledEngineProvider } from '@mui/material';
 import i18next from 'i18next';
 import { theme } from 'material.theme';
