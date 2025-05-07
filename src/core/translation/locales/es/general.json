@@ -14,5 +14,9 @@
     "page": "Página",
     "of": "de"
   },
-  "general-copy-link": "Copiar"
+  "general-copy-link": "Copiar",
+  "connect-wallet": "Conectar billetera",
+  "disconnect": "Desconectar",
+  "copy-address": "Copiar dirección",
+  "no-wallet-alert": "No se detectó ninguna billetera Cardano. Por favor, instala una billetera Cardano como Lace, Eternl o Yoroi para continuar."
 }

@@ -20,5 +20,9 @@
     "cancel": "Cancel",
     "title": "Edit Image",
     "subtitle": "Crop your image to the desired dimensions."
-  }
+  },
+  "connect-wallet": "Connect wallet",
+  "disconnect": "Disconnect",
+  "copy-address": "Copy Address",
+  "no-wallet-alert": "No Cardano wallet detected. Please install a Cardano wallet like Lace, Eternl, or Yoroi to continue."
 }

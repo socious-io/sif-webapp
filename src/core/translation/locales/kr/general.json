@@ -14,5 +14,9 @@
     "page": "페이지",
     "of": "전체"
   },
-  "general-copy-link": "복사"
+  "general-copy-link": "복사",
+  "connect-wallet": "지갑 연결",
+  "disconnect": "연결 해제",
+  "copy-address": "주소 복사",
+  "no-wallet-alert": "Cardano 지갑이 감지되지 않았습니다. Lace, Eternl 또는 Yoroi와 같은 Cardano 지갑을 설치해 주세요."
 }
