@@ -170,5 +170,11 @@
       "cancel": "Conservar proyecto",
       "confirm": "Eliminar proyecto"
     }
+  },
+  "alertModal": {
+    "title": "Verificación requerida",
+    "message": "Para continuar con esta acción, por favor verifica tu identidad.",
+    "verify-button-label": "Verificar",
+    "close-button-label": "Cerrar"
   }
 }

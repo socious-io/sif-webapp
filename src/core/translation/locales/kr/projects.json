@@ -169,5 +169,11 @@
       "cancel": "프로젝트 유지",
       "confirm": "프로젝트 삭제"
     }
+  },
+  "alertModal": {
+    "title": "인증 필요",
+    "message": "이 작업을 계속하려면 본인 인증이 필요합니다.",
+    "verify-button-label": "인증하기",
+    "close-button-label": "닫기"
   }
 }
