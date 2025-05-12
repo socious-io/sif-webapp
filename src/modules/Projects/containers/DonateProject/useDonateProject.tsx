@@ -76,17 +76,27 @@ export const useDonateProject = (onDonate: (data: DonateReq) => void) => {
   const onPreventDisplayName = (checked: boolean) => setValue('preventDisplayName', checked);
 
   const onSubmit = async (data: Form) => {
-    if (!connected || !wallet) return;
+    if (!connected || !wallet || !selectedCurrency) return;
+    const tx = new Transaction({ initiator: wallet });
 
-    const tx = new Transaction({ initiator: wallet }).sendLovelace(
-      config.payoutDonationsAddress,
-      `${BigInt(data.donate) * 1000000n}`,
-    );
-
-    const unsignedTx = await tx.build();
-    const signedTx = await wallet.signTx(unsignedTx);
-    const txHash = await wallet.submitTx(signedTx);
-    return onDonate({ ...data, transactionHash: txHash, wallet_address: address });
+    if (selectedCurrency.value === 'lovelace') {
+      tx.sendLovelace(config.payoutDonationsAddress, `${BigInt(data.donate) * selectedCurrency.decimals}`);
+    } else {
+      tx.sendAssets(config.payoutDonationsAddress, [
+        {
+          unit: selectedCurrency.value,
+          quantity: `${BigInt(data.donate) * selectedCurrency.decimals}`,
+        },
+      ]);
+    }
+    try {
+      const unsignedTx = await tx.build();
+      const signedTx = await wallet.signTx(unsignedTx);
+      const txHash = await wallet.submitTx(signedTx);
+      return onDonate({ ...data, transactionHash: txHash, wallet_address: address });
+    } catch (error) {
+      alert(error);
+    }
   };
 
   return {

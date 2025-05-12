@@ -1,5 +1,6 @@
 import { CircularProgress, Divider } from '@mui/material';
 import { translate } from 'src/core/helpers/utils';
+import { AlertModal } from 'src/modules/General/components/AlertModal';
 import Button from 'src/modules/General/components/Button';
 import CardRadioButton from 'src/modules/General/components/CardRadioButton';
 import Icon from 'src/modules/General/components/Icon';
@@ -13,8 +14,25 @@ import DonateProject from '../DonateProject';
 
 const VoteDonateCard = () => {
   const {
-    data: { detail, selectedCard, isVoteChoice, userImpactPoints, openSuccessModal, voteInfo, donateInfo, loading },
-    operations: { setSelectedCard, onVoteOrDonate, setOpenSuccessModal, onContinue },
+    data: {
+      detail,
+      selectedCard,
+      isVoteChoice,
+      userImpactPoints,
+      openSuccessModal,
+      voteInfo,
+      donateInfo,
+      loading,
+      showConfirmationModal,
+    },
+    operations: {
+      setSelectedCard,
+      onVoteOrDonate,
+      setOpenSuccessModal,
+      onContinue,
+      setShowConfirmationModal,
+      navigateToVerify,
+    },
   } = useVoteDonateCard();
 
   const voteChoices = [
@@ -115,6 +133,17 @@ const VoteDonateCard = () => {
         voteInfo={voteInfo}
         donateInfo={donateInfo}
         onContinue={onContinue}
+      />
+      <AlertModal
+        open={showConfirmationModal}
+        onClose={() => setShowConfirmationModal(false)}
+        onSubmit={navigateToVerify}
+        message={translate('alertModal.message')}
+        title={translate('alertModal.title')}
+        submitButton={true}
+        submitButtonTheme="primary"
+        submitButtonLabel={translate('alertModal.verify-button-label')}
+        closeButtonLabel={translate('alertModal.close-button-label')}
       />
     </>
   );

@@ -28,7 +28,7 @@ const Connect = (defaultAddress = '') => {
   };
 
   const handleWalletSelect = ({ wallet, address, name }) => {
-    setWallet(name);
+    setWallet(wallet);
     setAddress(address);
     setConnected(true);
     setIsModalOpen(false);
