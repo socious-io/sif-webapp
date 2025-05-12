@@ -18,7 +18,6 @@ const ChooseWalletModal = ({
     setError(null);
     try {
       const wallet = await BrowserWallet.enable(walletName);
-
       const address = await wallet.getChangeAddress();
       onWalletSelect({ wallet, address, name: walletName });
       localStorage.setItem('selectedWallet', walletName);

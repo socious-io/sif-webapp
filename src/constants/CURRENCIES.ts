@@ -4,6 +4,7 @@ import { config } from 'src/config';
 export type CurrencyType = {
   label: string;
   value: string;
+  decimals: bigint;
   icon?: string;
   rateConversionFunc: (amount: number) => Promise<number>;
 };
@@ -12,6 +13,7 @@ export const CURRENCIES: CurrencyType[] = [
   {
     label: 'ADA',
     value: 'lovelace',
+    decimals: 1000000n,
     rateConversionFunc: async (amount: number) => {
       const cacheKey = 'ADA_RATE';
       const cacheExpireTime = 10 * 60 * 1000; // 10 minutes
@@ -32,5 +34,35 @@ export const CURRENCIES: CurrencyType[] = [
       localStorage.setItem(`${cacheKey}_TIME`, String(now));
       return Math.round(amount * data?.data.rateUsd * 100) / 100;
     },
+  },
+  {
+    label: 'USDM',
+    value: `c48cbb3d5e57ed56e276bc45f99ab39abe94e6cd7ac39fb402da47ad0014df105553444d`,
+    decimals: 1000000n,
+    rateConversionFunc: async (amount: number) => amount,
+  },
+  {
+    label: 'USDC',
+    value: `25c5de5f5b286073c593edfd77b48abc7a48e5a4f3d4cd9d428ff93555534443`,
+    decimals: 100000000n,
+    rateConversionFunc: async (amount: number) => amount,
+  },
+  {
+    label: 'DJED',
+    value: `8db269c3ec630e06ae29f74bc39edd1f87c819f1056206e879a1cd61444a4544`,
+    decimals: 1000000n,
+    rateConversionFunc: async (amount: number) => amount,
+  },
+  {
+    label: 'USDT',
+    value: `25c5de5f5b286073c593edfd77b48abc7a48e5a4f3d4cd9d428ff93555534454`,
+    decimals: 100000000n,
+    rateConversionFunc: async (amount: number) => amount,
+  },
+  {
+    label: 'USDA',
+    value: `fe7c786ab321f41c654ef6c1af7b3250a613c24e4213e0425a7ae45655534441`,
+    decimals: 1000000n,
+    rateConversionFunc: async (amount: number) => amount,
   },
 ];
