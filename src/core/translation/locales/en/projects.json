@@ -170,5 +170,11 @@
       "cancel": "Keep Project",
       "confirm": "Delete Project"
     }
+  },
+  "alertModal": {
+    "title": "Verification required",
+    "message": "To proceed with this action, please verify your identity.",
+    "verify-button-label": "Verify",
+    "close-button-label": "Close"
   }
 }

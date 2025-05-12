@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useLoaderData, useNavigate } from 'react-router-dom';
+import { config } from 'src/config';
 import { CURRENCIES } from 'src/constants/CURRENCIES';
 import { CurrentIdentity, DonateReq, Project, voteOrDonateProjectAdaptor } from 'src/core/adaptors';
 import { RootState } from 'src/store';
@@ -12,6 +13,7 @@ export const useVoteDonateCard = () => {
   const [openSuccessModal, setOpenSuccessModal] = useState(false);
   const [currentDonateInfo, setCurrentDonateInfo] = useState<DonateReq | null>(null);
   const [loading, setLoading] = useState(false);
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const isVoteChoice = selectedCard === 'vote';
   const currentIdentity = useSelector<RootState, CurrentIdentity | undefined>(state => {
     return state.identity.entities.find(i => i.current);
@@ -29,22 +31,46 @@ export const useVoteDonateCard = () => {
       : undefined;
 
   const onVoteOrDonate = async (donatePayload?: DonateReq) => {
-    if (selectedCard === 'donate' && donatePayload) setCurrentDonateInfo(donatePayload);
+    if (currentIdentity?.verified) {
+      if (selectedCard === 'donate' && donatePayload) setCurrentDonateInfo(donatePayload);
 
-    setLoading(true);
-    const { error, data } = await voteOrDonateProjectAdaptor(detail.id, donatePayload);
-    if (error) {
+      setLoading(true);
+      const { error, data } = await voteOrDonateProjectAdaptor(detail.id, donatePayload);
+      if (error) {
+        setLoading(false);
+        return;
+      }
+      if (data) setOpenSuccessModal(true);
       setLoading(false);
-      return;
+    } else {
+      setShowConfirmationModal(true);
     }
-    if (data) setOpenSuccessModal(true);
-    setLoading(false);
+  };
+  const navigateToVerify = () => {
+    window.open(config.accountCenterURL + '/verification', '_blank');
   };
 
   const onContinue = () => navigate('/projects');
 
   return {
-    data: { detail, selectedCard, isVoteChoice, userImpactPoints, openSuccessModal, voteInfo, donateInfo, loading },
-    operations: { setSelectedCard, onVoteOrDonate, setOpenSuccessModal, onContinue },
+    data: {
+      detail,
+      selectedCard,
+      isVoteChoice,
+      userImpactPoints,
+      openSuccessModal,
+      voteInfo,
+      donateInfo,
+      loading,
+      showConfirmationModal,
+    },
+    operations: {
+      setSelectedCard,
+      onVoteOrDonate,
+      setOpenSuccessModal,
+      onContinue,
+      setShowConfirmationModal,
+      navigateToVerify,
+    },
   };
 };
