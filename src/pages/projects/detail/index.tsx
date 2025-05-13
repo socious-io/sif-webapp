@@ -1,5 +1,6 @@
 import { Divider } from '@mui/material';
 import { translate } from 'src/core/helpers/utils';
+import { AlertModal } from 'src/modules/General/components/AlertModal';
 import AvatarLabelGroup from 'src/modules/General/components/AvatarLabelGroup';
 import BackLink from 'src/modules/General/components/BackLink';
 import Breadcrumbs from 'src/modules/General/components/Breadcrumbs';
@@ -28,8 +29,18 @@ export const ProjectDetail = () => {
       currentIdentity,
       openVerifyModal,
       isSubmissionOver,
+      showConfirmationModal,
     },
-    operations: { navigate, onShare, onEditProject, onVote, removeProject, setOpenVerifyModal },
+    operations: {
+      navigate,
+      onShare,
+      onEditProject,
+      onVote,
+      removeProject,
+      setOpenVerifyModal,
+      setShowConfirmationModal,
+      navigateToVerify,
+    },
   } = useProjectDetail();
   const breadcrumbs = [
     { iconName: 'home-line', label: '', link: '/' },
@@ -207,6 +218,17 @@ export const ProjectDetail = () => {
           },
         ]}
         customStyle="md:max-w-[400px]"
+      />
+      <AlertModal
+        open={showConfirmationModal}
+        onClose={() => setShowConfirmationModal(false)}
+        onSubmit={navigateToVerify}
+        message={translate('alertModal.message')}
+        title={translate('alertModal.title')}
+        submitButton={true}
+        submitButtonTheme="primary"
+        submitButtonLabel={translate('alertModal.verify-button-label')}
+        closeButtonLabel={translate('alertModal.close-button-label')}
       />
     </div>
   );
