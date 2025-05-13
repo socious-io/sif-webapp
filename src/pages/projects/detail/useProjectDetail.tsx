@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useLoaderData, useNavigate, useParams } from 'react-router-dom';
+import { config } from 'src/config';
 import { Project } from 'src/core/adaptors';
 import { CurrentIdentity } from 'src/core/adaptors';
 import { removeProjects } from 'src/core/api';
@@ -12,6 +13,8 @@ export const useProjectDetail = () => {
   const [openVerifyModal, setOpenVerifyModal] = useState(false);
   const { id: projectId } = useParams();
   const { projectDetail: detail } = useLoaderData() as { projectDetail: Project };
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+
   const currentIdentity = useSelector<RootState, CurrentIdentity | undefined>(state =>
     state.identity.entities.find(identity => identity.current),
   );
@@ -33,7 +36,10 @@ export const useProjectDetail = () => {
   const onEditProject = () => navigate(`/${projectId}/edit`);
 
   const onVote = () => {
-    currentIdentity ? navigate('vote') : navigate('/intro');
+    if (currentIdentity) {
+      if (currentIdentity?.verified) navigate('vote');
+      else setShowConfirmationModal(true);
+    } else navigate('/intro');
   };
   const removeProject = async () => {
     setOpenVerifyModal(false);
@@ -41,7 +47,9 @@ export const useProjectDetail = () => {
     navigate('/projects');
   };
   const isSubmissionOver = getDaysUntil(round?.submission_end_at as string) <= 0;
-
+  const navigateToVerify = () => {
+    window.open(config.accountCenterURL + '/verification', '_blank');
+  };
   return {
     data: {
       detail,
@@ -53,7 +61,17 @@ export const useProjectDetail = () => {
       currentIdentity,
       openVerifyModal,
       isSubmissionOver,
+      showConfirmationModal,
     },
-    operations: { navigate, onShare, onEditProject, onVote, removeProject, setOpenVerifyModal },
+    operations: {
+      navigate,
+      onShare,
+      onEditProject,
+      onVote,
+      removeProject,
+      setOpenVerifyModal,
+      setShowConfirmationModal,
+      navigateToVerify,
+    },
   };
 };
