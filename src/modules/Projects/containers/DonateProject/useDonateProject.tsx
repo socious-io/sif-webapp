@@ -2,11 +2,13 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Transaction } from '@meshsdk/core';
 import { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 import { config } from 'src/config';
 import { CURRENCIES } from 'src/constants/CURRENCIES';
-import { DonateReq } from 'src/core/adaptors';
+import { CurrentIdentity, DonateReq } from 'src/core/adaptors';
 import { translate } from 'src/core/helpers/utils';
 import Connect from 'src/modules/General/components/ConnectButton';
+import { RootState } from 'src/store';
 import * as yup from 'yup';
 
 import { Form } from './index.types';
@@ -41,6 +43,12 @@ export const useDonateProject = (onDonate: (data: DonateReq) => void) => {
   const selectedCurrency = CURRENCIES.find(currency => currency.value === selectedCurrencyValue);
   const selectedCurrencyLabel = selectedCurrency?.label;
   const donateValue = watch('donate') || 0;
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+
+  const currentIdentity = useSelector<RootState, CurrentIdentity | undefined>(state => {
+    return state.identity.entities.find(i => i.current);
+  });
+
   // FIXME: socious fee later added to donate value
   // const sociousFee = 2;
   // const donateWithFee = (sociousFee / 100) * donateValue;
@@ -76,27 +84,32 @@ export const useDonateProject = (onDonate: (data: DonateReq) => void) => {
   const onPreventDisplayName = (checked: boolean) => setValue('preventDisplayName', checked);
 
   const onSubmit = async (data: Form) => {
-    if (!connected || !wallet || !selectedCurrency) return;
-    const tx = new Transaction({ initiator: wallet });
+    if (currentIdentity?.verified) {
+      if (!connected || !wallet || !selectedCurrency) return;
+      const tx = new Transaction({ initiator: wallet });
 
-    if (selectedCurrency.value === 'lovelace') {
-      tx.sendLovelace(config.payoutDonationsAddress, `${BigInt(data.donate) * selectedCurrency.decimals}`);
-    } else {
-      tx.sendAssets(config.payoutDonationsAddress, [
-        {
-          unit: selectedCurrency.value,
-          quantity: `${BigInt(data.donate) * selectedCurrency.decimals}`,
-        },
-      ]);
-    }
-    try {
-      const unsignedTx = await tx.build();
-      const signedTx = await wallet.signTx(unsignedTx);
-      const txHash = await wallet.submitTx(signedTx);
-      return onDonate({ ...data, transactionHash: txHash, wallet_address: address });
-    } catch (error) {
-      alert(error);
-    }
+      if (selectedCurrency.value === 'lovelace') {
+        tx.sendLovelace(config.payoutDonationsAddress, `${BigInt(data.donate) * selectedCurrency.decimals}`);
+      } else {
+        tx.sendAssets(config.payoutDonationsAddress, [
+          {
+            unit: selectedCurrency.value,
+            quantity: `${BigInt(data.donate) * selectedCurrency.decimals}`,
+          },
+        ]);
+      }
+      try {
+        const unsignedTx = await tx.build();
+        const signedTx = await wallet.signTx(unsignedTx);
+        const txHash = await wallet.submitTx(signedTx);
+        return onDonate({ ...data, transactionHash: txHash, wallet_address: address });
+      } catch (error) {
+        alert(error);
+      }
+    } else setShowConfirmationModal(true);
+  };
+  const navigateToVerify = () => {
+    window.open(config.accountCenterURL + '/verification', '_blank');
   };
 
   return {
@@ -110,7 +123,15 @@ export const useDonateProject = (onDonate: (data: DonateReq) => void) => {
       donateValueConversion,
       isConnected: connected,
       ConnectButton,
+      showConfirmationModal,
     },
-    operations: { onSelectCurrency, onPreventDisplayName, handleSubmit, onSubmit },
+    operations: {
+      onSelectCurrency,
+      onPreventDisplayName,
+      handleSubmit,
+      onSubmit,
+      setShowConfirmationModal,
+      navigateToVerify,
+    },
   };
 };
