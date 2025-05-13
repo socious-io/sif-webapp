@@ -3,6 +3,7 @@ import { translate } from 'src/core/helpers/utils';
 import { AlertModal } from 'src/modules/General/components/AlertModal';
 import Button from 'src/modules/General/components/Button';
 import CardRadioButton from 'src/modules/General/components/CardRadioButton';
+import HorizontalTabs from 'src/modules/General/components/HorizontalTabs';
 import Icon from 'src/modules/General/components/Icon';
 import Link from 'src/modules/General/components/Link';
 import SuccessModal from 'src/modules/Projects/components/SuccessModal';
@@ -65,6 +66,18 @@ const VoteDonateCard = () => {
       description: translate('vote-donate.option-2-desc'),
     },
   ];
+  const tabs = [
+    {
+      label: 'Crypto',
+      content: <DonateProject onDonate={onVoteOrDonate} isLoading={loading} />,
+      default: true,
+    },
+    {
+      label: 'Fiat',
+      content: <></>,
+      default: true,
+    },
+  ];
 
   return (
     <>
@@ -123,7 +136,7 @@ const VoteDonateCard = () => {
             </Button>
           </>
         ) : (
-          <DonateProject onDonate={onVoteOrDonate} isLoading={loading} />
+          <HorizontalTabs tabs={tabs} />
         )}
       </div>
       <SuccessModal
