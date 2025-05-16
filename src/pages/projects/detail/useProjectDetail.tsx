@@ -37,8 +37,9 @@ export const useProjectDetail = () => {
 
   const onVote = () => {
     if (currentIdentity) {
-      if (currentIdentity?.verified) navigate('vote');
-      else setShowConfirmationModal(true);
+      navigate('vote');
+      // if (currentIdentity?.verified) navigate('vote');
+      // else setShowConfirmationModal(true);
     } else navigate('/intro');
   };
   const removeProject = async () => {
