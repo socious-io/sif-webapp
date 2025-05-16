@@ -43,7 +43,7 @@ export const useDonateProject = (onDonate: (data: DonateReq) => void) => {
   const selectedCurrency = CURRENCIES.find(currency => currency.value === selectedCurrencyValue);
   const selectedCurrencyLabel = selectedCurrency?.label;
   const donateValue = watch('donate') || 0;
-  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+  // const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 
   const currentIdentity = useSelector<RootState, CurrentIdentity | undefined>(state => {
     return state.identity.entities.find(i => i.current);
@@ -84,29 +84,29 @@ export const useDonateProject = (onDonate: (data: DonateReq) => void) => {
   const onPreventDisplayName = (checked: boolean) => setValue('preventDisplayName', checked);
 
   const onSubmit = async (data: Form) => {
-    if (currentIdentity?.verified) {
-      if (!connected || !wallet || !selectedCurrency) return;
-      const tx = new Transaction({ initiator: wallet });
+    // if (currentIdentity?.verified) {
+    if (!connected || !wallet || !selectedCurrency) return;
+    const tx = new Transaction({ initiator: wallet });
 
-      if (selectedCurrency.value === 'lovelace') {
-        tx.sendLovelace(config.payoutDonationsAddress, `${BigInt(data.donate) * selectedCurrency.decimals}`);
-      } else {
-        tx.sendAssets(config.payoutDonationsAddress, [
-          {
-            unit: selectedCurrency.value,
-            quantity: `${BigInt(data.donate) * selectedCurrency.decimals}`,
-          },
-        ]);
-      }
-      try {
-        const unsignedTx = await tx.build();
-        const signedTx = await wallet.signTx(unsignedTx);
-        const txHash = await wallet.submitTx(signedTx);
-        return onDonate({ ...data, transactionHash: txHash, wallet_address: address });
-      } catch (error) {
-        alert(error);
-      }
-    } else setShowConfirmationModal(true);
+    if (selectedCurrency.value === 'lovelace') {
+      tx.sendLovelace(config.payoutDonationsAddress, `${BigInt(data.donate) * selectedCurrency.decimals}`);
+    } else {
+      tx.sendAssets(config.payoutDonationsAddress, [
+        {
+          unit: selectedCurrency.value,
+          quantity: `${BigInt(data.donate) * selectedCurrency.decimals}`,
+        },
+      ]);
+    }
+    try {
+      const unsignedTx = await tx.build();
+      const signedTx = await wallet.signTx(unsignedTx);
+      const txHash = await wallet.submitTx(signedTx);
+      return onDonate({ ...data, transactionHash: txHash, wallet_address: address });
+    } catch (error) {
+      alert(error);
+    }
+    // } else setShowConfirmationModal(true);
   };
   const navigateToVerify = () => {
     window.open(config.accountCenterURL + '/verification', '_blank');
@@ -123,14 +123,14 @@ export const useDonateProject = (onDonate: (data: DonateReq) => void) => {
       donateValueConversion,
       isConnected: connected,
       ConnectButton,
-      showConfirmationModal,
+      // showConfirmationModal,
     },
     operations: {
       onSelectCurrency,
       onPreventDisplayName,
       handleSubmit,
       onSubmit,
-      setShowConfirmationModal,
+      // setShowConfirmationModal,
       navigateToVerify,
     },
   };

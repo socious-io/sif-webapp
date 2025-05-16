@@ -38,8 +38,16 @@ const VerifyTopBanner = () => {
       <>
         <TopBanner
           theme="warning"
-          text={translate('layout-verification.not-verified-text', { title })}
-          supportingText={translate('layout-verification.not-verified-support-text', { title })}
+          text={
+            type === 'organizations'
+              ? translate('layout-verification.not-verified-text', { title })
+              : translate('layout-verification.not-verified-text-user')
+          }
+          supportingText={
+            type === 'organizations'
+              ? translate('layout-verification.not-verified-support-text', { title })
+              : translate('layout-verification.not-verified-support-text-user')
+          }
           secondaryButton={{
             children: translate('layout-verification.not-verified-secondary-btn'),
             href: 'https://socious.io/verified-credentials',

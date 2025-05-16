@@ -134,7 +134,7 @@ const VoteDonateCard = () => {
         donateInfo={donateInfo}
         onContinue={onContinue}
       />
-      <AlertModal
+      {/* <AlertModal
         open={showConfirmationModal}
         onClose={() => setShowConfirmationModal(false)}
         onSubmit={navigateToVerify}
@@ -144,7 +144,7 @@ const VoteDonateCard = () => {
         submitButtonTheme="primary"
         submitButtonLabel={translate('alertModal.verify-button-label')}
         closeButtonLabel={translate('alertModal.close-button-label')}
-      />
+      /> */}
     </>
   );
 };
