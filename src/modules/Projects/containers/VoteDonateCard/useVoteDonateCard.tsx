@@ -13,7 +13,7 @@ export const useVoteDonateCard = () => {
   const [openSuccessModal, setOpenSuccessModal] = useState(false);
   const [currentDonateInfo, setCurrentDonateInfo] = useState<DonateReq | null>(null);
   const [loading, setLoading] = useState(false);
-  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+  // const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const isVoteChoice = selectedCard === 'vote';
   const currentIdentity = useSelector<RootState, CurrentIdentity | undefined>(state => {
     return state.identity.entities.find(i => i.current);
@@ -31,20 +31,20 @@ export const useVoteDonateCard = () => {
       : undefined;
 
   const onVoteOrDonate = async (donatePayload?: DonateReq) => {
-    if (currentIdentity?.verified) {
-      if (selectedCard === 'donate' && donatePayload) setCurrentDonateInfo(donatePayload);
+    // if (currentIdentity?.verified) {
+    if (selectedCard === 'donate' && donatePayload) setCurrentDonateInfo(donatePayload);
 
-      setLoading(true);
-      const { error, data } = await voteOrDonateProjectAdaptor(detail.id, donatePayload);
-      if (error) {
-        setLoading(false);
-        return;
-      }
-      if (data) setOpenSuccessModal(true);
+    setLoading(true);
+    const { error, data } = await voteOrDonateProjectAdaptor(detail.id, donatePayload);
+    if (error) {
       setLoading(false);
-    } else {
-      setShowConfirmationModal(true);
+      return;
     }
+    if (data) setOpenSuccessModal(true);
+    setLoading(false);
+    // } else {
+    //   setShowConfirmationModal(true);
+    // }
   };
   const navigateToVerify = () => {
     window.open(config.accountCenterURL + '/verification', '_blank');
@@ -62,14 +62,14 @@ export const useVoteDonateCard = () => {
       voteInfo,
       donateInfo,
       loading,
-      showConfirmationModal,
+      // showConfirmationModal,
     },
     operations: {
       setSelectedCard,
       onVoteOrDonate,
       setOpenSuccessModal,
       onContinue,
-      setShowConfirmationModal,
+      // setShowConfirmationModal,
       navigateToVerify,
     },
   };

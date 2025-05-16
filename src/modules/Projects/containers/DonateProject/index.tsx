@@ -1,7 +1,7 @@
 import { CircularProgress, Divider } from '@mui/material';
 import { CURRENCIES } from 'src/constants/CURRENCIES';
 import { translate } from 'src/core/helpers/utils';
-import { AlertModal } from 'src/modules/General/components/AlertModal';
+// import { AlertModal } from 'src/modules/General/components/AlertModal';
 import Button from 'src/modules/General/components/Button';
 import Checkbox from 'src/modules/General/components/Checkbox';
 import Input from 'src/modules/General/components/Input';
@@ -23,14 +23,14 @@ const DonateProject: React.FC<DonateProjectProps> = ({ isLoading, onDonate }) =>
       donateValueConversion,
       isConnected,
       ConnectButton,
-      showConfirmationModal,
+      // showConfirmationModal,
     },
     operations: {
       onSelectCurrency,
       onPreventDisplayName,
       handleSubmit,
       onSubmit,
-      setShowConfirmationModal,
+      // setShowConfirmationModal,
       navigateToVerify,
     },
   } = useDonateProject(onDonate);
@@ -100,7 +100,7 @@ const DonateProject: React.FC<DonateProjectProps> = ({ isLoading, onDonate }) =>
         {isLoading && <CircularProgress size="16px" sx={{ color: variables.color_white }} />}
         {translate('vote-donate.donate-now-btn')}
       </Button>
-      <AlertModal
+      {/* <AlertModal
         open={showConfirmationModal}
         onClose={() => setShowConfirmationModal(false)}
         onSubmit={navigateToVerify}
@@ -110,7 +110,7 @@ const DonateProject: React.FC<DonateProjectProps> = ({ isLoading, onDonate }) =>
         submitButtonTheme="primary"
         submitButtonLabel={translate('alertModal.verify-button-label')}
         closeButtonLabel={translate('alertModal.close-button-label')}
-      />
+      /> */}
     </form>
   );
 };
