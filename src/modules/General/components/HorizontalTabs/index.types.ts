@@ -10,5 +10,6 @@ export interface HorizontalTabsProps {
   leftAligned?: boolean;
   activeIndex?: number;
   onActiveIndex?: (index: number) => void;
+  onChangeTab?: (tab: HorizontalTabsItem) => void;
   containerCustomStyle?: string;
 }

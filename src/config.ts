@@ -11,6 +11,7 @@ export const config = {
   datadogAppId: import.meta.env.VITE_DATADOG_APP_ID,
   datadogClientToken: import.meta.env.VITE_DATADOG_CLIENT_TOKEN,
   payoutDonationsAddress: import.meta.env.VITE_PAYOUT_DONATIONS_ADDRESS,
+  stripePublicKey: import.meta.env.VITE_STRIPE_PUBLIC_KEY,
   rates: {
     ada: import.meta.env.VITE_CARDANO_ADA_RATE,
   },

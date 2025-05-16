@@ -12,28 +12,12 @@ import variables from 'src/styles/constants/_exports.module.scss';
 
 import { useVoteDonateCard } from './useVoteDonateCard';
 import DonateProject from '../DonateProject';
+import FiatDonation from '../FiatDonation';
 
 const VoteDonateCard = () => {
   const {
-    data: {
-      detail,
-      selectedCard,
-      isVoteChoice,
-      userImpactPoints,
-      openSuccessModal,
-      voteInfo,
-      donateInfo,
-      loading,
-      showConfirmationModal,
-    },
-    operations: {
-      setSelectedCard,
-      onVoteOrDonate,
-      setOpenSuccessModal,
-      onContinue,
-      setShowConfirmationModal,
-      navigateToVerify,
-    },
+    data: { detail, selectedCard, isVoteChoice, userImpactPoints, openSuccessModal, voteInfo, donateInfo, loading },
+    operations: { setSelectedCard, onVoteOrDonate, setOpenSuccessModal, onContinue, setSelectedPayment },
   } = useVoteDonateCard();
 
   const voteChoices = [
@@ -66,16 +50,15 @@ const VoteDonateCard = () => {
       description: translate('vote-donate.option-2-desc'),
     },
   ];
+
   const tabs = [
+    {
+      label: 'Fiat',
+      content: <FiatDonation onDonate={onVoteOrDonate} />,
+    },
     {
       label: 'Crypto',
       content: <DonateProject onDonate={onVoteOrDonate} isLoading={loading} />,
-      default: true,
-    },
-    {
-      label: 'Fiat',
-      content: <></>,
-      default: true,
     },
   ];
 
@@ -136,7 +119,7 @@ const VoteDonateCard = () => {
             </Button>
           </>
         ) : (
-          <HorizontalTabs tabs={tabs} />
+          <HorizontalTabs tabs={tabs} onChangeTab={tab => setSelectedPayment(tab.label as 'Fiat' | 'Crypto')} />
         )}
       </div>
       <SuccessModal

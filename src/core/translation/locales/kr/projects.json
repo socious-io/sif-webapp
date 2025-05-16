@@ -175,5 +175,9 @@
     "message": "이 작업을 계속하려면 본인 인증이 필요합니다.",
     "verify-button-label": "인증하기",
     "close-button-label": "닫기"
-  }
+  },
+  "cont-add-btn": "추가",
+  "cont-add-credit-card": "신용카드 추가",
+  "cont-add-card-btn": "카드 추가",
+  "cont-change-card-btn": "카드 변경"
 }
