@@ -23,5 +23,8 @@
   "header-setting": "設定",
   "header-logout": "ログアウト",
   "header-support": "サポート",
-  "header-create-org": "組織を作成"
+  "header-create-org": "組織を作成",
+  "submission-closed-header": "提出期間終了",
+  "submission-closed-subheader": "プロジェクトの提出期間が終了しました。次のラウンドで提案を提出してください。",
+  "submission-closed-button": "閉じる"
 }

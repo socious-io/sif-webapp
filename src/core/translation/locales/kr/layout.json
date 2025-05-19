@@ -21,5 +21,8 @@
   "header-setting": "설정",
   "header-logout": "로그아웃",
   "header-support": "지원",
-  "header-create-org": "조직 만들기"
+  "header-create-org": "조직 만들기",
+  "submission-closed-header": "제출 마감",
+  "submission-closed-subheader": "프로젝트 제출 기간이 종료되었습니다. 다음 라운드에서 제안을 제출해 주세요.",
+  "submission-closed-button": "닫기"
 }

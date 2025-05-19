@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { CurrentIdentity } from 'src/core/adaptors';
 import { logout } from 'src/core/api/auth/auth.service';
+import { getDaysUntil } from 'src/core/helpers/date-converter';
 import { RootState } from 'src/store';
 
 export const useHeader = () => {
@@ -15,6 +16,8 @@ export const useHeader = () => {
   const [userType, setUserType] = useState<'users' | 'organizations'>('users');
   const [image, setImage] = useState('');
   const [openVerifyModal, setOpenVerifyModal] = useState(false);
+  const [submissionOverModal, setSubmissionOverModal] = useState(false);
+  const round = useSelector((state: RootState) => state.round.round);
 
   useEffect(() => {
     setAccounts(identities);
@@ -28,6 +31,11 @@ export const useHeader = () => {
   }, [currentIdentity]);
 
   const onCreate = () => {
+    const isSubmissionOver = getDaysUntil(round?.submission_end_at as string) <= 0;
+    if (isSubmissionOver) {
+      setSubmissionOverModal(true);
+      return;
+    }
     if (currentIdentity?.type === 'users') navigate('/create/select-identity');
     if (currentIdentity?.type === 'organizations') {
       if (currentIdentity.verified) navigate('/create');
@@ -52,5 +60,7 @@ export const useHeader = () => {
     openVerifyModal,
     setOpenVerifyModal,
     navigateSettings,
+    submissionOverModal,
+    setSubmissionOverModal,
   };
 };

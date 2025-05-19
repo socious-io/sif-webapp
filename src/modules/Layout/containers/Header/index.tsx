@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import logo from 'src/assets/logo/logo.svg';
 import { translate } from 'src/core/helpers/utils';
 import Button from 'src/modules/General/components/Button';
+import ConfirmModal from 'src/modules/General/components/ConfirmModal';
 import IconDropDown from 'src/modules/General/components/IconDropDown';
 import KYB from 'src/modules/Verification/containers/KYB';
 
@@ -18,6 +19,8 @@ const Header: React.FC = () => {
     openVerifyModal,
     setOpenVerifyModal,
     navigateSettings,
+    submissionOverModal,
+    setSubmissionOverModal,
   } = useHeader();
   return (
     <div className="w-full border-b border-b-Gray-light-mode-300 border-solid border-t-0 border-l-0 border-r-0">
@@ -61,6 +64,22 @@ const Header: React.FC = () => {
         </div>
       </div>
       <KYB open={openVerifyModal} setOpen={setOpenVerifyModal} />
+      <ConfirmModal
+        open={submissionOverModal}
+        handleClose={() => setSubmissionOverModal(false)}
+        confirmHeader={translate('submission-closed-header')}
+        confirmSubheader={translate('submission-closed-subheader')}
+        buttons={[
+          {
+            children: translate('submission-closed-button'),
+            color: 'info',
+            variant: 'outlined',
+            onClick: () => setSubmissionOverModal(false),
+            customStyle: 'w-full',
+          },
+        ]}
+        customStyle="md:max-w-[400px]"
+      />
     </div>
   );
 };
