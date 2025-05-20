@@ -30,3 +30,5 @@ export const LANGUAGES: OptionType[] = [
     label: 'French Français',
   },
 ];
+
+export const RTL_LANGUAGES = ['ar', 'he', 'fa', 'ur'];
