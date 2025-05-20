@@ -15,7 +15,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 }) => {
   return (
     <div
-      data-testid="projectCard"
+      data-testid="project-card"
       className={`flex flex-col rounded-xl border border-solid border-Gray-light-mode-200 overflow-hidden shadow-xs cursor-pointer ${className}`}
       onClick={onClick}
     >

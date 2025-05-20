@@ -10,7 +10,7 @@ const Icon: React.FC<IconProps> = props => {
     cursor: cursor,
   };
   return (
-    <div data-testid="homeicon" className={`${styles['container']} ${containerClass}`} onClick={onClick}>
+    <div data-testid="home-icon" className={`${styles['container']} ${containerClass}`} onClick={onClick}>
       <span className={`icon-${name} ${styles['icon']} ${className}`} style={iconStyle} />
     </div>
   );

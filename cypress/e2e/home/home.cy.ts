@@ -18,11 +18,9 @@ describe('home page test', () => {
 
         // explore projects intercepts
 
-        cy.intercept('GET', `${API_SERVER}/projects?t=*&page=1&limit=10`,
-            req => {
-                req.reply(200, PROJECTS);
-            }
-        ).as('getProjects');
+        cy.intercept('GET', `${API_SERVER}/projects?t=*&page=1&limit=10`, req => {
+            req.reply(200, PROJECTS);
+        }).as('getProjects');
     });
 
     Cypress.on('uncaught:exception', (err) => {
@@ -30,23 +28,26 @@ describe('home page test', () => {
             return false;
         }
     });
-      it('user navigates to home and clicks on learn more', () => {
-        cy.visit(`${APP_URL}/home`);
-        cy.contains('Make your impact').should('exist');
-        cy.contains('Learn more').click();
-      });
     it('user navigates to home and clicks on explore and sees projects', () => {
         cy.visit(`${APP_URL}/home`);
         cy.contains('Make your impact').should('exist');
+        cy.contains('button', 'Explore').should('be.visible');
         cy.contains('button', 'Explore').click();
-        cy.wait('@getProjects');
 
         cy.contains('New Round').should('be.visible');
-        cy.get('[data-testid="projectCard"]').should('exist');
+        cy.wait('@getProjects');
+        
+        cy.get('[data-testid="project-card"]').should('exist');
+    });
+    it('user navigates to home and clicks on learn more', () => {
+        cy.visit(`${APP_URL}/home`);
+        cy.contains('Make your impact').should('exist');
+        cy.contains('Learn more').click();
     });
     it('user navigates to Home from page navigator', () => {
         cy.visit(`${APP_URL}/projects`);
-        cy.get('[data-testid="homeicon"]').first().click();
+        cy.get('[data-testid="home-icon"]').should('exist');
+        cy.get('[data-testid="home-icon"]').first().click();
         cy.contains('Make your impact').should('exist');
-    })
+    });
 });
