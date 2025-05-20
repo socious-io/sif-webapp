@@ -1,0 +1,13 @@
+{
+  "intro-individual": "فرد",
+  "intro-individual-desc": "صوّت وتبرّع للمشاريع",
+  "intro-organization": "منظمة",
+  "intro-organization-desc": "أنشئ مشروعك في دقائق واحصل على التمويل",
+  "intro-create-account-header": "إنشاء حساب",
+  "intro-create-account-subheader": "امنح الجميع فرصة لإحداث فرق",
+  "intro-continue-button": "متابعة",
+  "intro-already-account": "هل لديك حساب بالفعل؟ ",
+  "intro-login": "تسجيل الدخول",
+  "intro-login-with-socious": "إنشاء أو تسجيل الدخول باستخدام Socious ID",
+  "select-identity-create-title": "إنشاء مشروع"
+}
