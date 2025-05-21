@@ -100,6 +100,7 @@ const Input: React.FC<InputProps> = ({
       )}
 
       <TextField
+        data-testid="currency"
         id={id}
         variant="outlined"
         className={`${styles['default']} ${errors ? styles['errorColor'] : styles['defaultColor']}`}
@@ -125,8 +126,8 @@ const Input: React.FC<InputProps> = ({
         }}
         {...(register
           ? register(name, {
-              setValueAs: setValue,
-            })
+            setValueAs: setValue,
+          })
           : {})}
         {...props}
         type={inputType}
