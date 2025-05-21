@@ -14,13 +14,18 @@ const ReferCard: React.FC<ReferCardProps> = ({
   refereeReward,
   color = 'blue',
 }) => {
-  const lightColor = {
-    blue: 'Wild_blue-100',
-    green: 'Dark_vanilla-100',
+  //Tailwind can't parse dynamic strings
+  const lightBackgroundColor = {
+    blue: 'bg-Wild_blue-100',
+    green: 'bg-Dark_vanilla-100',
   }[color];
-  const darkColor = {
-    blue: 'Wild_blue-500',
-    green: 'Dark_vanilla-500',
+  const darkBackgroundColor = {
+    blue: 'bg-Wild_blue-500',
+    green: 'bg-Dark_vanilla-500',
+  }[color];
+  const darkBorderColor = {
+    blue: 'border-Wild_blue-500',
+    green: 'border-Dark_vanilla-500',
   }[color];
   const [copied, setCopied] = useState(false);
 
@@ -31,8 +36,8 @@ const ReferCard: React.FC<ReferCardProps> = ({
 
   return (
     <>
-      <div className={`flex-1 flex flex-col rounded-xl bg-${lightColor}`}>
-        <div className={`flex flex-col gap-1 py-6 px-4 md:px-6 border-0 border-b border-solid border-${darkColor}`}>
+      <div className={`flex-1 flex flex-col rounded-xl ${lightBackgroundColor}`}>
+        <div className={`flex flex-col gap-1 py-6 px-4 md:px-6 border-0 border-b border-solid ${darkBorderColor}`}>
           <span className="font-semibold text-lg leading-7 text-Gray-light-mode-900">{title}</span>
           <span className="font-normal text-sm leading-5 text-Gray-light-mode-600">{subtitle}</span>
           <Input
@@ -63,7 +68,7 @@ const ReferCard: React.FC<ReferCardProps> = ({
                 name="tick"
                 fontSize={10}
                 color={variables.color_white}
-                containerClass={`w-5 h-5 p-2 rounded-full bg-${darkColor}`}
+                containerClass={`w-5 h-5 p-2 rounded-full ${darkBackgroundColor}`}
               />
               <p className="text-sm font-normal leading-5 text-Gray-light-mode-600">{referrerReward}</p>
             </div>
@@ -75,7 +80,7 @@ const ReferCard: React.FC<ReferCardProps> = ({
                 name="tick"
                 fontSize={10}
                 color={variables.color_white}
-                containerClass={`w-5 h-5 p-2 rounded-full bg-${darkColor}`}
+                containerClass={`w-5 h-5 p-2 rounded-full ${darkBackgroundColor}`}
               />
               <p className="text-sm font-normal leading-5 text-Gray-light-mode-600">{refereeReward}</p>
             </div>

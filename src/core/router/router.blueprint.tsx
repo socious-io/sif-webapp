@@ -104,6 +104,13 @@ export const blueprint: RouteObject[] = [
               return { Component: Protect(Settings, 'both') };
             },
           },
+          {
+            path: 'refer',
+            async lazy() {
+              const { Refer } = await import('src/pages/refer');
+              return { Component: Protect(Refer, 'both') };
+            },
+          },
         ],
       },
       {
