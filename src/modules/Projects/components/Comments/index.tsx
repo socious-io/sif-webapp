@@ -20,6 +20,7 @@ const Comments: React.FC<CommentsProps> = ({
   onSeeMoreRepliesClick,
   reactProjectComment,
   unreactProjectComment,
+  restrictReply,
 }) => {
   const {
     data: { emojis, activeEmojiPickerCommentId },
@@ -65,12 +66,14 @@ const Comments: React.FC<CommentsProps> = ({
                       {emoji.emoji}
                     </div>
                   ))}
-                <span
-                  className="text-sm text-Gray-light-mode-600 cursor-pointer ml-1"
-                  onClick={() => onReply({ replyTo: name || '', commentId: item.id })}
-                >
-                  {translate('feeds-reply')}
-                </span>
+                {restrictReply && (
+                  <span
+                    className="text-sm text-Gray-light-mode-600 cursor-pointer ml-1"
+                    onClick={() => onReply({ replyTo: name || '', commentId: item.id })}
+                  >
+                    {translate('feeds-reply')}
+                  </span>
+                )}
               </div>
               {activeEmojiPickerCommentId === item.id && (
                 <CustomEmojiPicker
