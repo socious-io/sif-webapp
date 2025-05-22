@@ -335,7 +335,7 @@ export const useCommentSection = (projectId: string) => {
       fetchComments(projectId);
     }
   }, [projectId]);
-
+  const restrictComment = currentIdentity?.verified || false;
   const commentList = state.comments;
   const avatarImage = currentIdentity?.img;
   const comment = state.comments.find(c => c.id === replyCommentId);
@@ -369,5 +369,6 @@ export const useCommentSection = (projectId: string) => {
     replyCommentId,
     loading,
     replyToName,
+    restrictComment,
   };
 };

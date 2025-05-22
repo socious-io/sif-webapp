@@ -96,7 +96,7 @@ const SearchDropdown: React.FC<SelectProps> = ({
     }
   };
   return (
-    <div className={`${styles['container']} ${containerClassName}`}>
+    <div data-testid="search-dropdown" className={`${styles['container']} ${containerClassName}`}>
       {label && (
         <div className={styles['labelContainer']}>
           <label

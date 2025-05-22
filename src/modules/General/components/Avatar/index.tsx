@@ -38,6 +38,7 @@ const Avatar: React.FC<AvatarProps> = props => {
 
   return (
     <div
+      data-testid="avatar-icon"
       onClick={onClick}
       style={{ width: size, height: size, minWidth: size, minHeight: size }}
       className={`${styles['container']} ${hasBorder && styles['container__border']} ${customStyle} `}

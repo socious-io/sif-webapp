@@ -1,0 +1,28 @@
+{
+  "general-file-uploader": {
+    "click": "انقر للتحميل",
+    "drag": "أو اسحب وأفلت",
+    "or": "أو",
+    "max": "الحد الأقصى",
+    "max-error": "{{name}} يتجاوز الحجم الأقصى وهو {{max}} ميجابايت",
+    "limit-error": "يمكنك تحميل ما يصل إلى {{limit}} ملفات كحد أقصى. يرجى اختيار عدد أقل من الملفات."
+  },
+  "general-multi-select-popular": "شائع",
+  "general-pagination": {
+    "next": "التالي",
+    "prev": "السابق",
+    "page": "صفحة",
+    "of": "من"
+  },
+  "general-copy-link": "نسخ",
+  "general-image-editor": {
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "title": "تحرير الصورة",
+    "subtitle": "قم بقص صورتك إلى الأبعاد المطلوبة."
+  },
+  "connect-wallet": "ربط المحفظة",
+  "disconnect": "قطع الاتصال",
+  "copy-address": "نسخ العنوان",
+  "no-wallet-alert": "لم يتم اكتشاف محفظة كاردانو. يرجى تثبيت محفظة كاردانو مثل Lace أو Eternl أو Yoroi للمتابعة."
+}

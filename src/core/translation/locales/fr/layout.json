@@ -1,0 +1,28 @@
+{
+  "socious-fund": "Fonds Socious",
+  "header-login": "Se connecter",
+  "layout-action-button": "Créer un projet",
+  "layout-verification": {
+    "success-text": "Votre {{title}} a été vérifié avec succès",
+    "success-support-text": "Vous pouvez maintenant voter et faire des dons pour des projets.",
+    "success-primary-btn": "Fermer",
+    "pending-text": "Vérification en attente",
+    "pending-support-text": "Nous examinons les documents soumis, vous serez notifié une fois la vérification terminée.",
+    "not-verified-text": "Vérifiez votre {{title}}",
+    "not-verified-support-text": "Pour voter et faire des dons sur notre plateforme, veuillez vérifier votre {{title}}.",
+    "not-verified-primary-btn": "Vérifier maintenant",
+    "not-verified-secondary-btn": "En savoir plus",
+    "title-organization": "organisation",
+    "title-identity": "identité"
+  },
+  "not-verified-secondary-btn": "En savoir plus",
+  "footer-copyright": "© 2025 Socious Global Inc. Tous droits réservés.",
+  "header-your-impact": "Votre impact",
+  "header-setting": "Paramètres",
+  "header-logout": "Se déconnecter",
+  "header-support": "Support",
+  "header-create-org": "Créer une organisation",
+  "submission-closed-header": "Soumissions closes",
+  "submission-closed-subheader": "La période de soumission des projets est terminée. Veuillez soumettre votre proposition lors du prochain cycle.",
+  "submission-closed-button": "Fermer"
+}
