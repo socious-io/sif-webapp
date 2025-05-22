@@ -179,6 +179,13 @@ export const blueprint: RouteObject[] = [
           },
         ],
       },
+      {
+        path: '/referral',
+        async lazy() {
+          const { Referral } = await import('src/pages/refer/referral');
+          return { Component: Referral };
+        },
+      },
     ],
   },
 ];
