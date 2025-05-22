@@ -176,5 +176,9 @@
     "message": "Para continuar con esta acción, por favor verifica tu identidad.",
     "verify-button-label": "Verificar",
     "close-button-label": "Cerrar"
-  }
+  },
+  "cont-add-btn": "Agregar",
+  "cont-add-credit-card": "Agregar una tarjeta de crédito",
+  "cont-add-card-btn": "Agregar tarjeta",
+  "cont-change-card-btn": "Cambiar tarjeta"
 }
