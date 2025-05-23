@@ -180,5 +180,6 @@
   "cont-add-btn": "Agregar",
   "cont-add-credit-card": "Agregar una tarjeta de crédito",
   "cont-add-card-btn": "Agregar tarjeta",
-  "cont-change-card-btn": "Cambiar tarjeta"
+  "cont-change-card-btn": "Cambiar tarjeta",
+  "vote-donate.strict-org": "Por favor, cambia a tu cuenta personal de Socious para votar."
 }

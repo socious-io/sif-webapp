@@ -51,6 +51,7 @@ export const useProjectDetail = () => {
   const navigateToVerify = () => {
     window.open(config.accountCenterURL + '/verification', '_blank');
   };
+  const identityType = currentIdentity?.type;
   return {
     data: {
       detail,
@@ -63,6 +64,7 @@ export const useProjectDetail = () => {
       openVerifyModal,
       isSubmissionOver,
       showConfirmationModal,
+      identityType,
     },
     operations: {
       navigate,
