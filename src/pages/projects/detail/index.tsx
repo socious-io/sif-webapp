@@ -29,6 +29,7 @@ export const ProjectDetail = () => {
       currentIdentity,
       openVerifyModal,
       isSubmissionOver,
+      identityType,
       // showConfirmationModal,
     },
     operations: {
@@ -192,6 +193,7 @@ export const ProjectDetail = () => {
             onVote={onVote}
             votingStartAt={round?.voting_start_at}
             showResult={isOwner}
+            identityType={identityType}
           />
         )}
       </div>
