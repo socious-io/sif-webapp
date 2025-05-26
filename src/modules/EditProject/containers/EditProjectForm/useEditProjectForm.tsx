@@ -5,7 +5,7 @@ import { useLoaderData, useNavigate } from 'react-router-dom';
 import { editProjectAdaptor, socialCausesToCategoryAdaptor, uploadMediaAdaptor } from 'src/core/adaptors';
 import { Project } from 'src/core/api';
 import Connect from 'src/modules/General/components/ConnectButton';
-import { Files } from 'src/modules/General/components/ProgressFileUploader/index.types';
+import { Files } from 'src/modules/General/components/FileUploader/index.types';
 import * as yup from 'yup';
 
 import { FormData } from './index.types';

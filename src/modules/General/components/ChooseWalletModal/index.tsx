@@ -12,7 +12,7 @@ const ChooseWalletModal = ({
   mobileCentered = true,
   ...props
 }) => {
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   const connectWallet = async walletName => {
     setError(null);
@@ -23,7 +23,7 @@ const ChooseWalletModal = ({
       localStorage.setItem('selectedWallet', walletName);
       handleClose();
     } catch (err) {
-      setError(err.message);
+      setError(err instanceof Error ? err.message : 'An error occurred');
     }
   };
 

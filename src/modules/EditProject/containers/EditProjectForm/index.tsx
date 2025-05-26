@@ -50,7 +50,7 @@ const EditProjectForm: React.FC = () => {
       >
         <LocationSearchDropdown
           onSelect={location => onSelectLocation(location)}
-          value={{ city, country, label: city ? `${country}, ${city}` : '' }}
+          value={{ city: city ?? '', country: country ?? '', label: city ? `${country ?? ''}, ${city}` : '' }}
         />
       </FormColumnTemplate>
       <FormColumnTemplate
