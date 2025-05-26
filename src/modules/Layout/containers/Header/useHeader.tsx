@@ -50,6 +50,8 @@ export const useHeader = () => {
 
   const navigateIntro = () => navigate('/intro');
   const navigateSettings = () => navigate('/settings');
+  const navigateRefer = () => navigate('/refer');
+
   return {
     accounts,
     image,
@@ -60,6 +62,7 @@ export const useHeader = () => {
     openVerifyModal,
     setOpenVerifyModal,
     navigateSettings,
+    navigateRefer,
     submissionOverModal,
     setSubmissionOverModal,
   };
