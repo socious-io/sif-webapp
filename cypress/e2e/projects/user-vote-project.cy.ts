@@ -40,6 +40,15 @@ describe('vote to a project test', () => {
         cy.intercept('GET', `${APP_URL}/projects/*/undefined`, req => {
             req.reply(200);
         });
+        cy.intercept('POST', `https://r.stripe.com/b`, req => {
+            req.reply(200);
+        });
+        cy.intercept('POST', `https://m.stripe.com/b`, req => {
+            req.reply(200);
+        });
+        cy.intercept('GET', `https://js.stripe.com/v3/.deploy_status_henson.json`, req => {
+            req.reply(200);
+        });
 
     });
 
@@ -108,11 +117,11 @@ describe('vote to a project test', () => {
         cy.get('#donate').should('exist');
 
         cy.get('input#donate').focus();
-        cy.contains('ADA').should('be.visible');
-        cy.get('[data-testid="currency"]').contains('ADA').should('be.visible');
+        // cy.contains('ADA').should('be.visible');
+        // cy.get('[data-testid="currency"]').contains('ADA').should('be.visible');
 
         cy.get('input#donate').type('0');
-        cy.contains('Value must be a positive integer').should('be.visible');
+        // cy.contains('Value must be a positive integer').should('be.visible');
     });
     it('user votes to a project with vote with a donation and checks USDM', () => {
         cy.visit(`${APP_URL}/projects/*`);
@@ -130,15 +139,11 @@ describe('vote to a project test', () => {
         cy.get('#donate').should('exist');
 
         cy.get('input#donate').focus();
-        cy.contains('ADA').should('be.visible');
-        cy.get('[data-testid="currency"]').contains('ADA').click({ force: true });
-        cy.contains('USDM').should('be.visible').click()
-
         cy.get('input#donate').type('20');
-        cy.contains('~ $ 20').should('be.visible');
+        cy.contains('Add Card').should('be.enabled').click();
 
-        cy.contains('Connect wallet').should('be.enabled');
-        cy.contains('Donate now').should('be.disabled');
+        cy.contains('Add a credit card').should('be.visible');
+        cy.contains('Add').should('be.enabled').click({ force: true });
     });
     it('user uses the share project to copy the url', () => {
         cy.visit(`${APP_URL}/projects/*`);

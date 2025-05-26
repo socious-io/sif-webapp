@@ -36,13 +36,32 @@ describe('home page test', () => {
 
         cy.contains('New Round').should('be.visible');
         cy.wait('@getProjects');
-        
+
         cy.get('[data-testid="project-card"]').should('exist');
     });
-    it('user navigates to home and clicks on learn more', () => {
+    it('navigates to home and clicks Learn more (cross-origin)', () => {
         cy.visit(`${APP_URL}/home`);
         cy.contains('Make your impact').should('exist');
-        cy.contains('Learn more').click();
+
+        cy.contains('Learn more')
+            .should('have.attr', 'href')
+            .then((href) => {
+                if (!href) return;
+
+                const url = new URL(href);
+                const origin = url.origin;
+                const path = url.pathname + url.search;
+
+                cy.origin(
+                    origin,
+                    { args: { path } },
+                    ({ path }) => {
+                        cy.on('uncaught:exception', () => false);
+                        cy.visit(path);
+                        cy.contains('Rewards').should('exist'); // Adjust based on expected GitBook content
+                    }
+                );
+            });
     });
     it('user navigates to Home from page navigator', () => {
         cy.visit(`${APP_URL}/projects`);
