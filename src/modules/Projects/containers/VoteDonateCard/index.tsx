@@ -53,12 +53,12 @@ const VoteDonateCard = () => {
 
   const tabs = [
     {
-      label: 'Fiat',
-      content: <FiatDonation onDonate={onVoteOrDonate} />,
-    },
-    {
       label: 'Crypto',
       content: <DonateProject onDonate={onVoteOrDonate} isLoading={loading} />,
+    },
+    {
+      label: 'Fiat',
+      content: <FiatDonation onDonate={onVoteOrDonate} />,
     },
   ];
 
