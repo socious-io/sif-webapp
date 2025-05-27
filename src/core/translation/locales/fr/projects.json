@@ -117,7 +117,7 @@
     "option-2-desc": "Amplifiez votre impact en faisant un don en plus de votre vote.",
     "help-visibility-funding": "Votre vote aidera ce projet à gagner en visibilité et augmentera ses chances de recevoir un financement de notre plateforme communautaire.",
     "impact-cardano": "Bien que le vote soit gratuit, vous avez la possibilité de faire un don pour amplifier votre impact. Les dons sont traités en toute sécurité en utilisant la cryptomonnaie ADA sur le réseau Cardano pour garantir transparence, responsabilité et une allocation équitable des fonds correspondants.",
-    "supported-wallet-lace": "Actuellement, nous ne prenons en charge que Lace Wallet pour la connexion. Lace est un portefeuille convivial développé par Input Output Global, disponible sous forme d'extension de navigateur.",
+    "supported-wallet-lace": "Le vote est compatible avec les portefeuilles Cardano, y compris Lace, Yoroi et d'autres pris en charge par le navigateur. Lace est un portefeuille convivial développé par Input Output Global, disponible en tant qu'extension de navigateur.",
     "why-cryptocurrency-link": "Pourquoi utiliser la cryptomonnaie ?",
     "more-about-lace-link": "En savoir plus sur Lace Wallet",
     "vote-for": "Voter pour",
