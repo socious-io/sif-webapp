@@ -73,7 +73,9 @@ const VoteDetailCard: React.FC<VoteDetailCardProps> = ({
                   <Button color="primary" onClick={onVote} disabled={identityType === 'organizations'}>
                     {translate('projects-round-stats.vote-button')}
                   </Button>
-                  <AlertMessage theme="warning" iconName="alert-circle" title={translate('vote-donate.strict-org')} />
+                  {identityType === 'organizations' && (
+                    <AlertMessage theme="warning" iconName="alert-circle" title={translate('vote-donate.strict-org')} />
+                  )}
                 </>
               )}
             </>
