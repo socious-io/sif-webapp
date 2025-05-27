@@ -8,6 +8,7 @@ const HorizontalTabs: React.FC<HorizontalTabsProps> = ({
   leftAligned = true,
   activeIndex = 0,
   onActiveIndex,
+  onChangeTab,
   containerCustomStyle = '',
 }) => {
   const [active, setActive] = useState(activeIndex);
@@ -21,6 +22,9 @@ const HorizontalTabs: React.FC<HorizontalTabsProps> = ({
       onActiveIndex(index);
     } else {
       setActive(index);
+    }
+    if (onChangeTab) {
+      onChangeTab(tabs[index]);
     }
   };
 

@@ -176,5 +176,6 @@
     "message": "لمتابعة هذا الإجراء، يرجى التحقق من هويتك.",
     "verify-button-label": "تحقق",
     "close-button-label": "إغلاق"
-  }
+  },
+  "vote-donate.strict-org": "يرجى التبديل إلى حسابك الشخصي في Socious للتصويت."
 }

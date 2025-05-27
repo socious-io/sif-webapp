@@ -176,5 +176,6 @@
     "message": "Pour poursuivre cette action, veuillez vérifier votre identité.",
     "verify-button-label": "Vérifier",
     "close-button-label": "Fermer"
-  }
+  },
+  "vote-donate.strict-org": "Veuillez passer à votre compte Socious personnel pour voter."
 }

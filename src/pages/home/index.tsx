@@ -24,7 +24,7 @@ export const Home = () => {
             <Button
               color="info"
               customStyle="!h-[3.75rem] min-w-[9.25rem] !p-3 md:!p-4 !text-Gray-light-mode-700"
-              href="https://socious.org"
+              href="https://socious.gitbook.io/fund/rewards"
             >
               {translate('home-learn-more-button')}
             </Button>

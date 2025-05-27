@@ -176,5 +176,10 @@
     "message": "To proceed with this action, please verify your identity.",
     "verify-button-label": "Verify",
     "close-button-label": "Close"
-  }
+  },
+  "cont-add-btn": "Add",
+  "cont-add-credit-card": "Add a credit card",
+  "cont-add-card-btn": "Add Card",
+  "cont-change-card-btn": "Change Card",
+  "vote-donate.strict-org": "Please switch to your personal Socious account to vote."
 }

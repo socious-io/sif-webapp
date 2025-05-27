@@ -1,6 +1,7 @@
+import Cookies from 'js-cookie';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useLoaderData, useNavigate, useParams } from 'react-router-dom';
+import { useLoaderData, useNavigate, useParams, useLocation } from 'react-router-dom';
 import { config } from 'src/config';
 import { Project } from 'src/core/adaptors';
 import { CurrentIdentity } from 'src/core/adaptors';
@@ -10,6 +11,7 @@ import { RootState } from 'src/store';
 
 export const useProjectDetail = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [openVerifyModal, setOpenVerifyModal] = useState(false);
   const { id: projectId } = useParams();
   const { projectDetail: detail } = useLoaderData() as { projectDetail: Project };
@@ -40,7 +42,10 @@ export const useProjectDetail = () => {
       navigate('vote');
       // if (currentIdentity?.verified) navigate('vote');
       // else setShowConfirmationModal(true);
-    } else navigate('/intro');
+    } else {
+      Cookies.set('lastPath', location.pathname, { expires: 1 });
+      navigate('/intro');
+    }
   };
   const removeProject = async () => {
     setOpenVerifyModal(false);
@@ -51,6 +56,7 @@ export const useProjectDetail = () => {
   const navigateToVerify = () => {
     window.open(config.accountCenterURL + '/verification', '_blank');
   };
+  const identityType = currentIdentity?.type;
   return {
     data: {
       detail,
@@ -63,6 +69,7 @@ export const useProjectDetail = () => {
       openVerifyModal,
       isSubmissionOver,
       showConfirmationModal,
+      identityType,
     },
     operations: {
       navigate,
