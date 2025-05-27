@@ -1952,3 +1952,79 @@ export const NOT_VERIFIED_ORG = {
         }
     ]
 }
+
+export const EDIT_PROJECT_DETAIL = {
+    id: "c4346dd7-497b-4a86-9da8-85146f3bf44e",
+    title: "Social cause test",
+    description: "\u003cp\u003eSocial cause bug fix test\u003c/p\u003e\u003cp\u003e\u003c/p\u003e\u003cp\u003eJoshua test\u003c/p\u003e",
+    status: "ACTIVE",
+    city: "",
+    country: "",
+    website: "https://aaug.ir/",
+    social_cause: "MENTAL",
+    identity: {
+        id: "5f9b98e7-a31b-4622-88d1-2da867f5ffdd",
+        type: "organizations",
+        meta: {
+            bio: null,
+            city: null,
+            logo: {
+                id: "53172727-71ae-4ed6-9459-0e4e93cf1884",
+                url: "https://storage.googleapis.com/socious-gcs/f63c207fad58219f0d89022ec3e4a614418063b25e29b97a4b03870e0c175892.jpg",
+                filename: "cover photo.jpg",
+                created_at: "2025-03-25T17:36:45.580589Z"
+            },
+            name: "testorganization",
+            cover: {},
+            email: "shantisaghoolian@gmail.com",
+            phone: null,
+            status: "NOT_ACTIVE",
+            address: null,
+            country: null,
+            culture: null,
+            mission: null,
+            website: null,
+            verified: true,
+            shortname: "testorganization",
+            description: null,
+            verified_impact: false
+        },
+        current: false,
+        created_at: "2025-03-25T17:37:38Z",
+        updated_at: "2025-05-26T08:27:53Z"
+    },
+    cover_id: "25ccea2b-964d-4897-9625-024e42e7529e",
+    cover: {
+        id: "25ccea2b-964d-4897-9625-024e42e7529e",
+        url: "https://storage.googleapis.com/socious-gcs/cd6febb87735a73f955ae534af92e68d2aa6b37837a6886e019152f62c07ca07.jpg",
+        filename: "360_F_297892888_fiCFYX2oB9GvCotLpOBhc5t7RVgNHozm.jpg",
+        created_at: "2025-04-09T11:21:52Z"
+    },
+    round: {
+        id: "39a37dea-b4ec-488d-a3a0-c784258bf4b9",
+        name: "New Round",
+        pool_amount: 10000,
+        cover_id: null,
+        cover: null,
+        voting_start_at: "2025-03-28T00:00:00Z",
+        voting_end_at: "2025-06-30T00:00:00Z",
+        submission_start_at: "2025-03-26T00:00:00Z",
+        submission_end_at: "2025-03-27T00:00:00Z",
+        total_donations: 1081,
+        total_votes: 48,
+        total_projects: 25,
+        voting_announce_at: null,
+        created_at: "2025-03-25T18:47:58Z",
+        updated_at: "2025-03-25T18:47:58Z"
+    },
+    total_votes: 4,
+    total_donations: 2,
+    wallet_address: "addr1qxnym0wj3kggvrqpzhwut07fwyfulsjs8ewx0t5hy7t8r5zepxjh87rcyash8syzsn0p5zhtcst5mntm4v8z5nefsyes8lcxr5",
+    wallet_env: "",
+    user_voted: true,
+    created_at: "2025-04-09T11:22:16.120504Z",
+    updated_at: "2025-04-09T11:22:16.120504Z",
+    expires_at: null,
+    deleted_at: null,
+    not_eligible_at: null
+}
