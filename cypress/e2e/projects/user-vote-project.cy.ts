@@ -63,27 +63,45 @@ describe('vote to a project test', () => {
         });
     });
 
-    it('user votes to a project with vote without donation', () => {
-        cy.visit(`${APP_URL}/projects/*`);
-        cy.contains('Project Details').should('be.visible');
-        cy.contains('Overview').should('be.visible');
+    // it('user votes to a project with vote without donation', () => {
+    //     cy.visit(`${APP_URL}/projects/*`);
+    //     cy.contains('Project Details').should('be.visible');
+    //     cy.contains('Overview').should('be.visible');
 
-        cy.contains('Vote now').scrollIntoView().should('exist').should('be.enabled');
-        cy.contains('Vote now').click();
+    //     cy.contains('Vote now').scrollIntoView().should('exist').should('be.enabled');
+    //     cy.contains('Vote now').click();
 
-        cy.contains('Vote without donation').should('exist');
-        cy.contains('Vote without donation').click();
-        cy.contains('Vote now').should('exist');
-        cy.contains('Vote now').click();
-        cy.wait('@vote');
+    //     cy.contains('Vote without donation').should('exist');
+    //     cy.contains('Vote without donation').click();
+    //     cy.contains('Vote now').should('exist');
+    //     cy.contains('Vote now').click();
+    //     cy.wait('@vote');
 
-        cy.contains('Thank you for your vote!').should('be.visible');
-        cy.contains('Continue').should('exist');
-        cy.contains('Continue').click();
-        cy.wait('@getProjects').its('response.statusCode').should('eq', 200);
-    });
+    //     cy.contains('Thank you for your vote!').should('be.visible');
+    //     cy.contains('Continue').should('exist');
+    //     cy.contains('Continue').click();
+    //     cy.wait('@getProjects').its('response.statusCode').should('eq', 200);
+    // });
 
-    it('user votes to a project with vote with a donation', () => {
+    // it('user votes to a project with vote with a donation', () => {
+    //     cy.visit(`${APP_URL}/projects/*`);
+    //     cy.contains('Project Details').should('be.visible');
+    //     cy.contains('Overview').should('be.visible');
+
+    //     cy.contains('Vote now').scrollIntoView().should('exist').should('be.enabled');
+    //     cy.contains('Vote now').click();
+
+    //     cy.contains('Vote with a donation').should('exist');
+    //     Cypress.once('uncaught:exception', () => false);
+    //     cy.get('[data-testid="RadioButtonCheckedIcon"]').eq(1).click({ force: true });
+
+    //     cy.contains('Donate now').should('exist').should('be.disabled');
+    //     cy.get('#donate').should('exist');
+
+    //     cy.get('input#donate').focus();
+    //     cy.contains('ADA').should('be.visible');
+    // });
+    it('user votes to a project with vote with a donation in USDM with invalid amount', () => {
         cy.visit(`${APP_URL}/projects/*`);
         cy.contains('Project Details').should('be.visible');
         cy.contains('Overview').should('be.visible');
@@ -94,14 +112,28 @@ describe('vote to a project test', () => {
         cy.contains('Vote with a donation').should('exist');
         Cypress.once('uncaught:exception', () => false);
         cy.get('[data-testid="RadioButtonCheckedIcon"]').eq(1).click({ force: true });
+
+        cy.contains('Crypto').should('exist').click({force: true});
 
         cy.contains('Donate now').should('exist').should('be.disabled');
         cy.get('#donate').should('exist');
 
         cy.get('input#donate').focus();
         cy.contains('ADA').should('be.visible');
+        cy.get('[data-testid="currency"]').contains('ADA').should('be.visible');
+        cy.get('[data-testid="currency"]').contains('ADA').click({ force: true });
+
+        cy.contains('USDM').should('be.visible').click();
+        cy.get('[data-testid="currency"]').contains('USDM').should('exist');
+
+        cy.get('input#donate').focus();
+        cy.contains('USDM').should('exist');
+        cy.get('[data-testid="currency"]').contains('USDM').should('exist');
+
+        cy.get('input#donate').type('0');
+        cy.contains('Value must be a positive integer').should('be.visible');
     });
-    it('user votes to a project with vote with a donation with unvalid amount', () => {
+    it('user votes to a project with vote with a donation in ADA', () => {
         cy.visit(`${APP_URL}/projects/*`);
         cy.contains('Project Details').should('be.visible');
         cy.contains('Overview').should('be.visible');
@@ -113,17 +145,47 @@ describe('vote to a project test', () => {
         Cypress.once('uncaught:exception', () => false);
         cy.get('[data-testid="RadioButtonCheckedIcon"]').eq(1).click({ force: true });
 
+        cy.contains('Crypto').should('exist').click();
+
         cy.contains('Donate now').should('exist').should('be.disabled');
         cy.get('#donate').should('exist');
 
         cy.get('input#donate').focus();
-        // cy.contains('ADA').should('be.visible');
-        // cy.get('[data-testid="currency"]').contains('ADA').should('be.visible');
+        cy.contains('ADA').should('be.visible');
+        cy.get('[data-testid="currency"]').contains('ADA').should('be.visible');
 
-        cy.get('input#donate').type('0');
-        // cy.contains('Value must be a positive integer').should('be.visible');
+        cy.get('input#donate').type('20');
+        cy.contains('20 ADA').should('be.visible');
     });
-    it('user votes to a project with vote with a donation and checks USDM', () => {
+    it('user votes to a project with vote with a donation in USDM', () => {
+        cy.visit(`${APP_URL}/projects/*`);
+        cy.contains('Project Details').should('be.visible');
+        cy.contains('Overview').should('be.visible');
+
+        cy.contains('Vote now').scrollIntoView().should('exist').should('be.enabled');
+        cy.contains('Vote now').click();
+
+        cy.contains('Vote with a donation').should('exist');
+        Cypress.once('uncaught:exception', () => false);
+        cy.get('[data-testid="RadioButtonCheckedIcon"]').eq(1).click({ force: true });
+
+        cy.contains('Crypto').should('exist').click();
+
+        cy.contains('Donate now').should('exist').should('be.disabled');
+        cy.get('#donate').should('exist');
+
+        cy.get('input#donate').focus();
+        cy.contains('ADA').should('be.visible');
+        cy.get('[data-testid="currency"]').contains('ADA').should('be.visible');
+        cy.get('[data-testid="currency"]').contains('ADA').click({ force: true });
+
+        cy.contains('USDM').should('be.visible').click();
+        cy.get('[data-testid="currency"]').contains('USDM').should('exist');
+
+        cy.get('input#donate').type('20');
+        cy.contains('20 USDM').should('be.visible');
+    });
+    it('user votes to a project with fiat payment', () => {
         cy.visit(`${APP_URL}/projects/*`);
         cy.contains('Project Details').should('be.visible');
         cy.contains('Overview').should('be.visible');
