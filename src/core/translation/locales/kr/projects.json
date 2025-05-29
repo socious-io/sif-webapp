@@ -129,7 +129,7 @@
     "power-funding-title": "당신의 영향을 증폭시키기 위해 기부하세요",
     "power-funding-subtitle": "기부를 하면 투표력이 강화되고 이 프로젝트가 매칭 풀을 통해 추가 자금을 확보하는 데 도움이 됩니다.",
     "enter-donation": "기부 금액 입력 (정수만 가능)",
-    "enter-donation-positive-error": "값은 양의 정수여야 합니다",
+    "enter-donation-positive-error": "소수점 없는 정수를 입력해주세요.",
     "error-donation-required-error": "이 필드는 필수입니다",
     "payment-method": "결제 방법",
     "prevent-display-name": "이 프로젝트에 내 이름을 공개적으로 표시하지 않기",

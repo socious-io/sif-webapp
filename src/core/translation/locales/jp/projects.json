@@ -130,7 +130,7 @@
     "power-funding-title": "寄付して影響力を高める",
     "power-funding-subtitle": "寄付をすることで、投票の影響力が増し、マッチングプールを通じて追加資金を獲得できます。",
     "enter-donation": "寄付金額を入力してください（整数のみ）",
-    "enter-donation-positive-error": "値は正の整数でなければなりません。",
+    "enter-donation-positive-error": "小数点なしの整数を入力してください。",
     "error-donation-required-error": "この項目は必須です",
     "payment-method": "支払い方法",
     "prevent-display-name": "このプロジェクトで自分の名前を公開しない",
