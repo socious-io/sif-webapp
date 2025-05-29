@@ -39,7 +39,8 @@ export const Referral = () => {
       const authURL = await fetchAuthURL();
       if (authURL) {
         const url = new URL(authURL);
-        url.searchParams.append('referred_by', referredBy);
+        url.searchParams.set('auth_mode', 'register');
+        url.searchParams.set('referred_by', referredBy);
         window.location.href = url.toString();
       }
     };
