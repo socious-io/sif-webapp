@@ -1,4 +1,4 @@
-import Select, { components } from 'react-select';
+import Select, { components, ControlProps, SingleValueProps, GroupBase } from 'react-select';
 import Icon from 'src/modules/General/components/Icon';
 
 import styles from './index.module.scss';
@@ -16,8 +16,7 @@ const InputDropdown: React.FC<InputDropdownProps> = ({
   minWidth = '',
   ...props
 }) => {
-  const CustomControl = ({ children, ...props }) => {
-    //FIXME: ts errors
+  const CustomControl = ({ children, ...props }: ControlProps<any, boolean, GroupBase<any>>) => {
     return (
       <components.Control {...props}>
         {icon && <Icon className={styles['startIcon']} name={icon} fontSize={20} color="#667085" />}
@@ -36,12 +35,13 @@ const InputDropdown: React.FC<InputDropdownProps> = ({
       </div>
     );
   };
-  const CustomSingleValue = ({ children, data, ...props }) => {
+  const CustomSingleValue = (props: SingleValueProps<any, boolean, GroupBase<any>>) => {
+    const { children, data } = props;
     return (
       <components.SingleValue {...props}>
         <div className="flex ">
           {children}
-          {data.description && <div className={styles['description']}>{data.description}</div>}
+          {data?.description && <div className={styles['description']}>{data.description}</div>}
         </div>
       </components.SingleValue>
     );
@@ -61,7 +61,7 @@ const InputDropdown: React.FC<InputDropdownProps> = ({
             <Icon name="chevron-down" fontSize={20} color="#667085" />
           </div>
         ),
-        SingleValue: CustomSingleValue,
+        SingleValue: props => <CustomSingleValue {...props} />,
       }}
       styles={{
         singleValue: (provided, state) => ({
