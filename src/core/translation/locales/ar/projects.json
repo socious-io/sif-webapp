@@ -130,7 +130,7 @@
     "power-funding-title": "تبرع لتضخيم تأثيرك",
     "power-funding-subtitle": "تقديم تبرع يعزز قوة تصويتك ويساعد هذا المشروع على تأمين تمويل إضافي من خلال تجمع المطابقة الخاص بنا.",
     "enter-donation": "أدخل تبرعك (بالأرقام الصحيحة فقط)",
-    "enter-donation-positive-error": "يجب أن تكون القيمة عددًا صحيحًا إيجابيًا",
+    "enter-donation-positive-error": "يرجى إدخال رقم صحيح بدون فواصل عشرية.",
     "error-donation-required-error": "هذا الحقل مطلوب",
     "payment-method": "طريقة الدفع",
     "prevent-display-name": "لا تعرض اسمي علنًا على هذا المشروع",

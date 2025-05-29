@@ -130,7 +130,7 @@
     "power-funding-title": "通过捐款放大你的影响力",
     "power-funding-subtitle": "捐款可增强你的投票影响力，并帮助该项目通过我们的匹配资金池获得额外资助。",
     "enter-donation": "输入你的捐款（仅限整数）",
-    "enter-donation-positive-error": "值必须为正整数",
+    "enter-donation-positive-error": "请输入不带小数的整数。",
     "error-donation-required-error": "此字段为必填",
     "payment-method": "支付方式",
     "prevent-display-name": "不要在此项目上公开显示我的姓名",
