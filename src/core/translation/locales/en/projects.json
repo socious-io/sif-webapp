@@ -130,7 +130,7 @@
     "power-funding-title": "Donate to amplify your impact",
     "power-funding-subtitle": "Making a donation enhances your voting power and helps this project secure additional funding through our matching pool.",
     "enter-donation": "Enter your donation (only in whole numbers)",
-    "enter-donation-positive-error": "Value must be a positive integer",
+    "enter-donation-positive-error": "Please enter a whole number without decimals.",
     "error-donation-required-error": "This field is required",
     "payment-method": "Payment method",
     "prevent-display-name": "Don’t display my name publicly on this project",
