@@ -16,8 +16,22 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["@typescript-eslint", "react", "import", "jsdoc", "i18next"],
-  "ignorePatterns": ["node_modules/", "dist/"],
+  "plugins": [
+    "@typescript-eslint",
+    "react",
+    "import",
+    "jsdoc",
+    "i18next"
+  ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "ignorePatterns": [
+    "node_modules/",
+    "dist/"
+  ],
   "rules": {
     "i18next/no-literal-string": "error",
     "semi": "error",
@@ -28,7 +42,11 @@
       "error",
       {
         "newlines-between": "always",
-        "groups": [["builtin", "external"], "internal", ["parent", "sibling", "index"]],
+        "groups": [
+          ["builtin", "external"],
+          "internal",
+          ["parent", "sibling", "index"]
+        ],
         "alphabetize": {
           "order": "asc",
           "caseInsensitive": true
