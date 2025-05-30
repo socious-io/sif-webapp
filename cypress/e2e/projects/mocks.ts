@@ -1647,33 +1647,33 @@ export const NEW_PROJECT_DETAIL = {
 }
 
 export const LOCATIONS = {
-  page: 1,
-  limit: 20,
-  total_count: 2,
-  items: [
-    {
-      add_id: 1649380,
-      id: 1850147,
-      name: 'Tokyo',
-      type: 'PPLC',
-      population: 8336599,
-      country_code: 'JP',
-      alternate_name: 'Tokyo',
-      alt_language: 'en',
-      is_historic: false,
-      is_colloquial: false,
-      is_short_name: false,
-      region_id: '40',
-      subregion_id: '',
-      region_name: 'Tokyo Prefecture',
-      region_iso: '13',
-      subregion_name: null,
-      subregion_iso: null,
-      timezone: 'Asia/Tokyo',
-      country_name: 'Japan',
-      timezone_utc: 'UTC+09:00',
-    },
-  ],
+    page: 1,
+    limit: 20,
+    total_count: 2,
+    items: [
+        {
+            add_id: 1649380,
+            id: 1850147,
+            name: 'Tokyo',
+            type: 'PPLC',
+            population: 8336599,
+            country_code: 'JP',
+            alternate_name: 'Tokyo',
+            alt_language: 'en',
+            is_historic: false,
+            is_colloquial: false,
+            is_short_name: false,
+            region_id: '40',
+            subregion_id: '',
+            region_name: 'Tokyo Prefecture',
+            region_iso: '13',
+            subregion_name: null,
+            subregion_iso: null,
+            timezone: 'Asia/Tokyo',
+            country_name: 'Japan',
+            timezone_utc: 'UTC+09:00',
+        },
+    ],
 };
 
 export const NOT_VERIFIED_ORG = {
@@ -2028,3 +2028,225 @@ export const EDIT_PROJECT_DETAIL = {
     deleted_at: null,
     not_eligible_at: null
 }
+
+export const VERIFIED_ORG_IDENTITY = {
+    identities: [
+        {
+            id: "5f9b98e7-a31b-4622-88d1-2da867f5ffdd",
+            type: "organizations",
+            meta: {
+                bio: null,
+                city: null,
+                logo: {
+                    id: "53172727-71ae-4ed6-9459-0e4e93cf1884",
+                    url: "https://storage.googleapis.com/socious-gcs/f63c207fad58219f0d89022ec3e4a614418063b25e29b97a4b03870e0c175892.jpg",
+                    filename: "cover photo.jpg",
+                    created_at: "2025-03-25T17:36:45.580589Z"
+                },
+                name: "testorganization",
+                cover: {},
+                email: "shantisaghoolian@gmail.com",
+                phone: null,
+                status: "NOT_ACTIVE",
+                address: null,
+                country: null,
+                culture: null,
+                mission: null,
+                website: null,
+                verified: true,
+                shortname: "testorganization",
+                description: null,
+                verified_impact: false
+            },
+            current: true,
+            created_at: "2025-03-25T17:37:38.441352Z",
+            updated_at: "2025-05-23T07:21:22.55332Z"
+        },
+        {
+            id: "035f724e-5824-4129-8ed6-96c6dda81a3a",
+            type: "users",
+            meta: {
+                city: null,
+                cover: {},
+                email: "imshantik@gmail.com",
+                avatar: {},
+                address: null,
+                country: null,
+                donates: 0,
+                language: null,
+                username: "imshantik5140",
+                last_name: "Isaghoolian",
+                first_name: "Shant",
+                impact_points: 2100,
+                project_supported: 0,
+                identity_verified_at: "2025-05-22T00:00:00"
+            },
+            current: false,
+            created_at: "2025-03-14T08:00:11.751864Z",
+            updated_at: "2025-05-23T07:21:22.433608Z"
+        }
+    ]
+}
+
+export const OTHER_PROJECT_DETAILS = {
+    id: "d8c472f4-def0-4cd1-b70e-1ae30b2bc491",
+    title: "test",
+    description: "\u003cp\u003efsdfsdfsdfsdf\u003c/p\u003e",
+    status: "ACTIVE",
+    city: "",
+    country: "",
+    website: "",
+    social_cause: "POVERTY",
+    identity: {
+        id: "2bd26aa5-f745-4f12-bca7-17916161ae8b",
+        type: "organizations",
+        meta: {
+            bio: "Socious is a talent marketplace connecting purpose-driven talent with their dream jobs.",
+            city: "Tokyo, Tokyo Prefecture",
+            logo: {
+                id: "53e51908-19a2-4579-9566-5842f01531eb",
+                url: "https://storage.googleapis.com/socious-gcs/ad4ae46f5dc138d8bc63928890bc64e0.png",
+                filename: "Logomark_3 2.png",
+                created_at: "2023-04-06T08:49:28.777155Z"
+            },
+            name: "Socious",
+            cover: {
+                id: "091193bc-c34b-43f3-89fe-1db4e72d9db2",
+                url: "https://storage.googleapis.com/socious-gcs/a2eba401bef6cbbaa66ca66eac1d8da1.jpg",
+                filename: "YS-1580189.jpg",
+                created_at: "2023-04-06T08:50:00.412141Z"
+            },
+            email: "info@socious.io",
+            phone: "07074906558",
+            status: "ACTIVE",
+            address: "Nihonbashi 3-2-14-1F, Chuo Ward, Tokyo, Japan 103-0027",
+            country: "JP",
+            culture: "Diversity, Inclusion and Belonging\r\n\r\nWe want build a more inclusive world and it starts from building an inclusive company.\r\n\r\nLife First, Work Second\r\n\r\nWe believe that family and friends are more important than work. If there is a conflict between life and work, we should always prioritize life.\r\n\r\nHigh Performance for High Social Impact\r\n\r\nOur goal is to maximize social impact, not shareholder value or profit. Our social and financial returns are generally aligned, but if there is a conflict, we prioritize social returns.\r\n\r\nAutonomy and Accountability\r\n\r\nEach Socious member enjoys a high level of autonomy is trusted to do the right thing. They are also accountable for the decisions they make.\r\n\r\nCandor and Collaboration\r\n\r\nBeing honest is better than being nice.",
+            mission: "Our mission is to give everyone the chance to make a difference.\r\n\r\nWe are a talent platform that makes impact work accessible and transparent; we build connections between purpose-driven individuals and organizations. By leveraging blockchain technology, we make social/environmental impact work traceable and reward contributions with crypto tokens.",
+            website: "https://socious.io",
+            verified: true,
+            shortname: "socious",
+            description: null,
+            verified_impact: true
+        },
+        current: false,
+        created_at: "2025-03-13T07:36:15Z",
+        updated_at: "2025-05-27T08:32:18Z"
+    },
+    cover_id: "3adb9483-fe5f-4058-9aa9-ba729cd9d5e4",
+    cover: {
+        id: "3adb9483-fe5f-4058-9aa9-ba729cd9d5e4",
+        url: "https://storage.googleapis.com/socious-gcs/a8594291ee7146f78f2ebab863b1efdbc4c9805d8c0a92644fa6aa0e74ce982f.jpg",
+        filename: "gow.jpg",
+        created_at: "2025-04-09T08:58:17Z"
+    },
+    round: {
+        id: "39a37dea-b4ec-488d-a3a0-c784258bf4b9",
+        name: "New Round",
+        pool_amount: 10000,
+        cover_id: null,
+        cover: null,
+        voting_start_at: "2025-03-28T00:00:00Z",
+        voting_end_at: "2025-06-30T00:00:00Z",
+        submission_start_at: "2025-03-26T00:00:00Z",
+        submission_end_at: "2025-03-27T00:00:00Z",
+        total_donations: 1279,
+        total_votes: 53,
+        total_projects: 24,
+        voting_announce_at: null,
+        created_at: "2025-03-25T18:47:58Z",
+        updated_at: "2025-03-25T18:47:58Z"
+    },
+    total_votes: 3,
+    total_donations: 176,
+    wallet_address: "addr_test1qp5gwq2w7yq3qh35vce9jyn4kf04w984edz5elw3y2v64ueg679evx7j6rcz9xsaqe0h6pzxd4ex2evx398d5aa9kjcq64v2tj",
+    wallet_env: "",
+    user_voted: true,
+    created_at: "2025-04-09T08:58:23.589245Z",
+    updated_at: "2025-04-09T08:58:23.589245Z",
+    expires_at: null,
+    deleted_at: null,
+    not_eligible_at: null
+}
+
+export const NOT_VOTED_PROJECT = {
+    id: "7adffab0-f1c2-409d-9b7a-b4d2a700bf38",
+    title: "test",
+    description: "\u003ch1\u003e\u003cstrong class=\"font-bold\"\u003eTell donors why you're fundraising  - editted\u003c/strong\u003e\u003c/h1\u003e\u003cp\u003eBelow are some questions to help you start writing. You can always edit it later:\u003c/p\u003e\u003cul\u003e\u003cli\u003e\u003cp\u003eWho are you and what are you raising funds for?\u003c/p\u003e\u003c/li\u003e\u003cli\u003e\u003cp\u003eWhy is this cause important to you?\u003c/p\u003e\u003c/li\u003e\u003cli\u003e\u003cp\u003eHow will the funds be used?\u003c/p\u003e\u003c/li\u003e\u003c/ul\u003e\u003cp\u003e\u003cbr\u003e\u003c/p\u003e",
+    status: "ACTIVE",
+    city: "",
+    country: "",
+    website: "http://www.myorg.com",
+    social_cause: "Poverty",
+    identity: {
+        id: "2bd26aa5-f745-4f12-bca7-17916161ae8b",
+        type: "organizations",
+        meta: {
+            bio: "Socious is a talent marketplace connecting purpose-driven talent with their dream jobs.",
+            city: "Tokyo, Tokyo Prefecture",
+            logo: {
+                id: "53e51908-19a2-4579-9566-5842f01531eb",
+                url: "https://storage.googleapis.com/socious-gcs/ad4ae46f5dc138d8bc63928890bc64e0.png",
+                filename: "Logomark_3 2.png",
+                created_at: "2023-04-06T08:49:28.777155Z"
+            },
+            name: "Socious",
+            cover: {
+                id: "091193bc-c34b-43f3-89fe-1db4e72d9db2",
+                url: "https://storage.googleapis.com/socious-gcs/a2eba401bef6cbbaa66ca66eac1d8da1.jpg",
+                filename: "YS-1580189.jpg",
+                created_at: "2023-04-06T08:50:00.412141Z"
+            },
+            email: "info@socious.io",
+            phone: "07074906558",
+            status: "ACTIVE",
+            address: "Nihonbashi 3-2-14-1F, Chuo Ward, Tokyo, Japan 103-0027",
+            country: "JP",
+            culture: "Diversity, Inclusion and Belonging\r\n\r\nWe want build a more inclusive world and it starts from building an inclusive company.\r\n\r\nLife First, Work Second\r\n\r\nWe believe that family and friends are more important than work. If there is a conflict between life and work, we should always prioritize life.\r\n\r\nHigh Performance for High Social Impact\r\n\r\nOur goal is to maximize social impact, not shareholder value or profit. Our social and financial returns are generally aligned, but if there is a conflict, we prioritize social returns.\r\n\r\nAutonomy and Accountability\r\n\r\nEach Socious member enjoys a high level of autonomy is trusted to do the right thing. They are also accountable for the decisions they make.\r\n\r\nCandor and Collaboration\r\n\r\nBeing honest is better than being nice.",
+            mission: "Our mission is to give everyone the chance to make a difference.\r\n\r\nWe are a talent platform that makes impact work accessible and transparent; we build connections between purpose-driven individuals and organizations. By leveraging blockchain technology, we make social/environmental impact work traceable and reward contributions with crypto tokens.",
+            website: "https://socious.io",
+            verified: true,
+            shortname: "socious",
+            description: null,
+            verified_impact: true
+        },
+        current: false,
+        created_at: "2025-03-13T07:36:15Z",
+        updated_at: "2025-05-27T08:32:18Z"
+    },
+    cover_id: "a3795277-4de5-4352-8c7f-8d030a473a1f",
+    cover: {
+        id: "a3795277-4de5-4352-8c7f-8d030a473a1f",
+        url: "https://storage.googleapis.com/socious-gcs/50cc4125b5f1598ac04f0309bdf21136b1c3d5ff90f5797876ea13decf00c876.png",
+        filename: "Screenshot 2025-03-02 231816.png",
+        created_at: "2025-04-02T01:08:30Z"
+    },
+    round: {
+        id: "39a37dea-b4ec-488d-a3a0-c784258bf4b9",
+        name: "New Round",
+        pool_amount: 10000,
+        cover_id: null,
+        cover: null,
+        voting_start_at: "2025-03-28T00:00:00Z",
+        voting_end_at: "2025-06-30T00:00:00Z",
+        submission_start_at: "2025-03-26T00:00:00Z",
+        submission_end_at: "2025-03-27T00:00:00Z",
+        total_donations: 1279,
+        total_votes: 53,
+        total_projects: 24,
+        voting_announce_at: null,
+        created_at: "2025-03-25T18:47:58Z",
+        updated_at: "2025-03-25T18:47:58Z"
+    },
+    total_votes: 4,
+    total_donations: 83,
+    wallet_address: "addr_test1qp5gwq2w7yq3qh35vce9jyn4kf04w984edz5elw3y2v64ueg679evx7j6rcz9xsaqe0h6pzxd4ex2evx398d5aa9kjcq64v2tj",
+    wallet_env: "",
+    user_voted: false,
+    created_at: "2025-04-02T00:33:09.993296Z",
+    updated_at: "2025-04-02T00:33:09.993296Z",
+    expires_at: null,
+    deleted_at: null,
+    not_eligible_at: null
+}
+

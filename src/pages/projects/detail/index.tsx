@@ -156,7 +156,7 @@ export const ProjectDetail = () => {
                 </div>
               )}
             </div>
-            <Button
+            <Button              
               color="error"
               variant="outlined"
               fullWidth
