@@ -21,7 +21,8 @@
     "react",
     "import",
     "jsdoc",
-    "i18next"
+    "i18next",
+    "cypress"
   ],
   "settings": {
     "react": {
