@@ -13,7 +13,7 @@ const CustomLink: React.FC<CustomLinkProps> = ({ children, href }) => (
 );
 
 CustomLink.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.element.isRequired,
   href: PropTypes.string.isRequired,
 };
 
