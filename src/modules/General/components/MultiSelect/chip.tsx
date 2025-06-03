@@ -10,7 +10,6 @@ const Chip: React.FC<CustomChipProps> = props => {
   };
   return (
     <div
-      data-testid="chip"
       className={`${styles['chip']} ${customStyle}`}
       style={{ borderColor: borderColor ? borderColor : '', backgroundColor: bgColor || '' }}
       onClick={() => onClick(label)}

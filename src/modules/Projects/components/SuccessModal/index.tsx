@@ -55,8 +55,7 @@ const SuccessModal: React.FC<SuccessModalProps> = ({
             <span className="font-medium text-Gray-light-mode-900">
               {` ${donateInfo.donate} ${donateInfo.currency} `}
             </span>
-            {donateInfo.donateConversion && `(${donateInfo.donateConversion}) `}
-            {translate('vote-donate.success-modal.meaningful-impact')}
+            ({donateInfo.donateConversion}) {translate('vote-donate.success-modal.meaningful-impact')}
           </p>
           <p className="mt-4">{translate('vote-donate.success-modal.meaningful-difference')}</p>
         </>

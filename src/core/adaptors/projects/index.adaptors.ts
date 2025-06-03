@@ -91,24 +91,13 @@ export const voteOrDonateProjectAdaptor = async (
 ): Promise<AdaptorRes<SuccessRes>> => {
   try {
     if (donatePayload) {
-      if (donatePayload.type === 'FIAT') {
-        const payload: DonateReqRaw = {
-          amount: donatePayload.donate,
-          payment_type: donatePayload.type,
-          card_token: donatePayload.token,
-          currency: donatePayload.currency,
-        };
-        await donate(projectId, payload);
-      } else {
-        // Crypto
-        const payload: DonateReqRaw = {
-          amount: donatePayload.donate,
-          currency: donatePayload.currency,
-          txid: donatePayload.transactionHash,
-          wallet_address: donatePayload.wallet_address,
-        };
-        await donate(projectId, payload);
-      }
+      const payload: DonateReqRaw = {
+        amount: donatePayload.donate,
+        currency: donatePayload.currency,
+        txid: donatePayload.transactionHash,
+        wallet_address: donatePayload.wallet_address,
+      };
+      await donate(projectId, payload);
     } else {
       await vote(projectId);
     }

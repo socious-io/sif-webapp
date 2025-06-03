@@ -17,18 +17,4 @@ export const LANGUAGES: OptionType[] = [
     value: 'kr',
     label: 'Korean 한국어',
   },
-  {
-    value: 'ar',
-    label: 'Arabic العربية',
-  },
-  {
-    value: 'zh',
-    label: 'Chinese 中文',
-  },
-  {
-    value: 'fr',
-    label: 'French Français',
-  },
 ];
-
-export const RTL_LANGUAGES = ['ar', 'he', 'fa', 'ur'];

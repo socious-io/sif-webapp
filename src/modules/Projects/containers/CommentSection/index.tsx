@@ -27,7 +27,6 @@ const CommentSection = ({ projectId }: { projectId: string }) => {
     unreactToComment,
     replyToName,
     loading,
-    restrictComment,
   } = useCommentSection(projectId);
 
   return (
@@ -40,7 +39,6 @@ const CommentSection = ({ projectId }: { projectId: string }) => {
         </Box>
       ) : (
         <Comments
-          restrictReply={restrictComment}
           postId={projectId}
           list={commentList}
           onReply={userInfo => {
@@ -55,40 +53,36 @@ const CommentSection = ({ projectId }: { projectId: string }) => {
           {translate('feeds-see-more')}
         </span>
       )}
-      {restrictComment && (
-        <>
-          <SendBox
-            name="comment"
-            buttonText={translate('feeds-reply')}
-            userImg={avatarImage as string}
-            placeholder={translate('feeds-action-comment')}
-            value={commentText}
-            onChange={value => {
-              setCommentText(value);
-              setError(null);
-            }}
-            onEmojiSelect={emoji => setCommentText(prev => prev + emoji)}
-            onSend={handleSendComment}
-            disabled={isSubmitting}
-          />
-          {error && <div className="text-red-500 text-sm">{error}</div>}
-          {showReplySection && (
-            <SendBox
-              name="comment"
-              buttonText={translate('feeds-reply')}
-              userImg={avatarImage as string}
-              placeholder={translate('feeds-reply-to', { name: replyToName })}
-              value={replyText}
-              onChange={value => {
-                setReplyText(value);
-                setError(null);
-              }}
-              onEmojiSelect={emoji => setReplyText(prev => prev + emoji)}
-              onSend={handleSendReply}
-              disabled={isSubmitting}
-            />
-          )}
-        </>
+      <SendBox
+        name="comment"
+        buttonText={translate('feeds-reply')}
+        userImg={avatarImage as string}
+        placeholder={translate('feeds-action-comment')}
+        value={commentText}
+        onChange={value => {
+          setCommentText(value);
+          setError(null);
+        }}
+        onEmojiSelect={emoji => setCommentText(prev => prev + emoji)}
+        onSend={handleSendComment}
+        disabled={isSubmitting}
+      />
+      {error && <div className="text-red-500 text-sm">{error}</div>}
+      {showReplySection && (
+        <SendBox
+          name="comment"
+          buttonText={translate('feeds-reply')}
+          userImg={avatarImage as string}
+          placeholder={translate('feeds-reply-to', { name: replyToName })}
+          value={replyText}
+          onChange={value => {
+            setReplyText(value);
+            setError(null);
+          }}
+          onEmojiSelect={emoji => setCommentText(prev => prev + emoji)}
+          onSend={handleSendReply}
+          disabled={isSubmitting}
+        />
       )}
     </div>
   );

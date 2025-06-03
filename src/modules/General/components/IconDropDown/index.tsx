@@ -91,18 +91,17 @@ const IconDropDown: React.FC<IconDropDownProps> = props => {
           )}
           {iconItems.length ? <Divider className="!m-0" /> : ''}
           {iconItems.map(i => (
-            <div key={i.label}>
-              <MenuItem
-                className={styles['menuItem']}
-                onFocus={handleOpen}
-                onBlur={handleClose}
-                onMouseDown={i.onClick}
-                onClick={i.onClick}
-              >
-                <IconListItem iconName={i.iconName} label={i.label} />
-              </MenuItem>
+            <MenuItem
+              key={i.label}
+              className={styles['menuItem']}
+              onFocus={handleOpen}
+              onBlur={handleClose}
+              onMouseDown={i.onClick}
+              onClick={i.onClick}
+            >
+              <IconListItem iconName={i.iconName} label={i.label} />
               <Divider className="!m-0 w-full" />
-            </div>
+            </MenuItem>
           ))}
           {customItems.length ? <Divider className="!m-0" /> : ''}
           {customItems.map((i, index) => (

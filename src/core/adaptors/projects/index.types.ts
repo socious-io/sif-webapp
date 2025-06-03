@@ -36,10 +36,8 @@ export type ProjectRes = PaginateRes<Project>;
 
 export type DonateReq = {
   donate: number;
-  currency?: string;
+  currency: string;
   preventDisplayName: boolean;
-  transactionHash?: string;
-  wallet_address?: string;
-  type?: 'FIAT' | 'CRYPTO';
-  token?: string;
+  transactionHash: string;
+  wallet_address: string;
 };

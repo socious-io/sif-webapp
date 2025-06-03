@@ -14,7 +14,6 @@ export const useVoteDonateCard = () => {
   const [currentDonateInfo, setCurrentDonateInfo] = useState<DonateReq | null>(null);
   const [loading, setLoading] = useState(false);
   // const [showConfirmationModal, setShowConfirmationModal] = useState(false);
-  const [selectedPayment, setSelectedPayment] = useState<'Fiat' | 'Crypto'>('Fiat');
   const isVoteChoice = selectedCard === 'vote';
   const currentIdentity = useSelector<RootState, CurrentIdentity | undefined>(state => {
     return state.identity.entities.find(i => i.current);
@@ -26,12 +25,8 @@ export const useVoteDonateCard = () => {
       ? {
           donate: Number(currentDonateInfo?.donate || 0).toFixed(2),
           currency:
-            selectedPayment === 'Crypto'
-              ? CURRENCIES.find(currency => currency.value === currentDonateInfo?.currency)?.label ||
-                CURRENCIES[0].label
-              : 'USD',
-          donateConversion:
-            selectedPayment === 'Crypto' ? `$${Number(currentDonateInfo?.donate || 0).toFixed(2)} USD` : '',
+            CURRENCIES.find(currency => currency.value === currentDonateInfo?.currency)?.label || CURRENCIES[0].label,
+          donateConversion: `$${Number(currentDonateInfo?.donate || 0).toFixed(2)} USD`,
         }
       : undefined;
 
@@ -68,7 +63,6 @@ export const useVoteDonateCard = () => {
       donateInfo,
       loading,
       // showConfirmationModal,
-      selectedPayment,
     },
     operations: {
       setSelectedCard,
@@ -77,7 +71,6 @@ export const useVoteDonateCard = () => {
       onContinue,
       // setShowConfirmationModal,
       navigateToVerify,
-      setSelectedPayment,
     },
   };
 };

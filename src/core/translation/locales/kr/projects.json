@@ -116,13 +116,13 @@
     "option-2-desc": "투표에 더해 기부를 통해 당신의 영향을 증폭시키세요.",
     "help-visibility-funding": "당신의 투표는 이 프로젝트가 가시성을 얻고 커뮤니티 주도 플랫폼에서 자금을 받을 가능성을 높이는 데 도움이 됩니다.",
     "impact-cardano": "투표는 무료이지만, 당신의 영향을 증폭시키기 위해 기부할 수 있는 옵션이 있습니다. 기부는 Cardano 네트워크에서 ADA 암호화폐를 사용해 안전하게 처리되며, 투명성, 책임성, 그리고 매칭 자금의 공정한 분배를 보장합니다.",
-    "supported-wallet-lace": "투표는 브라우저에서 지원하는 Lace, Yoroi 등 Cardano 지갑과 호환됩니다. Lace는 Input Output Global에서 개발한 사용자 친화적인 지갑으로, 브라우저 확장 프로그램으로 제공됩니다.",
+    "supported-wallet-lace": "현재 우리는 연결을 위해 Lace Wallet만 지원합니다. Lace는 Input Output Global에서 개발한 사용자 친화적인 지갑으로, 브라우저 확장 프로그램으로 제공됩니다.",
     "why-cryptocurrency-link": "왜 암호화폐를 사용하나요?",
     "more-about-lace-link": "Lace Wallet에 대해 더 알아보기",
     "vote-for": "투표 대상",
     "to-vote": "투표하려면:",
     "vote-now-btn": "지금 투표",
-    "impact-points": "현재 임팩트 포인트",
+    "impact-points": "당신의 영향 포인트",
     "estimated-match": "예상 매칭",
     "total-contribution": "총 기여",
     "pts": "포인트",
@@ -175,10 +175,5 @@
     "message": "이 작업을 계속하려면 본인 인증이 필요합니다.",
     "verify-button-label": "인증하기",
     "close-button-label": "닫기"
-  },
-  "cont-add-btn": "추가",
-  "cont-add-credit-card": "신용카드 추가",
-  "cont-add-card-btn": "카드 추가",
-  "cont-change-card-btn": "카드 변경",
-  "vote-donate.strict-org": "투표하려면 개인 Socious 계정으로 전환해 주세요."
+  }
 }

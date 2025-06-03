@@ -14,15 +14,8 @@ export async function vote(id: string): Promise<any> {
   return (await post<any>(`projects/${id}/votes`, {})).data;
 }
 
-export async function donate(id: string, payload: DonationReq, retry = 1): Promise<any> {
-  // Note: requests may failed cause retrying on slow crypto network 3 time retry to test valid transaction
-  // BE can not hold request more than 30 secs cause browsers timeout
-  try {
-    return (await post<any>(`projects/${id}/donates`, payload)).data;
-  } catch (error) {
-    if (retry > 3) throw error;
-    return donate(id, payload, retry + 1);
-  }
+export async function donate(id: string, payload: DonationReq): Promise<any> {
+  return (await post<any>(`projects/${id}/donates`, payload)).data;
 }
 
 export async function createProjects(payload: Partial<Project>): Promise<any> {

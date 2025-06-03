@@ -30,13 +30,16 @@ export enum DateRangeStatus {
 }
 
 export const getDateRangeStatus = (startDate: Date, endDate: Date): DateRangeStatus => {
-  const now = new Date();
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
   const start = new Date(startDate);
+  start.setHours(0, 0, 0, 0);
   const end = new Date(endDate);
+  end.setHours(0, 0, 0, 0);
 
-  if (end < now) {
+  if (end < today) {
     return DateRangeStatus.AFTER;
-  } else if (start > now) {
+  } else if (start > today) {
     return DateRangeStatus.BEFORE;
   } else {
     return DateRangeStatus.DURING;

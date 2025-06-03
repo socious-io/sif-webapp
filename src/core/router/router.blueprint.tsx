@@ -104,13 +104,6 @@ export const blueprint: RouteObject[] = [
               return { Component: Protect(Settings, 'both') };
             },
           },
-          {
-            path: 'refer',
-            async lazy() {
-              const { Refer } = await import('src/pages/refer');
-              return { Component: Protect(Refer, 'both') };
-            },
-          },
         ],
       },
       {
@@ -178,13 +171,6 @@ export const blueprint: RouteObject[] = [
             },
           },
         ],
-      },
-      {
-        path: '/referral',
-        async lazy() {
-          const { Referral } = await import('src/pages/refer/referral');
-          return { Component: Referral };
-        },
       },
     ],
   },

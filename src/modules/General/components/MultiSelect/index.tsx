@@ -70,7 +70,6 @@ const MultiSelect: React.FC<MultiSelectProps> = props => {
         {searchTitle}
       </label>
       <Autocomplete
-        data-testid="social-causes-input"
         id={id}
         value={componentValue}
         onChange={(event, value) => handleChange(value)}

@@ -32,13 +32,13 @@ const Modal: React.FC<ModalProps> = props => {
       {open && (
         <Backdrop sx={{ zIndex: theme => theme.zIndex.drawer + 1, width: '100vw' }} open={open} id={id}>
           <div
-            data-testid="modal"
-            className={`${styles['container']} ${customStyle} ${mobileCentered
-              ? styles['mobileCentered']
-              : mobileFullHeight
-                ? styles['mobileFullHeight']
-                : styles['mobileDefault']
-              }`}
+            className={`${styles['container']} ${customStyle} ${
+              mobileCentered
+                ? styles['mobileCentered']
+                : mobileFullHeight
+                  ? styles['mobileFullHeight']
+                  : styles['mobileDefault']
+            }`}
           >
             <div
               className={`w-full flex gap-4 px-4 pt-4 md:px-6 md:pt-6 relative top-0 ${centerHeader && 'justify-center'}`}

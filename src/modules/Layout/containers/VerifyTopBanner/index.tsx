@@ -50,7 +50,7 @@ const VerifyTopBanner = () => {
           }
           secondaryButton={{
             children: translate('layout-verification.not-verified-secondary-btn'),
-            href: 'https://socious.gitbook.io/fund/rewards',
+            href: 'https://socious.io/verified-credentials',
           }}
           primaryButton={{
             children: translate('layout-verification.not-verified-primary-btn'),

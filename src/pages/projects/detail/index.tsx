@@ -29,7 +29,6 @@ export const ProjectDetail = () => {
       currentIdentity,
       openVerifyModal,
       isSubmissionOver,
-      identityType,
       // showConfirmationModal,
     },
     operations: {
@@ -138,12 +137,11 @@ export const ProjectDetail = () => {
             >
               {isShared ? translate('projects-detail.link-copied') : translate('projects-detail.share-button')}
             </Button>
-
             <div className="flex flex-col items-stretch gap-1">
               <Button
                 color="primary"
                 fullWidth
-                customStyle="min-w-[10rem] break-keep"
+                customStyle="flex-1 min-w-[10rem] break-keep"
                 onClick={onEditProject}
                 disabled={isSubmissionOver}
               >
@@ -156,7 +154,7 @@ export const ProjectDetail = () => {
                 </div>
               )}
             </div>
-            <Button              
+            <Button
               color="error"
               variant="outlined"
               fullWidth
@@ -193,7 +191,6 @@ export const ProjectDetail = () => {
             onVote={onVote}
             votingStartAt={round?.voting_start_at}
             showResult={isOwner}
-            identityType={identityType}
           />
         )}
       </div>

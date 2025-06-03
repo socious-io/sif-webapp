@@ -10,7 +10,6 @@ const AvatarLabelGroup: React.FC<AvatarLabelGroupProps> = props => {
 
   return (
     <div
-      data-testid="avatar-label-group"
       className={`${styles['container']} ${!removeFull && styles['container--full']} ${customStyle} ${handleClick && 'cursor-pointer'}`}
       onClick={handleClick}
     >

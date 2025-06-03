@@ -103,7 +103,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
   return (
     <div className={styles['main']}>
       {label && <label className={styles['label']}>{label}</label>}
-      <div data-testid="description-input" className={`${styles['container']} ${errors ? styles['container--error'] : styles['container--default']}`}>
+      <div className={`${styles['container']} ${errors ? styles['container--error'] : styles['container--default']}`}>
         <EditorContent editor={editor} />
         <MenuBar editor={editor} />
       </div>

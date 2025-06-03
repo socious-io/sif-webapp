@@ -117,13 +117,13 @@
     "option-2-desc": "Amplifica tu impacto haciendo una donación además de tu voto.",
     "help-visibility-funding": "Tu voto ayudará a este proyecto a ganar visibilidad y aumentará sus posibilidades de recibir financiación de nuestra plataforma impulsada por la comunidad.",
     "impact-cardano": "Aunque votar es gratis, tienes la opción de hacer una donación para amplificar tu impacto. Las donaciones se procesan de forma segura usando la criptomoneda ADA en la red Cardano para garantizar transparencia, responsabilidad y una asignación justa de los fondos de contrapartida.",
-    "supported-wallet-lace": "La votación es compatible con las billeteras de Cardano, incluidas Lace, Yoroi y otras compatibles con el navegador. Lace es una billetera fácil de usar desarrollada por Input Output Global, disponible como una extensión del navegador.",
+    "supported-wallet-lace": "Actualmente, solo soportamos la billetera Lace para la conexión. Lace es una billetera fácil de usar desarrollada por Input Output Global, disponible como extensión del navegador.",
     "why-cryptocurrency-link": "¿Por qué usamos criptomonedas?",
     "more-about-lace-link": "Más sobre la billetera Lace",
     "vote-for": "Votar por",
     "to-vote": "Para votar:",
     "vote-now-btn": "Votar ahora",
-    "impact-points": "Tus puntos de impacto actuales",
+    "impact-points": "Tus puntos de impacto",
     "estimated-match": "Coincidencia estimada",
     "total-contribution": "Contribución total",
     "pts": "pts",
@@ -176,10 +176,5 @@
     "message": "Para continuar con esta acción, por favor verifica tu identidad.",
     "verify-button-label": "Verificar",
     "close-button-label": "Cerrar"
-  },
-  "cont-add-btn": "Agregar",
-  "cont-add-credit-card": "Agregar una tarjeta de crédito",
-  "cont-add-card-btn": "Agregar tarjeta",
-  "cont-change-card-btn": "Cambiar tarjeta",
-  "vote-donate.strict-org": "Por favor, cambia a tu cuenta personal de Socious para votar."
+  }
 }

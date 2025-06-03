@@ -3,7 +3,6 @@ import { translate } from 'src/core/helpers/utils';
 import { AlertModal } from 'src/modules/General/components/AlertModal';
 import Button from 'src/modules/General/components/Button';
 import CardRadioButton from 'src/modules/General/components/CardRadioButton';
-import HorizontalTabs from 'src/modules/General/components/HorizontalTabs';
 import Icon from 'src/modules/General/components/Icon';
 import Link from 'src/modules/General/components/Link';
 import SuccessModal from 'src/modules/Projects/components/SuccessModal';
@@ -12,12 +11,28 @@ import variables from 'src/styles/constants/_exports.module.scss';
 
 import { useVoteDonateCard } from './useVoteDonateCard';
 import DonateProject from '../DonateProject';
-import FiatDonation from '../FiatDonation';
 
 const VoteDonateCard = () => {
   const {
-    data: { detail, selectedCard, isVoteChoice, userImpactPoints, openSuccessModal, voteInfo, donateInfo, loading },
-    operations: { setSelectedCard, onVoteOrDonate, setOpenSuccessModal, onContinue, setSelectedPayment },
+    data: {
+      detail,
+      selectedCard,
+      isVoteChoice,
+      userImpactPoints,
+      openSuccessModal,
+      voteInfo,
+      donateInfo,
+      loading,
+      showConfirmationModal,
+    },
+    operations: {
+      setSelectedCard,
+      onVoteOrDonate,
+      setOpenSuccessModal,
+      onContinue,
+      setShowConfirmationModal,
+      navigateToVerify,
+    },
   } = useVoteDonateCard();
 
   const voteChoices = [
@@ -48,17 +63,6 @@ const VoteDonateCard = () => {
       ),
       title: translate('vote-donate.option-2-title'),
       description: translate('vote-donate.option-2-desc'),
-    },
-  ];
-
-  const tabs = [
-    {
-      label: 'Crypto',
-      content: <DonateProject onDonate={onVoteOrDonate} isLoading={loading} />,
-    },
-    {
-      label: 'Fiat',
-      content: <FiatDonation onDonate={onVoteOrDonate} />,
     },
   ];
 
@@ -119,7 +123,7 @@ const VoteDonateCard = () => {
             </Button>
           </>
         ) : (
-          <HorizontalTabs tabs={tabs} onChangeTab={tab => setSelectedPayment(tab.label as 'Fiat' | 'Crypto')} />
+          <DonateProject onDonate={onVoteOrDonate} isLoading={loading} />
         )}
       </div>
       <SuccessModal
