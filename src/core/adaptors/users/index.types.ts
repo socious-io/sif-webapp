@@ -4,6 +4,7 @@ export interface IdentityMetaRes {
   username: string;
   usernameVal: string;
   name: string;
+  email: string;
   profileImage: string;
   type: IdentityType | '';
 }
@@ -12,7 +13,9 @@ export interface CurrentIdentity {
   id: string;
   name: string;
   username: string;
+  usernameVal?: string;
   img: string;
+  email: string;
   type: IdentityType;
   current: boolean;
   verified: boolean;

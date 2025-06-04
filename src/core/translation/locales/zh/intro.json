@@ -1,0 +1,13 @@
+{
+  "intro-individual": "个人用户",
+  "intro-individual-desc": "为项目投票和捐款",
+  "intro-organization": "组织",
+  "intro-organization-desc": "几分钟内创建项目并获得资助",
+  "intro-create-account-header": "创建账户",
+  "intro-create-account-subheader": "让每个人都有机会带来改变",
+  "intro-continue-button": "继续",
+  "intro-already-account": "已有账户？",
+  "intro-login": "登录",
+  "intro-login-with-socious": "使用 Socious ID 创建或登录",
+  "select-identity-create-title": "创建项目"
+}

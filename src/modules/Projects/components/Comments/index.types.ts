@@ -16,4 +16,5 @@ export interface CommentsProps {
   onSeeMoreRepliesClick?: (commentId: string) => void;
   reactProjectComment: (commentId: string, reaction: string) => void;
   unreactProjectComment: (commentId: string) => void;
+  restrictReply: boolean;
 }

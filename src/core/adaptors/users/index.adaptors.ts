@@ -7,12 +7,21 @@ export const getIdentitiesAdaptor = async (): Promise<AdaptorRes<CurrentIdentity
   try {
     const { identities: currentIdentities } = await identities();
     const data = currentIdentities.map(identity => {
-      const { name = '', username = '', type = 'users', profileImage = '' } = getIdentityMeta(identity);
+      const {
+        name = '',
+        username = '',
+        usernameVal = '',
+        type = 'users',
+        profileImage = '',
+        email = '',
+      } = getIdentityMeta(identity);
       return {
         id: identity.id,
         name,
         username,
+        usernameVal,
         img: profileImage,
+        email,
         type: type as IdentityType,
         current: identity.current || false,
         verified:
@@ -37,6 +46,7 @@ export const getIdentityMeta = (identity: Identity | UserMeta | OrgMeta | undefi
         usernameVal: user.username,
         name: `${user.first_name} ${user.last_name}`,
         profileImage: user.avatar?.url || '',
+        email: user.email,
         type: identity.type as 'users',
       };
     }
@@ -46,6 +56,7 @@ export const getIdentityMeta = (identity: Identity | UserMeta | OrgMeta | undefi
       usernameVal: org.shortname,
       name: org.name || org.shortname,
       profileImage: org.logo?.url || '',
+      email: org?.email || '',
       type: identity.type as 'organizations',
     };
   } else {
@@ -54,6 +65,7 @@ export const getIdentityMeta = (identity: Identity | UserMeta | OrgMeta | undefi
       usernameVal: '',
       name: '',
       profileImage: '',
+      email: '',
       type: '',
     };
   }

@@ -4,10 +4,12 @@ import { StyledEngineProvider } from '@mui/material';
 import i18next from 'i18next';
 import { theme } from 'material.theme';
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { RouterProvider } from 'react-router-dom';
 import router from 'src/core/router';
 
+import { RTL_LANGUAGES } from './constants/Languages';
 import { setupInterceptors } from './core/api/http';
 import RequestLoading from './modules/General/components/RequestLoading';
 import store, { AppDispatch, RootState } from './store';
@@ -18,8 +20,11 @@ import { fetchRound } from './store/thunks/round.thunk';
 function App() {
   const { language } = useSelector((state: RootState) => state.language);
   const dispatch = useDispatch<AppDispatch>();
-
+  const { i18n } = useTranslation();
   useEffect(() => {
+    const currentLang = i18n.language;
+    const direction = RTL_LANGUAGES.includes(currentLang) ? 'rtl' : 'ltr';
+    document.documentElement.dir = direction;
     i18next.changeLanguage(language);
   }, [language]);
 

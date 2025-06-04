@@ -1,4 +1,4 @@
-import { Identity, PaginateResV3, Round } from '..';
+import { Identity, PaginateRes, PaginateResV3, Round } from '..';
 import { Media } from '../media/index.types';
 
 export interface Project {
@@ -28,9 +28,11 @@ export type ProjectsRes = PaginateResV3<Project>;
 
 export type DonationReq = {
   amount: number;
-  currency: string;
-  txid: string;
-  wallet_address: string;
+  currency?: string;
+  txid?: string;
+  wallet_address?: string;
+  payment_type?: 'FIAT' | 'CRYPTO';
+  card_token?: string;
 };
 
 export interface Comment {

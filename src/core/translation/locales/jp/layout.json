@@ -21,7 +21,11 @@
   "footer-copyright": "© 2025 Socious Global Inc. 無断複製・転載を禁じます。",
   "header-your-impact": "あなたの影響",
   "header-setting": "設定",
+  "header-refer": "紹介して報酬を獲得",
   "header-logout": "ログアウト",
   "header-support": "サポート",
-  "header-create-org": "組織を作成"
+  "header-create-org": "組織を作成",
+  "submission-closed-header": "提出期間終了",
+  "submission-closed-subheader": "プロジェクトの提出期間が終了しました。次のラウンドで提案を提出してください。",
+  "submission-closed-button": "閉じる"
 }

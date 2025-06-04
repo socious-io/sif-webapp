@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export interface LangState {
-  language: 'en' | 'jp';
+  language: 'en' | 'jp' | 'es' | 'kr' | 'ar' | 'zh' | 'fr';
 }
 
 const initialState = {

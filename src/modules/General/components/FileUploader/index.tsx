@@ -77,7 +77,7 @@ const FileUploader: React.FC<FileUploaderProps> = ({
       {showPreviewImages && files.some(file => file.url) && (
         <div className={styles['preview']}>
           {files.map(file => (
-            <div key={file.id} className={styles['preview__item']}>
+            <div data-testid="image-preview" key={file.id} className={styles['preview__item']}>
               <img src={file.url} className={styles['preview__image']} />
               <div className={styles['preview__delete']} onClick={() => onDeleteFiles?.(file.id)}>
                 <Icon name="x-close" color={variables.color_grey_700} fontSize={16} cursor="pointer" />

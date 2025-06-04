@@ -117,13 +117,13 @@
     "option-2-desc": "投票に加えて寄付を行うことで、影響力を高めます。",
     "help-visibility-funding": "あなたの投票はこのプロジェクトの可視性を高め、資金を獲得する可能性を向上させます。",
     "impact-cardano": "投票は無料ですが、影響力を強めるために寄付を行うオプションがあります。寄付はADA暗号通貨を使用し、Cardanoネットワーク上で安全に処理され、透明性、公正性、アカウンタビリティが確保されます。",
-    "supported-wallet-lace": "現在、接続可能なウォレットはLace Walletのみです。LaceはInput Output Globalによって開発された、ブラウザ拡張機能として利用可能な使いやすいウォレットです。",
+    "supported-wallet-lace": "投票は、Lace、Yoroi などのブラウザ対応の Cardano ウォレットと互換性があります。Lace は、Input Output Global によって開発された使いやすいウォレットで、ブラウザ拡張機能として利用できます。",
     "why-cryptocurrency-link": "なぜ暗号通貨を使用するのですか？",
     "more-about-lace-link": "Lace Walletについて詳しく知る",
     "vote-for": "投票対象",
     "to-vote": "投票するには：",
     "vote-now-btn": "今すぐ投票",
-    "impact-points": "あなたの影響ポイント",
+    "impact-points": "現在のインパクトポイント",
     "estimated-match": "推定マッチ額",
     "total-contribution": "総貢献額",
     "pts": "ポイント",
@@ -176,5 +176,10 @@
     "message": "この操作を続行するには、本人確認が必要です。",
     "verify-button-label": "確認する",
     "close-button-label": "閉じる"
-  }
+  },
+  "cont-add-btn": "追加",
+  "cont-add-credit-card": "クレジットカードを追加",
+  "cont-add-card-btn": "カードを追加",
+  "cont-change-card-btn": "カードを変更",
+  "vote-donate.strict-org": "投票するには、個人用のSociousアカウントに切り替えてください。"
 }

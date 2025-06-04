@@ -17,6 +17,7 @@ const VoteDetailCard: React.FC<VoteDetailCardProps> = ({
   votingStartAt,
   onVote,
   showResult = true,
+  identityType,
 }) => {
   const { donatedAmount, votes } = roundStats || {};
   const { isShared, handleCopy } = useVoteDetailCard();
@@ -53,23 +54,32 @@ const VoteDetailCard: React.FC<VoteDetailCardProps> = ({
           >
             {isShared ? translate('projects-round-stats.link-copied') : translate('projects-round-stats.share-button')}
           </Button>
-          {roundStatus !== DateRangeStatus.DURING || alreadyVoted ? (
-            <AlertMessage
-              theme="warning"
-              iconName="alert-circle"
-              title={
-                roundStatus === DateRangeStatus.AFTER
-                  ? translate('vote-donate.end-voted')
-                  : roundStatus === DateRangeStatus.BEFORE
-                    ? `${translate('vote-donate.not-started')} ${formatVotingStartMessage(votingStartAt)}`
-                    : translate('vote-donate.already-voted')
-              }
-            />
-          ) : (
-            <Button color="primary" onClick={onVote}>
-              {translate('projects-round-stats.vote-button')}
-            </Button>
-          )}
+          {
+            <>
+              {roundStatus !== DateRangeStatus.DURING || alreadyVoted ? (
+                <AlertMessage
+                  theme="warning"
+                  iconName="alert-circle"
+                  title={
+                    roundStatus === DateRangeStatus.AFTER
+                      ? translate('vote-donate.end-voted')
+                      : roundStatus === DateRangeStatus.BEFORE
+                        ? `${translate('vote-donate.not-started')} ${formatVotingStartMessage(votingStartAt as Date)}`
+                        : translate('vote-donate.already-voted')
+                  }
+                />
+              ) : (
+                <>
+                  <Button color="primary" onClick={onVote} disabled={identityType === 'organizations'}>
+                    {translate('projects-round-stats.vote-button')}
+                  </Button>
+                  {identityType === 'organizations' && (
+                    <AlertMessage theme="warning" iconName="alert-circle" title={translate('vote-donate.strict-org')} />
+                  )}
+                </>
+              )}
+            </>
+          }
         </div>
       )}
     </div>
