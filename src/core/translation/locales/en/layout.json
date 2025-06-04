@@ -20,8 +20,12 @@
   "not-verified-secondary-btn": "Learn more",
   "footer-copyright": "© 2025 Socious Global Inc. All rights reserved.",
   "header-your-impact": "Your impact",
-  "header-setting": "Setting",
+  "header-setting": "Settings",
+  "header-refer": "Refer and earn",
   "header-logout": "Logout",
   "header-support": "Support",
-  "header-create-org": "Create an organization"
+  "header-create-org": "Create an organization",
+  "submission-closed-header": "Submission Closed",
+  "submission-closed-subheader": "The project submission period has ended. Please submit your proposal in the next round.",
+  "submission-closed-button": "Close"
 }

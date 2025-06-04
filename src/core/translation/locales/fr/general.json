@@ -1,0 +1,28 @@
+{
+  "general-file-uploader": {
+    "click": "Cliquez pour téléverser",
+    "drag": "ou faites glisser et déposez",
+    "or": "ou",
+    "max": "max",
+    "max-error": "{{name}} dépasse la taille maximale de {{max}} Mo",
+    "limit-error": "Vous pouvez téléverser un maximum de {{limit}} fichiers. Veuillez en sélectionner moins."
+  },
+  "general-multi-select-popular": "Populaire",
+  "general-pagination": {
+    "next": "Suivant",
+    "prev": "Précédent",
+    "page": "Page",
+    "of": "sur"
+  },
+  "general-copy-link": "Copier",
+  "general-image-editor": {
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "title": "Modifier l'image",
+    "subtitle": "Recadrez votre image selon les dimensions souhaitées."
+  },
+  "connect-wallet": "Connecter le portefeuille",
+  "disconnect": "Déconnecter",
+  "copy-address": "Copier l'adresse",
+  "no-wallet-alert": "Aucun portefeuille Cardano détecté. Veuillez installer un portefeuille Cardano tel que Lace, Eternl ou Yoroi pour continuer."
+}

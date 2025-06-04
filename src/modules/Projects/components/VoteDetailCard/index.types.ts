@@ -9,4 +9,5 @@ export interface VoteDetailCardProps {
   onVote?: () => void;
   votingStartAt?: Date;
   showResult: boolean;
+  identityType?: 'users' | 'organizations';
 }

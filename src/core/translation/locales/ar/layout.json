@@ -1,0 +1,31 @@
+{
+  "socious-fund": "Socious Fund",
+  "header-login": "تسجيل الدخول",
+  "layout-action-button": "إنشاء مشروع",
+  "layout-verification": {
+    "success-text": "تم التحقق من {{title}} الخاص بك بنجاح",
+    "success-support-text": "يمكنك الآن التصويت والتبرع للمشاريع.",
+    "success-primary-btn": "إغلاق",
+    "pending-text": "التحقق في انتظار المراجعة",
+    "pending-support-text": "نحن نراجع المستندات التي قدمتها، سنخطرك بمجرد اكتمال العملية.",
+    "not-verified-text": "تحقق من {{title}} الخاص بك",
+    "not-verified-text-user": "تحقق من حسابك",
+    "not-verified-support-text": "للتصويت والتبرع على منصتنا، يرجى التحقق من {{title}} الخاص بك.",
+    "not-verified-support-text-user": "عزز قوة تصويتك وافتح مكافآت حصرية من خلال التحقق من حسابك اليوم (اختياري)",
+    "not-verified-primary-btn": "تحقق الآن",
+    "not-verified-secondary-btn": "تعرف على المزيد",
+    "title-organization": "منظمة",
+    "title-identity": "هوية"
+  },
+  "not-verified-secondary-btn": "تعرف على المزيد",
+  "footer-copyright": "© 2025 Socious Global Inc. جميع الحقوق محفوظة.",
+  "header-your-impact": "تأثيرك",
+  "header-setting": "الإعدادات",
+  "header-refer": "أرسل دعوة واربح",
+  "header-logout": "تسجيل الخروج",
+  "header-support": "الدعم",
+  "header-create-org": "إنشاء منظمة",
+  "submission-closed-header": "انتهاء فترة التقديم",
+  "submission-closed-subheader": "انتهت فترة تقديم المشاريع. يرجى تقديم اقتراحك في الجولة القادمة.",
+  "submission-closed-button": "إغلاق"
+}

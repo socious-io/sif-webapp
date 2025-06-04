@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie';
 import { useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { config } from 'src/config';
@@ -20,7 +21,9 @@ export const SociousID = () => {
   async function onLoginSucceed(loginRes: AuthRes) {
     await setAuthParams(loginRes, true);
     if (typeof identityId === 'string') switchAccount(identityId);
-    navigate('/');
+    const lastPath = Cookies.get('lastPath');
+    if (lastPath) navigate(lastPath);
+    else navigate('/');
     return loginRes;
   }
 
