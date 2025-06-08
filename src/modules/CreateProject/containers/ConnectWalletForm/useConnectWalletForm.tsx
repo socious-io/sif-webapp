@@ -12,7 +12,7 @@ export const useConnectWalletForm = () => {
   const { wallet_address } = useSelector((state: RootState) => state.createProject);
   const { ConnectButton, address } = Connect(wallet_address);
   const navigatePublish = () => navigate('/create/publish');
-  const goBack = () => navigate('/create/step-3');
+  const goBack = () => navigate('/create/step-6');
 
   useEffect(() => {
     dispatch(setProjectData({ wallet_address: address }));

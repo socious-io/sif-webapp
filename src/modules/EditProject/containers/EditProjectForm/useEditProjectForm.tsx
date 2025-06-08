@@ -20,6 +20,8 @@ const schema = yup.object().shape({
   cover_id: yup.string().nullable(),
   cover_url: yup.string().nullable(),
   wallet_address: yup.string(),
+  email: yup.string().email('Must be a valid email').nullable(),
+  linkedin: yup.string().url('Must be a valid LinkedIn URL').nullable(),
 });
 
 export const useEditProjectForm = () => {
