@@ -55,7 +55,7 @@ const Input: React.FC<InputProps> = ({
   const setValue = (v: string) => {
     let val = v;
     if (props.type !== 'password') {
-      val = val.trim();
+      val = val.toString().trim();
     }
     if (props.type === 'password')
       if (val.length) setShowEyeIcon(true);
@@ -126,8 +126,8 @@ const Input: React.FC<InputProps> = ({
         }}
         {...(register
           ? register(name, {
-            setValueAs: setValue,
-          })
+              setValueAs: setValue,
+            })
           : {})}
         {...props}
         type={inputType}

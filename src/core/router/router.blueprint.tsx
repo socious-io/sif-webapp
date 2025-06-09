@@ -1,6 +1,7 @@
 import { ComponentType } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, RouteObject, createBrowserRouter } from 'react-router-dom';
+import { translate } from 'src/core/helpers/utils';
 import { Layout } from 'src/modules/Layout';
 import { RootState } from 'src/store';
 
@@ -8,7 +9,7 @@ import { getProjectAdaptor, getProjectsAdaptor, getRawProjectAdaptor } from '../
 
 export const blueprint: RouteObject[] = [
   { path: '/', element: <DefaultRoute /> },
-  { path: '*', element: <div>Page not found :(</div> },
+  { path: '*', element: <div>{translate('page-not-found')}(</div> },
   {
     path: '/',
     children: [
@@ -161,6 +162,27 @@ export const blueprint: RouteObject[] = [
             async lazy() {
               const { CreateProjectStep4 } = await import('src/pages/projects/create/step-4');
               return { Component: Protect(CreateProjectStep4, 'organizations') };
+            },
+          },
+          {
+            path: 'step-5',
+            async lazy() {
+              const { CreateProjectStep5 } = await import('src/pages/projects/create/step-5');
+              return { Component: Protect(CreateProjectStep5, 'organizations') };
+            },
+          },
+          {
+            path: 'step-6',
+            async lazy() {
+              const { CreateProjectStep6 } = await import('src/pages/projects/create/step-6');
+              return { Component: Protect(CreateProjectStep6, 'organizations') };
+            },
+          },
+          {
+            path: 'step-7',
+            async lazy() {
+              const { CreateProjectStep7 } = await import('src/pages/projects/create/step-7');
+              return { Component: Protect(CreateProjectStep7, 'organizations') };
             },
           },
           {

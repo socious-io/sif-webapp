@@ -10,12 +10,16 @@ interface FormData {
   title: string;
   description: string;
   website?: string | null;
+  email?: string | null;
+  linkdin?: string | null;
 }
 
 const schema = yup.object().shape({
   title: yup.string().required('This field is required'),
   description: yup.string().required('This field is required'),
   website: yup.string().url('Must be a valid URL').nullable(),
+  email: yup.string().email('Must be a valid email').nullable(),
+  linkdin: yup.string().url('Must be a valid LinkedIn URL').nullable(),
 });
 
 export const useNameDescriptionForm = () => {
@@ -36,6 +40,8 @@ export const useNameDescriptionForm = () => {
       title: project.title || '',
       description: project.description || '',
       website: project.website || '',
+      email: project.email || '',
+      linkdin: project.linkdin || '',
     },
   });
   const description = watch('description') || '';
@@ -46,8 +52,8 @@ export const useNameDescriptionForm = () => {
   const nextStep = () => navigate('/create/step-3');
 
   const onSubmit = (data: FormData) => {
-    const { title, description, website } = data;
-    dispatch(setProjectData({ title, description, website }));
+    const { title, description, website, email, linkdin } = data;
+    dispatch(setProjectData({ title, description, website, email, linkdin }));
     nextStep();
   };
 

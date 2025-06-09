@@ -48,8 +48,8 @@ export const useUploadBannerForm = () => {
     setUneditedAttachments(null);
   };
 
-  const navigateStep4 = () => navigate('/create/step-4');
-  const goBack = () => navigate('/create/step-2');
+  const navigateStep4 = () => navigate('/create/step-7');
+  const goBack = () => navigate('/create/step-5');
   const isEnabled = !cover_id;
 
   return {
