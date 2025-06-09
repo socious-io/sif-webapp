@@ -86,7 +86,7 @@ describe('vote to a project test', () => {
     cy.get('[data-testid="currency"]').contains('USDM').should('exist');
 
     cy.get('input#donate').type('0');
-    cy.contains('Value must be a positive integer').should('be.visible');
+    cy.contains('Please enter a whole number without decimals.').should('be.visible');
   });
   it('user votes to a project with vote with a donation in ADA', () => {
     cy.visit(`${APP_URL}/projects/*`);
