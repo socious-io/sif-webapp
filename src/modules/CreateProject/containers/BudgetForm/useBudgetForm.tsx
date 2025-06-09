@@ -14,9 +14,17 @@ interface FormData {
 }
 
 const schema = yup.object().shape({
-  total_requested_amount: yup.number().required('Total amount is required').min(1, 'Amount must not be empty'),
+  total_requested_amount: yup
+    .number()
+    .typeError('Total amount must be a number')
+    .positive('Total amount must be a positive number')
+    .required('Total amount is required'),
   cost_beakdown: yup.string(),
-  impact_assessment: yup.number().required('Impact assessment is required'),
+  impact_assessment: yup
+    .number()
+    .typeError('Total amount must be a number')
+    .positive('Total amount must be a positive number')
+    .required('Total amount is required'),
   voluntery_contribution: yup.string().optional(),
 });
 
@@ -35,7 +43,7 @@ export const useBudgetForm = () => {
     defaultValues: {
       total_requested_amount: project.total_requested_amount || null,
       cost_beakdown: project.cost_beakdown || '',
-      impact_assessment: project.impact_assessment || '',
+      impact_assessment: project.impact_assessment || null,
       voluntery_contribution: project.voluntery_contribution || '',
     },
   });

@@ -45,11 +45,7 @@ export const usePublish = () => {
       console.error(error);
     }
   };
-  const getYouTubeEmbedUrl = (url: string | undefined): string | undefined => {
-    if (!url) return undefined;
-    const videoIdMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]+)/);
-    return videoIdMatch ? `https://www.youtube.com/embed/${videoIdMatch[1]}` : undefined;
-  };
+
   return {
     data: {
       currentIdentity,
@@ -75,7 +71,6 @@ export const usePublish = () => {
       onEditProject,
       setOpenVerifyModal,
       onPublish,
-      getYouTubeEmbedUrl,
     },
   };
 };
