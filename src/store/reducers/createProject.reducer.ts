@@ -39,13 +39,13 @@ const initialState: ProjectState = {
   category: '',
   problem_statement: '',
   solution: '',
-  total_requested_amount: '',
+  total_requested_amount: null,
   goals: '',
   video: '',
   cost_beakdown: '',
   voluntery_contribution: '',
   feasibility: '',
-  impact_assessment: '',
+  impact_assessment: null,
 };
 
 export const createProjectSlice = createSlice({

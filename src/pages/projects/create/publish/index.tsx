@@ -141,7 +141,7 @@ export const Publish = () => {
       <Divider />
       {contents.map(
         ({ label, content }) =>
-          content ?? (
+          content && (
             <div key={label} className="flex flex-col items-stretch gap-8 leading-6 text-Gray-light-mode-600">
               <span className="text-2xl font-semibold leading-8 text-Gray-light-mode-900">{label}</span>
               {content}

@@ -35,7 +35,7 @@ export const useBudgetForm = () => {
     defaultValues: {
       total_requested_amount: project.total_requested_amount || null,
       cost_beakdown: project.cost_beakdown || '',
-      impact_assessment: project.impact_assessment || '',
+      impact_assessment: project.impact_assessment || null,
       voluntery_contribution: project.voluntery_contribution || '',
     },
   });
