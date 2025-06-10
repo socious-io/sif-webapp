@@ -74,6 +74,18 @@ export const getProjectAdaptor = async (projectId: string): Promise<AdaptorRes<P
         },
         { id: '2', donated_identity: { name: 'Anonymous' }, donated_price: '200.00 ADA', date: new Date().toString() },
       ],
+      created_at: project.created_at,
+      updated_at: project.updated_at,
+      status: project.status,
+      total_requested_amount: project.total_requested_amount,
+      impact_assessment: project.impact_assessment,
+      problem_statement: project.problem_statement,
+      solution: project.solution,
+      feasibility: project.feasibility,
+      video: project.video,
+      wallet_address: project.wallet_address,
+      wallet_env: project.wallet_env,
+      cost_beakdown: project.cost_beakdown,
     };
     return {
       data,

@@ -23,6 +23,21 @@ const NameDescriptionForm: React.FC = () => {
         />
         <Input
           register={register}
+          name="email"
+          type="email"
+          label="Email*"
+          placeholder="Your project’s contact for communications"
+          errors={errors['email']?.message ? [errors['email']?.message.toString()] : undefined}
+        />
+        <Input
+          register={register}
+          name="linkedin"
+          label="LinkedIn profile (optional)"
+          placeholder="Your project’s LinkedIn profile"
+          errors={errors['linkedin']?.message ? [errors['linkedin']?.message.toString()] : undefined}
+        />
+        <Input
+          register={register}
           name="website"
           label={translate('project-website-label')}
           placeholder={translate('project-website-placeholder')}

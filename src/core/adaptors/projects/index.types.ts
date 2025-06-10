@@ -30,6 +30,16 @@ export interface Project {
   donations?: Donation[];
   voted?: boolean;
   roundStatus?: DateRangeStatus;
+  feasibility: string;
+  goals?: string | null;
+  impact_assessment: number;
+  linkdin?: string | null;
+  problem_statement: string;
+  email?: string;
+  solution: string;
+  total_requested_amount: string;
+  cost_beakdown: string;
+  video?: string;
 }
 
 export type ProjectRes = PaginateRes<Project>;

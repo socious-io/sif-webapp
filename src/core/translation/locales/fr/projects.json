@@ -130,7 +130,7 @@
     "power-funding-title": "Faites un don pour amplifier votre impact",
     "power-funding-subtitle": "Faire un don augmente votre pouvoir de vote et aide ce projet à obtenir un financement supplémentaire grâce à notre fonds de correspondance.",
     "enter-donation": "Entrez votre don (uniquement en nombres entiers)",
-    "enter-donation-positive-error": "La valeur doit être un entier positif",
+    "enter-donation-positive-error": "Veuillez entrer un nombre entier sans décimales.",
     "error-donation-required-error": "Ce champ est requis",
     "payment-method": "Moyen de paiement",
     "prevent-display-name": "Ne pas afficher mon nom publiquement sur ce projet",

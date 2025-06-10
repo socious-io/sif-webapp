@@ -10,6 +10,18 @@ export interface ProjectState {
   city: string;
   country: string;
   cover_url: string;
+  email?: string | null;
+  linkdin?: string | null;
+  category: string;
+  problem_statement: string;
+  solution: string;
+  total_requested_amount: number | null;
+  feasibility: string;
+  goals?: string;
+  video?: string;
+  cost_beakdown: string;
+  voluntery_contribution: string;
+  impact_assessment: number | null;
 }
 
 const initialState: ProjectState = {
@@ -22,6 +34,18 @@ const initialState: ProjectState = {
   social_cause: '',
   city: '',
   country: '',
+  email: '',
+  linkdin: '',
+  category: '',
+  problem_statement: '',
+  solution: '',
+  total_requested_amount: null,
+  goals: '',
+  video: '',
+  cost_beakdown: '',
+  voluntery_contribution: '',
+  feasibility: '',
+  impact_assessment: null,
 };
 
 export const createProjectSlice = createSlice({

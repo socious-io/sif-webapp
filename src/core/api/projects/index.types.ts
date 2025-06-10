@@ -22,6 +22,16 @@ export interface Project {
   total_votes: number;
   user_voted: boolean;
   round: Round;
+  feasibility: string;
+  goals: string | null;
+  impact_assessment?: number;
+  linkdin?: string | null;
+  problem_statement: string;
+  email?: string;
+  solution?: string;
+  total_requested_amount: string;
+  video: string;
+  cost_beakdown: string;
 }
 
 export type ProjectsRes = PaginateResV3<Project>;

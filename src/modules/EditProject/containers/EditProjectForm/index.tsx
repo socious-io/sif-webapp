@@ -92,6 +92,23 @@ const EditProjectForm: React.FC = () => {
           required
         />
       </FormColumnTemplate>
+      <FormColumnTemplate title="Email" subtitle="Contact email for your project">
+        <Input
+          placeholder="Enter your email"
+          register={register}
+          name="email"
+          type="email"
+          errors={errors['email']?.message ? [errors['email']?.message.toString()] : undefined}
+        />
+      </FormColumnTemplate>
+      <FormColumnTemplate title="LinkedIn" subtitle="LinkedIn profile or company page">
+        <Input
+          placeholder="Enter LinkedIn URL"
+          register={register}
+          name="linkedin"
+          errors={errors['linkedin']?.message ? [errors['linkedin']?.message.toString()] : undefined}
+        />
+      </FormColumnTemplate>
       <FormColumnTemplate
         title={translate('edit-project-description')}
         subtitle={translate('edit-project-description-subtitle')}

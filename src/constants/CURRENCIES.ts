@@ -27,7 +27,6 @@ export const CURRENCIES: CurrencyType[] = [
       const api = config.rates.ada;
       const { status, data } = await axios.get(api);
       if (status !== 200) {
-        console.log(`Error ${status} in fetching ${api} to get ADA rate`);
         return amount;
       }
       localStorage.setItem(cacheKey, String(data?.data.rateUsd));
