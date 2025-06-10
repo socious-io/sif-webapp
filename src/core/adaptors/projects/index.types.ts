@@ -32,12 +32,12 @@ export interface Project {
   roundStatus?: DateRangeStatus;
   feasibility: string;
   goals?: string | null;
-  impact_assessment: number;
+  impact_assessment: number | null;
   linkdin?: string | null;
   problem_statement: string;
   email?: string;
   solution: string;
-  total_requested_amount: string;
+  total_requested_amount: number | null;
   cost_beakdown: string;
   video?: string;
 }

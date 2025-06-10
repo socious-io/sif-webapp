@@ -1,22 +1,11 @@
-import Select, { components } from 'react-select';
+import Select, { components, ControlProps, SingleValueProps } from 'react-select';
 import Icon from 'src/modules/General/components/Icon';
 
 import styles from './index.module.scss';
-import { InputDropdownProps } from './index.types';
+import { InputDropdownProps, OptionType } from './index.types';
 
-const InputDropdown: React.FC<InputDropdownProps> = ({
-  isAsync,
-  hasDropdownIcon = true,
-  options,
-  className,
-  label,
-  icon,
-  errors,
-  id,
-  minWidth = '',
-  ...props
-}) => {
-  const CustomControl = ({ children, ...props }) => {
+const InputDropdown: React.FC<InputDropdownProps> = ({ options, icon, minWidth = '', ...props }) => {
+  const CustomControl: React.FC<ControlProps<OptionType, false>> = ({ children, ...props }) => {
     //FIXME: ts errors
     return (
       <components.Control {...props}>
@@ -25,6 +14,7 @@ const InputDropdown: React.FC<InputDropdownProps> = ({
       </components.Control>
     );
   };
+
   const CustomOption = ({ value, ...props }) => {
     const { innerProps, label, data, ...rest } = props;
     const selected = value && value.label ? value.label === label : false;
@@ -36,9 +26,9 @@ const InputDropdown: React.FC<InputDropdownProps> = ({
       </div>
     );
   };
-  const CustomSingleValue = ({ children, data, ...props }) => {
+  const CustomSingleValue: React.FC<SingleValueProps<OptionType, false>> = ({ children, data, ...props }) => {
     return (
-      <components.SingleValue {...props}>
+      <components.SingleValue data={data} {...props}>
         <div className="flex ">
           {children}
           {data.description && <div className={styles['description']}>{data.description}</div>}
@@ -46,6 +36,7 @@ const InputDropdown: React.FC<InputDropdownProps> = ({
       </components.SingleValue>
     );
   };
+
   const selectedVal = props.value;
 
   return (

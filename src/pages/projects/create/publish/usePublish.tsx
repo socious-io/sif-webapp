@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLoaderData, useNavigate } from 'react-router-dom';
-import { createProjectAdaptor, Project } from 'src/core/adaptors';
+import { useNavigate } from 'react-router-dom';
+import { createProjectAdaptor, editProjectAdaptor } from 'src/core/adaptors';
 import { CurrentIdentity } from 'src/core/adaptors';
 import { RootState } from 'src/store';
 import { resetProject } from 'src/store/reducers/createProject.reducer';
@@ -18,7 +18,6 @@ export const usePublish = () => {
     city,
     country,
     social_cause,
-    cover_id,
     website,
     cover_url,
     feasibility,
@@ -29,6 +28,7 @@ export const usePublish = () => {
     total_requested_amount,
     cost_beakdown,
     video,
+    mode,
   } = projectState;
   const currentIdentity = useSelector<RootState, CurrentIdentity | undefined>(state =>
     state.identity.entities.find(identity => identity.current),
@@ -38,7 +38,8 @@ export const usePublish = () => {
   const identityType = currentIdentity?.type;
   const onPublish = async () => {
     try {
-      const result = await createProjectAdaptor(projectState);
+      const result =
+        mode === 'create' ? await createProjectAdaptor(projectState) : await editProjectAdaptor(projectState);
       dispatch(resetProject());
       navigate(`/projects/${result.data?.id}`);
     } catch (error) {

@@ -49,7 +49,7 @@ export const useProjectCategoryForm = () => {
   const goBack = () => navigate('/create/step-2');
   const nextStep = () => navigate('/create/step-4');
 
-  const setProjectCategory = (newValue: { value: string; label: string } | null) => {
+  const setProjectCategory = newValue => {
     setValue('category', newValue ? newValue.value : '', { shouldValidate: true });
   };
 

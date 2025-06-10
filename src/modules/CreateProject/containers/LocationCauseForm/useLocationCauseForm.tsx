@@ -10,7 +10,7 @@ import { locationOptions } from './statics';
 
 export const useLocationCauseForm = () => {
   const navigate = useNavigate();
-  const { city, country, social_cause } = useSelector((state: RootState) => state.createProject);
+  const { city, country, social_cause, mode } = useSelector((state: RootState) => state.createProject);
   const [selectedCardId, setSelectedCardId] = useState(() =>
     city === '' && country === '' ? 'WOLRDWIDE' : 'COUNTRY_CITY',
   );
