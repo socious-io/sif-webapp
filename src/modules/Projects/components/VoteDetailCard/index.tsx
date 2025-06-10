@@ -1,4 +1,4 @@
-import { formatVotingStartMessage } from 'src/core/convert-md-to-jsx';
+import { formatVotingStartMessage } from 'src/core/helpers/convert-md-to-jsx';
 import { DateRangeStatus } from 'src/core/helpers/date-converter';
 import { translate } from 'src/core/helpers/utils';
 import AlertMessage from 'src/modules/General/components/AlertMessage';

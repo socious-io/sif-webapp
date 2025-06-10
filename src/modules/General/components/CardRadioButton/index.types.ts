@@ -11,7 +11,7 @@ export interface CardRadioButtonProps {
 }
 
 export type CardRadioButtonItem = {
-  id: string;
+  id: string | number;
   value: string;
   title: string;
   description?: string;

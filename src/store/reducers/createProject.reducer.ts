@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface ProjectState {
+  id?: string | null;
   title: string;
   wallet_address: string;
   cover_id: string;
@@ -22,9 +23,11 @@ export interface ProjectState {
   cost_beakdown: string;
   voluntery_contribution: string;
   impact_assessment: number | null;
+  mode?: 'create' | 'update';
 }
 
 const initialState: ProjectState = {
+  id: null,
   title: '',
   wallet_address: '',
   cover_id: '',
@@ -46,6 +49,7 @@ const initialState: ProjectState = {
   voluntery_contribution: '',
   feasibility: '',
   impact_assessment: null,
+  mode: 'create',
 };
 
 export const createProjectSlice = createSlice({

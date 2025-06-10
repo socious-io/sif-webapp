@@ -7,6 +7,7 @@ import { cleanMarkdown, convertMarkdownToJSX } from 'src/core/helpers/convert-md
 import { getDateRangeStatus } from 'src/core/helpers/date-converter';
 import { removedEmptyProps } from 'src/core/helpers/objects-arrays';
 import { translate } from 'src/core/helpers/utils';
+import { ProjectState } from 'src/store/reducers/createProject.reducer';
 
 import { AdaptorRes, DonateReq, getIdentityMeta, Project, ProjectRes, SuccessRes } from '..';
 
@@ -31,6 +32,12 @@ export const getProjectsAdaptor = async (
           name,
           img,
         },
+        feasibility: project.feasibility || '',
+        impact_assessment: project.impact_assessment || null,
+        problem_statement: project.problem_statement || '',
+        solution: project.solution || '',
+        total_requested_amount: project.total_requested_amount || null,
+        cost_beakdown: project.cost_beakdown || '',
       };
     });
     return {
@@ -77,10 +84,10 @@ export const getProjectAdaptor = async (projectId: string): Promise<AdaptorRes<P
       created_at: project.created_at,
       updated_at: project.updated_at,
       status: project.status,
-      total_requested_amount: project.total_requested_amount,
-      impact_assessment: project.impact_assessment,
+      total_requested_amount: project.total_requested_amount || null,
+      impact_assessment: project.impact_assessment || null,
       problem_statement: project.problem_statement,
-      solution: project.solution,
+      solution: project.solution || '',
       feasibility: project.feasibility,
       video: project.video,
       wallet_address: project.wallet_address,
@@ -141,10 +148,10 @@ export const createProjectAdaptor = async (project): Promise<AdaptorRes<Project>
   }
 };
 
-export const editProjectAdaptor = async (project): Promise<AdaptorRes<SuccessRes>> => {
+export const editProjectAdaptor = async (project): Promise<AdaptorRes<Project>> => {
   try {
-    await editProjects(project.id, removedEmptyProps(project) as Partial<Project>);
-    return { data: { message: 'succeed' }, error: null };
+    const newProject = await editProjects(project.id, removedEmptyProps(project) as Partial<Project>);
+    return { data: newProject, error: null };
   } catch (error) {
     console.error('Error in editing project: ', error);
     return { data: null, error: 'Error in editing project' };
@@ -160,5 +167,46 @@ export const getRawProjectAdaptor = async (projectId: string): Promise<AdaptorRe
     };
   } catch (error) {
     return { data: null, error: 'Error in editing project' };
+  }
+};
+
+export const getEditProjectAdaptor = async (projectId: string): Promise<AdaptorRes<Partial<ProjectState>>> => {
+  try {
+    const project = await getProject(projectId);
+
+    const data = {
+      title: project.title || '',
+      wallet_address: project.wallet_address || '',
+      cover_id: project.cover.id || '',
+      website: project.website || null,
+      description: project.description || '',
+      social_cause: project.social_cause || '',
+      city: project.city || '',
+      country: project.country || '',
+      cover_url: project.cover?.url || '',
+      email: project.email || null,
+      linkdin: project.linkdin || null,
+      category: project.category || '',
+      problem_statement: project.problem_statement || '',
+      solution: project.solution || '',
+      total_requested_amount: project.total_requested_amount || null,
+      feasibility: project.feasibility || '',
+      goals: project.goals || '',
+      video: project.video || '',
+      cost_beakdown: project.cost_beakdown || '',
+      voluntery_contribution: project.voluntery_contribution || '',
+      impact_assessment: project.impact_assessment || null,
+    };
+
+    return {
+      data,
+      error: null,
+    };
+  } catch (error) {
+    console.error('Error in getting project: ', error);
+    return {
+      data: null,
+      error: 'Error in getting project',
+    };
   }
 };
