@@ -1,5 +1,6 @@
 import { Divider } from '@mui/material';
-import { translate } from 'src/core/helpers/utils';
+import { convertMarkdownToJSX } from 'src/core/convert-md-to-jsx';
+import { getYouTubeEmbedUrl, translate } from 'src/core/helpers/utils';
 // import { AlertModal } from 'src/modules/General/components/AlertModal';
 import AvatarLabelGroup from 'src/modules/General/components/AvatarLabelGroup';
 import BackLink from 'src/modules/General/components/BackLink';
@@ -96,7 +97,22 @@ export const ProjectDetail = () => {
       ),
     },
   ];
-
+  const contents = [
+    { label: 'Project Description', content: convertMarkdownToJSX(detail.description) },
+    { label: 'Problem Statement', content: convertMarkdownToJSX(detail.problem_statement) },
+    { label: 'Solution', content: convertMarkdownToJSX(detail.solution) },
+    { label: 'Key Deliverables & Goals', content: detail.goals ? convertMarkdownToJSX(detail.goals) : '' },
+    {
+      label: 'Funding and budget',
+      content: (
+        <>
+          <div>{`Total amount requested: ${detail.total_requested_amount}`}</div>
+          {convertMarkdownToJSX(detail.cost_beakdown)}
+        </>
+      ),
+    },
+    { label: 'Feasibility and team', content: convertMarkdownToJSX(detail.feasibility) },
+  ];
   const tabs = [
     {
       label: translate('projects-detail.overview'),
@@ -105,7 +121,29 @@ export const ProjectDetail = () => {
           <span className="text-2xl font-semibold leading-8 text-Gray-light-mode-900">
             {translate('projects-detail.overview')}
           </span>
-          {detail.overview}
+          {contents.map(
+            ({ label, content }) =>
+              content && (
+                <div key={label} className="flex flex-col items-stretch gap-8 leading-6 text-Gray-light-mode-600">
+                  <span className="text-2xl font-semibold leading-8 text-Gray-light-mode-900">{label}</span>
+                  {content}
+                </div>
+              ),
+          )}
+          {detail?.video && (
+            <div className="flex flex-col items-stretch gap-8 mt-12">
+              <div className="relative mx-auto w-full max-w-[620px] md:max-w-[620px] aspect-[16/9]">
+                <iframe
+                  src={getYouTubeEmbedUrl(detail.video)}
+                  title="Project Video"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="absolute top-0 left-0 w-full h-full rounded-2xl"
+                />
+              </div>
+            </div>
+          )}
         </div>
       ),
     },
@@ -156,7 +194,7 @@ export const ProjectDetail = () => {
                 </div>
               )}
             </div>
-            <Button              
+            <Button
               color="error"
               variant="outlined"
               fullWidth

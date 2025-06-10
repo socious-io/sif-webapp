@@ -1,7 +1,7 @@
 import { Divider } from '@mui/material';
 import { categoriesAdaptor } from 'src/constants/PROJECT_CATEGORIES';
 import { convertMarkdownToJSX } from 'src/core/convert-md-to-jsx';
-import { translate } from 'src/core/helpers/utils';
+import { getYouTubeEmbedUrl, translate } from 'src/core/helpers/utils';
 import AvatarLabelGroup from 'src/modules/General/components/AvatarLabelGroup';
 import BackLink from 'src/modules/General/components/BackLink';
 import Button from 'src/modules/General/components/Button';
@@ -30,7 +30,7 @@ export const Publish = () => {
       video,
       social_cause,
     },
-    operations: { navigate, onEditProject, onPublish, getYouTubeEmbedUrl },
+    operations: { navigate, onEditProject, onPublish },
   } = usePublish();
 
   const details = [
