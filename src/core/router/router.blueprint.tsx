@@ -86,19 +86,6 @@ export const blueprint: RouteObject[] = [
             },
           },
           {
-            path: ':id/edit',
-            loader: async ({ params }) => {
-              if (params.id) {
-                const projects = await getRawProjectAdaptor(params.id);
-                return { project: projects.data };
-              }
-            },
-            async lazy() {
-              const { EditProject } = await import('src/pages/projects/edit');
-              return { Component: Protect(EditProject, 'both') };
-            },
-          },
-          {
             path: 'settings',
             async lazy() {
               const { Settings } = await import('src/pages/settings');

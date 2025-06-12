@@ -29,7 +29,7 @@ const CardRadioButton: React.FC<CardRadioButtonProps> = ({
           ${containerClassName}`}
         >
           <Radio
-            id={item.id}
+            id={String(item.id)}
             value={item.value}
             checked={selectedValue === item.value}
             onChange={handleChange}

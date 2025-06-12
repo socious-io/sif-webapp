@@ -23,7 +23,7 @@ const ChooseWalletModal = ({
       localStorage.setItem('selectedWallet', walletName);
       handleClose();
     } catch (err) {
-      setError(err.message);
+      console.error(err);
     }
   };
 

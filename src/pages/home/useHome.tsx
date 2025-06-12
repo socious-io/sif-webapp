@@ -9,6 +9,6 @@ export const useHome = () => {
     return state.identity.entities.find(i => i.current);
   });
   const isIdentityUser = currentIdentity?.type === 'users';
-  const roundIsClosed = getDaysUntil(round?.voting_end_at as string) <= 0;
+  const roundIsClosed = round?.voting_end_at ? getDaysUntil(round?.voting_end_at) <= 0 : false;
   return { round, isIdentityUser, roundIsClosed };
 };
