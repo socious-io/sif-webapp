@@ -4,7 +4,6 @@ import { translate } from 'src/core/helpers/utils';
 import Button from 'src/modules/General/components/Button';
 import ConfirmModal from 'src/modules/General/components/ConfirmModal';
 import IconDropDown from 'src/modules/General/components/IconDropDown';
-import KYB from 'src/modules/Verification/containers/KYB';
 
 import { useHeader } from './useHeader';
 
@@ -16,8 +15,6 @@ const Header: React.FC = () => {
     onCreate,
     onLogout,
     navigateIntro,
-    openVerifyModal,
-    setOpenVerifyModal,
     navigateSettings,
     navigateRefer,
     submissionOverModal,
@@ -74,7 +71,6 @@ const Header: React.FC = () => {
           )}
         </div>
       </div>
-      <KYB open={openVerifyModal} setOpen={setOpenVerifyModal} />
       <ConfirmModal
         open={submissionOverModal}
         handleClose={() => setSubmissionOverModal(false)}
