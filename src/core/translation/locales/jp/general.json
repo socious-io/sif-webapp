@@ -24,5 +24,11 @@
     "disconnect": "切断",
     "copy-address": "アドレスをコピー",
     "no-wallet-alert": "Cardanoウォレットが検出されませんでした。Lace、Eternl、またはYoroiなどのCardanoウォレットをインストールしてください。"
+  },
+  "kyb": {
+    "title": "組織を認証してプロジェクトを作成する",
+    "subtitle": "プロジェクトを開始するには、Sociousアカウントセンターで組織の1回限りの認証を完了してください。",
+    "cancel": "キャンセル",
+    "continue": "認証に進む"
   }
 }

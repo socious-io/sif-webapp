@@ -24,5 +24,11 @@
   "connect-wallet": "Connecter le portefeuille",
   "disconnect": "Déconnecter",
   "copy-address": "Copier l'adresse",
-  "no-wallet-alert": "Aucun portefeuille Cardano détecté. Veuillez installer un portefeuille Cardano tel que Lace, Eternl ou Yoroi pour continuer."
+  "no-wallet-alert": "Aucun portefeuille Cardano détecté. Veuillez installer un portefeuille Cardano tel que Lace, Eternl ou Yoroi pour continuer.",
+  "kyb": {
+    "title": "Vérifiez votre organisation pour créer un projet",
+    "subtitle": "Pour démarrer un projet, veuillez effectuer une vérification unique de votre organisation dans le Centre de Compte Socious.",
+    "cancel": "Annuler",
+    "continue": "Continuer vers la Vérification"
+  }
 }

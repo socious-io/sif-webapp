@@ -2,12 +2,15 @@ import bg from 'src/assets/images/create-hero.jpeg';
 import { translate } from 'src/core/helpers/utils';
 import Button from 'src/modules/General/components/Button';
 import ConfirmModal from 'src/modules/General/components/ConfirmModal';
-import KYB from 'src/modules/Verification/containers/KYB';
+import FeaturedIcon from 'src/modules/General/components/FeaturedIcon';
 
 import { useCreateProjectForm } from './useCreateProjectForm';
+
 const CreateProjectForm: React.FC = () => {
-  const { openVerifyModal, setOpenVerifyModal, onCreate, submissionOverModal, setSubmissionOverModal } =
-    useCreateProjectForm();
+  const {
+    data: { submissionOverModal, openKybModal },
+    operations: { onCreate, setSubmissionOverModal, setOpenKybModal, navigateKyb },
+  } = useCreateProjectForm();
 
   return (
     <div className="flex flex-col md:grid md:grid-cols-2 items-center max-w-[1280px] mx-auto px-4 pb-16">
@@ -28,7 +31,6 @@ const CreateProjectForm: React.FC = () => {
           className="w-full md:w-[592px] h-[540px] object-cover md:min-w-[592px] "
         />
       </div>
-      <KYB open={openVerifyModal} setOpen={setOpenVerifyModal} />
       <ConfirmModal
         open={submissionOverModal}
         handleClose={() => setSubmissionOverModal(false)}
@@ -44,6 +46,32 @@ const CreateProjectForm: React.FC = () => {
           },
         ]}
         customStyle="md:max-w-[400px]"
+      />
+      <ConfirmModal
+        open={openKybModal}
+        handleClose={() => setOpenKybModal(false)}
+        icon={<FeaturedIcon type="light-circle-outlined" iconName="check-circle" theme="primary" size="lg" />}
+        confirmHeader={translate('kyb.title')}
+        confirmSubheader={translate('kyb.subtitle')}
+        footerDivider
+        customStyle="md:max-w-[480px]"
+        footerClassName="flex-col pt-6"
+        buttons={[
+          {
+            children: translate('kyb.continue'),
+            color: 'primary',
+            variant: 'contained',
+            block: true,
+            onClick: navigateKyb,
+          },
+          {
+            children: translate('kyb.cancel'),
+            color: 'secondary',
+            variant: 'text',
+            block: true,
+            onClick: () => setOpenKybModal(false),
+          },
+        ]}
       />
     </div>
   );

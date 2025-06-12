@@ -24,5 +24,11 @@
   "connect-wallet": "Connect wallet",
   "disconnect": "Disconnect",
   "copy-address": "Copy Address",
-  "no-wallet-alert": "No Cardano wallet detected. Please install a Cardano wallet like Lace, Eternl, or Yoroi to continue."
+  "no-wallet-alert": "No Cardano wallet detected. Please install a Cardano wallet like Lace, Eternl, or Yoroi to continue.",
+  "kyb": {
+    "title": "Verify your organization to create a project",
+    "subtitle": "To start a project, please complete a one-time verification of your organization in the Socious Account Center.",
+    "cancel": "Cancel",
+    "continue": "Continue to Verification"
+  }
 }
