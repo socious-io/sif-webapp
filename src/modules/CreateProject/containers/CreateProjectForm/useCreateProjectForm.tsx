@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { config } from 'src/config';
 import { CurrentIdentity } from 'src/core/adaptors';
 import { getDaysUntil } from 'src/core/helpers/date-converter';
 import { RootState } from 'src/store';
 
 export const useCreateProjectForm = () => {
   const navigate = useNavigate();
-  const [openVerifyModal, setOpenVerifyModal] = useState(false);
   const [submissionOverModal, setSubmissionOverModal] = useState(false);
 
   const currentIdentity = useSelector<RootState, CurrentIdentity | undefined>(state => {
@@ -24,9 +24,9 @@ export const useCreateProjectForm = () => {
     if (currentIdentity?.type === 'users') navigate('/create/select-identity');
     if (currentIdentity?.type === 'organizations') {
       if (currentIdentity.verified) navigate('/create/step-1');
-      else setOpenVerifyModal(true);
+      else window.open(config.accountCenterURL + '/kyb', '_blank');
     }
   };
 
-  return { openVerifyModal, setOpenVerifyModal, onCreate, submissionOverModal, setSubmissionOverModal };
+  return { onCreate, submissionOverModal, setSubmissionOverModal };
 };

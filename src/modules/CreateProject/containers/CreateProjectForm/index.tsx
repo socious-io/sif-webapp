@@ -2,12 +2,10 @@ import bg from 'src/assets/images/create-hero.jpeg';
 import { translate } from 'src/core/helpers/utils';
 import Button from 'src/modules/General/components/Button';
 import ConfirmModal from 'src/modules/General/components/ConfirmModal';
-import KYB from 'src/modules/Verification/containers/KYB';
 
 import { useCreateProjectForm } from './useCreateProjectForm';
 const CreateProjectForm: React.FC = () => {
-  const { openVerifyModal, setOpenVerifyModal, onCreate, submissionOverModal, setSubmissionOverModal } =
-    useCreateProjectForm();
+  const { onCreate, submissionOverModal, setSubmissionOverModal } = useCreateProjectForm();
 
   return (
     <div className="flex flex-col md:grid md:grid-cols-2 items-center max-w-[1280px] mx-auto px-4 pb-16">
@@ -28,7 +26,6 @@ const CreateProjectForm: React.FC = () => {
           className="w-full md:w-[592px] h-[540px] object-cover md:min-w-[592px] "
         />
       </div>
-      <KYB open={openVerifyModal} setOpen={setOpenVerifyModal} />
       <ConfirmModal
         open={submissionOverModal}
         handleClose={() => setSubmissionOverModal(false)}

@@ -11,9 +11,6 @@ export * from './projects/index.types';
 export * from './auth/index.adaptors';
 export * from './auth/index.types';
 
-export * from './verification/index.adaptors';
-export * from './verification/index.types';
-
 export * from './users/index.adaptors';
 export * from './users/index.types';
 

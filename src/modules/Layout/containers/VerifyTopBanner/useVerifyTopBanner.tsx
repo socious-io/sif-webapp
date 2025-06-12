@@ -13,10 +13,9 @@ export const useVerifyTopBanner = () => {
   const isPendingStatus = currentIdentity?.status === 'PENDING';
   const pendingOrgVerification = type === 'organizations' && isPendingStatus;
   const [hideVerifyBanner, setHideVerifyBanner] = useState(localStorage.getItem('hideVerifiedBanner') === 'true');
-  const [openVerifyModal, setOpenVerifyModal] = useState(false);
 
   const onVerifyIdentity = () => {
-    if (type === 'organizations') setOpenVerifyModal(true);
+    if (type === 'organizations') window.open(config.accountCenterURL + '/kyb', '_blank');
     else window.open(config.accountCenterURL + '/verification', '_blank');
   };
 
@@ -32,12 +31,10 @@ export const useVerifyTopBanner = () => {
       verified,
       hideVerifyBanner,
       pendingOrgVerification,
-      openVerifyModal,
     },
     operations: {
       onDismiss,
       onVerifyIdentity,
-      setOpenVerifyModal,
     },
   };
 };
