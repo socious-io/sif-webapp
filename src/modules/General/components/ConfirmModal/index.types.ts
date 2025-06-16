@@ -7,4 +7,5 @@ export interface ConfirmModalProps extends ModalProps {
   confirmHeader: string;
   confirmSubheader?: string;
   buttons?: ButtonProps[];
+  footerClassName?: string;
 }

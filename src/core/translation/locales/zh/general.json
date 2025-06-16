@@ -24,5 +24,11 @@
   "connect-wallet": "连接钱包",
   "disconnect": "断开连接",
   "copy-address": "复制地址",
-  "no-wallet-alert": "未检测到 Cardano 钱包。请安装如 Lace、Eternl 或 Yoroi 等 Cardano 钱包以继续操作。"
+  "no-wallet-alert": "未检测到 Cardano 钱包。请安装如 Lace、Eternl 或 Yoroi 等 Cardano 钱包以继续操作。",
+  "kyb": {
+    "title": "验证您的组织以创建项目",
+    "subtitle": "要启动一个项目，请在Socious账户中心完成您组织的一次性验证。",
+    "cancel": "取消",
+    "continue": "继续验证"
+  }
 }
