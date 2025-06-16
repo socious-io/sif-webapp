@@ -7,7 +7,7 @@ import { setProjectData } from 'src/store/reducers/createProject.reducer';
 import * as yup from 'yup';
 
 interface FormData {
-  feasibility: string;
+  feasibility?: string;
   video?: string;
 }
 

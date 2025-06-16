@@ -1,5 +1,5 @@
 import { Divider } from '@mui/material';
-import { convertMarkdownToJSX } from 'src/core/convert-md-to-jsx';
+import { convertMarkdownToJSX } from 'src/core/helpers/convert-md-to-jsx';
 import { getYouTubeEmbedUrl, translate } from 'src/core/helpers/utils';
 // import { AlertModal } from 'src/modules/General/components/AlertModal';
 import AvatarLabelGroup from 'src/modules/General/components/AvatarLabelGroup';
