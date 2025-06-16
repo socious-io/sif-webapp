@@ -24,14 +24,16 @@ export interface Project {
   round: Round;
   feasibility: string;
   goals: string | null;
-  impact_assessment?: number;
+  impact_assessment: number | null;
   linkdin?: string | null;
   problem_statement: string;
   email?: string;
   solution?: string;
-  total_requested_amount: string;
+  total_requested_amount: number | null;
   video: string;
   cost_beakdown: string;
+  category: string;
+  voluntery_contribution: string;
 }
 
 export type ProjectsRes = PaginateResV3<Project>;

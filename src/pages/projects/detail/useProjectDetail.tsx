@@ -1,17 +1,20 @@
 import Cookies from 'js-cookie';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLoaderData, useNavigate, useParams, useLocation } from 'react-router-dom';
 import { config } from 'src/config';
-import { Project } from 'src/core/adaptors';
+import { getEditProjectAdaptor, Project } from 'src/core/adaptors';
 import { CurrentIdentity } from 'src/core/adaptors';
 import { removeProjects } from 'src/core/api';
 import { getDaysUntil } from 'src/core/helpers/date-converter';
 import { RootState } from 'src/store';
+import { setProjectData } from 'src/store/reducers/createProject.reducer';
 
 export const useProjectDetail = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
+
   const [openVerifyModal, setOpenVerifyModal] = useState(false);
   const { id: projectId } = useParams();
   const { projectDetail: detail } = useLoaderData() as { projectDetail: Project };
@@ -35,7 +38,13 @@ export const useProjectDetail = () => {
     }
   };
 
-  const onEditProject = () => navigate(`/${projectId}/edit`);
+  const onEditProject = async () => {
+    const { data } = await getEditProjectAdaptor(projectId as string);
+    if (data) {
+      dispatch(setProjectData({ ...data, id: projectId, mode: 'update' }));
+      navigate(`/create/step-1`);
+    }
+  };
 
   const onVote = () => {
     if (currentIdentity) {
