@@ -1,6 +1,6 @@
 import React from 'react';
 import { getIdentityMeta } from 'src/core/adaptors/users/index.adaptors';
-import { toRelativeTime } from 'src/core/helpers/relative-time';
+import { toRelativeTime } from 'src/core/helpers/date-helpers';
 
 import { RepliesProps } from './index.types';
 import { useReplies } from './useReplies';
