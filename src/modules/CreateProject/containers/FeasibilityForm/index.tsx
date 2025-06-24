@@ -17,7 +17,7 @@ const FeasibilityForm: React.FC = () => {
         <RichTextEditor
           register={register}
           name="feasibility"
-          label="Feasibility and team (optional)"
+          label="Feasibility and team*"
           placeholder="Describe your project's timeline and major milestones"
           value={feasibility}
           setValue={setValue}

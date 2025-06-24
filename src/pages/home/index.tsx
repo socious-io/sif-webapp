@@ -39,7 +39,7 @@ export const Home = () => {
         </div>
         <img src="/images/line-pattern.png" className="absolute bottom-[4.25rem] left-0 hidden md:block" />
         <div className="max-w-full md:max-w-[60rem] flex flex-col mx-4 bg-Base-White shadow-md rounded-xl overflow-hidden absolute top-[calc(100%-2rem)] md:top-[calc(100%-9.75rem)]">
-          <img src={round?.cover || '/images/explorer-cover.png'} alt="Explorer" />
+          <img src={round?.cover || '/images/explorer-cover.jpg'} alt="Explorer" />
           <div className="flex flex-col gap-4 p-6 md:p-8">
             <div className="flex flex-col items-start gap-1">
               {roundIsClosed && <Chip theme="warning" label={translate('home-round-closed')} />}

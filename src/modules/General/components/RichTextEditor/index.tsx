@@ -3,7 +3,7 @@ import Placeholder from '@tiptap/extension-placeholder';
 import Underline from '@tiptap/extension-underline';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
-import { ChangeEvent, useEffect } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import variables from 'src/styles/constants/_exports.module.scss';
 
 import styles from './index.module.scss';
@@ -38,7 +38,7 @@ const MenuBar = ({ editor }) => {
         disabled={!editor.can().chain().focus().toggleBold().run()}
         className={`${styles['button']} ${editor.isActive('bold') && styles['button--active']}`}
       >
-        B
+        {'B'}
       </button>
       <button
         type="button"
@@ -46,7 +46,7 @@ const MenuBar = ({ editor }) => {
         disabled={!editor.can().chain().focus().toggleItalic().run()}
         className={`italic ${styles['button']} ${editor.isActive('italic') && styles['button--active']}`}
       >
-        i
+        {'i'}
       </button>
       <button
         type="button"
@@ -54,7 +54,7 @@ const MenuBar = ({ editor }) => {
         disabled={!editor.can().chain().focus().toggleUnderline().run()}
         className={`underline ${styles['button']} ${editor.isActive('underline') && styles['button--active']}`}
       >
-        u
+        {'u'}
       </button>
     </div>
   );
@@ -69,7 +69,10 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
   setValue,
   register,
   errors,
+  charLimit,
 }) => {
+  const [charCount, setCharCount] = useState(0);
+
   const extensions = [
     Placeholder.configure({ placeholder, emptyNodeClass: 'is-empty' }),
     StarterKit.configure({
@@ -89,23 +92,48 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
     onUpdate: ({ editor }) => {
       const html = editor.getHTML();
       const isEmptyEditor = editor.isEmpty;
-      setValue?.(name, isEmptyEditor ? '' : html, { shouldValidate: true });
-      onChange?.(html);
+      const text = editor.getText();
+      const currentCharCount = text.length;
+
+      if (charLimit && currentCharCount > charLimit) {
+        const truncatedText = text.slice(0, charLimit);
+        editor.commands.setContent(truncatedText);
+        setCharCount(charLimit);
+        setValue?.(name, truncatedText, { shouldValidate: true });
+        onChange?.(truncatedText);
+      } else {
+        setCharCount(currentCharCount);
+        setValue?.(name, isEmptyEditor ? '' : html, { shouldValidate: true });
+        onChange?.(html);
+      }
     },
   });
 
   useEffect(() => {
     register?.(name);
-  }, [register, name]);
+    if (editor) {
+      setCharCount(editor.getText().length);
+    }
+  }, [register, name, editor]);
 
   if (!editor) return null;
 
   return (
     <div className={styles['main']}>
       {label && <label className={styles['label']}>{label}</label>}
-      <div data-testid="description-input" className={`${styles['container']} ${errors ? styles['container--error'] : styles['container--default']}`}>
+      <div
+        data-testid="description-input"
+        className={`${styles['container']} ${errors ? styles['container--error'] : styles['container--default']}`}
+      >
         <EditorContent editor={editor} />
         <MenuBar editor={editor} />
+      </div>
+      <div className={styles['char-counter']}>
+        {charLimit && (
+          <span>
+            {charCount}/{charLimit}
+          </span>
+        )}
       </div>
       {errors &&
         errors.map((e, index) => (

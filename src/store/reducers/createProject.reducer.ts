@@ -11,18 +11,18 @@ export interface ProjectState {
   city: string;
   country: string;
   cover_url: string;
-  email?: string | null;
-  linkdin?: string | null;
+  email?: string;
+  linkdin?: string;
   category: string;
   problem_statement: string;
   solution: string;
-  total_requested_amount: number | null;
+  total_requested_amount: number;
   feasibility: string;
   goals?: string;
   video?: string;
   cost_beakdown: string;
   voluntery_contribution: string;
-  impact_assessment: number | null;
+  impact_assessment: string;
   mode?: 'create' | 'update';
 }
 
@@ -48,7 +48,7 @@ const initialState: ProjectState = {
   cost_beakdown: '',
   voluntery_contribution: '',
   feasibility: '',
-  impact_assessment: null,
+  impact_assessment: '',
   mode: 'create',
 };
 

@@ -7,24 +7,16 @@ import { setProjectData } from 'src/store/reducers/createProject.reducer';
 import * as yup from 'yup';
 
 interface FormData {
-  total_requested_amount: number | null;
-  cost_beakdown: string;
-  impact_assessment: number | null;
+  total_requested_amount: number;
+  cost_beakdown?: string;
+  impact_assessment: string;
   voluntery_contribution?: string;
 }
 
 const schema = yup.object().shape({
-  total_requested_amount: yup
-    .number()
-    .typeError('Total amount must be a number')
-    .positive('Total amount must be a positive number')
-    .required('Total amount is required'),
-  cost_beakdown: yup.string(),
-  impact_assessment: yup
-    .number()
-    .typeError('Total amount must be a number')
-    .positive('Total amount must be a positive number')
-    .required('Total amount is required'),
+  total_requested_amount: yup.number().required('Total amount is required'),
+  cost_beakdown: yup.string().optional(),
+  impact_assessment: yup.string().required('Impact assessment is required'),
   voluntery_contribution: yup.string().optional(),
 });
 
@@ -37,13 +29,15 @@ export const useBudgetForm = () => {
     register,
     formState: { errors, isValid },
     handleSubmit,
+    watch,
+    setValue,
   } = useForm<FormData>({
     resolver: yupResolver(schema),
     mode: 'all',
     defaultValues: {
-      total_requested_amount: project.total_requested_amount || null,
+      total_requested_amount: project.total_requested_amount,
       cost_beakdown: project.cost_beakdown || '',
-      impact_assessment: project.impact_assessment || null,
+      impact_assessment: project.impact_assessment || '',
       voluntery_contribution: project.voluntery_contribution || '',
     },
   });
@@ -63,17 +57,20 @@ export const useBudgetForm = () => {
     );
     nextStep();
   };
+  const impact_assessment = watch('impact_assessment') || '';
 
   return {
     data: {
       register,
       errors,
       hasErrors,
+      impact_assessment,
     },
     operations: {
       goBack,
       handleSubmit,
       onSubmit,
+      setValue,
     },
   };
 };

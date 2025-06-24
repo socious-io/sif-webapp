@@ -31,10 +31,10 @@ const NameDescriptionForm: React.FC = () => {
         />
         <Input
           register={register}
-          name="linkedin"
+          name="linkdin"
           label="LinkedIn profile (optional)"
           placeholder="Your project’s LinkedIn profile"
-          errors={errors['linkedin']?.message ? [errors['linkedin']?.message.toString()] : undefined}
+          errors={errors['linkdin']?.message ? [errors['linkdin']?.message.toString()] : undefined}
         />
         <Input
           register={register}
@@ -45,6 +45,7 @@ const NameDescriptionForm: React.FC = () => {
         />
         <RichTextEditor
           register={register}
+          charLimit={3000}
           name="description"
           label={translate('project-description-label') + '*'}
           placeholder={translate('project-description-placeholder')}

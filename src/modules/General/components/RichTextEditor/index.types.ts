@@ -7,4 +7,5 @@ export interface RichTextEditorProps {
   setValue?: any;
   register?: any;
   errors?: string[];
+  charLimit?: number;
 }

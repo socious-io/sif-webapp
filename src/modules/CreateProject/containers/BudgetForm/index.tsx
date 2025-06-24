@@ -1,13 +1,14 @@
 import { translate } from 'src/core/helpers/utils';
 import Button from 'src/modules/General/components/Button';
 import Input from 'src/modules/General/components/Input';
+import RichTextEditor from 'src/modules/General/components/RichTextEditor';
 
 import { useBudgetForm } from './useBudgetForm';
 
 const BudgetForm: React.FC = () => {
   const {
-    data: { register, errors, hasErrors },
-    operations: { goBack, handleSubmit, onSubmit },
+    data: { register, errors, hasErrors, impact_assessment },
+    operations: { goBack, handleSubmit, onSubmit, setValue },
   } = useBudgetForm();
 
   return (
@@ -26,6 +27,15 @@ const BudgetForm: React.FC = () => {
               : undefined
           }
         />
+        <RichTextEditor
+          register={register}
+          name="impact_assessment"
+          label="Impact assessment*"
+          placeholder="Allocate $1500 of your secured funds"
+          value={impact_assessment}
+          setValue={setValue}
+          errors={errors['impact_assessment']?.message ? [errors['impact_assessment']?.message.toString()] : undefined}
+        />
         <Input
           register={register}
           name="cost_beakdown"
@@ -33,15 +43,6 @@ const BudgetForm: React.FC = () => {
           placeholder="Give us an itemized breakdown of intended goals, deliverables..."
           customHeight="240px"
           errors={errors['cost_breakdown']?.message ? [errors['cost_breakdown']?.message.toString()] : undefined}
-        />
-        <Input
-          register={register}
-          name="impact_assessment"
-          label="Impact assessment* "
-          placeholder="Allocate $1500 of your secured funds "
-          type="number"
-          required
-          errors={errors['impact_assessment']?.message ? [errors['impact_assessment']?.message.toString()] : undefined}
         />
         <Input
           register={register}

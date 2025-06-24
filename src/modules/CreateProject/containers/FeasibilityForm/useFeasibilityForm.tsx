@@ -12,7 +12,7 @@ interface FormData {
 }
 
 const schema = yup.object().shape({
-  feasibility: yup.string(),
+  feasibility: yup.string().required('Feasibility is required'),
   video: yup.string().optional(),
 });
 
