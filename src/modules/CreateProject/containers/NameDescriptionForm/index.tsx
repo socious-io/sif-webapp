@@ -31,7 +31,7 @@ const NameDescriptionForm: React.FC = () => {
         />
         <Input
           register={register}
-          name="linkedin"
+          name="linkdin"
           label="LinkedIn profile (optional)"
           placeholder="Your project’s LinkedIn profile"
           errors={errors['linkedin']?.message ? [errors['linkedin']?.message.toString()] : undefined}
