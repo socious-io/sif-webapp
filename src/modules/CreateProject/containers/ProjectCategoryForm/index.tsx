@@ -25,6 +25,7 @@ const ProjectCategoryForm: React.FC = () => {
           options={PROJECT_CATEGORIES}
           isSearchable={false}
           onChange={setProjectCategory}
+          value={projectCategory ? PROJECT_CATEGORIES.find(opt => opt.value === projectCategory) || null : null}
           errors={errors['projectCategory']?.message ? [errors['projectCategory']?.message.toString()] : undefined}
         />
         <RichTextEditor
