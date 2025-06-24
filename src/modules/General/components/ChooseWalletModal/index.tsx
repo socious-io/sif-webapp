@@ -1,6 +1,7 @@
 import { BrowserWallet } from '@meshsdk/core';
 import { useState } from 'react';
 import Modal from 'src/modules/General/components/Modal';
+import { string } from 'yup';
 
 const ChooseWalletModal = ({
   open,
@@ -22,8 +23,9 @@ const ChooseWalletModal = ({
       onWalletSelect({ wallet, address, name: walletName });
       localStorage.setItem('selectedWallet', walletName);
       handleClose();
-    } catch (err) {
-      setError(err.message);
+    } catch (err: any) {
+      if (err?.message) setError(err.message);
+      console.error(err);
     }
   };
 
