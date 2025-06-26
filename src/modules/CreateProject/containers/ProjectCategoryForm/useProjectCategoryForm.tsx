@@ -46,7 +46,16 @@ export const useProjectCategoryForm = () => {
   const solution = watch('solution') || '';
   const keyDeliverablesGoals = watch('goals') || '';
 
-  const goBack = () => navigate('/create/step-2');
+  const goBack = () => {
+    const values = {
+      category: projectCategory,
+      problem_statement: problemStatement,
+      solution: solution,
+      goals: keyDeliverablesGoals,
+    };
+    dispatch(setProjectData(values));
+    navigate('/create/step-2');
+  };
   const nextStep = () => navigate('/create/step-4');
 
   const setProjectCategory = (newValue: { value: string; label: string } | null) => {
