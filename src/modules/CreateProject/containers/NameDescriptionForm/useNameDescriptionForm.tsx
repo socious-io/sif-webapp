@@ -47,7 +47,17 @@ export const useNameDescriptionForm = () => {
   const description = watch('description') || '';
   const hasErrors = !isValid;
 
-  const goBack = () => navigate('/create/step-1');
+  const goBack = () => {
+    const values = {
+      title: watch('title'),
+      description: watch('description'),
+      website: watch('website'),
+      email: watch('email'),
+      linkdin: watch('linkdin'),
+    };
+    dispatch(setProjectData(values));
+    navigate('/create/step-1');
+  };
 
   const nextStep = () => navigate('/create/step-3');
 

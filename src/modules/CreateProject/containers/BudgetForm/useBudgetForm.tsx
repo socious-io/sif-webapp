@@ -49,7 +49,16 @@ export const useBudgetForm = () => {
   });
   const hasErrors = !isValid;
 
-  const goBack = () => navigate('/create/step-3');
+  const goBack = () => {
+    const values = {
+      total_requested_amount: watch('total_requested_amount'),
+      cost_beakdown: watch('cost_beakdown'),
+      impact_assessment: watch('impact_assessment'),
+      voluntery_contribution: watch('voluntery_contribution'),
+    };
+    dispatch(setProjectData(values));
+    navigate('/create/step-3');
+  };
   const nextStep = () => navigate('/create/step-5');
   const onSubmit = (data: FormData) => {
     const { total_requested_amount, cost_beakdown, impact_assessment, voluntery_contribution } = data;
