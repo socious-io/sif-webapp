@@ -37,14 +37,11 @@ export const useFeasibilityForm = () => {
   });
 
   const feasibility = watch('feasibility') || '';
+  const video = watch('video') || '';
   const hasErrors = !isValid;
 
   const goBack = () => {
-    const values = {
-      feasibility: watch('feasibility'),
-      video: watch('video'),
-    };
-    dispatch(setProjectData(values));
+    dispatch(setProjectData({ feasibility, video }));
     navigate('/create/step-4');
   };
   const nextStep = () => navigate('/create/step-6');

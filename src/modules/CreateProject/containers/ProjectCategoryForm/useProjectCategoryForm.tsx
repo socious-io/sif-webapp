@@ -48,10 +48,10 @@ export const useProjectCategoryForm = () => {
 
   const goBack = () => {
     const values = {
-      category: watch('category'),
-      problem_statement: watch('problem_statement'),
-      solution: watch('solution'),
-      goals: watch('goals'),
+      category: projectCategory,
+      problem_statement: problemStatement,
+      solution: solution,
+      goals: keyDeliverablesGoals,
     };
     dispatch(setProjectData(values));
     navigate('/create/step-2');
