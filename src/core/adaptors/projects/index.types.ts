@@ -5,7 +5,7 @@ import { PaginateRes } from '..';
 
 export type RoundStats = {
   estimatedMatch?: number;
-  donatedAmount: number;
+  donatedAmount: { USD: number };
   votes: number;
 };
 

@@ -33,7 +33,7 @@ const VoteDetailCard: React.FC<VoteDetailCardProps> = ({
         <>
           <div className="flex flex-col gap-1 text-sm leading-5 text-Gray-light-mode-600">
             <span className="text-3xl font-semibold leading-8 text-Gray-light-mode-900">
-              ${donatedAmount.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+              ${(donatedAmount.USD || 0).toLocaleString('en-US', { minimumFractionDigits: 2 })}
             </span>
             {translate('projects-round-stats.donated')}
           </div>
