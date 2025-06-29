@@ -9,10 +9,9 @@ import { useProjectCategoryForm } from './useProjectCategoryForm';
 
 const ProjectCategoryForm: React.FC = () => {
   const {
-    data: { errors, problemStatement, solution, keyDeliverablesGoals, projectCategory },
+    data: { errors, problemStatement, solution, keyDeliverablesGoals, projectCategory, isSubmitDisabled },
     operations: { goBack, setValue, handleSubmit, onSubmit, setProjectCategory },
   } = useProjectCategoryForm();
-  const isSubmitDisabled = !projectCategory || !problemStatement.trim() || !solution.trim();
 
   return (
     <div>
@@ -31,7 +30,7 @@ const ProjectCategoryForm: React.FC = () => {
         <RichTextEditor
           name="problem_statement"
           label="Problem Statement*"
-          placeholder="Describe the problem your project aims to solve"
+          placeholder="Describe the problem are you addressing..."
           value={problemStatement}
           setValue={setValue}
           errors={errors['problemStatement']?.message ? [errors['problemStatement']?.message.toString()] : undefined}
@@ -39,15 +38,15 @@ const ProjectCategoryForm: React.FC = () => {
         <RichTextEditor
           name="solution"
           label="Solution*"
-          placeholder="Describe your project's solution to the problem"
+          placeholder="Tell us how you are solving this problem..."
           value={solution}
           setValue={setValue}
           errors={errors['solution']?.message ? [errors['solution']?.message.toString()] : undefined}
         />
         <RichTextEditor
           name="goals"
-          label="Key Deliverables & Goals (optional)"
-          placeholder="Describe key deliverables and goals of the project (optional)"
+          label="Key Deliverables & Goals *"
+          placeholder="Give us an itemized breakdown of intended goals, deliverables, and timeline, e.g..."
           value={keyDeliverablesGoals}
           setValue={setValue}
           errors={
