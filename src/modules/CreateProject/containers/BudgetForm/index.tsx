@@ -8,7 +8,16 @@ import { useBudgetForm } from './useBudgetForm';
 
 const BudgetForm: React.FC = () => {
   const {
-    data: { register, errors, hasErrors, costBreakdown, impactAssessmentType, impactAssessment, impactOptions },
+    data: {
+      register,
+      errors,
+      hasErrors,
+      costBreakdown,
+      impactAssessmentType,
+      impactAssessment,
+      impactOptions,
+      volunteryContribution,
+    },
     operations: { goBack, handleSubmit, onSubmit, setValue },
   } = useBudgetForm();
 
@@ -59,11 +68,12 @@ const BudgetForm: React.FC = () => {
           setValue={setValue}
           errors={errors['cost_beakdown']?.message ? [errors['cost_beakdown']?.message.toString()] : undefined}
         />
-        <Input
-          register={register}
+        <RichTextEditor
           name="voluntery_contribution"
           label="Voluntary Contribution to Matching Pool (Optional)"
           placeholder="Contribute to the next round of Socious Fund"
+          value={volunteryContribution}
+          setValue={setValue}
           errors={
             errors['voluntery_contribution']?.message
               ? [errors['voluntery_contribution']?.message.toString()]
