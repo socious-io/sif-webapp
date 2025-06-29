@@ -48,13 +48,10 @@
             // }
         }
 
-        // :global(p.is-editor-empty:first-child::before) {
-        //     height: 0;
-        //     color: #617089;
-        //     content: attr(data-placeholder);
-        //     float: left;
-        //     pointer-events: none;
-        // }
+        :global(p.is-editor-empty:first-child::before) {
+            color: $color-grey-500;
+            content: attr(data-placeholder);
+        }
 
         .menu {
             display: flex;
