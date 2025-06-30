@@ -44,10 +44,17 @@ export const useNameDescriptionForm = () => {
       linkdin: project.linkdin || '',
     },
   });
+  const title = watch('title') || '';
   const description = watch('description') || '';
+  const website = watch('website') || '';
+  const email = watch('email') || '';
+  const linkdin = watch('linkdin') || '';
   const hasErrors = !isValid;
 
-  const goBack = () => navigate('/create/step-1');
+  const goBack = () => {
+    dispatch(setProjectData({ title, description, website, email, linkdin }));
+    navigate('/create/step-1');
+  };
 
   const nextStep = () => navigate('/create/step-3');
 

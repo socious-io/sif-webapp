@@ -49,7 +49,15 @@ export const useUploadBannerForm = () => {
   };
 
   const navigateStep4 = () => navigate('/create/step-7');
-  const goBack = () => navigate('/create/step-5');
+  const goBack = () => {
+    if (attachments.length > 0) {
+      const { id, url } = attachments[0];
+      dispatch(setProjectData({ cover_id: id, cover_url: url }));
+    } else {
+      dispatch(setProjectData({ cover_id: '', cover_url: '' }));
+    }
+    navigate('/create/step-5');
+  };
   const isEnabled = !cover_id;
 
   return {
