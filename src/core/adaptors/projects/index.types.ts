@@ -40,6 +40,7 @@ export interface Project {
   total_requested_amount: number | null;
   cost_beakdown: string;
   video?: string;
+  voluntery_contribution?: string;
 }
 
 export type ProjectRes = PaginateRes<Project>;

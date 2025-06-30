@@ -12,7 +12,7 @@ interface FormData {
 }
 
 const schema = yup.object().shape({
-  feasibility: yup.string(),
+  feasibility: yup.string().required(),
   video: yup.string().optional(),
 });
 
@@ -58,6 +58,7 @@ export const useFeasibilityForm = () => {
       errors,
       feasibility,
       hasErrors,
+      isValid,
     },
     operations: {
       goBack,

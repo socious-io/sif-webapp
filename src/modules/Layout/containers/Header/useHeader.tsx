@@ -32,6 +32,10 @@ export const useHeader = () => {
   }, [currentIdentity]);
 
   const onCreate = () => {
+    if (currentIdentity === undefined) {
+      navigate('/intro');
+      return;
+    }
     const isSubmissionOver = getDaysUntil(round?.submission_end_at as string) <= 0;
     if (isSubmissionOver) {
       setSubmissionOverModal(true);

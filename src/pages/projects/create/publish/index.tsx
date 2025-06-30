@@ -29,6 +29,7 @@ export const Publish = () => {
       feasibility,
       video,
       social_cause,
+      voluntery_contribution,
     },
     operations: { navigate, onEditProject, onPublish },
   } = usePublish();
@@ -83,6 +84,10 @@ export const Publish = () => {
     { label: 'Problem Statement', content: convertMarkdownToJSX(problem_statement) },
     { label: 'Solution', content: convertMarkdownToJSX(solution) },
     { label: 'Key Deliverables & Goals', content: goals ? convertMarkdownToJSX(goals) : '' },
+    {
+      label: 'Voluntery Contribution',
+      content: voluntery_contribution ? convertMarkdownToJSX(voluntery_contribution) : 'N/A',
+    },
     {
       label: 'Funding and budget',
       content: (

@@ -103,6 +103,10 @@ export const ProjectDetail = () => {
     { label: 'Solution', content: convertMarkdownToJSX(detail.solution) },
     { label: 'Key Deliverables & Goals', content: detail.goals ? convertMarkdownToJSX(detail.goals) : '' },
     {
+      label: 'Voluntery Contribution',
+      content: detail?.voluntery_contribution ? convertMarkdownToJSX(detail?.voluntery_contribution) : 'N/A',
+    },
+    {
       label: 'Funding and budget',
       content: (
         <>
