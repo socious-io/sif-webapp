@@ -19,7 +19,14 @@ const VoteDetailCard: React.FC<VoteDetailCardProps> = ({
   showResult = true,
   identityType,
 }) => {
-  const { donatedAmount, votes } = roundStats || {};
+  const donatedAmount =
+    typeof roundStats?.donatedAmount === 'number'
+      ? roundStats.donatedAmount
+      : typeof roundStats?.donatedAmount === 'object' && roundStats?.donatedAmount !== null
+        ? (roundStats.donatedAmount as { USD: number }).USD
+        : 0;
+
+  const votes = roundStats?.votes ?? 0;
   const { isShared, handleCopy } = useVoteDetailCard();
   return (
     <div className="w-full md:w-[22.5rem] flex flex-col items-stretch gap-4 p-6 bg-Gray-light-mode-50 rounded-xl">
