@@ -8,7 +8,7 @@ import * as yup from 'yup';
 
 interface FormData {
   total_requested_amount: number | null;
-  cost_beakdown: string;
+  cost_breakdown: string;
   impact_assessment_type: 'OPTION_A' | 'OPTION_B';
   impact_assessment: string;
   voluntery_contribution?: string;
@@ -52,7 +52,7 @@ export const useBudgetForm = () => {
     mode: 'all',
     defaultValues: {
       total_requested_amount: project.total_requested_amount,
-      cost_beakdown: project.cost_beakdown || '',
+      cost_breakdown: project.cost_breakdown || '',
       impact_assessment_type: project.impact_assessment_type || 'OPTION_A',
       impact_assessment: project.impact_assessment || '',
       voluntery_contribution: project.voluntery_contribution || '',
@@ -60,7 +60,7 @@ export const useBudgetForm = () => {
   });
 
   const hasErrors = !isValid;
-  const costBreakdown = watch('cost_beakdown') || '';
+  const costBreakdown = watch('cost_breakdown') || '';
   const impactAssessmentType = watch('impact_assessment_type') || '';
   const impactAssessment = watch('impact_assessment') || '';
   const volunteryContribution = watch('voluntery_contribution') || '';
@@ -68,7 +68,7 @@ export const useBudgetForm = () => {
   const goBack = () => {
     const values = {
       total_requested_amount: watch('total_requested_amount'),
-      cost_beakdown: watch('cost_beakdown'),
+      cost_breakdown: watch('cost_breakdown'),
       impact_assessment: watch('impact_assessment'),
       voluntery_contribution: watch('voluntery_contribution'),
     };
@@ -77,12 +77,17 @@ export const useBudgetForm = () => {
   };
   const nextStep = () => navigate('/create/step-5');
   const onSubmit = (data: FormData) => {
-    const { total_requested_amount, cost_beakdown, impact_assessment_type, impact_assessment, voluntery_contribution } =
-      data;
+    const {
+      total_requested_amount,
+      cost_breakdown,
+      impact_assessment_type,
+      impact_assessment,
+      voluntery_contribution,
+    } = data;
     dispatch(
       setProjectData({
         total_requested_amount,
-        cost_beakdown,
+        cost_breakdown,
         impact_assessment_type,
         impact_assessment,
         voluntery_contribution,

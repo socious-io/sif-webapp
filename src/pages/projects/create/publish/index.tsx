@@ -25,7 +25,7 @@ export const Publish = () => {
       solution,
       goals,
       total_requested_amount,
-      cost_beakdown,
+      cost_breakdown,
       feasibility,
       video,
       social_cause,
@@ -85,7 +85,7 @@ export const Publish = () => {
     { label: 'Solution', content: convertMarkdownToJSX(solution) },
     { label: 'Key Deliverables & Goals', content: goals ? convertMarkdownToJSX(goals) : '' },
     {
-      label: 'Voluntery Contribution',
+      label: 'Voluntary Contribution',
       content: voluntery_contribution ? convertMarkdownToJSX(voluntery_contribution) : 'N/A',
     },
     {
@@ -93,7 +93,7 @@ export const Publish = () => {
       content: (
         <>
           <div>{`Total amount requested: ${total_requested_amount}`}</div>
-          {convertMarkdownToJSX(cost_beakdown)}
+          {convertMarkdownToJSX(cost_breakdown)}
         </>
       ),
     },

@@ -74,7 +74,7 @@ export const ProjectDetail = () => {
     },
     {
       label: translate('projects-detail.social-causes'),
-      content: <span className="text-base font-semibold leading-6 text-Brand-600">{detail.category}</span>,
+      content: <span className="text-base font-semibold leading-6 text-Brand-600">{detail.socialCause}</span>,
     },
     {
       label: translate('projects-detail.website'),
@@ -96,14 +96,23 @@ export const ProjectDetail = () => {
         </div>
       ),
     },
+    {
+      label: 'Category',
+      content: (
+        <div className="flex items-center gap-1.5 text-base font-semibold leading-6 text-Brand-600">
+          {detail.category}
+        </div>
+      ),
+    },
   ];
+  console.log('GOals', detail.goals);
   const contents = [
     { label: 'Project Description', content: convertMarkdownToJSX(detail.description) },
     { label: 'Problem Statement', content: convertMarkdownToJSX(detail.problem_statement) },
     { label: 'Solution', content: convertMarkdownToJSX(detail.solution) },
     { label: 'Key Deliverables & Goals', content: detail.goals ? convertMarkdownToJSX(detail.goals) : '' },
     {
-      label: 'Voluntery Contribution',
+      label: 'Voluntary Contribution',
       content: detail?.voluntery_contribution ? convertMarkdownToJSX(detail?.voluntery_contribution) : 'N/A',
     },
     {
@@ -111,7 +120,7 @@ export const ProjectDetail = () => {
       content: (
         <>
           <div>{`Total amount requested: ${detail.total_requested_amount}`}</div>
-          {convertMarkdownToJSX(detail.cost_beakdown)}
+          {convertMarkdownToJSX(detail.cost_breakdown)}
         </>
       ),
     },
