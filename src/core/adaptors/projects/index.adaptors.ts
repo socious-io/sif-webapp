@@ -188,7 +188,7 @@ export const getEditProjectAdaptor = async (projectId: string): Promise<AdaptorR
       country: project.country || '',
       cover_url: project.cover?.url || '',
       email: project.email || null,
-      linkdin: project.linkdin || null,
+      linkedin: project.linkedin || null,
       category: project.category || '',
       problem_statement: project.problem_statement || '',
       solution: project.solution || '',

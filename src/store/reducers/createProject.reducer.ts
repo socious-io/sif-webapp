@@ -13,7 +13,7 @@ export interface ProjectState {
   country: string;
   cover_url: string;
   email?: string | null;
-  linkdin?: string | null;
+  linkedin?: string | null;
   category: string;
   problem_statement: string;
   solution: string;
@@ -40,7 +40,7 @@ const initialState: ProjectState = {
   city: '',
   country: '',
   email: '',
-  linkdin: '',
+  linkedin: '',
   category: '',
   problem_statement: '',
   solution: '',

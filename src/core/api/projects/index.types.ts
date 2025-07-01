@@ -25,7 +25,7 @@ export interface Project {
   feasibility: string;
   goals: string | null;
   impact_assessment: number | null;
-  linkdin?: string | null;
+  linkedin?: string | null;
   problem_statement: string;
   email?: string;
   solution?: string;
