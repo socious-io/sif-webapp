@@ -38,9 +38,10 @@ export interface Project {
   email?: string;
   solution: string;
   total_requested_amount: number | null;
-  cost_beakdown: string;
+  cost_breakdown: string;
   video?: string;
   voluntery_contribution?: string;
+  socialCause: string;
 }
 
 export type ProjectRes = PaginateRes<Project>;

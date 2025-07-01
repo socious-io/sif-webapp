@@ -61,12 +61,12 @@ const BudgetForm: React.FC = () => {
           errors={errors['impact_assessment']?.message ? [errors['impact_assessment']?.message.toString()] : undefined}
         />
         <RichTextEditor
-          name="cost_beakdown"
+          name="cost_breakdown"
           label="Cost Breakdown*"
           placeholder="Give us an itemized breakdown of intended goals, deliverables..."
           value={costBreakdown}
           setValue={setValue}
-          errors={errors['cost_beakdown']?.message ? [errors['cost_beakdown']?.message.toString()] : undefined}
+          errors={errors['cost_breakdown']?.message ? [errors['cost_breakdown']?.message.toString()] : undefined}
         />
         <RichTextEditor
           name="voluntery_contribution"

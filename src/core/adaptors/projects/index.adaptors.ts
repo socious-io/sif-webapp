@@ -1,3 +1,4 @@
+import { categoriesAdaptor } from 'src/constants/PROJECT_CATEGORIES';
 import { SOCIAL_CAUSES } from 'src/constants/SOCIAL_CAUSES';
 import { createProjects, editProjects, getProject, getProjects, IdentityType } from 'src/core/api';
 import { donate, vote } from 'src/core/api';
@@ -37,7 +38,7 @@ export const getProjectsAdaptor = async (
         problem_statement: project.problem_statement || '',
         solution: project.solution || '',
         total_requested_amount: project.total_requested_amount || null,
-        cost_beakdown: project.cost_beakdown || '',
+        cost_breakdown: project.cost_breakdown || '',
       };
     });
     return {
@@ -62,7 +63,8 @@ export const getProjectAdaptor = async (projectId: string): Promise<AdaptorRes<P
     const data = {
       id: project.id,
       coverImg: project.cover?.url || '',
-      category: translate(project.social_cause) || SOCIAL_CAUSES[project.social_cause]?.label,
+      socialCause: translate(project.social_cause) || SOCIAL_CAUSES[project.social_cause]?.label,
+      category: categoriesAdaptor(project.category),
       title: project.title,
       description: project.description,
       creator: { id: project.identity.id, type: type as IdentityType, name, img, username },
@@ -92,7 +94,8 @@ export const getProjectAdaptor = async (projectId: string): Promise<AdaptorRes<P
       video: project.video,
       wallet_address: project.wallet_address,
       wallet_env: project.wallet_env,
-      cost_beakdown: project.cost_beakdown,
+      cost_breakdown: project.cost_breakdown,
+      goals: project.goals,
     };
     return {
       data,
@@ -193,7 +196,7 @@ export const getEditProjectAdaptor = async (projectId: string): Promise<AdaptorR
       feasibility: project.feasibility || '',
       goals: project.goals || '',
       video: project.video || '',
-      cost_beakdown: project.cost_beakdown || '',
+      cost_breakdown: project.cost_breakdown || '',
       voluntery_contribution: project.voluntery_contribution || '',
       impact_assessment: project.impact_assessment || null,
     };

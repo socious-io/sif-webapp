@@ -21,7 +21,7 @@ export interface ProjectState {
   feasibility: string;
   goals?: string;
   video?: string;
-  cost_beakdown: string;
+  cost_breakdown: string;
   voluntery_contribution: string;
   impact_assessment: string;
   impact_assessment_type: 'OPTION_A' | 'OPTION_B';
@@ -46,7 +46,7 @@ const initialState: ProjectState = {
   solution: '',
   goals: '',
   video: '',
-  cost_beakdown: '',
+  cost_breakdown: '',
   voluntery_contribution: '',
   feasibility: '',
   impact_assessment: '',

@@ -31,7 +31,7 @@ export interface Project {
   solution?: string;
   total_requested_amount: number | null;
   video: string;
-  cost_beakdown: string;
+  cost_breakdown: string;
   category: string;
   voluntery_contribution: string;
 }
