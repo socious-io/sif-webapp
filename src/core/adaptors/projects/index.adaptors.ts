@@ -96,6 +96,7 @@ export const getProjectAdaptor = async (projectId: string): Promise<AdaptorRes<P
       wallet_env: project.wallet_env,
       cost_breakdown: project.cost_breakdown,
       goals: project.goals,
+      voluntery_contribution: project.voluntery_contribution,
     };
     return {
       data,
