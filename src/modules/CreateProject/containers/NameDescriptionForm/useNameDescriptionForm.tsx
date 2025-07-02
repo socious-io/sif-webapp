@@ -11,7 +11,7 @@ interface FormData {
   description: string;
   website?: string | null;
   email?: string | null;
-  linkdin?: string | null;
+  linkedin?: string | null;
 }
 
 const schema = yup.object().shape({
@@ -19,7 +19,7 @@ const schema = yup.object().shape({
   description: yup.string().required('This field is required'),
   website: yup.string().url('Must be a valid URL').nullable(),
   email: yup.string().email('Must be a valid email').nullable(),
-  linkdin: yup.string().url('Must be a valid LinkedIn URL').nullable(),
+  linkedin: yup.string().url('Must be a valid LinkedIn URL').nullable(),
 });
 
 export const useNameDescriptionForm = () => {
@@ -41,19 +41,26 @@ export const useNameDescriptionForm = () => {
       description: project.description || '',
       website: project.website || '',
       email: project.email || '',
-      linkdin: project.linkdin || '',
+      linkedin: project.linkedin || '',
     },
   });
+  const title = watch('title') || '';
   const description = watch('description') || '';
+  const website = watch('website') || '';
+  const email = watch('email') || '';
+  const linkedin = watch('linkedin') || '';
   const hasErrors = !isValid;
 
-  const goBack = () => navigate('/create/step-1');
+  const goBack = () => {
+    dispatch(setProjectData({ title, description, website, email, linkedin }));
+    navigate('/create/step-1');
+  };
 
   const nextStep = () => navigate('/create/step-3');
 
   const onSubmit = (data: FormData) => {
-    const { title, description, website, email, linkdin } = data;
-    dispatch(setProjectData({ title, description, website, email, linkdin }));
+    const { title, description, website, email, linkedin } = data;
+    dispatch(setProjectData({ title, description, website, email, linkedin }));
     nextStep();
   };
 

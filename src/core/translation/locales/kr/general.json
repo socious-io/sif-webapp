@@ -18,5 +18,11 @@
   "connect-wallet": "지갑 연결",
   "disconnect": "연결 해제",
   "copy-address": "주소 복사",
-  "no-wallet-alert": "Cardano 지갑이 감지되지 않았습니다. Lace, Eternl 또는 Yoroi와 같은 Cardano 지갑을 설치해 주세요."
+  "no-wallet-alert": "Cardano 지갑이 감지되지 않았습니다. Lace, Eternl 또는 Yoroi와 같은 Cardano 지갑을 설치해 주세요.",
+  "kyb": {
+    "title": "조직을 인증하여 프로젝트를 생성하세요",
+    "subtitle": "프로젝트를 시작하려면 Socious 계정 센터에서 조직의 일회성 인증을 완료하십시오.",
+    "cancel": "취소",
+    "continue": "인증으로 계속"
+  }
 }

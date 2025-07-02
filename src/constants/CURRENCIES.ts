@@ -41,21 +41,15 @@ export const CURRENCIES: CurrencyType[] = [
     rateConversionFunc: async (amount: number) => amount,
   },
   {
-    label: 'USDC',
-    value: `25c5de5f5b286073c593edfd77b48abc7a48e5a4f3d4cd9d428ff93555534443`,
-    decimals: 100000000n,
-    rateConversionFunc: async (amount: number) => amount,
-  },
-  {
     label: 'DJED',
     value: `8db269c3ec630e06ae29f74bc39edd1f87c819f1056206e879a1cd61444a4544`,
     decimals: 1000000n,
     rateConversionFunc: async (amount: number) => amount,
   },
   {
-    label: 'USDT',
-    value: `25c5de5f5b286073c593edfd77b48abc7a48e5a4f3d4cd9d428ff93555534454`,
-    decimals: 100000000n,
+    label: 'SOCIO',
+    value: `bd8669352095ea280c834bad675525b3cefca1d3333fe6f6298e36320014df10534f43494f`,
+    decimals: 1000000n,
     rateConversionFunc: async (amount: number) => amount,
   },
   {

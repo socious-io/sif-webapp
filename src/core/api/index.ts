@@ -9,9 +9,6 @@ export * from './projects/index.types';
 export * from './auth/auth.api';
 export * from './auth/auth.types';
 
-export * from './verification/index.api';
-export * from './verification/index.types';
-
 export * from './geo/index.api';
 export * from './geo/index.types';
 

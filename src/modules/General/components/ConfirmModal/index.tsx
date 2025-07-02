@@ -11,30 +11,35 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
   confirmSubheader = '',
   buttons = [],
   headerDivider = false,
+  footerDivider = false,
   mobileCentered = true,
   contentClassName = '',
+  footerClassName = '',
   ...props
 }) => {
+  const footerJSX = !!buttons.length && (
+    <div className={`${styles['content__buttons']} ${footerClassName}`}>
+      {buttons.map((button, index) => (
+        <Button key={index} {...button} />
+      ))}
+    </div>
+  );
+
   return (
     <Modal
       open={open}
       handleClose={handleClose}
       headerDivider={headerDivider}
+      footerDivider={footerDivider}
       mobileCentered={mobileCentered}
       contentClassName={`${styles['content']} ${contentClassName}`}
+      footer={footerJSX}
       {...props}
     >
       <div className="flex flex-col gap-1">
         <span className={styles['content__title']}>{confirmHeader}</span>
         <span className={styles['content__subtitle']}>{confirmSubheader}</span>
       </div>
-      {!!buttons.length && (
-        <div className={styles['content__buttons']}>
-          {buttons.map((button, index) => (
-            <Button key={index} {...button} />
-          ))}
-        </div>
-      )}
     </Modal>
   );
 };

@@ -33,13 +33,15 @@ export interface Project {
   feasibility: string;
   goals?: string | null;
   impact_assessment: number | null;
-  linkdin?: string | null;
+  linkedin?: string | null;
   problem_statement: string;
   email?: string;
   solution: string;
   total_requested_amount: number | null;
-  cost_beakdown: string;
+  cost_breakdown: string;
   video?: string;
+  voluntery_contribution?: string;
+  socialCause: string;
 }
 
 export type ProjectRes = PaginateRes<Project>;

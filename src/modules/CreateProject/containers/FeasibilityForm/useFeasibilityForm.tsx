@@ -12,7 +12,7 @@ interface FormData {
 }
 
 const schema = yup.object().shape({
-  feasibility: yup.string(),
+  feasibility: yup.string().required(),
   video: yup.string().optional(),
 });
 
@@ -37,9 +37,13 @@ export const useFeasibilityForm = () => {
   });
 
   const feasibility = watch('feasibility') || '';
+  const video = watch('video') || '';
   const hasErrors = !isValid;
 
-  const goBack = () => navigate('/create/step-4');
+  const goBack = () => {
+    dispatch(setProjectData({ feasibility, video }));
+    navigate('/create/step-4');
+  };
   const nextStep = () => navigate('/create/step-6');
 
   const onSubmit = (data: FormData) => {
@@ -54,6 +58,7 @@ export const useFeasibilityForm = () => {
       errors,
       feasibility,
       hasErrors,
+      isValid,
     },
     operations: {
       goBack,

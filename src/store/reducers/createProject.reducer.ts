@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { string } from 'yup';
 
 export interface ProjectState {
   id?: string | null;
@@ -12,17 +13,18 @@ export interface ProjectState {
   country: string;
   cover_url: string;
   email?: string | null;
-  linkdin?: string | null;
+  linkedin?: string | null;
   category: string;
   problem_statement: string;
   solution: string;
-  total_requested_amount: number | null;
+  total_requested_amount?: number | null;
   feasibility: string;
   goals?: string;
   video?: string;
-  cost_beakdown: string;
+  cost_breakdown: string;
   voluntery_contribution: string;
-  impact_assessment: number | null;
+  impact_assessment: string;
+  impact_assessment_type: 'OPTION_A' | 'OPTION_B';
   mode?: 'create' | 'update';
 }
 
@@ -38,17 +40,18 @@ const initialState: ProjectState = {
   city: '',
   country: '',
   email: '',
-  linkdin: '',
+  linkedin: '',
   category: '',
   problem_statement: '',
   solution: '',
-  total_requested_amount: null,
   goals: '',
   video: '',
-  cost_beakdown: '',
+  cost_breakdown: '',
   voluntery_contribution: '',
   feasibility: '',
-  impact_assessment: null,
+  impact_assessment: '',
+  total_requested_amount: null,
+  impact_assessment_type: 'OPTION_A',
   mode: 'create',
 };
 

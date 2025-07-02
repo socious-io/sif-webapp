@@ -1,5 +1,5 @@
-import { formatVotingStartMessage } from 'src/core/convert-md-to-jsx';
 import { DateRangeStatus } from 'src/core/helpers/date-converter';
+import { formatVotingStartMessage } from 'src/core/helpers/date-helpers';
 import { translate } from 'src/core/helpers/utils';
 import AlertMessage from 'src/modules/General/components/AlertMessage';
 import Button from 'src/modules/General/components/Button';

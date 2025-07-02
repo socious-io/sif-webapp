@@ -18,5 +18,11 @@
   "connect-wallet": "Conectar billetera",
   "disconnect": "Desconectar",
   "copy-address": "Copiar dirección",
-  "no-wallet-alert": "No se detectó ninguna billetera Cardano. Por favor, instala una billetera Cardano como Lace, Eternl o Yoroi para continuar."
+  "no-wallet-alert": "No se detectó ninguna billetera Cardano. Por favor, instala una billetera Cardano como Lace, Eternl o Yoroi para continuar.",
+  "kyb": {
+    "title": "Verifica tu organización para crear un proyecto",
+    "subtitle": "Para iniciar un proyecto, completa una verificación única de tu organización en el Centro de Cuentas de Socious.",
+    "cancel": "Cancelar",
+    "continue": "Continuar con la Verificación"
+  }
 }

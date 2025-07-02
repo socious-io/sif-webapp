@@ -1,4 +1,4 @@
-import { toRelativeTime } from 'src/core/helpers/relative-time';
+import { toRelativeTime } from 'src/core/helpers/date-helpers';
 import { translate } from 'src/core/helpers/utils';
 import Icon from 'src/modules/General/components/Icon';
 import variables from 'src/styles/constants/_exports.module.scss';

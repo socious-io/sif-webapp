@@ -10,14 +10,14 @@ interface FormData {
   category: string;
   problem_statement: string;
   solution: string;
-  goals?: string;
+  goals: string;
 }
 
 const schema = yup.object().shape({
   category: yup.string().required('Project category is required'),
   problem_statement: yup.string().required('Problem statement is required'),
   solution: yup.string().required('Solution is required'),
-  goals: yup.string().optional(),
+  goals: yup.string().optional().required(),
 });
 
 export const useProjectCategoryForm = () => {
@@ -46,7 +46,16 @@ export const useProjectCategoryForm = () => {
   const solution = watch('solution') || '';
   const keyDeliverablesGoals = watch('goals') || '';
 
-  const goBack = () => navigate('/create/step-2');
+  const goBack = () => {
+    const values = {
+      category: projectCategory,
+      problem_statement: problemStatement,
+      solution: solution,
+      goals: keyDeliverablesGoals,
+    };
+    dispatch(setProjectData(values));
+    navigate('/create/step-2');
+  };
   const nextStep = () => navigate('/create/step-4');
 
   const setProjectCategory = (newValue: { value: string; label: string } | null) => {
@@ -65,6 +74,8 @@ export const useProjectCategoryForm = () => {
     );
     nextStep();
   };
+  const isSubmitDisabled = !isValid;
+
   return {
     data: {
       errors,
@@ -72,6 +83,7 @@ export const useProjectCategoryForm = () => {
       problemStatement,
       solution,
       keyDeliverablesGoals,
+      isSubmitDisabled,
     },
     operations: {
       goBack,

@@ -7,7 +7,7 @@ import { useFeasibilityForm } from './useFeasibilityForm';
 
 const FeasibilityForm: React.FC = () => {
   const {
-    data: { register, errors, feasibility },
+    data: { register, errors, feasibility, isValid },
     operations: { goBack, setValue, handleSubmit, onSubmit },
   } = useFeasibilityForm();
 
@@ -17,7 +17,7 @@ const FeasibilityForm: React.FC = () => {
         <RichTextEditor
           register={register}
           name="feasibility"
-          label="Feasibility and team (optional)"
+          label="Feasibility and team *"
           placeholder="Describe your project's timeline and major milestones"
           value={feasibility}
           setValue={setValue}
@@ -31,7 +31,14 @@ const FeasibilityForm: React.FC = () => {
           errors={errors['video']?.message ? [errors['video']?.message.toString()] : undefined}
         />
         <div className="flex flex-col items-stretch gap-3">
-          <Button color="primary" block type="submit" customStyle="mt-12" onClick={handleSubmit(onSubmit)}>
+          <Button
+            color="primary"
+            block
+            type="submit"
+            customStyle="mt-12"
+            onClick={handleSubmit(onSubmit)}
+            disabled={!isValid}
+          >
             {translate('continue-button')}
           </Button>
           <Button color="secondary" block variant="text" onClick={goBack}>

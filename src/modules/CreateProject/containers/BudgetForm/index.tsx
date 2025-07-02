@@ -1,13 +1,24 @@
 import { translate } from 'src/core/helpers/utils';
 import Button from 'src/modules/General/components/Button';
 import Input from 'src/modules/General/components/Input';
+import { RadioGroup } from 'src/modules/General/components/RadioGroup';
+import RichTextEditor from 'src/modules/General/components/RichTextEditor';
 
 import { useBudgetForm } from './useBudgetForm';
 
 const BudgetForm: React.FC = () => {
   const {
-    data: { register, errors, hasErrors },
-    operations: { goBack, handleSubmit, onSubmit },
+    data: {
+      register,
+      errors,
+      hasErrors,
+      costBreakdown,
+      impactAssessmentType,
+      impactAssessment,
+      impactOptions,
+      volunteryContribution,
+    },
+    operations: { goBack, handleSubmit, onSubmit, setValue },
   } = useBudgetForm();
 
   return (
@@ -26,31 +37,46 @@ const BudgetForm: React.FC = () => {
               : undefined
           }
         />
-        <Input
-          register={register}
-          name="cost_beakdown"
-          label="Cost breakdown*"
-          placeholder="Give us an itemized breakdown of intended goals, deliverables..."
-          customHeight="240px"
-          errors={errors['cost_breakdown']?.message ? [errors['cost_breakdown']?.message.toString()] : undefined}
+        <RadioGroup
+          contentClassName="text-sm"
+          label="Impact Assessment Type*"
+          name="impact_assessment_type"
+          items={impactOptions}
+          onChange={item =>
+            setValue('impact_assessment_type', item.value as 'OPTION_A' | 'OPTION_B', { shouldValidate: true })
+          }
+          defaultValue={impactAssessmentType}
+          errors={
+            errors['impact_assessment_type']?.message
+              ? [errors['impact_assessment_type']?.message.toString()]
+              : undefined
+          }
         />
-        <Input
-          register={register}
+        <RichTextEditor
           name="impact_assessment"
-          label="Impact assessment* "
-          placeholder="Allocate $1500 of your secured funds "
-          type="number"
-          required
+          label="Impact Assessment Details*"
+          placeholder="Please describe your impact assessment choice and include relevant details, names..."
+          value={impactAssessment}
+          setValue={setValue}
           errors={errors['impact_assessment']?.message ? [errors['impact_assessment']?.message.toString()] : undefined}
         />
-        <Input
-          register={register}
+        <RichTextEditor
+          name="cost_breakdown"
+          label="Cost Breakdown*"
+          placeholder="Give us an itemized breakdown of intended goals, deliverables..."
+          value={costBreakdown}
+          setValue={setValue}
+          errors={errors['cost_breakdown']?.message ? [errors['cost_breakdown']?.message.toString()] : undefined}
+        />
+        <RichTextEditor
           name="voluntery_contribution"
-          label="Voluntary contribution to matching pool (optional)"
+          label="Voluntary Contribution to Matching Pool (Optional)"
           placeholder="Contribute to the next round of Socious Fund"
+          value={volunteryContribution}
+          setValue={setValue}
           errors={
-            errors['voluntary_contribution']?.message
-              ? [errors['voluntary_contribution']?.message.toString()]
+            errors['voluntery_contribution']?.message
+              ? [errors['voluntery_contribution']?.message.toString()]
               : undefined
           }
         />

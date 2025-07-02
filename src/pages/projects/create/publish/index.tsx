@@ -25,10 +25,11 @@ export const Publish = () => {
       solution,
       goals,
       total_requested_amount,
-      cost_beakdown,
+      cost_breakdown,
       feasibility,
       video,
       social_cause,
+      voluntery_contribution,
     },
     operations: { navigate, onEditProject, onPublish },
   } = usePublish();
@@ -84,11 +85,15 @@ export const Publish = () => {
     { label: 'Solution', content: convertMarkdownToJSX(solution) },
     { label: 'Key Deliverables & Goals', content: goals ? convertMarkdownToJSX(goals) : '' },
     {
+      label: 'Voluntary Contribution',
+      content: voluntery_contribution ? convertMarkdownToJSX(voluntery_contribution) : 'N/A',
+    },
+    {
       label: 'Funding and budget',
       content: (
         <>
           <div>{`Total amount requested: ${total_requested_amount}`}</div>
-          {convertMarkdownToJSX(cost_beakdown)}
+          {convertMarkdownToJSX(cost_breakdown)}
         </>
       ),
     },
