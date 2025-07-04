@@ -38,14 +38,6 @@ const Header: React.FC = () => {
             color="info"
             variant="outlined"
             customStyle="h-[40px] text-sm font-semibold leading-5"
-            onClick={navigateRefer}
-          >
-            {translate('header-refer')}
-          </Button>
-          <Button
-            color="info"
-            variant="outlined"
-            customStyle="h-[40px] text-sm font-semibold leading-5"
             onClick={onCreate}
           >
             {translate('layout-action-button')}
