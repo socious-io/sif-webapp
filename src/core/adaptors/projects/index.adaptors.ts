@@ -97,6 +97,7 @@ export const getProjectAdaptor = async (projectId: string): Promise<AdaptorRes<P
       cost_breakdown: project.cost_breakdown,
       goals: project.goals,
       voluntery_contribution: project.voluntery_contribution,
+      impact_assessment: project.impact_assessment,
     };
     return {
       data,

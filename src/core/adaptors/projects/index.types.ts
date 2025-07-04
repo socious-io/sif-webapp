@@ -32,7 +32,7 @@ export interface Project {
   roundStatus?: DateRangeStatus;
   feasibility: string;
   goals?: string | null;
-  impact_assessment: number | null;
+  impact_assessment: string;
   linkedin?: string | null;
   problem_statement: string;
   email?: string;

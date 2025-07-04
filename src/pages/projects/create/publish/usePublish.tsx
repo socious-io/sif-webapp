@@ -30,6 +30,7 @@ export const usePublish = () => {
     video,
     mode,
     voluntery_contribution,
+    impact_assessment,
   } = projectState;
   const currentIdentity = useSelector<RootState, CurrentIdentity | undefined>(state =>
     state.identity.entities.find(identity => identity.current),
@@ -68,6 +69,7 @@ export const usePublish = () => {
       video,
       social_cause,
       voluntery_contribution,
+      impact_assessment,
     },
     operations: {
       navigate,
