@@ -38,14 +38,6 @@ const Header: React.FC = () => {
             color="info"
             variant="outlined"
             customStyle="h-[40px] text-sm font-semibold leading-5"
-            onClick={navigateRefer}
-          >
-            {translate('header-refer')}
-          </Button>
-          <Button
-            color="info"
-            variant="outlined"
-            customStyle="h-[40px] text-sm font-semibold leading-5"
             onClick={onCreate}
           >
             {translate('layout-action-button')}
@@ -57,13 +49,13 @@ const Header: React.FC = () => {
               img={image}
               accounts={accounts}
               iconItems={[
+                { iconName: 'stars-02', label: translate('header-refer'), onClick: navigateRefer },
+                { iconName: 'settings-01', label: translate('header-setting'), onClick: navigateSettings },
                 {
                   iconName: 'user-circle',
                   label: translate('header-support'),
                   onClick: () => (window.location.href = 'https://socious.org/#faq'),
                 },
-                { iconName: 'settings-01', label: translate('header-setting'), onClick: navigateSettings },
-                { iconName: 'stars-02', label: translate('header-refer'), onClick: navigateRefer },
                 { iconName: 'log-out-01', label: translate('header-logout'), onClick: onLogout },
               ]}
               createItem
