@@ -7,6 +7,8 @@ export const config = {
   refreshExpire: import.meta.env.VITE_REFRESH_EXPIRE,
   appBaseURL: import.meta.env.VITE_APP_URL,
   accountCenterURL: import.meta.env.VITE_ACCOUNT_CENTER_URL,
+  workURL: import.meta.env.VITE_WORK_URL,
+  verifyURL: import.meta.env.VITE_VERIFY_URL,
   dappENV: import.meta.env.VITE_DAPP_ENV,
   datadogAppId: import.meta.env.VITE_DATADOG_APP_ID,
   datadogClientToken: import.meta.env.VITE_DATADOG_CLIENT_TOKEN,

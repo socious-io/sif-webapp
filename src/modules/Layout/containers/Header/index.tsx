@@ -5,6 +5,7 @@ import Button from 'src/modules/General/components/Button';
 import ConfirmModal from 'src/modules/General/components/ConfirmModal';
 import FeaturedIcon from 'src/modules/General/components/FeaturedIcon';
 import IconDropDown from 'src/modules/General/components/IconDropDown';
+import NavPortal from 'src/modules/Layout/components/NavPortal';
 
 import { useHeader } from './useHeader';
 
@@ -25,22 +26,14 @@ const Header: React.FC = () => {
 
   return (
     <div className="w-full border-b border-b-Gray-light-mode-300 border-solid border-t-0 border-l-0 border-r-0">
-      <div className="max-w-[1280px] w-full h-[72px] flex items-center justify-between mx-auto px-4">
+      <div className="max-w-[1280px] w-full h-[72px] flex items-center justify-between mx-auto p-4">
         <Link to="/home" className="flex items-center gap-2">
           <img src={logo} alt="Socious Fund Logo" />
           <span className="hidden sm:block text-[20px] font-semibold leading-[30px] text-Brand-600">
             {translate('socious-fund')}
           </span>
         </Link>
-        <div className="flex gap-2 md:gap-4">
-          <Button
-            color="info"
-            variant="outlined"
-            customStyle="h-[40px] text-sm font-semibold leading-5"
-            onClick={navigateRefer}
-          >
-            {translate('header-refer')}
-          </Button>
+        <div className="flex items-center gap-2 md:gap-4">
           <Button
             color="info"
             variant="outlined"
@@ -49,19 +42,20 @@ const Header: React.FC = () => {
           >
             {translate('layout-action-button')}
           </Button>
+          <NavPortal />
           {accounts.length > 0 ? (
             <IconDropDown
               type={userType}
               img={image}
               accounts={accounts}
               iconItems={[
+                { iconName: 'stars-02', label: translate('header-refer'), onClick: navigateRefer },
+                { iconName: 'settings-01', label: translate('header-setting'), onClick: navigateSettings },
                 {
                   iconName: 'user-circle',
                   label: translate('header-support'),
                   onClick: () => (window.location.href = 'https://socious.org/#faq'),
                 },
-                { iconName: 'settings-01', label: translate('header-setting'), onClick: navigateSettings },
-                { iconName: 'stars-02', label: translate('header-refer'), onClick: navigateRefer },
                 { iconName: 'log-out-01', label: translate('header-logout'), onClick: onLogout },
               ]}
               createItem
