@@ -56,22 +56,14 @@ const VoteDetailCard: React.FC<VoteDetailCardProps> = ({
           >
             {isShared ? translate('projects-round-stats.link-copied') : translate('projects-round-stats.share-button')}
           </Button>
-          {
-            <>
-              {alreadyVoted ? (
-                <AlertMessage theme="warning" iconName="alert-circle" title={translate('vote-donate.already-voted')} />
-              ) : (
-                <>
-                  <Button color="primary" onClick={onVote} disabled={identityType === 'organizations'}>
-                    {translate('projects-round-stats.vote-button')}
-                  </Button>
-                  {identityType === 'organizations' && (
-                    <AlertMessage theme="warning" iconName="alert-circle" title={translate('vote-donate.strict-org')} />
-                  )}
-                </>
-              )}
-            </>
-          }
+          <>
+            <Button color="primary" onClick={onVote} disabled={identityType === 'organizations'}>
+              {alreadyVoted ? translate('vote-donate.donate-now-btn') : translate('projects-round-stats.vote-button')}
+            </Button>
+            {identityType === 'organizations' && (
+              <AlertMessage theme="warning" iconName="alert-circle" title={translate('vote-donate.strict-org')} />
+            )}
+          </>
         </div>
       )}
     </div>
