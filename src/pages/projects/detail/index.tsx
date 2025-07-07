@@ -244,11 +244,8 @@ export const ProjectDetail = () => {
             roundStats={detail.roundStats}
             isOwner={isOwner}
             alreadyVoted={detail.voted}
-            roundStatus={detail.roundStatus}
-            onVote={onVote}
-            votingStartAt={round?.voting_start_at}
-            showResult={isOwner}
             identityType={identityType}
+            onVote={onVote}
           />
         )}
       </div>
