@@ -56,7 +56,7 @@ const VoteDetailCard: React.FC<VoteDetailCardProps> = ({
           </Button>
           {
             <>
-              {roundStatus !== DateRangeStatus.DURING || alreadyVoted ? (
+              {roundStatus !== DateRangeStatus.DURING ? (
                 <AlertMessage
                   theme="warning"
                   iconName="alert-circle"
@@ -65,13 +65,15 @@ const VoteDetailCard: React.FC<VoteDetailCardProps> = ({
                       ? translate('vote-donate.end-voted')
                       : roundStatus === DateRangeStatus.BEFORE
                         ? `${translate('vote-donate.not-started')} ${formatVotingStartMessage(votingStartAt as Date)}`
-                        : translate('vote-donate.already-voted')
+                        : ''
                   }
                 />
               ) : (
                 <>
                   <Button color="primary" onClick={onVote} disabled={identityType === 'organizations'}>
-                    {translate('projects-round-stats.vote-button')}
+                    {alreadyVoted
+                      ? translate('vote-donate.donate-now-btn')
+                      : translate('projects-round-stats.vote-button')}
                   </Button>
                   {identityType === 'organizations' && (
                     <AlertMessage theme="warning" iconName="alert-circle" title={translate('vote-donate.strict-org')} />

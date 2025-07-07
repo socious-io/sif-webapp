@@ -9,7 +9,7 @@ import { RootState } from 'src/store';
 export const useVoteDonateCard = () => {
   const navigate = useNavigate();
   const { projectDetail: detail } = useLoaderData() as { projectDetail: Project };
-  const [selectedCard, setSelectedCard] = useState('vote');
+  const [selectedCard, setSelectedCard] = useState(detail.voted ? 'donate' : 'vote');
   const [openSuccessModal, setOpenSuccessModal] = useState(false);
   const [currentDonateInfo, setCurrentDonateInfo] = useState<DonateReq | null>(null);
   const [loading, setLoading] = useState(false);
@@ -69,6 +69,7 @@ export const useVoteDonateCard = () => {
       loading,
       // showConfirmationModal,
       selectedPayment,
+      alreadyVoted: detail.voted,
     },
     operations: {
       setSelectedCard,
