@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { CURRENCIES } from 'src/constants/CURRENCIES';
 import { DonateReq } from 'src/core/adaptors';
 import { CreditCardProps } from 'src/modules/General/components/CreditCard/index.types';
 export const useFiatDonation = (onDonate: (data: DonateReq) => void) => {
@@ -12,6 +13,12 @@ export const useFiatDonation = (onDonate: (data: DonateReq) => void) => {
   };
 
   const onSubmit = async () => {
+    const selectedCurrency = CURRENCIES.find(currency => currency.value === 'USD');
+    if (!selectedCurrency) {
+      throw new Error('Selected currency not found');
+    }
+    const rate = await selectedCurrency.rateConversionFunc(Number(donation));
+
     if (card && donation) {
       await onDonate({
         donate: Number(donation),
@@ -19,6 +26,7 @@ export const useFiatDonation = (onDonate: (data: DonateReq) => void) => {
         type: 'FIAT',
         token: card.id,
         currency: 'USD',
+        rate,
       });
     }
   };

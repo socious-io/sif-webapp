@@ -54,4 +54,5 @@ export type DonateReq = {
   wallet_address?: string;
   type?: 'FIAT' | 'CRYPTO';
   token?: string;
+  rate: number;
 };

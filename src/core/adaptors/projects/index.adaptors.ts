@@ -121,6 +121,7 @@ export const voteOrDonateProjectAdaptor = async (
           payment_type: donatePayload.type,
           card_token: donatePayload.token,
           currency: donatePayload.currency,
+          rate: donatePayload.rate,
         };
         await donate(projectId, payload);
       } else {
@@ -130,6 +131,7 @@ export const voteOrDonateProjectAdaptor = async (
           currency: donatePayload.currency,
           txid: donatePayload.transactionHash,
           wallet_address: donatePayload.wallet_address,
+          rate: donatePayload.rate,
         };
         await donate(projectId, payload);
       }

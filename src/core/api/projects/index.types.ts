@@ -45,6 +45,7 @@ export type DonationReq = {
   wallet_address?: string;
   payment_type?: 'FIAT' | 'CRYPTO';
   card_token?: string;
+  rate: number;
 };
 
 export interface Comment {
