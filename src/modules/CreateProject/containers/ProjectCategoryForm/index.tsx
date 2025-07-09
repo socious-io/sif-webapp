@@ -33,7 +33,7 @@ const ProjectCategoryForm: React.FC = () => {
           placeholder="Describe the problem are you addressing..."
           value={problemStatement}
           setValue={setValue}
-          errors={errors['problemStatement']?.message ? [errors['problemStatement']?.message.toString()] : undefined}
+          errors={errors['problem_statement']?.message ? [errors['problem_statement']?.message.toString()] : undefined}
         />
         <RichTextEditor
           name="solution"
@@ -49,9 +49,7 @@ const ProjectCategoryForm: React.FC = () => {
           placeholder="Give us an itemized breakdown of intended goals, deliverables, and timeline, e.g..."
           value={keyDeliverablesGoals}
           setValue={setValue}
-          errors={
-            errors['keyDeliverablesGoals']?.message ? [errors['keyDeliverablesGoals']?.message.toString()] : undefined
-          }
+          errors={errors['goals']?.message ? [errors['goals']?.message.toString()] : undefined}
         />
         <div className="flex flex-col items-stretch gap-3">
           <Button

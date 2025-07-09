@@ -21,7 +21,7 @@ const FeasibilityForm: React.FC = () => {
           placeholder="Describe your project's timeline and major milestones"
           value={feasibility}
           setValue={setValue}
-          errors={errors['timeline']?.message ? [errors['timeline']?.message.toString()] : undefined}
+          errors={errors['feasibility']?.message ? [errors['feasibility']?.message.toString()] : undefined}
         />
         <Input
           register={register}
