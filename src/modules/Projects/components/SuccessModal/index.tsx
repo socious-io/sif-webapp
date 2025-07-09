@@ -53,10 +53,10 @@ const SuccessModal: React.FC<SuccessModalProps> = ({
           <p>
             Your donation of <span className="font-medium text-Gray-light-mode-900">800.00 ADA ($475.77 USD)</span> will
             be matched by an estimated $300.00 (this amount may change based on future voting results), resulting in a
-            total contribution of $87577 to support this project. Your generosity and commitment to this cause are
+            total contribution of $875.77 to support this project. Your generosity and commitment to this cause are
             greatly appreciated. Together, we are making a meaningful difference in the lives of those who need it most.
             Thank you for being a part of our community and helping us drive positive change.
-            {translate('vote-donate.success-modal.your-donation-of')}
+            {/* {translate('vote-donate.success-modal.your-donation-of')} */}
             {/* <span className="font-medium text-Gray-light-mode-900">
               {` ${donateInfo.donate} ${donateInfo.currency} `}
             </span> */}
