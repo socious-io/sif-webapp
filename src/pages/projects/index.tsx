@@ -9,8 +9,7 @@ import { RootState } from 'src/store';
 
 export const Projects = () => {
   const round = useSelector((state: RootState) => state.round.round);
-
-  const roundIsClosed = getDaysUntil(round?.voting_end_at as string) <= 0;
+  const roundIsClosed = round && getDaysUntil(round.voting_end_at) <= 0;
 
   const breadcrumbs = [
     { iconName: 'home-line', label: '', link: '/' },

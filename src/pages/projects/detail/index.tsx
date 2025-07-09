@@ -1,5 +1,5 @@
 import { Divider } from '@mui/material';
-import { convertMarkdownToJSX } from 'src/core/convert-md-to-jsx';
+import { convertMarkdownToJSX } from 'src/core/helpers/convert-md-to-jsx';
 import { getYouTubeEmbedUrl, translate } from 'src/core/helpers/utils';
 // import { AlertModal } from 'src/modules/General/components/AlertModal';
 import AvatarLabelGroup from 'src/modules/General/components/AvatarLabelGroup';
@@ -105,7 +105,7 @@ export const ProjectDetail = () => {
       ),
     },
   ];
-  console.log('GOals', detail.goals);
+
   const contents = [
     { label: 'Project Description', content: convertMarkdownToJSX(detail.description) },
     { label: 'Problem Statement', content: convertMarkdownToJSX(detail.problem_statement) },
@@ -117,7 +117,7 @@ export const ProjectDetail = () => {
     },
     {
       label: 'Voluntary Contribution',
-      content: detail?.voluntery_contribution ? convertMarkdownToJSX(detail?.voluntery_contribution) : 'N/A',
+      content: detail?.voluntery_contribution ? convertMarkdownToJSX(detail.voluntery_contribution) : 'N/A',
     },
     {
       label: 'Funding and budget',

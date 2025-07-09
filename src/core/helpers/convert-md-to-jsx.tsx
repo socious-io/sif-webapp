@@ -1,5 +1,4 @@
 import Markdown from 'markdown-to-jsx';
-import PropTypes from 'prop-types';
 import { ReactNode } from 'react';
 
 interface CustomLinkProps {
@@ -11,11 +10,6 @@ const CustomLink: React.FC<CustomLinkProps> = ({ children, href }) => (
     {children}
   </a>
 );
-
-CustomLink.propTypes = {
-  children: PropTypes.node.isRequired,
-  href: PropTypes.string.isRequired,
-};
 
 const options = {
   overrides: {

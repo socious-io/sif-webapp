@@ -1,7 +1,7 @@
 import { PROJECT_CATEGORIES } from 'src/constants/PROJECT_CATEGORIES';
+import { OptionType } from 'src/core/adaptors';
 import { translate } from 'src/core/helpers/utils';
 import Button from 'src/modules/General/components/Button';
-import Input from 'src/modules/General/components/Input';
 import RichTextEditor from 'src/modules/General/components/RichTextEditor';
 import SearchDropdown from 'src/modules/General/components/SearchDropdown';
 
@@ -23,7 +23,7 @@ const ProjectCategoryForm: React.FC = () => {
           placeholder="Please select a category"
           options={PROJECT_CATEGORIES}
           isSearchable={false}
-          onChange={setProjectCategory}
+          onChange={value => setProjectCategory(value as OptionType)}
           value={PROJECT_CATEGORIES.find(opt => opt.value === projectCategory) || null}
           errors={errors['projectCategory']?.message ? [errors['projectCategory']?.message.toString()] : undefined}
         />

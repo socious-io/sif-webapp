@@ -18,7 +18,7 @@ export const useLocationCauseForm = () => {
   const items = socialCausesToCategoryAdaptor();
   const options: CardRadioButtonItem[] = locationOptions.map(option => {
     return {
-      id: option.id,
+      id: option.id.toString(),
       value: option.value,
       title: option.title,
       disabled: false,
