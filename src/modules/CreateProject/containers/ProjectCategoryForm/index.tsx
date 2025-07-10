@@ -18,9 +18,9 @@ const ProjectCategoryForm: React.FC = () => {
       <form className="flex flex-col items-stretch gap-8">
         <SearchDropdown
           id="projectCategory"
-          label="Project category*"
+          label="Project Track*"
           className="mb-5"
-          placeholder="Please select a category"
+          placeholder="Please select a Track"
           options={PROJECT_CATEGORIES}
           isSearchable={false}
           onChange={value => setProjectCategory(value as OptionType)}
