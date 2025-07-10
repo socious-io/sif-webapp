@@ -16,7 +16,7 @@ export interface Project {
   status: ProjectStatus;
   wallet_address: string;
   wallet_env: string;
-  total_donations: number;
+  total_donations: { [currency: string]: number };
   total_votes: number;
   user_voted: boolean;
   round: Round;
