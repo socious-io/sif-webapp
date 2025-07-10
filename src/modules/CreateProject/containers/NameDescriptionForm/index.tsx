@@ -19,7 +19,7 @@ const NameDescriptionForm: React.FC = () => {
           label={translate('project-name-label') + '*'}
           placeholder={translate('project-name-placeholder')}
           required
-          errors={errors['name']?.message ? [errors['name']?.message.toString()] : undefined}
+          errors={errors['title']?.message ? [errors['title']?.message.toString()] : undefined}
         />
         <Input
           register={register}

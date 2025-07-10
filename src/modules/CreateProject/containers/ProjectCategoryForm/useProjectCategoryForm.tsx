@@ -2,6 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { OptionType } from 'src/core/adaptors';
 import { RootState } from 'src/store';
 import { setProjectData } from 'src/store/reducers/createProject.reducer';
 import * as yup from 'yup';
@@ -58,8 +59,8 @@ export const useProjectCategoryForm = () => {
   };
   const nextStep = () => navigate('/create/step-4');
 
-  const setProjectCategory = (newValue: { value: string; label: string } | null) => {
-    setValue('category', newValue ? newValue.value : '', { shouldValidate: true });
+  const setProjectCategory = (newValue: OptionType) => {
+    setValue('category', newValue.value, { shouldValidate: true });
   };
 
   const onSubmit = (data: FormData) => {

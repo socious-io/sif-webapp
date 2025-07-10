@@ -1,39 +1,41 @@
-import { Identity, PaginateRes, PaginateResV3, Round } from '..';
+import { Identity, PaginateResV3, Round } from '..';
 import { Media } from '../media/index.types';
+
+export type ProjectStatus = 'ACTIVE' | 'DRAFT';
 
 export interface Project {
   id: string;
   title: string;
   description: string;
-  status: 'ACTIVE' | 'DRAFT';
   city: string;
   country: string;
   social_cause: string;
   identity: Identity;
   cover: Media;
+  website: string;
+  status: ProjectStatus;
   wallet_address: string;
-  website?: string;
   wallet_env: string;
-  created_at: Date;
-  updated_at: Date;
-  expires_at: Date | null;
-  deleted_at: Date | null;
   total_donations: number;
   total_votes: number;
   user_voted: boolean;
   round: Round;
   feasibility: string;
-  goals: string | null;
-  impact_assessment: number | null;
-  linkedin?: string | null;
+  goals: string;
+  impact_assessment: string;
+  linkedin: string;
   problem_statement: string;
-  email?: string;
-  solution?: string;
-  total_requested_amount: number | null;
+  email: string;
+  solution: string;
+  total_requested_amount: number;
   video: string;
   cost_breakdown: string;
   category: string;
   voluntery_contribution: string;
+  created_at: Date;
+  updated_at: Date;
+  expires_at: Date;
+  deleted_at: Date;
 }
 
 export type ProjectsRes = PaginateResV3<Project>;

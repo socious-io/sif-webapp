@@ -1,4 +1,4 @@
-import { convertMarkdownToJSX } from 'src/core/convert-md-to-jsx';
+import { convertMarkdownToJSX } from 'src/core/helpers/convert-md-to-jsx';
 
 import styles from './index.module.scss';
 import { AlertMessageProps } from './index.types';

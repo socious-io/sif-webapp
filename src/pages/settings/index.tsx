@@ -1,7 +1,7 @@
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useState } from 'react';
 import { translate } from 'src/core/helpers/utils';
 import HorizontalTabs from 'src/modules/General/components/HorizontalTabs';
-import SearchDropdown from 'src/modules/General/components/SearchDropdown';
+// import SearchDropdown from 'src/modules/General/components/SearchDropdown';
 import Language from 'src/modules/Settings/components/Language';
 export const Settings = () => {
   const [content, setContent] = useState<ReactNode>(<Language />);
@@ -13,13 +13,11 @@ export const Settings = () => {
       default: true,
     },
   ];
+
   const setValue = value => {
     if (value.value === 'Language') return setContent(<Language />);
   };
 
-  // tabs will be added later
-  // const items: any[] = [
-  // ];
   return (
     <>
       <div className="container">

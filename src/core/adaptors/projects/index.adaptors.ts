@@ -10,7 +10,7 @@ import { removedEmptyProps } from 'src/core/helpers/objects-arrays';
 import { translate } from 'src/core/helpers/utils';
 import { ProjectState } from 'src/store/reducers/createProject.reducer';
 
-import { AdaptorRes, DonateReq, getIdentityMeta, Project, ProjectRes, SuccessRes } from '..';
+import { AdaptorRes, DonateReq, getIdentityMeta, Project, ProjectReq, ProjectRes, SuccessRes } from '..';
 
 export const getProjectsAdaptor = async (
   page = 1,
@@ -24,7 +24,7 @@ export const getProjectsAdaptor = async (
       return {
         id: project.id,
         coverImg: project.cover?.url || '',
-        category: translate(project.social_cause) || SOCIAL_CAUSES[project.social_cause]?.label,
+        socialCause: translate(project.social_cause) || SOCIAL_CAUSES[project.social_cause]?.label,
         title: project.title,
         description: cleanMarkdown(project.description),
         creator: {
@@ -33,12 +33,12 @@ export const getProjectsAdaptor = async (
           name,
           img,
         },
-        feasibility: project.feasibility || '',
-        impact_assessment: project.impact_assessment || null,
-        problem_statement: project.problem_statement || '',
-        solution: project.solution || '',
-        total_requested_amount: project.total_requested_amount || null,
-        cost_breakdown: project.cost_breakdown || '',
+        feasibility: project.feasibility,
+        impact_assessment: project.impact_assessment,
+        problem_statement: project.problem_statement,
+        solution: project.solution,
+        total_requested_amount: project.total_requested_amount,
+        cost_breakdown: project.cost_breakdown,
       };
     });
     return {
@@ -64,7 +64,7 @@ export const getProjectAdaptor = async (projectId: string): Promise<AdaptorRes<P
       id: project.id,
       coverImg: project.cover?.url || '',
       socialCause: translate(project.social_cause) || SOCIAL_CAUSES[project.social_cause]?.label,
-      category: categoriesAdaptor(project.category),
+      category: categoriesAdaptor(project.category) || '',
       title: project.title,
       description: project.description,
       creator: { id: project.identity.id, type: type as IdentityType, name, img, username },
@@ -83,21 +83,18 @@ export const getProjectAdaptor = async (projectId: string): Promise<AdaptorRes<P
         },
         { id: '2', donated_identity: { name: 'Anonymous' }, donated_price: '200.00 ADA', date: new Date().toString() },
       ],
-      created_at: project.created_at,
-      updated_at: project.updated_at,
-      status: project.status,
-      total_requested_amount: project.total_requested_amount || null,
-      impact_assessment: project.impact_assessment || null,
+      total_requested_amount: project.total_requested_amount,
+      impact_assessment: project.impact_assessment,
       problem_statement: project.problem_statement,
-      solution: project.solution || '',
+      solution: project.solution,
       feasibility: project.feasibility,
       video: project.video,
-      wallet_address: project.wallet_address,
-      wallet_env: project.wallet_env,
       cost_breakdown: project.cost_breakdown,
       goals: project.goals,
       voluntery_contribution: project.voluntery_contribution,
-      impact_assessment: project.impact_assessment,
+      status: project.status,
+      wallet_address: project.wallet_address,
+      wallet_env: project.wallet_env,
     };
     return {
       data,
@@ -145,9 +142,9 @@ export const voteOrDonateProjectAdaptor = async (
   }
 };
 
-export const createProjectAdaptor = async (project): Promise<AdaptorRes<Project>> => {
+export const createProjectAdaptor = async (project: ProjectReq): Promise<AdaptorRes<Project>> => {
   try {
-    const newProject = await createProjects(removedEmptyProps(project) as Partial<Project>);
+    const newProject = await createProjects(removedEmptyProps(project) as Partial<ProjectReq>);
     return { data: newProject, error: null };
   } catch (error) {
     console.error('Error in creating project: ', error);
@@ -155,9 +152,9 @@ export const createProjectAdaptor = async (project): Promise<AdaptorRes<Project>
   }
 };
 
-export const editProjectAdaptor = async (project): Promise<AdaptorRes<Project>> => {
+export const editProjectAdaptor = async (project: ProjectReq): Promise<AdaptorRes<Project>> => {
   try {
-    const newProject = await editProjects(project.id, removedEmptyProps(project) as Partial<Project>);
+    const newProject = await editProjects(project.id, removedEmptyProps(project) as Partial<ProjectReq>);
     return { data: newProject, error: null };
   } catch (error) {
     console.error('Error in editing project: ', error);
@@ -182,27 +179,27 @@ export const getEditProjectAdaptor = async (projectId: string): Promise<AdaptorR
     const project = await getProject(projectId);
 
     const data = {
-      title: project.title || '',
+      title: project.title,
       wallet_address: project.wallet_address || '',
       cover_id: project.cover.id || '',
-      website: project.website || null,
-      description: project.description || '',
-      social_cause: project.social_cause || '',
+      website: project.website || '',
+      description: project.description,
+      social_cause: project.social_cause,
       city: project.city || '',
       country: project.country || '',
       cover_url: project.cover?.url || '',
-      email: project.email || null,
-      linkedin: project.linkedin || null,
-      category: project.category || '',
-      problem_statement: project.problem_statement || '',
-      solution: project.solution || '',
-      total_requested_amount: project.total_requested_amount || null,
-      feasibility: project.feasibility || '',
-      goals: project.goals || '',
+      email: project.email,
+      linkedin: project.linkedin || '',
+      category: project.category,
+      problem_statement: project.problem_statement,
+      solution: project.solution,
+      total_requested_amount: project.total_requested_amount,
+      feasibility: project.feasibility,
+      goals: project.goals,
       video: project.video || '',
-      cost_breakdown: project.cost_breakdown || '',
+      cost_breakdown: project.cost_breakdown,
       voluntery_contribution: project.voluntery_contribution || '',
-      impact_assessment: project.impact_assessment || null,
+      impact_assessment: project.impact_assessment,
     };
 
     return {

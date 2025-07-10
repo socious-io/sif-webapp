@@ -2,14 +2,15 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { ImpactAssessmentType } from 'src/core/adaptors';
 import { RootState } from 'src/store';
 import { setProjectData } from 'src/store/reducers/createProject.reducer';
 import * as yup from 'yup';
 
 interface FormData {
-  total_requested_amount: number | null;
+  total_requested_amount: number;
   cost_breakdown: string;
-  impact_assessment_type: 'OPTION_A' | 'OPTION_B';
+  impact_assessment_type: ImpactAssessmentType;
   impact_assessment: string;
   voluntery_contribution?: string;
 }
@@ -17,12 +18,14 @@ interface FormData {
 const schema = yup.object().shape({
   total_requested_amount: yup
     .number()
-    .nullable()
     .typeError('Total amount must be a number')
     .positive('Total amount must be a positive number')
     .required('Total amount is required'),
-  cost_breakdown: yup.string(),
-  impact_assessment_type: yup.string().required('Impact assessment type is required'),
+  cost_breakdown: yup.string().required('Cost breakdown type is required'),
+  impact_assessment_type: yup
+    .mixed<ImpactAssessmentType>()
+    .oneOf(['OPTION_A', 'OPTION_B'], 'Invalid impact assessment type')
+    .required('Impact assessment type is required'),
   impact_assessment: yup.string().required('Impact assessment details are required'),
   voluntery_contribution: yup.string().optional(),
 });
@@ -61,7 +64,7 @@ export const useBudgetForm = () => {
 
   const hasErrors = !isValid;
   const costBreakdown = watch('cost_breakdown') || '';
-  const impactAssessmentType = watch('impact_assessment_type') || '';
+  const impactAssessmentType = watch('impact_assessment_type') || 'OPTION_A';
   const impactAssessment = watch('impact_assessment') || '';
   const volunteryContribution = watch('voluntery_contribution') || '';
 

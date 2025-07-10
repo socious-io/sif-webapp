@@ -1,7 +1,7 @@
 import { PROJECT_CATEGORIES } from 'src/constants/PROJECT_CATEGORIES';
+import { OptionType } from 'src/core/adaptors';
 import { translate } from 'src/core/helpers/utils';
 import Button from 'src/modules/General/components/Button';
-import Input from 'src/modules/General/components/Input';
 import RichTextEditor from 'src/modules/General/components/RichTextEditor';
 import SearchDropdown from 'src/modules/General/components/SearchDropdown';
 
@@ -23,7 +23,7 @@ const ProjectCategoryForm: React.FC = () => {
           placeholder="Please select a category"
           options={PROJECT_CATEGORIES}
           isSearchable={false}
-          onChange={setProjectCategory}
+          onChange={value => setProjectCategory(value as OptionType)}
           value={PROJECT_CATEGORIES.find(opt => opt.value === projectCategory) || null}
           errors={errors['projectCategory']?.message ? [errors['projectCategory']?.message.toString()] : undefined}
         />
@@ -33,7 +33,7 @@ const ProjectCategoryForm: React.FC = () => {
           placeholder="Describe the problem are you addressing..."
           value={problemStatement}
           setValue={setValue}
-          errors={errors['problemStatement']?.message ? [errors['problemStatement']?.message.toString()] : undefined}
+          errors={errors['problem_statement']?.message ? [errors['problem_statement']?.message.toString()] : undefined}
         />
         <RichTextEditor
           name="solution"
@@ -49,9 +49,7 @@ const ProjectCategoryForm: React.FC = () => {
           placeholder="Give us an itemized breakdown of intended goals, deliverables, and timeline, e.g..."
           value={keyDeliverablesGoals}
           setValue={setValue}
-          errors={
-            errors['keyDeliverablesGoals']?.message ? [errors['keyDeliverablesGoals']?.message.toString()] : undefined
-          }
+          errors={errors['goals']?.message ? [errors['goals']?.message.toString()] : undefined}
         />
         <div className="flex flex-col items-stretch gap-3">
           <Button

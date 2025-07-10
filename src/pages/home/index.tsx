@@ -84,15 +84,13 @@ export const Home = () => {
               </div>
               <div className="flex-1 flex flex-col gap-1 text-sm text-Gray-light-mode-600">
                 <span className="text-4xl md:text-5xl font-semibold text-Brand-700">
-                  {getDaysUntil(round?.submission_end_at as string) > 0
-                    ? getDaysUntil(round?.submission_end_at as string)
-                    : 0}
+                  {round && getDaysUntil(round.submission_end_at) > 0 ? getDaysUntil(round.submission_end_at) : 0}
                 </span>
                 {translate('home-days-left-to-submit')}
               </div>
               <div className="flex-1 flex flex-col gap-1 text-sm text-Gray-light-mode-600">
                 <span className="text-4xl md:text-5xl font-semibold text-Brand-700">
-                  {getDaysUntil(round?.voting_end_at as string) > 0 ? getDaysUntil(round?.voting_end_at as string) : 0}
+                  {round && getDaysUntil(round.voting_end_at) > 0 ? getDaysUntil(round.voting_end_at) : 0}
                 </span>
                 {translate('home-days-left-to-vote')}
               </div>

@@ -3,7 +3,9 @@ import { useState, useEffect } from 'react';
 import { config } from 'src/config';
 import { translate } from 'src/core/helpers/utils';
 
-export const useAddCardModal = (open: boolean, handleClose: () => void, onSelectCard) => {
+import { Card } from './index.types';
+
+export const useAddCardModal = (open: boolean, handleClose: () => void, onSelectCard: (card: Card) => void) => {
   const [stripe, setStripe] = useState<Stripe | null>(null);
   const [card, setCard] = useState<StripeCardElement | null>(null);
   const [openErrorModal, setOpenErrorModal] = useState(false);

@@ -15,7 +15,6 @@ export const usePublish = () => {
   const {
     title,
     description,
-    city,
     country,
     social_cause,
     website,

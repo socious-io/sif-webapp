@@ -6,7 +6,7 @@ import { ProjectCardProps } from './index.types';
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
   coverImg,
-  category,
+  socialCause,
   title,
   description,
   creator,
@@ -22,7 +22,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       <img src={coverImg} width="100%" height={144} className="object-cover" />
       <div className="h-[calc(100%-9rem)] flex flex-col justify-between gap-8 p-5 md:px-6 md:py-8">
         <div className="flex flex-col items-stretch gap-1">
-          <span className="font-semibold leading-6 text-Brand-600">{category}</span>
+          <span className="font-semibold leading-6 text-Brand-600">{socialCause}</span>
           <span className="text-2xl font-medium leading-8 text-Gray-light-mode-900">{title}</span>
           <ExpandableText
             text={description}

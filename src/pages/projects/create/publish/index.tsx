@@ -1,6 +1,6 @@
 import { Divider } from '@mui/material';
 import { categoriesAdaptor } from 'src/constants/PROJECT_CATEGORIES';
-import { convertMarkdownToJSX } from 'src/core/convert-md-to-jsx';
+import { convertMarkdownToJSX } from 'src/core/helpers/convert-md-to-jsx';
 import { getYouTubeEmbedUrl, translate } from 'src/core/helpers/utils';
 import AvatarLabelGroup from 'src/modules/General/components/AvatarLabelGroup';
 import BackLink from 'src/modules/General/components/BackLink';
@@ -43,9 +43,9 @@ export const Publish = () => {
           avatarSize="3rem"
           account={{
             id: currentIdentity?.id || '',
-            name: currentIdentity?.name,
+            name: currentIdentity?.name || '',
             username: currentIdentity?.username || '',
-            img: currentIdentity?.img,
+            img: currentIdentity?.img || '',
             type: 'organizations',
           }}
         />
