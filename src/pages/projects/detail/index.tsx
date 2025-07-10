@@ -14,6 +14,7 @@ import Link from 'src/modules/General/components/Link';
 import VerticalTabs from 'src/modules/General/components/VerticalTabs';
 import VoteDetailCard from 'src/modules/Projects/components/VoteDetailCard';
 import CommentSection from 'src/modules/Projects/containers/CommentSection';
+import DonationsList from 'src/modules/Projects/containers/DonationsList';
 import variables from 'src/styles/constants/_exports.module.scss';
 
 import { useProjectDetail } from './useProjectDetail';
@@ -105,7 +106,6 @@ export const ProjectDetail = () => {
       ),
     },
   ];
-  console.log('GOals', detail.goals);
   const contents = [
     { label: 'Project Description', content: convertMarkdownToJSX(detail.description) },
     { label: 'Problem Statement', content: convertMarkdownToJSX(detail.problem_statement) },
@@ -164,6 +164,7 @@ export const ProjectDetail = () => {
         </div>
       ),
     },
+    { label: 'Donations', content: <DonationsList projectId={projectId} /> },
   ];
 
   return (
