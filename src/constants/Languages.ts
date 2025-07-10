@@ -6,7 +6,7 @@ export const LANGUAGES: OptionType[] = [
     label: 'English (US)',
   },
   {
-    value: 'jp',
+    value: 'ja',
     label: 'Japanese 日本語',
   },
   {
@@ -14,7 +14,7 @@ export const LANGUAGES: OptionType[] = [
     label: 'Spanish Español',
   },
   {
-    value: 'kr',
+    value: 'ko',
     label: 'Korean 한국어',
   },
   {
@@ -22,7 +22,7 @@ export const LANGUAGES: OptionType[] = [
     label: 'Arabic العربية',
   },
   {
-    value: 'zh',
+    value: 'zh-CN',
     label: 'Chinese 中文',
   },
   {

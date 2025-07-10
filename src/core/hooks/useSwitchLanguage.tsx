@@ -4,14 +4,13 @@ import { LANGUAGES } from 'src/constants/Languages';
 
 const useSwitchLanguage = (defaultLanguage = 'en') => {
   const [selectedLanguage, setSelectedLanguage] = useState(() => {
-    return localStorage.getItem('language') || defaultLanguage;
+    return localStorage.getItem('i18nextLng') || defaultLanguage;
   });
 
   const switchLanguage = language => {
     if (LANGUAGES.map(lang => lang.value).includes(language)) {
       setSelectedLanguage(language);
       i18next.changeLanguage(language);
-      localStorage.setItem('language', language);
       window.location.reload();
     } else {
       console.warn(`Language '${language}' is not supported.`);
