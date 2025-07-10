@@ -48,6 +48,7 @@ export type DonationReq = {
   payment_type?: 'FIAT' | 'CRYPTO';
   card_token?: string;
   rate: number;
+  anonymous?: boolean;
 };
 
 export interface Comment {
@@ -78,3 +79,41 @@ export interface CommentReq {
   content: string;
   parent_id?: string;
 }
+
+export interface Donation {
+  amount: number;
+  anonymous: boolean;
+  created_at: string;
+  currency: string;
+  id: string;
+  project_id: string;
+  rate: number;
+  release_transaction_id: string | null;
+  status: string;
+  transaction_id: string | null;
+  updated_at: string;
+  user: {
+    address: string | null;
+    avatar: string | null;
+    city: string | null;
+    country: string | null;
+    cover: string | null;
+    created_at: string;
+    deleted_at: string | null;
+    donates: number;
+    email: string;
+    first_name: string;
+    id: string;
+    identity_verified_at: string | null;
+    impact_points: number;
+    language: string | null;
+    last_name: string;
+    project_supported: number;
+    referred_by: string | null;
+    stripe_customer_id: string | null;
+    updated_at: string;
+    username: string;
+    user_id: string;
+  };
+}
+export type DonationRes = PaginateResV3<Donation>;

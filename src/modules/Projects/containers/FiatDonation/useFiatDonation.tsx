@@ -27,6 +27,7 @@ export const useFiatDonation = (onDonate: (data: DonateReq) => void) => {
         token: card.id,
         currency: 'USD',
         rate,
+        anonymous: preventDisplayName,
       });
     }
   };
