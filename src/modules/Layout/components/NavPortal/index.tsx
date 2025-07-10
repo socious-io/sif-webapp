@@ -1,5 +1,4 @@
 import { useRef, useState } from 'react';
-import fundLogo from 'src/assets/logo/logo.svg';
 import workLogo from 'src/assets/logo/socious-logo.svg';
 import verifyLogo from 'src/assets/logo/verify-logo.svg';
 import { config } from 'src/config';
@@ -23,11 +22,6 @@ const NavPortal = () => {
       name: 'Verify',
       logo: verifyLogo,
       link: config.verifyURL,
-    },
-    {
-      name: 'Fund',
-      logo: fundLogo,
-      link: config.appBaseURL,
     },
   ];
 
