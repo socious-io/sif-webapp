@@ -29,7 +29,8 @@ const BudgetForm: React.FC = () => {
           name="total_requested_amount"
           type="number"
           label="Total Amount Requested*"
-          placeholder="Enter the total amount needed for your project"
+          placeholder="Total amount needed for project"
+          className="placeholder:text-sm sm:placeholder:text-base"
           required
           errors={
             errors['total_requested_amount']?.message
