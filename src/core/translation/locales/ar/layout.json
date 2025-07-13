@@ -1,7 +1,7 @@
 {
   "socious-fund": "Socious Fund",
   "header-login": "تسجيل الدخول",
-  "layout-action-button": "إنشاء مشروع",
+  "layout-action-button": "احصل على تمويل",
   "layout-verification": {
     "success-text": "تم التحقق من {{title}} الخاص بك بنجاح",
     "success-support-text": "يمكنك الآن التصويت والتبرع للمشاريع.",

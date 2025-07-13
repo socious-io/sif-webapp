@@ -51,7 +51,7 @@ describe('Organization creates project', () => {
     cy.contains('Your organization has been successfully verified').should('be.visible');
     cy.contains('Make your impact').should('be.visible');
 
-    cy.contains('Create a Project').should('exist').click();
+    cy.contains('Get Funded').should('exist').click();
     cy.contains('Submission Closed').should('be.visible');
 
     cy.contains('Close').click({ force: true });
@@ -61,7 +61,7 @@ describe('Organization creates project', () => {
     mockRoundsResponse = SUBMITABLE_ROUNDS;
 
     cy.visit(`${APP_URL}/home`);
-    cy.contains('Create a Project').click();
+    cy.contains('Get Funded').click();
 
     // Step 1
     cy.contains('Start a project').should('be.visible');
@@ -162,7 +162,7 @@ describe('Organization creates project', () => {
     mockRoundsResponse = SUBMITABLE_ROUNDS;
 
     cy.visit(`${APP_URL}/home`);
-    cy.contains('Create a Project').click();
+    cy.contains('Get Funded').click();
 
     cy.contains('Start a project').should('be.visible');
     cy.contains('Start a project').click();
@@ -183,7 +183,7 @@ describe('Organization creates project', () => {
     cy.visit(`${APP_URL}/home`);
     cy.contains('Make your impact').should('be.visible');
 
-    cy.contains('Create a Project').should('exist').click();
+    cy.contains('Get Funded').should('exist').click();
     cy.contains('Verify your organization').should('be.visible');
   });
 });
