@@ -107,7 +107,7 @@ export const ProjectDetail = () => {
   ];
 
   const contents = [
-    { label: 'Project Description', content: convertMarkdownToJSX(detail.description) },
+    { label: 'Project Summary', content: convertMarkdownToJSX(detail.description) },
     { label: 'Problem Statement', content: convertMarkdownToJSX(detail.problem_statement) },
     { label: 'Solution', content: convertMarkdownToJSX(detail.solution) },
     { label: 'Key Deliverables & Goals', content: detail.goals ? convertMarkdownToJSX(detail.goals) : '' },

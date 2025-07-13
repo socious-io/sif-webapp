@@ -81,7 +81,7 @@ export const Publish = () => {
     },
   ];
   const contents = [
-    { label: 'Project Description', content: convertMarkdownToJSX(description) },
+    { label: 'Project Summary', content: convertMarkdownToJSX(description) },
     { label: 'Problem Statement', content: convertMarkdownToJSX(problem_statement) },
     { label: 'Solution', content: convertMarkdownToJSX(solution) },
     { label: 'Key Deliverables & Goals', content: goals ? convertMarkdownToJSX(goals) : '' },

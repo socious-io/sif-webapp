@@ -4,9 +4,10 @@ import Input from 'src/modules/General/components/Input';
 import RichTextEditor from 'src/modules/General/components/RichTextEditor';
 
 import { useNameDescriptionForm } from './useNameDescriptionForm';
+
 const NameDescriptionForm: React.FC = () => {
   const {
-    data: { register, errors, description, hasErrors },
+    data: { register, errors, description, hasErrors, descriptionLength, maxDescriptionLength },
     operations: { goBack, setValue, handleSubmit, onSubmit },
   } = useNameDescriptionForm();
 
@@ -43,15 +44,20 @@ const NameDescriptionForm: React.FC = () => {
           placeholder={translate('project-website-placeholder')}
           errors={errors['website']?.message ? [errors['website']?.message.toString()] : undefined}
         />
-        <RichTextEditor
-          register={register}
-          name="description"
-          label={translate('project-description-label') + '*'}
-          placeholder={translate('project-description-placeholder')}
-          value={description}
-          setValue={setValue}
-          errors={errors['description']?.message ? [errors['description']?.message.toString()] : undefined}
-        />
+        <div className="flex flex-col gap-2">
+          <RichTextEditor
+            register={register}
+            name="description"
+            label={translate('project-description-label') + '*'}
+            placeholder={translate('project-description-placeholder')}
+            value={description}
+            setValue={setValue}
+            errors={errors['description']?.message ? [errors['description']?.message.toString()] : undefined}
+          />
+          <p className="text-sm text-gray-500">
+            {descriptionLength}/{maxDescriptionLength}
+          </p>
+        </div>
         <div className="flex flex-col items-stretch gap-3">
           <Button
             color="primary"
@@ -71,4 +77,5 @@ const NameDescriptionForm: React.FC = () => {
     </div>
   );
 };
+
 export default NameDescriptionForm;
