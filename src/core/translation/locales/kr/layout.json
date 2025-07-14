@@ -1,7 +1,7 @@
 {
   "socious-fund": "소셔스 펀드",
   "header-login": "로그인",
-  "layout-action-button": "프로젝트 만들기",
+  "layout-action-button": "자금을 확보하세요",
   "layout-verification": {
     "success-text": "귀하의 {{title}}가 성공적으로 인증되었습니다",
     "success-support-text": "이제 프로젝트에 투표하고 기부할 수 있습니다.",

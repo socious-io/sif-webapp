@@ -1,7 +1,7 @@
 {
   "socious-fund": "Socious Fund（ソーシャスファンド）",
   "header-login": "ログイン",
-  "layout-action-button": "プロジェクトを作成",
+  "layout-action-button": "資金を調達する",
   "layout-verification": {
     "success-text": "あなたの{{title}}は正常に認証されました",
     "success-support-text": "これでプロジェクトへの投票や寄付が可能になりました。",

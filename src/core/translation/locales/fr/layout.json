@@ -1,7 +1,7 @@
 {
   "socious-fund": "Fonds Socious",
   "header-login": "Se connecter",
-  "layout-action-button": "Créer un projet",
+  "layout-action-button": "Obtenez un financement",
   "layout-verification": {
     "success-text": "Votre {{title}} a été vérifié avec succès",
     "success-support-text": "Vous pouvez maintenant voter et faire des dons pour des projets.",
