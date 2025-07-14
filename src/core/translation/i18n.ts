@@ -17,13 +17,13 @@ const resources = {
   en: {
     translation: generateTranslationFile(),
   },
-  jp: {
+  ja: {
     translation: generateJPTranslationFile(),
   },
   es: {
     translation: generateESTranslationFile(),
   },
-  kr: {
+  ko: {
     translation: generateKRTranslationFile(),
   },
   ar: {
@@ -32,7 +32,7 @@ const resources = {
   fr: {
     translation: generateFRTranslationFile(),
   },
-  zh: {
+  'zh-CN': {
     translation: generateZHTranslationFile(),
   },
 };

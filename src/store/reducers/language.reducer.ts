@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export interface LangState {
-  language: 'en' | 'jp' | 'es' | 'kr' | 'ar' | 'zh' | 'fr';
+  language: 'en' | 'ja' | 'es' | 'ko' | 'ar' | 'fr' | 'zh-CN';
 }
 
 const initialState = {
-  language: localStorage.getItem('i18nextLng') || 'en',
+  language: localStorage.getItem('i18nextLng') || navigator.language || 'en',
 } as LangState;
 
 export const languageSlice = createSlice({
