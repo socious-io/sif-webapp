@@ -14,7 +14,7 @@ const VoteDetailCard: React.FC<VoteDetailCardProps> = ({
   identityType,
   onVote,
 }) => {
-  const { donatedAmount, votes } = roundStats || {};
+  const { donations, votes } = roundStats || {};
   const { isShared, handleCopy } = useVoteDetailCard();
 
   return (
@@ -28,9 +28,16 @@ const VoteDetailCard: React.FC<VoteDetailCardProps> = ({
       {isOwner ? (
         <>
           <div className="flex flex-col gap-1 text-sm leading-5 text-Gray-light-mode-600">
-            <span className="text-3xl font-semibold leading-8 text-Gray-light-mode-900">
-              ${donatedAmount.toLocaleString('en-US', { minimumFractionDigits: 2 })}
-            </span>
+            <div>
+              {Object.entries(donations).map(([currency, amount]) => (
+                <div key={currency} className="flex flex-row justify-between">
+                  <span className="text-3xl font-semibold leading-8 text-Gray-light-mode-900">{currency}</span>
+                  <span className="text-3xl font-semibold leading-8 text-Gray-light-mode-900">
+                    ${donations[currency].toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                  </span>
+                </div>
+              ))}
+            </div>
             {translate('projects-round-stats.donated')}
           </div>
           <div className="flex flex-col gap-1 text-sm leading-5 text-Gray-light-mode-600">
