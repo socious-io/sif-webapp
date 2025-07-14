@@ -1,6 +1,6 @@
 import { categoriesAdaptor } from 'src/constants/PROJECT_CATEGORIES';
 import { SOCIAL_CAUSES } from 'src/constants/SOCIAL_CAUSES';
-import { createProjects, editProjects, getProject, getProjects, IdentityType } from 'src/core/api';
+import { createProjects, editProjects, getDonations, getProject, getProjects, IdentityType } from 'src/core/api';
 import { donate, vote } from 'src/core/api';
 import { Project as ProjectRaw } from 'src/core/api/projects/index.types';
 import { DonationReq as DonateReqRaw } from 'src/core/api/projects/index.types';
@@ -10,7 +10,7 @@ import { removedEmptyProps } from 'src/core/helpers/objects-arrays';
 import { translate } from 'src/core/helpers/utils';
 import { ProjectState } from 'src/store/reducers/createProject.reducer';
 
-import { AdaptorRes, DonateReq, getIdentityMeta, Project, ProjectReq, ProjectRes, SuccessRes } from '..';
+import { AdaptorRes, Donate, DonateReq, getIdentityMeta, Project, ProjectRes, SuccessRes, ProjectReq } from '..';
 
 export const getProjectsAdaptor = async (
   page = 1,
@@ -119,6 +119,7 @@ export const voteOrDonateProjectAdaptor = async (
           card_token: donatePayload.token,
           currency: donatePayload.currency,
           rate: donatePayload.rate,
+          anonymous: donatePayload.anonymous,
         };
         await donate(projectId, payload);
       } else {
@@ -129,6 +130,7 @@ export const voteOrDonateProjectAdaptor = async (
           txid: donatePayload.transactionHash,
           wallet_address: donatePayload.wallet_address,
           rate: donatePayload.rate,
+          anonymous: donatePayload.anonymous,
         };
         await donate(projectId, payload);
       }
@@ -211,6 +213,30 @@ export const getEditProjectAdaptor = async (projectId: string): Promise<AdaptorR
     return {
       data: null,
       error: 'Error in getting project',
+    };
+  }
+};
+
+export const getProjectDonationsAdaptor = async (projectId): Promise<AdaptorRes<Donate[]>> => {
+  try {
+    const donations = await getDonations(projectId);
+    const data = donations.results.map(donation => ({
+      id: donation.id,
+      amount: donation.amount,
+      anonymous: donation.anonymous,
+      name: `${donation.user?.first_name} ${donation.user?.last_name}`,
+      date: donation.created_at,
+      currency: donation.currency || 'USD',
+    }));
+    return {
+      data,
+      error: null,
+    };
+  } catch (error) {
+    console.error('Error in getting project donations: ', error);
+    return {
+      data: null,
+      error: 'Error in getting project donations',
     };
   }
 };

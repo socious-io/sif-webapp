@@ -87,4 +87,14 @@ export type DonateReq = {
   type?: 'FIAT' | 'CRYPTO';
   token?: string;
   rate: number;
+  anonymous: boolean;
+};
+
+export type Donate = {
+  id: string;
+  amount: number;
+  anonymous: boolean;
+  name: string;
+  date: string;
+  currency: string;
 };
