@@ -244,6 +244,7 @@ export const ProjectDetail = () => {
         {detail.roundStats && (
           <VoteDetailCard
             roundStats={detail.roundStats}
+            roundStatus={detail.roundStatus}
             isOwner={isOwner}
             alreadyVoted={detail.voted}
             identityType={identityType}
