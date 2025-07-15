@@ -7,7 +7,7 @@ export type ImpactAssessmentType = 'OPTION_A' | 'OPTION_B';
 
 export type RoundStats = {
   estimatedMatch?: number;
-  donatedAmount: number;
+  donations: Record<string, number>;
   votes: number;
 };
 

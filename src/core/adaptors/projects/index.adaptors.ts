@@ -73,7 +73,7 @@ export const getProjectAdaptor = async (projectId: string): Promise<AdaptorRes<P
       overview: convertMarkdownToJSX(project.description),
       voted: project.user_voted,
       roundStatus: getDateRangeStatus(project.round.voting_start_at, project.round.voting_end_at),
-      roundStats: { donatedAmount: project.total_donations.USD || 0, votes: project.total_votes },
+      roundStats: { donations: project.total_donations || 0, votes: project.total_votes },
       donations: [
         {
           id: '1',
