@@ -1,5 +1,6 @@
 import { CircularProgress, Divider } from '@mui/material';
 import { translate } from 'src/core/helpers/utils';
+import AlertMessage from 'src/modules/General/components/AlertMessage';
 import { AlertModal } from 'src/modules/General/components/AlertModal';
 import Button from 'src/modules/General/components/Button';
 import CardRadioButton from 'src/modules/General/components/CardRadioButton';
@@ -16,7 +17,17 @@ import FiatDonation from '../FiatDonation';
 
 const VoteDonateCard = () => {
   const {
-    data: { detail, selectedCard, isVoteChoice, userImpactPoints, openSuccessModal, voteInfo, donateInfo, loading },
+    data: {
+      detail,
+      selectedCard,
+      isVoteChoice,
+      userImpactPoints,
+      openSuccessModal,
+      voteInfo,
+      donateInfo,
+      loading,
+      alreadyVoted,
+    },
     operations: { setSelectedCard, onVoteOrDonate, setOpenSuccessModal, onContinue, setSelectedPayment },
   } = useVoteDonateCard();
 
@@ -34,6 +45,7 @@ const VoteDonateCard = () => {
       ),
       title: translate('vote-donate.option-1-title'),
       description: translate('vote-donate.option-1-desc'),
+      disabled: alreadyVoted,
     },
     {
       id: '2',
@@ -46,7 +58,7 @@ const VoteDonateCard = () => {
           className="p-[0.625rem] bg-Brand-100 rounded-full"
         />
       ),
-      title: translate('vote-donate.option-2-title'),
+      title: alreadyVoted ? translate('vote-donate.option-2-title-2') : translate('vote-donate.option-2-title'),
       description: translate('vote-donate.option-2-desc'),
     },
   ];
@@ -109,6 +121,9 @@ const VoteDonateCard = () => {
             titleClassName="!text-lg !font-semibold !leading-7 !text-Gray-light-mode-900"
           />
         </div>
+        {alreadyVoted && (
+          <AlertMessage theme="warning" iconName="alert-circle" title={translate('vote-donate.already-voted')} />
+        )}
         <Divider />
         {isVoteChoice ? (
           <>

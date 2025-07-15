@@ -15,7 +15,7 @@ interface FormData {
 }
 
 const schema = yup.object().shape({
-  category: yup.string().required('Project category is required'),
+  category: yup.string().required('Project track is required'),
   problem_statement: yup.string().required('Problem statement is required'),
   solution: yup.string().required('Solution is required'),
   goals: yup.string().optional().required(),
