@@ -21,6 +21,7 @@ const Header: React.FC = () => {
       setSubmissionOverModal,
       setOpenKybModal,
       navigateKyb,
+      navigateMyProjects,
     },
   } = useHeader();
 
@@ -49,6 +50,7 @@ const Header: React.FC = () => {
               img={image}
               accounts={accounts}
               iconItems={[
+                { iconName: 'layout-alt-02', label: 'Your Projects', onClick: navigateMyProjects },
                 { iconName: 'stars-02', label: translate('header-refer'), onClick: navigateRefer },
                 { iconName: 'settings-01', label: translate('header-setting'), onClick: navigateSettings },
                 {
