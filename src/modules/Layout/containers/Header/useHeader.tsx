@@ -61,6 +61,8 @@ export const useHeader = () => {
 
   const navigateKyb = () => window.open(config.accountCenterURL + `/kyb?id=${currentIdentity?.id}`, '_blank');
 
+  const navigateMyProjects = () => navigate(`/dashboard/${currentIdentity?.id}`);
+
   return {
     data: {
       accounts,
@@ -78,6 +80,7 @@ export const useHeader = () => {
       setSubmissionOverModal,
       setOpenKybModal,
       navigateKyb,
+      navigateMyProjects,
     },
   };
 };

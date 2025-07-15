@@ -3,6 +3,8 @@ import Breadcrumbs from 'src/modules/General/components/Breadcrumbs';
 import Button from 'src/modules/General/components/Button';
 import ProjectsList from 'src/modules/Projects/containers/ProjectsList';
 
+import { useDashboard } from './useDashboard';
+
 const breadcrumbs = [
   {
     iconName: 'home-line',
@@ -16,12 +18,16 @@ const breadcrumbs = [
 ];
 
 export const UsersProjects = () => {
+  const {
+    operations: { navigateCreate },
+  } = useDashboard();
+
   return (
-    <div className="container pt-6 pb-16 px-4">
+    <div className="container mb-8 pt-6 pb-16 px-4">
       <Breadcrumbs items={breadcrumbs} />
       <div className="flex flex-col items-start md:flex-row md:items-center justify-between gap-8 pt-5 pb-6">
         <h1 className="text-[30px] font-semibold text-Brand-800">{translate('your-projects.title')}</h1>
-        <Button color="primary" variant="contained">
+        <Button color="primary" variant="contained" onClick={navigateCreate}>
           {translate('your-projects.create-new')}
         </Button>
       </div>
