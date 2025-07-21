@@ -98,3 +98,11 @@ export type Donate = {
   date: string;
   currency: string;
 };
+
+export interface ConfirmDonationRes {
+  donationId: string;
+  is3DSRequired: boolean;
+  clientSecret: string;
+}
+
+export type VotedOrDonatedRes = ConfirmDonationRes | { message: string };
