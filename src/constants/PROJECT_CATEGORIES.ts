@@ -1,4 +1,10 @@
-export const PROJECT_CATEGORIES = [
+export type ProjectCategory = {
+  id: string;
+  label: string;
+  value: string;
+};
+
+export const PROJECT_CATEGORIES: ProjectCategory[] = [
   {
     id: '1',
     label: 'Emerging markets',
@@ -16,7 +22,7 @@ export const PROJECT_CATEGORIES = [
   },
 ];
 
-export const categoriesAdaptor = value => {
+export const categoriesAdaptor = (value: string): string | null => {
   const category = PROJECT_CATEGORIES.find(cat => cat.value === value);
   return category ? category.label : null;
 };

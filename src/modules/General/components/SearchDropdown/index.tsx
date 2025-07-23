@@ -86,6 +86,8 @@ const SearchDropdown: React.FC<SelectProps> = ({
   border = true,
   containerClassName = '',
   controlClassName,
+  controlStyleObject,
+  valueStyleObject,
   ...props
 }) => {
   const selectedVal = props.value || '';
@@ -134,6 +136,7 @@ const SearchDropdown: React.FC<SelectProps> = ({
               color: '#101828',
               fontSize: '16px',
               fontWeight: 500,
+              ...valueStyleObject,
             }),
 
             control: (provided: any, state: any) => ({
@@ -142,6 +145,7 @@ const SearchDropdown: React.FC<SelectProps> = ({
               border: !border ? 'none' : state.isFocused ? '1px solid #99B7B5' : '1px solid #D0D5DD',
               boxShadow: !border ? null : state.isFocused ? ' 0px 0px 0px 4px #E6EDED;' : null,
               borderRadius: '8px',
+              ...controlStyleObject,
             }),
             indicatorSeparator: () => ({ display: 'none' }),
           }}

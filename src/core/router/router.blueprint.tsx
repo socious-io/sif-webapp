@@ -5,7 +5,8 @@ import { translate } from 'src/core/helpers/utils';
 import { Layout } from 'src/modules/Layout';
 import { RootState } from 'src/store';
 
-import { getProjectAdaptor, getProjectsAdaptor } from '../adaptors';
+import { getProjectAdaptor, getProjectsAdaptor, getRoundsAdaptor } from '../adaptors';
+import { getRound } from '../api';
 
 export const blueprint: RouteObject[] = [
   { path: '/', element: <DefaultRoute /> },
@@ -36,8 +37,13 @@ export const blueprint: RouteObject[] = [
               {
                 path: '',
                 loader: async () => {
-                  const projects = await getProjectsAdaptor(1, 10);
-                  return { projects: projects.data };
+                  const currentRound = await getRound();
+                  if (!currentRound) {
+                    return { projects: [], rounds: [] };
+                  }
+                  const projects = await getProjectsAdaptor(1, 10, { round_id: currentRound.id as string });
+                  const rounds = await getRoundsAdaptor();
+                  return { projects: projects.data, rounds: rounds.data };
                 },
                 async lazy() {
                   const { Projects } = await import('src/pages/projects');
