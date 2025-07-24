@@ -249,6 +249,7 @@ export const ProjectDetail = () => {
             alreadyVoted={detail.voted}
             identityType={identityType}
             onVote={onVote}
+            votingStartAt={detail.votingStartAt}
           />
         )}
       </div>

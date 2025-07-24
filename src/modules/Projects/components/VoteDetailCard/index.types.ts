@@ -8,4 +8,5 @@ export interface VoteDetailCardProps {
   identityType?: 'users' | 'organizations';
   onVote?: () => void;
   roundStatus?: DateRangeStatus;
+  votingStartAt?: Date;
 }
