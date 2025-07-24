@@ -34,15 +34,18 @@ export const usePublish = () => {
   const currentIdentity = useSelector<RootState, CurrentIdentity | undefined>(state =>
     state.identity.entities.find(identity => identity.current),
   );
+  const identityType = currentIdentity?.type;
 
   const onEditProject = () => navigate(`/create/step-7`);
-  const identityType = currentIdentity?.type;
+
   const onPublish = async () => {
     try {
-      const result =
+      const { data, error } =
         mode === 'create' ? await createProjectAdaptor(projectState) : await editProjectAdaptor(projectState);
-      dispatch(resetProject());
-      navigate(`/projects/${result.data?.id}`);
+      if (!error && data) {
+        dispatch(resetProject());
+        navigate(`/projects/${data.id}`);
+      }
     } catch (error) {
       console.error(error);
     }

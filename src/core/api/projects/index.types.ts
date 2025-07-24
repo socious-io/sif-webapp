@@ -80,6 +80,17 @@ export interface CommentReq {
   parent_id?: string;
 }
 
+export interface Vote {
+  id: string;
+  user_id: string;
+  project_id: string;
+  created_at: string;
+}
+
+export type VotedRes = {
+  vote: Vote;
+};
+
 export interface Donation {
   amount: number;
   anonymous: boolean;
@@ -116,4 +127,16 @@ export interface Donation {
     user_id: string;
   };
 }
-export type DonationRes = PaginateResV3<Donation>;
+
+export type DonationsRes = PaginateResV3<Donation>;
+
+export type DonatedRes = {
+  action_required: true;
+  client_secret: null;
+  donation: Donation;
+  message: string;
+};
+
+export interface ConfirmDonationReq {
+  payment_intent_id: string;
+}
