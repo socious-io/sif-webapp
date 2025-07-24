@@ -3,18 +3,29 @@ import { useSelector } from 'react-redux';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import { config } from 'src/config';
 import { CURRENCIES } from 'src/constants/CURRENCIES';
-import { CurrentIdentity, DonateReq, Project, voteOrDonateProjectAdaptor } from 'src/core/adaptors';
+import {
+  confirmDonationAdaptor,
+  ConfirmDonationRes,
+  CurrentIdentity,
+  DonateReq,
+  Project,
+  voteOrDonateProjectAdaptor,
+} from 'src/core/adaptors';
+import useConfirm3DS from 'src/core/hooks/useConfirm3DS';
 import { RootState } from 'src/store';
 
 export const useVoteDonateCard = () => {
   const navigate = useNavigate();
   const { projectDetail: detail } = useLoaderData() as { projectDetail: Project };
   const [selectedCard, setSelectedCard] = useState(detail.voted ? 'donate' : 'vote');
+  const [open3DSModal, setOpen3DSModal] = useState(false);
   const [openSuccessModal, setOpenSuccessModal] = useState(false);
+  const [currentConfirmDonationData, setCurrentConfirmDonationData] = useState<ConfirmDonationRes | null>(null);
   const [currentDonateInfo, setCurrentDonateInfo] = useState<DonateReq | null>(null);
   const [loading, setLoading] = useState(false);
   // const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [selectedPayment, setSelectedPayment] = useState<'Fiat' | 'Crypto'>('Fiat');
+  const [errorMessage, setErrorMessage] = useState('');
   const isVoteChoice = selectedCard === 'vote';
   const currentIdentity = useSelector<RootState, CurrentIdentity | undefined>(state => {
     return state.identity.entities.find(i => i.current);
@@ -35,6 +46,19 @@ export const useVoteDonateCard = () => {
         }
       : undefined;
 
+  // 3DS Hook
+  useConfirm3DS(
+    open3DSModal,
+    () => setOpen3DSModal(false),
+    currentConfirmDonationData?.clientSecret || '',
+    async paymentIntentId => {
+      const { donationId = '' } = currentConfirmDonationData || {};
+      const { error, data } = await confirmDonationAdaptor(donationId, paymentIntentId);
+      if (!error && data) setOpenSuccessModal(true);
+    },
+    message => setErrorMessage(message),
+  );
+
   const onVoteOrDonate = async (donatePayload?: DonateReq) => {
     // if (currentIdentity?.verified) {
     if (selectedCard === 'donate' && donatePayload) setCurrentDonateInfo(donatePayload);
@@ -45,12 +69,21 @@ export const useVoteDonateCard = () => {
       setLoading(false);
       return;
     }
-    if (data) setOpenSuccessModal(true);
+    if (data) {
+      const confirmDonationData = data as ConfirmDonationRes;
+      if (confirmDonationData.is3DSRequired) {
+        setOpen3DSModal(true);
+        setCurrentConfirmDonationData(confirmDonationData);
+      } else {
+        setOpenSuccessModal(true);
+      }
+    }
     setLoading(false);
     // } else {
     //   setShowConfirmationModal(true);
     // }
   };
+
   const navigateToVerify = () => {
     window.open(config.accountCenterURL + '/verification', '_blank');
   };
@@ -70,6 +103,7 @@ export const useVoteDonateCard = () => {
       // showConfirmationModal,
       selectedPayment,
       alreadyVoted: detail.voted,
+      errorMessage,
     },
     operations: {
       setSelectedCard,
@@ -79,6 +113,7 @@ export const useVoteDonateCard = () => {
       // setShowConfirmationModal,
       navigateToVerify,
       setSelectedPayment,
+      setErrorMessage,
     },
   };
 };
