@@ -5,7 +5,6 @@ import storage from 'redux-persist/lib/storage'; // defaults to localStorage for
 
 import { createProjectSlice } from './reducers/createProject.reducer';
 import { identitySlice } from './reducers/identity.reducer';
-import { languageSlice } from './reducers/language.reducer';
 import { loadingSlice } from './reducers/loading.reducer';
 import { notificationSlice } from './reducers/notification.reducer';
 import { roundsSlice } from './reducers/round.reducer';
@@ -18,7 +17,6 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   loading: loadingSlice.reducer,
-  language: languageSlice.reducer,
   notification: notificationSlice.reducer,
   createProject: createProjectSlice.reducer,
   identity: identitySlice.reducer,
