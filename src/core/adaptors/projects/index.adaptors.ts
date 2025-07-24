@@ -1,6 +1,15 @@
 import { categoriesAdaptor } from 'src/constants/PROJECT_CATEGORIES';
 import { SOCIAL_CAUSES } from 'src/constants/SOCIAL_CAUSES';
-import { createProjects, editProjects, getDonations, getProject, getProjects, IdentityType } from 'src/core/api';
+import {
+  createProjects,
+  editProjects,
+  getDonations,
+  getProject,
+  getProjects,
+  getRounds,
+  IdentityType,
+  Round,
+} from 'src/core/api';
 import { donate, vote } from 'src/core/api';
 import { Project as ProjectRaw } from 'src/core/api/projects/index.types';
 import { DonationReq as DonateReqRaw } from 'src/core/api/projects/index.types';
@@ -15,7 +24,7 @@ import { AdaptorRes, Donate, DonateReq, getIdentityMeta, Project, ProjectRes, Su
 export const getProjectsAdaptor = async (
   page = 1,
   limit = 10,
-  filters?: { identity_id: string },
+  filters?: { identity_id?: string; round_id?: string; category?: string },
 ): Promise<AdaptorRes<ProjectRes>> => {
   try {
     const { results: projects, total } = await getProjects({ page, limit }, filters);
@@ -238,6 +247,21 @@ export const getProjectDonationsAdaptor = async (projectId): Promise<AdaptorRes<
     return {
       data: null,
       error: 'Error in getting project donations',
+    };
+  }
+};
+export const getRoundsAdaptor = async (): Promise<AdaptorRes<Round[]>> => {
+  try {
+    const rounds = await getRounds();
+    return {
+      data: rounds.data,
+      error: null,
+    };
+  } catch (error) {
+    console.error('Error in getting rounds: ', error);
+    return {
+      data: null,
+      error: 'Error in getting rounds',
     };
   }
 };

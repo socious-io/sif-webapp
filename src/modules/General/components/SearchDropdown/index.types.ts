@@ -11,4 +11,6 @@ export interface SelectProps extends Props {
   loadOptions?: (inputValue: string, callback: (options: any) => void) => void;
   containerClassName?: string;
   controlClassName?: string;
+  controlStyleObject?: React.CSSProperties;
+  valueStyleObject?: React.CSSProperties;
 }
