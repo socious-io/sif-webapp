@@ -76,6 +76,29 @@ export const CURRENCIES: CurrencyType[] = [
     value: 'JPY',
     decimals: 100n,
     fiatOrCrypto: 'fiat',
-    rateConversionFunc: async (amount: number) => amount, // TODO convert to JPY
+    rateConversionFunc: async (amount: number) => {
+      const cacheKey = 'JPY_RATE';
+      const cacheExpireTime = 10 * 60 * 1000; // 10 minutes
+      const cachedRate = localStorage.getItem(cacheKey);
+      const cachedTime = localStorage.getItem(`${cacheKey}_TIME`);
+      const now = Date.now();
+      if (cachedRate && cachedTime && Number(cachedTime) > now - cacheExpireTime) {
+        return Math.round(amount * Number(cachedRate) * 100) / 100;
+      }
+
+      try {
+        const response = await axios.get(config.rates.fiat);
+        if (response.status === 200 && response.data?.rates?.JPY) {
+          const jpyRate = response.data.rates.JPY;
+          localStorage.setItem(cacheKey, String(jpyRate));
+          localStorage.setItem(`${cacheKey}_TIME`, String(now));
+          return Math.round(amount * jpyRate * 100) / 100;
+        }
+      } catch (error) {
+        console.warn('Failed to fetch JPY rate:', error);
+      }
+
+      return Math.round(amount * 150 * 100) / 100;
+    },
   },
 ];
