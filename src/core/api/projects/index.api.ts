@@ -1,4 +1,4 @@
-import { FilterReq, PaginateReq, SuccessRes } from '..';
+import { FilterReq, PaginateReq, Round, SuccessRes } from '..';
 import { get, post, patch, del } from '../http';
 import { CommentReq, CommentsRes, DonationReq, Project, ProjectsRes, Comment, DonationRes } from './index.types';
 
@@ -52,4 +52,8 @@ export async function reactProjectComment(commentId: string, reaction: string): 
 
 export async function unreactProjectComment(commentId: string): Promise<CommentsRes> {
   return (await del<CommentsRes>(`projects/comments/${commentId}/reactions`)).data;
+}
+
+export async function getRounds(): Promise<Array<Round>> {
+  return (await get<Array<Round>>(`rounds/rounds`)).data;
 }
