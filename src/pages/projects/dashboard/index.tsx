@@ -1,7 +1,7 @@
 import { translate } from 'src/core/helpers/utils';
 import Breadcrumbs from 'src/modules/General/components/Breadcrumbs';
 import Button from 'src/modules/General/components/Button';
-import ProjectsList from 'src/modules/Projects/containers/ProjectsList';
+import UsersProjects from 'src/modules/Projects/containers/UsersProjects';
 
 import { useDashboard } from './useDashboard';
 
@@ -17,7 +17,7 @@ const breadcrumbs = [
   },
 ];
 
-export const UsersProjects = () => {
+export const Dashboard = () => {
   const {
     operations: { navigateCreate },
   } = useDashboard();
@@ -32,7 +32,7 @@ export const UsersProjects = () => {
         </Button>
       </div>
       <div className="pt-8 border-t border-t-Gray-light-mode-300 border-solid border-b-0 border-l-0 border-r-0">
-        <ProjectsList hasTitle={false} />
+        <UsersProjects hasTitle={false} />
       </div>
     </div>
   );

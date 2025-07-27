@@ -81,8 +81,8 @@ export const blueprint: RouteObject[] = [
               }
             },
             async lazy() {
-              const { UsersProjects } = await import('src/pages/projects/dashboard');
-              return { Component: Protect(UsersProjects, 'both') };
+              const { Dashboard } = await import('src/pages/projects/dashboard');
+              return { Component: Protect(Dashboard, 'both') };
             },
           },
           {
