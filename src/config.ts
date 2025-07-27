@@ -16,6 +16,7 @@ export const config = {
   stripePublicKey: import.meta.env.VITE_STRIPE_PUBLIC_KEY,
   rates: {
     ada: import.meta.env.VITE_CARDANO_ADA_RATE,
+    fiat: import.meta.env.VITE_FIAT_API_RATE,
   },
 };
 
