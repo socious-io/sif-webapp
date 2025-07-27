@@ -47,7 +47,7 @@ export interface Project {
   status?: ProjectStatus;
   wallet_address?: string;
   wallet_env?: string;
-  votingStartAt: Date;
+  votingStartAt?: Date;
 }
 
 export type ProjectRes = PaginateRes<Project>;

@@ -1,6 +1,15 @@
 import { FilterReq, PaginateReq, Round, SuccessRes } from '..';
 import { get, post, patch, del } from '../http';
-import { CommentReq, CommentsRes, DonationReq, Project, ProjectsRes, Comment, DonationRes } from './index.types';
+import {
+  CommentReq,
+  CommentsRes,
+  DonationReq,
+  Project,
+  ProjectsRes,
+  Comment,
+  DonationRes,
+  RoundsRes,
+} from './index.types';
 
 export async function getProjects(params: PaginateReq, filters?: FilterReq): Promise<ProjectsRes> {
   return (await get<ProjectsRes>('projects', { params }, filters)).data;
@@ -54,6 +63,10 @@ export async function unreactProjectComment(commentId: string): Promise<Comments
   return (await del<CommentsRes>(`projects/comments/${commentId}/reactions`)).data;
 }
 
-export async function getRounds(): Promise<Array<Round>> {
-  return (await get<Array<Round>>(`rounds/rounds`)).data;
+export async function getRound(): Promise<Round> {
+  return (await get<Round>('rounds')).data;
+}
+
+export async function getRounds(): Promise<RoundsRes> {
+  return (await get<RoundsRes>(`rounds/rounds`)).data;
 }
