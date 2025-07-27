@@ -27,5 +27,7 @@
   "header-create-org": "创建组织",
   "submission-closed-header": "提交已结束",
   "submission-closed-subheader": "项目提交期已结束。请在下一轮提交您的提案。",
-  "submission-closed-button": "关闭"
+  "submission-closed-button": "关闭",
+  "header-alert-organization-message": "请切换到组织账户。",
+  "header-alert-organization-close": "关闭"
 }

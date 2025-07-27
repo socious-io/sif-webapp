@@ -19,7 +19,7 @@ export const useHeader = () => {
   const [submissionOverModal, setSubmissionOverModal] = useState(false);
   const [openKybModal, setOpenKybModal] = useState(false);
   const round = useSelector((state: RootState) => state.round.round);
-
+  const [alertModalVisible, setAlertModalVisible] = useState(false);
   useEffect(() => {
     setAccounts(identities);
   }, [identities]);
@@ -61,7 +61,13 @@ export const useHeader = () => {
 
   const navigateKyb = () => window.open(config.accountCenterURL + `/kyb?id=${currentIdentity?.id}`, '_blank');
 
-  const navigateMyProjects = () => navigate(`/dashboard/${currentIdentity?.id}`);
+  const navigateMyProjects = () => {
+    if (currentIdentity?.type === 'users') {
+      setAlertModalVisible(true);
+    } else {
+      navigate(`/dashboard/${currentIdentity?.id}`);
+    }
+  };
 
   return {
     data: {
@@ -70,6 +76,7 @@ export const useHeader = () => {
       userType,
       submissionOverModal,
       openKybModal,
+      alertModalVisible,
     },
     operations: {
       onCreate,
@@ -81,6 +88,7 @@ export const useHeader = () => {
       setOpenKybModal,
       navigateKyb,
       navigateMyProjects,
+      setAlertModalVisible,
     },
   };
 };
