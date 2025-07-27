@@ -25,5 +25,7 @@
   "header-create-org": "조직 만들기",
   "submission-closed-header": "제출 마감",
   "submission-closed-subheader": "프로젝트 제출 기간이 종료되었습니다. 다음 라운드에서 제안을 제출해 주세요.",
-  "submission-closed-button": "닫기"
+  "submission-closed-button": "닫기",
+  "header-alert-organization-message": "조직 계정으로 전환해주세요.",
+  "header-alert-organization-close": "닫기"
 }

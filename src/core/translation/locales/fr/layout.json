@@ -25,5 +25,7 @@
   "header-create-org": "Créer une organisation",
   "submission-closed-header": "Soumissions closes",
   "submission-closed-subheader": "La période de soumission des projets est terminée. Veuillez soumettre votre proposition lors du prochain cycle.",
-  "submission-closed-button": "Fermer"
+  "submission-closed-button": "Fermer",
+  "header-alert-organization-message": "Veuillez passer à un compte d'organisation.",
+  "header-alert-organization-close": "Fermer"
 }

@@ -27,5 +27,7 @@
   "header-create-org": "إنشاء منظمة",
   "submission-closed-header": "انتهاء فترة التقديم",
   "submission-closed-subheader": "انتهت فترة تقديم المشاريع. يرجى تقديم اقتراحك في الجولة القادمة.",
-  "submission-closed-button": "إغلاق"
+  "submission-closed-button": "إغلاق",
+  "header-alert-organization-message": "يرجى التبديل إلى حساب مؤسسة.",
+  "header-alert-organization-close": "إغلاق"
 }
