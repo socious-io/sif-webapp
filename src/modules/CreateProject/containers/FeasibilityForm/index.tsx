@@ -17,8 +17,8 @@ const FeasibilityForm: React.FC = () => {
         <RichTextEditor
           register={register}
           name="feasibility"
-          label="Feasibility and team *"
-          placeholder="Describe your project's timeline and major milestones"
+          label={translate('project-feasibility-label') + '*'}
+          placeholder={translate('project-feasibility-placeholder')}
           value={feasibility}
           setValue={setValue}
           errors={errors['feasibility']?.message ? [errors['feasibility']?.message.toString()] : undefined}
@@ -26,8 +26,8 @@ const FeasibilityForm: React.FC = () => {
         <Input
           register={register}
           name="video"
-          label={'Project video (optional)'}
-          placeholder={'Paste your YouTube video link here'}
+          label={translate('project-video-label')}
+          placeholder={translate('project-video-placeholder')}
           errors={errors['video']?.message ? [errors['video']?.message.toString()] : undefined}
         />
         <div className="flex flex-col items-stretch gap-3">

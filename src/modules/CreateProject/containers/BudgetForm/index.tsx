@@ -28,8 +28,8 @@ const BudgetForm: React.FC = () => {
           register={register}
           name="total_requested_amount"
           type="number"
-          label="Total Amount Requested*"
-          placeholder="Total amount needed for project"
+          label={translate('project-amount-label') + '*'}
+          placeholder={translate('project-amount-placeholder')}
           className="placeholder:text-sm sm:placeholder:text-base"
           required
           errors={
@@ -40,8 +40,8 @@ const BudgetForm: React.FC = () => {
         />
         <RadioGroup
           contentClassName="text-sm"
-          label="Impact Assessment Type*"
           name="impact_assessment_type"
+          label={translate('project-assessment-type-label') + '*'}
           items={impactOptions}
           onChange={item =>
             setValue('impact_assessment_type', item.value as 'OPTION_A' | 'OPTION_B', { shouldValidate: true })
@@ -55,24 +55,24 @@ const BudgetForm: React.FC = () => {
         />
         <RichTextEditor
           name="impact_assessment"
-          label="Impact Assessment Details*"
-          placeholder="Please describe your impact assessment choice and include relevant details, names..."
+          label={translate('project-assessment-detail-label') + '*'}
+          placeholder={translate('project-assessment-detail-placeholder')}
           value={impactAssessment}
           setValue={setValue}
           errors={errors['impact_assessment']?.message ? [errors['impact_assessment']?.message.toString()] : undefined}
         />
         <RichTextEditor
           name="cost_breakdown"
-          label="Cost Breakdown*"
-          placeholder="Give us an itemized breakdown of intended goals, deliverables..."
+          label={translate('project-cost-label') + '*'}
+          placeholder={translate('project-cost-placeholder')}
           value={costBreakdown}
           setValue={setValue}
           errors={errors['cost_breakdown']?.message ? [errors['cost_breakdown']?.message.toString()] : undefined}
         />
         <RichTextEditor
           name="voluntery_contribution"
-          label="Voluntary Contribution to Matching Pool (Optional)"
-          placeholder="Contribute to the next round of Socious Fund"
+          label={translate('project-voluntary-label')}
+          placeholder={translate('project-voluntary-placeholder')}
           value={volunteryContribution}
           setValue={setValue}
           errors={

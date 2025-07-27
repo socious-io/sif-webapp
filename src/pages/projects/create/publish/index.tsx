@@ -56,7 +56,7 @@ export const Publish = () => {
       content: <span className="text-base font-semibold leading-6 text-Brand-600">{translate(social_cause)}</span>,
     },
     {
-      label: 'Category',
+      label: translate('projects-detail.category'),
       content: <span className="text-base font-semibold leading-6 text-Brand-600">{categoriesAdaptor(category)}</span>,
     },
     {
@@ -81,28 +81,28 @@ export const Publish = () => {
     },
   ];
   const contents = [
-    { label: 'Project Summary', content: convertMarkdownToJSX(description) },
-    { label: 'Problem Statement', content: convertMarkdownToJSX(problem_statement) },
-    { label: 'Solution', content: convertMarkdownToJSX(solution) },
-    { label: 'Key Deliverables & Goals', content: goals ? convertMarkdownToJSX(goals) : '' },
+    { label: translate('project-description-label'), content: convertMarkdownToJSX(description) },
+    { label: translate('project-statement-label'), content: convertMarkdownToJSX(problem_statement) },
+    { label: translate('project-solution-label'), content: convertMarkdownToJSX(solution) },
+    { label: translate('project-goals-label'), content: goals ? convertMarkdownToJSX(goals) : '' },
     {
-      label: 'Impact Assessment',
+      label: translate('project-impact-assessment-label'),
       content: convertMarkdownToJSX(impact_assessment),
     },
     {
-      label: 'Voluntary Contribution',
+      label: translate('project-voluntary-contribution-label'),
       content: voluntery_contribution ? convertMarkdownToJSX(voluntery_contribution) : 'N/A',
     },
     {
-      label: 'Funding and budget',
+      label: translate('create-project-step4-title'),
       content: (
         <>
-          <div>{`Total amount requested: ${total_requested_amount}`}</div>
+          <div>{`${translate('project-amount-label')}: ${total_requested_amount}`}</div>
           {convertMarkdownToJSX(cost_breakdown)}
         </>
       ),
     },
-    { label: 'Feasibility and team', content: convertMarkdownToJSX(feasibility) },
+    { label: translate('project-feasibility-label'), content: convertMarkdownToJSX(feasibility) },
   ];
 
   return (
@@ -126,7 +126,7 @@ export const Publish = () => {
             customStyle="flex-1 min-w-[10rem] !text-Gray-light-mode-900 break-keep"
             onClick={onPublish}
           >
-            {'Publish'}
+            {translate('publish-button')}
           </Button>
 
           <div className="flex flex-col items-stretch gap-1">

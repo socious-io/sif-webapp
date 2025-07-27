@@ -1,3 +1,4 @@
+import { PROJECT_CATEGORIES } from 'src/constants/PROJECT_CATEGORIES';
 import { SOCIAL_CAUSES } from 'src/constants/SOCIAL_CAUSES';
 
 import { translate } from '../helpers/utils';
@@ -37,8 +38,12 @@ export interface OptionType {
 }
 
 export function socialCausesToCategoryAdaptor() {
-  return Object.entries(SOCIAL_CAUSES).map(([, value]) => value);
+  return Object.entries(SOCIAL_CAUSES).map(([, socialCause]) => ({
+    value: socialCause.value,
+    label: translate(socialCause.value),
+  }));
 }
+
 export function socialCausesToCategory(categories: string[] = []) {
   if (!categories) {
     return [];
@@ -46,4 +51,11 @@ export function socialCausesToCategory(categories: string[] = []) {
   return categories.map(cat => {
     return { label: translate(cat), value: cat };
   });
+}
+
+export function projectCategoriesAdaptor() {
+  return Object.entries(PROJECT_CATEGORIES).map(([, category]) => ({
+    value: category.value,
+    label: translate(category.value),
+  }));
 }

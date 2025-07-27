@@ -12,7 +12,7 @@ export const LanguageSwitcher = () => {
         border={false}
         id="size"
         className="mb-5"
-        placeholder={'English (US)'}
+        placeholder="English (US)"
         options={LANGUAGES}
         isSearchable={false}
         value={LANGUAGES.find(option => option.value === selectedLanguage)}

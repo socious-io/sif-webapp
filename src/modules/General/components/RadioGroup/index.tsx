@@ -37,7 +37,6 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
       >
         {items.map((item, index) => (
           <React.Fragment key={index}>
-            {' '}
             {/* Use React.Fragment with a key for mapping */}
             <FormControlLabel
               value={item.value}

@@ -98,7 +98,7 @@ export const ProjectDetail = () => {
       ),
     },
     {
-      label: 'Category',
+      label: translate('projects-detail.category'),
       content: (
         <div className="flex items-center gap-1.5 text-base font-semibold leading-6 text-Brand-600">
           {detail.category}
@@ -108,28 +108,28 @@ export const ProjectDetail = () => {
   ];
 
   const contents = [
-    { label: 'Project Summary', content: convertMarkdownToJSX(detail.description) },
-    { label: 'Problem Statement', content: convertMarkdownToJSX(detail.problem_statement) },
-    { label: 'Solution', content: convertMarkdownToJSX(detail.solution) },
-    { label: 'Key Deliverables & Goals', content: detail.goals ? convertMarkdownToJSX(detail.goals) : '' },
+    { label: translate('project-description-label'), content: convertMarkdownToJSX(detail.description) },
+    { label: translate('project-statement-label'), content: convertMarkdownToJSX(detail.problem_statement) },
+    { label: translate('project-solution-label'), content: convertMarkdownToJSX(detail.solution) },
+    { label: translate('project-goals-label'), content: detail.goals ? convertMarkdownToJSX(detail.goals) : '' },
     {
-      label: 'Impact Assessment',
+      label: translate('project-impact-assessment-label'),
       content: convertMarkdownToJSX(detail?.impact_assessment),
     },
     {
-      label: 'Voluntary Contribution',
+      label: translate('project-voluntary-contribution-label'),
       content: detail?.voluntery_contribution ? convertMarkdownToJSX(detail.voluntery_contribution) : 'N/A',
     },
     {
-      label: 'Funding and budget',
+      label: translate('create-project-step4-title'),
       content: (
         <>
-          <div>{`Total amount requested: ${detail.total_requested_amount}`}</div>
+          <div>{`${translate('project-amount-label')}: ${detail.total_requested_amount}`}</div>
           {convertMarkdownToJSX(detail.cost_breakdown)}
         </>
       ),
     },
-    { label: 'Feasibility and team', content: convertMarkdownToJSX(detail.feasibility) },
+    { label: translate('project-feasibility-label'), content: convertMarkdownToJSX(detail.feasibility) },
   ];
   const tabs = [
     {
@@ -165,7 +165,7 @@ export const ProjectDetail = () => {
         </div>
       ),
     },
-    { label: 'Donations', content: <DonationsList projectId={projectId} /> },
+    { label: translate('projects-detail.donations'), content: <DonationsList projectId={projectId} /> },
   ];
 
   return (
