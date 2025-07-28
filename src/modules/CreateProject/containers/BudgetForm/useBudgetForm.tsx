@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { ImpactAssessmentType } from 'src/core/adaptors';
+import { translate } from 'src/core/helpers/utils';
 import { RootState } from 'src/store';
 import { setProjectData } from 'src/store/reducers/createProject.reducer';
 import * as yup from 'yup';
@@ -36,11 +37,11 @@ export const useBudgetForm = () => {
   const project = useSelector((state: RootState) => state.createProject);
   const impactOptions = [
     {
-      label: 'Option A: Request Socious to conduct impact assessment - $1500',
+      label: translate('project-assessment-type-option1'),
       value: 'OPTION_A',
     },
     {
-      label: 'Option B: Use a certified impact accountant',
+      label: translate('project-assessment-type-option2'),
       value: 'OPTION_B',
     },
   ];

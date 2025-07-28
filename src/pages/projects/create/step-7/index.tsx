@@ -5,8 +5,8 @@ import TwoColumnLayout from 'src/modules/CreateProject/templates/TwoColumnLayout
 export const CreateProjectStep7 = () => {
   return (
     <TwoColumnLayout
-      title={translate('create-project-step4-title')}
-      description={translate('create-project-step4-description')}
+      title={translate('create-project-step7-title')}
+      description={translate('create-project-step7-description')}
     >
       <ConnectWalletForm />
     </TwoColumnLayout>

@@ -6,8 +6,8 @@ import TwoColumnLayout from 'src/modules/CreateProject/templates/TwoColumnLayout
 export const CreateProjectStep6 = () => {
   return (
     <TwoColumnLayout
-      title={translate('create-project-step3-title')}
-      description={translate('create-project-step3-description')}
+      title={translate('create-project-step6-title')}
+      description={translate('create-project-step6-description')}
     >
       <UploadBannerForm />
     </TwoColumnLayout>

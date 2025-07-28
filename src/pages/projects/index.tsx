@@ -2,6 +2,7 @@ import { Divider } from '@mui/material';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useLoaderData } from 'react-router-dom';
+import { OptionType } from 'src/core/adaptors';
 import { Round } from 'src/core/api';
 import { convertDateFormat, getDaysUntil } from 'src/core/helpers/date-converter';
 import { translate } from 'src/core/helpers/utils';
@@ -14,7 +15,7 @@ export const Projects = () => {
   const round = useSelector((state: RootState) => state.round.round);
   const { rounds } = useLoaderData() as { rounds: Array<Round> };
   const roundIsClosed = round && getDaysUntil(round.voting_end_at) <= 0;
-  const [selectedRound, setSelectedRound] = useState<{ value: string; label: string } | null>(null);
+  const [selectedRound, setSelectedRound] = useState<OptionType | null>(null);
 
   const breadcrumbs = [
     { iconName: 'home-line', label: '', link: '/' },
@@ -23,7 +24,7 @@ export const Projects = () => {
       label: selectedRound?.label || '',
       options: rounds.map(r => ({ label: r.name, value: r.id })),
       onChange: value => {
-        setSelectedRound(value);
+        setSelectedRound(value as OptionType);
       },
       defaultValue: { label: rounds[0].name, value: rounds[0].id },
     },
@@ -51,7 +52,7 @@ export const Projects = () => {
           )}
         </div>
         <Divider />
-        <ProjectsList roundId={selectedRound?.value} />
+        <ProjectsList roundId={selectedRound?.value || ''} />
       </div>
     </>
   );

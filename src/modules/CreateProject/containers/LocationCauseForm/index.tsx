@@ -61,7 +61,7 @@ const LocationCauseForm: React.FC = () => {
           </span>
           <div className="mt-5">
             <MultiSelect
-              id={'social-causes'}
+              id="social-causes"
               max={1}
               items={items}
               placeholder={translate('social-cause-placeholder')}

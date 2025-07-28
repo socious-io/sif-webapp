@@ -18,9 +18,9 @@ const ProjectCategoryForm: React.FC = () => {
       <form className="flex flex-col items-stretch gap-8">
         <SearchDropdown
           id="projectCategory"
-          label="Project Track*"
+          label={translate('project-track-label') + '*'}
           className="mb-5"
-          placeholder="Please select a Track"
+          placeholder={translate('project-track-placeholder')}
           options={PROJECT_CATEGORIES}
           isSearchable={false}
           onChange={value => setProjectCategory(value as OptionType)}
@@ -29,24 +29,24 @@ const ProjectCategoryForm: React.FC = () => {
         />
         <RichTextEditor
           name="problem_statement"
-          label="Problem Statement*"
-          placeholder="Describe the problem are you addressing..."
+          label={translate('project-statement-label') + '*'}
+          placeholder={translate('project-statement-placeholder')}
           value={problemStatement}
           setValue={setValue}
           errors={errors['problem_statement']?.message ? [errors['problem_statement']?.message.toString()] : undefined}
         />
         <RichTextEditor
           name="solution"
-          label="Solution*"
-          placeholder="Tell us how you are solving this problem..."
+          label={translate('project-solution-label') + '*'}
+          placeholder={translate('project-solution-placeholder')}
           value={solution}
           setValue={setValue}
           errors={errors['solution']?.message ? [errors['solution']?.message.toString()] : undefined}
         />
         <RichTextEditor
           name="goals"
-          label="Key Deliverables & Goals *"
-          placeholder="Give us an itemized breakdown of intended goals, deliverables, and timeline, e.g..."
+          label={translate('project-goals-label') + '*'}
+          placeholder={translate('project-goals-placeholder')}
           value={keyDeliverablesGoals}
           setValue={setValue}
           errors={errors['goals']?.message ? [errors['goals']?.message.toString()] : undefined}

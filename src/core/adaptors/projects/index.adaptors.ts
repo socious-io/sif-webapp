@@ -250,11 +250,12 @@ export const getProjectDonationsAdaptor = async (projectId): Promise<AdaptorRes<
     };
   }
 };
+
 export const getRoundsAdaptor = async (): Promise<AdaptorRes<Round[]>> => {
   try {
-    const rounds = await getRounds();
+    const { data } = await getRounds();
     return {
-      data: rounds.data,
+      data,
       error: null,
     };
   } catch (error) {
