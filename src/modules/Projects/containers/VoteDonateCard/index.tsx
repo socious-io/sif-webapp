@@ -1,9 +1,10 @@
 import { CircularProgress, Divider } from '@mui/material';
 import { translate } from 'src/core/helpers/utils';
 import AlertMessage from 'src/modules/General/components/AlertMessage';
-import { AlertModal } from 'src/modules/General/components/AlertModal';
+import AlertModal from 'src/modules/General/components/AlertModal';
 import Button from 'src/modules/General/components/Button';
 import CardRadioButton from 'src/modules/General/components/CardRadioButton';
+import FeaturedIcon from 'src/modules/General/components/FeaturedIcon';
 import HorizontalTabs from 'src/modules/General/components/HorizontalTabs';
 import Icon from 'src/modules/General/components/Icon';
 import Link from 'src/modules/General/components/Link';
@@ -27,8 +28,16 @@ const VoteDonateCard = () => {
       donateInfo,
       loading,
       alreadyVoted,
+      errorMessage,
     },
-    operations: { setSelectedCard, onVoteOrDonate, setOpenSuccessModal, onContinue, setSelectedPayment },
+    operations: {
+      setSelectedCard,
+      onVoteOrDonate,
+      setOpenSuccessModal,
+      onContinue,
+      setSelectedPayment,
+      setErrorMessage,
+    },
   } = useVoteDonateCard();
 
   const voteChoices = [
@@ -137,6 +146,14 @@ const VoteDonateCard = () => {
           <HorizontalTabs tabs={tabs} onChangeTab={tab => setSelectedPayment(tab.label as 'Fiat' | 'Crypto')} />
         )}
       </div>
+      <AlertModal
+        open={!!errorMessage}
+        onClose={() => setErrorMessage('')}
+        title="Failed"
+        message={errorMessage}
+        customIcon={<FeaturedIcon iconName="alert-circle" size="md" theme="error" type="light-circle-outlined" />}
+        closeButton={false}
+      />
       <SuccessModal
         open={openSuccessModal}
         handleClose={() => setOpenSuccessModal(false)}

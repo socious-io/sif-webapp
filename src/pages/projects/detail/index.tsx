@@ -1,7 +1,7 @@
 import { Divider } from '@mui/material';
 import { convertMarkdownToJSX } from 'src/core/helpers/convert-md-to-jsx';
 import { getYouTubeEmbedUrl, translate } from 'src/core/helpers/utils';
-// import { AlertModal } from 'src/modules/General/components/AlertModal';
+// import AlertModal from 'src/modules/General/components/AlertModal';
 import AvatarLabelGroup from 'src/modules/General/components/AvatarLabelGroup';
 import BackLink from 'src/modules/General/components/BackLink';
 import Breadcrumbs from 'src/modules/General/components/Breadcrumbs';

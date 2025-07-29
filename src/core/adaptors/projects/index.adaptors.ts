@@ -1,6 +1,7 @@
 import { categoriesAdaptor } from 'src/constants/PROJECT_CATEGORIES';
 import { SOCIAL_CAUSES } from 'src/constants/SOCIAL_CAUSES';
 import {
+  confirmDonation,
   createProjects,
   editProjects,
   getDonations,
@@ -19,7 +20,17 @@ import { removedEmptyProps } from 'src/core/helpers/objects-arrays';
 import { translate } from 'src/core/helpers/utils';
 import { ProjectState } from 'src/store/reducers/createProject.reducer';
 
-import { AdaptorRes, Donate, DonateReq, getIdentityMeta, Project, ProjectRes, SuccessRes, ProjectReq } from '..';
+import {
+  AdaptorRes,
+  Donate,
+  DonateReq,
+  getIdentityMeta,
+  Project,
+  ProjectRes,
+  SuccessRes,
+  ProjectReq,
+  VotedOrDonatedRes,
+} from '..';
 
 export const getProjectsAdaptor = async (
   page = 1,
@@ -119,55 +130,80 @@ export const getProjectAdaptor = async (projectId: string): Promise<AdaptorRes<P
 export const voteOrDonateProjectAdaptor = async (
   projectId: string,
   donatePayload?: DonateReq,
-): Promise<AdaptorRes<SuccessRes>> => {
+): Promise<AdaptorRes<VotedOrDonatedRes>> => {
   try {
-    if (donatePayload) {
-      if (donatePayload.type === 'FIAT') {
-        const payload: DonateReqRaw = {
-          amount: donatePayload.donate,
-          payment_type: donatePayload.type,
-          card_token: donatePayload.token,
-          currency: donatePayload.currency,
-          rate: donatePayload.rate,
-          anonymous: donatePayload.anonymous,
-        };
-        await donate(projectId, payload);
-      } else {
-        // Crypto
-        const payload: DonateReqRaw = {
-          amount: donatePayload.donate,
-          currency: donatePayload.currency,
-          txid: donatePayload.transactionHash,
-          wallet_address: donatePayload.wallet_address,
-          rate: donatePayload.rate,
-          anonymous: donatePayload.anonymous,
-        };
-        await donate(projectId, payload);
-      }
-    } else {
+    if (!donatePayload) {
       await vote(projectId);
+
+      return { data: { message: 'succeed' }, error: null };
     }
-    return { data: { message: 'succeed' }, error: null };
+
+    if (donatePayload.type === 'FIAT') {
+      const payload: DonateReqRaw = {
+        amount: donatePayload.donate,
+        payment_type: donatePayload.type,
+        card_token: donatePayload.token,
+        currency: donatePayload.currency,
+        rate: donatePayload.rate,
+        anonymous: donatePayload.anonymous,
+      };
+      const { donation, action_required, client_secret } = await donate(projectId, payload);
+
+      return {
+        data: {
+          donationId: donation.id,
+          is3DSRequired: action_required,
+          clientSecret: client_secret || '',
+        },
+        error: null,
+      };
+    } else {
+      // Crypto
+      const payload: DonateReqRaw = {
+        amount: donatePayload.donate,
+        currency: donatePayload.currency,
+        txid: donatePayload.transactionHash,
+        wallet_address: donatePayload.wallet_address,
+        rate: donatePayload.rate,
+        anonymous: donatePayload.anonymous,
+      };
+      await donate(projectId, payload);
+
+      return { data: { message: 'succeed' }, error: null };
+    }
   } catch (error) {
     console.error('Error in voting/donating project: ', error);
     return { data: null, error: 'Error in voting/donating project' };
   }
 };
 
-export const createProjectAdaptor = async (project: ProjectReq): Promise<AdaptorRes<Project>> => {
+export const confirmDonationAdaptor = async (
+  donationId: string,
+  paymentIntentId: string,
+): Promise<AdaptorRes<SuccessRes>> => {
   try {
-    const newProject = await createProjects(removedEmptyProps(project) as Partial<ProjectReq>);
-    return { data: newProject, error: null };
+    await confirmDonation(donationId, { payment_intent_id: paymentIntentId });
+    return { data: { message: 'succeed' }, error: null };
+  } catch (error) {
+    console.error('Error in confirming donation: ', error);
+    return { data: null, error: 'Error in confirming donation' };
+  }
+};
+
+export const createProjectAdaptor = async (project: ProjectReq): Promise<AdaptorRes<Partial<Project>>> => {
+  try {
+    const { id } = await createProjects(removedEmptyProps(project) as Partial<ProjectReq>);
+    return { data: { id }, error: null };
   } catch (error) {
     console.error('Error in creating project: ', error);
     return { data: null, error: 'Error in creating project' };
   }
 };
 
-export const editProjectAdaptor = async (project: ProjectReq): Promise<AdaptorRes<Project>> => {
+export const editProjectAdaptor = async (project: ProjectReq): Promise<AdaptorRes<Partial<Project>>> => {
   try {
-    const newProject = await editProjects(project.id, removedEmptyProps(project) as Partial<ProjectReq>);
-    return { data: newProject, error: null };
+    const { id } = await editProjects(project.id, removedEmptyProps(project) as Partial<ProjectReq>);
+    return { data: { id }, error: null };
   } catch (error) {
     console.error('Error in editing project: ', error);
     return { data: null, error: 'Error in editing project' };

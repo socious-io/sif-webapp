@@ -7,27 +7,32 @@ import { resetProject } from 'src/store/reducers/createProject.reducer';
 
 export const useCreatePreview = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const projectState = useSelector((state: RootState) => state.createProject);
   const { title, description, city, country, social_cause, cover_id, website, cover_url } = projectState;
   const [newProjectId, setNewProjectId] = useState<string | null>(null);
-  const dispatch = useDispatch();
 
   const onPublish = async () => {
     try {
-      const result = await createProjectAdaptor(projectState);
-      setNewProjectId(result.data?.id as string);
-      setShowSuccessModal(true);
+      const { data, error } = await createProjectAdaptor(projectState);
+      if (!error && data) {
+        setNewProjectId(data.id as string);
+        setShowSuccessModal(true);
+      }
     } catch (error) {
       console.error(error);
     }
   };
+
   const onCloseModal = () => {
     setShowSuccessModal(false);
     navigate(`/projects/${newProjectId}`);
     dispatch(resetProject());
   };
+
   const navigateProjectDetails = () => navigate('/create/step-1');
+
   const goBack = () => navigate(-1);
 
   return {

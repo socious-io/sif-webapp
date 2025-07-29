@@ -1,5 +1,5 @@
 import { FilterReq, PaginateReq, Round, SuccessRes } from '..';
-import { get, post, patch, del } from '../http';
+import { get, post, patch, del, put } from '../http';
 import {
   CommentReq,
   CommentsRes,
@@ -7,8 +7,11 @@ import {
   Project,
   ProjectsRes,
   Comment,
-  DonationRes,
   RoundsRes,
+  DonationsRes,
+  DonatedRes,
+  VotedRes,
+  ConfirmDonationReq,
 } from './index.types';
 
 export async function getProjects(params: PaginateReq, filters?: FilterReq): Promise<ProjectsRes> {
@@ -19,32 +22,39 @@ export async function getProject(id: string): Promise<Project> {
   return (await get<Project>(`projects/${id}`)).data;
 }
 
-export async function vote(id: string): Promise<any> {
-  return (await post<any>(`projects/${id}/votes`, {})).data;
+export async function vote(id: string): Promise<VotedRes> {
+  return (await post<VotedRes>(`projects/${id}/votes`, {})).data;
 }
 
-export async function donate(id: string, payload: DonationReq, retry = 1): Promise<any> {
+export async function donate(id: string, payload: DonationReq, retry = 1): Promise<DonatedRes> {
   // Note: requests may failed cause retrying on slow crypto network 3 time retry to test valid transaction
   // BE can not hold request more than 30 secs cause browsers timeout
   try {
-    return (await post<any>(`projects/${id}/donates`, payload)).data;
+    return (await post<DonatedRes>(`projects/${id}/donates`, payload)).data;
   } catch (error) {
     if (retry > 3) throw error;
     return donate(id, payload, retry + 1);
   }
 }
-export async function getDonations(id: string): Promise<DonationRes> {
-  return (await get<DonationRes>(`projects/${id}/donates`)).data;
-}
-export async function createProjects(payload: Partial<Project>): Promise<any> {
-  return (await post<any>('projects', payload)).data;
-}
-export async function removeProjects(id: string): Promise<SuccessRes> {
-  return (await del<any>(`projects/${id}`)).data;
+
+export async function confirmDonation(id: string, payload: ConfirmDonationReq): Promise<SuccessRes> {
+  return (await put<SuccessRes>(`/projects/donates/${id}/confirm`, payload)).data;
 }
 
-export async function editProjects(id: string, payload: Partial<Project>): Promise<any> {
-  return (await patch<any>(`projects/${id}`, payload)).data;
+export async function getDonations(id: string): Promise<DonationsRes> {
+  return (await get<DonationsRes>(`projects/${id}/donates`)).data;
+}
+
+export async function createProjects(payload: Partial<Project>): Promise<Project> {
+  return (await post<Project>('projects', payload)).data;
+}
+
+export async function editProjects(id: string, payload: Partial<Project>): Promise<Project> {
+  return (await patch<Project>(`projects/${id}`, payload)).data;
+}
+
+export async function removeProjects(id: string): Promise<SuccessRes> {
+  return (await del<SuccessRes>(`projects/${id}`)).data;
 }
 
 export async function getComments(projectId: string, params?: PaginateReq): Promise<CommentsRes> {

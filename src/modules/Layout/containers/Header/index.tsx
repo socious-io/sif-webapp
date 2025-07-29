@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import logo from 'src/assets/logo/logo.svg';
 import { translate } from 'src/core/helpers/utils';
-import { AlertModal } from 'src/modules/General/components/AlertModal';
+import AlertModal from 'src/modules/General/components/AlertModal';
 import Button from 'src/modules/General/components/Button';
 import ConfirmModal from 'src/modules/General/components/ConfirmModal';
 import FeaturedIcon from 'src/modules/General/components/FeaturedIcon';
@@ -117,6 +117,7 @@ const Header: React.FC = () => {
         open={alertModalVisible}
         onClose={() => setAlertModalVisible(false)}
         message={translate('header-alert-organization-message')}
+        customIcon={<FeaturedIcon iconName="alert-circle" size="lg" theme="warning" type="light-circle-outlined" />}
         submitButtonTheme="primary"
         closeButtonLabel={translate('header-alert-organization-close')}
       />
