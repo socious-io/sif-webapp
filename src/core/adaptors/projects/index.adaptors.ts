@@ -172,8 +172,18 @@ export const voteOrDonateProjectAdaptor = async (
       return { data: { message: 'succeed' }, error: null };
     }
   } catch (error) {
+    let customError = '';
+    if (!donatePayload) {
+      customError = translate('vote-donate.error-modal.vote-error-message');
+    } else {
+      customError =
+        donatePayload.type === 'FIAT'
+          ? translate('vote-donate.error-modal.fiat-error-message')
+          : translate('vote-donate.error-modal.crypto-error-message');
+    }
+
     console.error('Error in voting/donating project: ', error);
-    return { data: null, error: 'Error in voting/donating project' };
+    return { data: null, error: customError };
   }
 };
 
