@@ -20,8 +20,10 @@ export const useProjectsList = (roundId: string) => {
   };
   useEffect(() => {
     const changeRound = async () => {
-      const { data } = await getProjectsAdaptor(1, limit, { round_id: roundId, category: projectCategory.value });
-      data && setCurrentProjects(data);
+      if (roundId) {
+        const { data } = await getProjectsAdaptor(1, limit, { round_id: roundId, category: projectCategory.value });
+        data && setCurrentProjects(data);
+      }
     };
     changeRound();
   }, [roundId, projectCategory]);
