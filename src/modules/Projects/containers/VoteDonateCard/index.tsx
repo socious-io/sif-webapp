@@ -1,4 +1,5 @@
 import { CircularProgress, Divider } from '@mui/material';
+import { DateRangeStatus } from 'src/core/helpers/date-converter';
 import { translate } from 'src/core/helpers/utils';
 import AlertMessage from 'src/modules/General/components/AlertMessage';
 import AlertModal from 'src/modules/General/components/AlertModal';
@@ -29,6 +30,7 @@ const VoteDonateCard = () => {
       loading,
       alreadyVoted,
       openErrorModal,
+      status,
     },
     operations: {
       setSelectedCard,
@@ -37,6 +39,7 @@ const VoteDonateCard = () => {
       onContinue,
       setSelectedPayment,
       setOpenErrorModal,
+      getAlertTitle,
     },
   } = useVoteDonateCard();
 
@@ -54,7 +57,7 @@ const VoteDonateCard = () => {
       ),
       title: translate('vote-donate.option-1-title'),
       description: translate('vote-donate.option-1-desc'),
-      disabled: alreadyVoted,
+      disabled: alreadyVoted || status !== DateRangeStatus.DURING,
     },
     {
       id: '2',
@@ -67,7 +70,10 @@ const VoteDonateCard = () => {
           className="p-[0.625rem] bg-Brand-100 rounded-full"
         />
       ),
-      title: alreadyVoted ? translate('vote-donate.option-2-title-2') : translate('vote-donate.option-2-title'),
+      title:
+        alreadyVoted || status !== DateRangeStatus.DURING
+          ? translate('vote-donate.option-2-title-2')
+          : translate('vote-donate.option-2-title'),
       description: translate('vote-donate.option-2-desc'),
     },
   ];
@@ -130,8 +136,8 @@ const VoteDonateCard = () => {
             titleClassName="!text-lg !font-semibold !leading-7 !text-Gray-light-mode-900"
           />
         </div>
-        {alreadyVoted && (
-          <AlertMessage theme="warning" iconName="alert-circle" title={translate('vote-donate.already-voted')} />
+        {(alreadyVoted || status !== DateRangeStatus.DURING) && (
+          <AlertMessage theme="warning" iconName="alert-circle" title={getAlertTitle()} />
         )}
         <Divider />
         {isVoteChoice ? (
@@ -162,17 +168,6 @@ const VoteDonateCard = () => {
         donateInfo={donateInfo}
         onContinue={onContinue}
       />
-      {/* <AlertModal
-        open={showConfirmationModal}
-        onClose={() => setShowConfirmationModal(false)}
-        onSubmit={navigateToVerify}
-        message={translate('alertModal.message')}
-        title={translate('alertModal.title')}
-        submitButton={true}
-        submitButtonTheme="primary"
-        submitButtonLabel={translate('alertModal.verify-button-label')}
-        closeButtonLabel={translate('alertModal.close-button-label')}
-      /> */}
     </>
   );
 };

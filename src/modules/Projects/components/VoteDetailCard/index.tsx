@@ -1,5 +1,4 @@
 import { DateRangeStatus } from 'src/core/helpers/date-converter';
-import { formatVotingStartMessage } from 'src/core/helpers/date-helpers';
 import { translate } from 'src/core/helpers/utils';
 import AlertMessage from 'src/modules/General/components/AlertMessage';
 import Button from 'src/modules/General/components/Button';
@@ -60,19 +59,11 @@ const VoteDetailCard: React.FC<VoteDetailCardProps> = ({
             {isShared ? translate('projects-round-stats.link-copied') : translate('projects-round-stats.share-button')}
           </Button>
           <>
-            {roundStatus === DateRangeStatus.BEFORE ? (
-              <AlertMessage
-                theme="warning"
-                iconName="alert-circle"
-                title={`${translate('vote-donate.not-started')} ${formatVotingStartMessage(votingStartAt as Date)}`}
-              />
-            ) : (
-              <Button color="primary" onClick={onVote} disabled={identityType === 'organizations'}>
-                {alreadyVoted || roundStatus === DateRangeStatus.AFTER
-                  ? translate('vote-donate.donate-now-btn')
-                  : translate('projects-round-stats.vote-button')}
-              </Button>
-            )}
+            <Button color="primary" onClick={onVote} disabled={identityType === 'organizations'}>
+              {alreadyVoted || roundStatus !== DateRangeStatus.DURING
+                ? translate('vote-donate.donate-now-btn')
+                : translate('projects-round-stats.vote-button')}
+            </Button>
             {identityType === 'organizations' && (
               <AlertMessage theme="warning" iconName="alert-circle" title={translate('vote-donate.strict-org')} />
             )}
