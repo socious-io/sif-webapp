@@ -26,7 +26,7 @@ export const Projects = () => {
       onChange: value => {
         setSelectedRound(value as OptionType);
       },
-      defaultValue: { label: rounds[0].name, value: rounds[0].id },
+      defaultValue: { label: rounds[rounds.length - 1].name, value: rounds[rounds.length - 1].id },
     },
   ];
   return (
