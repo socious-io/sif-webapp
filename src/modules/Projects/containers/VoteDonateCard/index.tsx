@@ -28,7 +28,7 @@ const VoteDonateCard = () => {
       donateInfo,
       loading,
       alreadyVoted,
-      errorMessage,
+      openErrorModal,
     },
     operations: {
       setSelectedCard,
@@ -36,7 +36,7 @@ const VoteDonateCard = () => {
       setOpenSuccessModal,
       onContinue,
       setSelectedPayment,
-      setErrorMessage,
+      setOpenErrorModal,
     },
   } = useVoteDonateCard();
 
@@ -147,10 +147,10 @@ const VoteDonateCard = () => {
         )}
       </div>
       <AlertModal
-        open={!!errorMessage}
-        onClose={() => setErrorMessage('')}
-        title="Failed"
-        message={errorMessage}
+        open={openErrorModal.open}
+        onClose={() => setOpenErrorModal({ open: false, title: '', message: '' })}
+        title={openErrorModal.title}
+        message={openErrorModal.message}
         customIcon={<FeaturedIcon iconName="alert-circle" size="md" theme="error" type="light-circle-outlined" />}
         closeButton={false}
       />

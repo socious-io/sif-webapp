@@ -197,6 +197,14 @@
       "meaningful-impact": "will support this project and create a meaningful impact.",
       "meaningful-difference": "Your generosity and commitment to this cause are greatly appreciated. Together, we are making a meaningful difference in the lives of those who need it most.",
       "thank-you": "Thank you for being a part of our community and helping us drive positive change."
+    },
+    "error-modal": {
+      "default-title": "Failed",
+      "donation-error-title": "Donation failed. Please try again.",
+      "fiat-error-message": "Your payment could not be completed. Please check your card details or try a different payment method. If the issue persists, contact your card provider or reach out to us for help.",
+      "crypto-error-message": "We couldn't complete your crypto donation. Make sure your wallet is connected, you have enough funds, and the transaction is confirmed. If the problem persists, try again later or contact support.",
+      "vote-error-title": "Vote not submitted. Please try again.",
+      "vote-error-message": "We couldn't complete your vote. Please make sure you're logged in. If the issue continues, please refresh the page and try again or contact support."
     }
   },
   "your-projects": {

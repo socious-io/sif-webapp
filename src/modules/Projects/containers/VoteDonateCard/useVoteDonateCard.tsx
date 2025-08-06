@@ -11,6 +11,7 @@ import {
   Project,
   voteOrDonateProjectAdaptor,
 } from 'src/core/adaptors';
+import { translate } from 'src/core/helpers/utils';
 import useConfirm3DS from 'src/core/hooks/useConfirm3DS';
 import { RootState } from 'src/store';
 
@@ -25,7 +26,11 @@ export const useVoteDonateCard = () => {
   const [loading, setLoading] = useState(false);
   // const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [selectedPayment, setSelectedPayment] = useState<'Fiat' | 'Crypto'>('Fiat');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [openErrorModal, setOpenErrorModal] = useState<{ open: boolean; title?: string; message: string }>({
+    open: false,
+    title: '',
+    message: '',
+  });
   const isVoteChoice = selectedCard === 'vote';
   const currentIdentity = useSelector<RootState, CurrentIdentity | undefined>(state => {
     return state.identity.entities.find(i => i.current);
@@ -56,7 +61,7 @@ export const useVoteDonateCard = () => {
       const { error, data } = await confirmDonationAdaptor(donationId, paymentIntentId);
       if (!error && data) setOpenSuccessModal(true);
     },
-    message => setErrorMessage(message),
+    message => setOpenErrorModal({ open: true, title: translate('vote-donate.error-modal.default-title'), message }),
   );
 
   const onVoteOrDonate = async (donatePayload?: DonateReq) => {
@@ -64,9 +69,16 @@ export const useVoteDonateCard = () => {
     if (selectedCard === 'donate' && donatePayload) setCurrentDonateInfo(donatePayload);
 
     setLoading(true);
-    const { error, data } = await voteOrDonateProjectAdaptor(detail.id, donatePayload);
-    if (error) {
+    const { error: errorMessage, data } = await voteOrDonateProjectAdaptor(detail.id, donatePayload);
+    if (errorMessage) {
       setLoading(false);
+      setOpenErrorModal({
+        open: true,
+        title: !donatePayload
+          ? translate('vote-donate.error-modal.vote-error-title')
+          : translate('vote-donate.error-modal.donation-error-title'),
+        message: errorMessage,
+      });
       return;
     }
     if (data) {
@@ -103,7 +115,7 @@ export const useVoteDonateCard = () => {
       // showConfirmationModal,
       selectedPayment,
       alreadyVoted: detail.voted,
-      errorMessage,
+      openErrorModal,
     },
     operations: {
       setSelectedCard,
@@ -113,7 +125,7 @@ export const useVoteDonateCard = () => {
       // setShowConfirmationModal,
       navigateToVerify,
       setSelectedPayment,
-      setErrorMessage,
+      setOpenErrorModal,
     },
   };
 };

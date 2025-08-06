@@ -197,6 +197,14 @@
       "meaningful-impact": "apoyará este proyecto y creará un impacto significativo.",
       "meaningful-difference": "Tu generosidad y compromiso con esta causa son muy apreciados. Juntos, estamos marcando una diferencia significativa en las vidas de quienes más lo necesitan.",
       "thank-you": "Gracias por ser parte de nuestra comunidad y ayudarnos a impulsar un cambio positivo."
+    },
+    "error-modal": {
+      "default-title": "Fallido",
+      "donation-error-title": "Donación fallida. Por favor, inténtalo de nuevo.",
+      "fiat-error-message": "No se pudo completar tu pago. Verifica los detalles de tu tarjeta o intenta con otro método de pago. Si el problema persiste, contacta a tu proveedor de tarjeta o comunícate con nosotros para obtener ayuda.",
+      "crypto-error-message": "No pudimos completar tu donación con criptomonedas. Asegúrate de que tu billetera esté conectada, tengas fondos suficientes y que la transacción esté confirmada. Si el problema continúa, inténtalo de nuevo más tarde o contacta al soporte.",
+      "vote-error-title": "Voto no enviado. Por favor, inténtalo de nuevo.",
+      "vote-error-message": "No pudimos completar tu voto. Asegúrate de haber iniciado sesión. Si el problema continúa, actualiza la página e inténtalo de nuevo o contacta al soporte."
     }
   },
   "your-projects": {

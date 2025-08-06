@@ -31,13 +31,7 @@ const AlertModal: React.FC<AlertModalProps> = ({
       <div className={`${styles['container']} ${customClassName}`}>
         <div className="flex justify-between">
           {customImage ? <img className={styles['image']} src={customImage} alt="image-header" /> : customIcon}
-          <Icon
-            name="x-close"
-            fontSize={24}
-            color={variables.color_grey_500}
-            className="cursor-pointer"
-            onClick={onClose}
-          />
+          <Icon name="x-close" fontSize={24} color={variables.color_grey_500} cursor="pointer" onClick={onClose} />
         </div>
         <div className={styles['title']}>{title}</div>
         {message.split('<br/>').map(substr => (
