@@ -27,7 +27,7 @@ const UsersProjects: React.FC<UsersProjectsProps> = ({ hasTitle = true }) => {
               <ProjectCard
                 key={project.id}
                 {...project}
-                onClick={() => navigate(project.id)}
+                onClick={() => navigate(`/projects/${project.id}`)}
                 className="w-full md:w-[calc((100%/2)-3rem)] lg:w-[calc((100%/3)-3rem)] mx-6 mb-6 md:mb-8"
               />
             ))}
