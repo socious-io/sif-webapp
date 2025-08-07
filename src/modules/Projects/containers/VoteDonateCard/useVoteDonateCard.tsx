@@ -11,6 +11,8 @@ import {
   Project,
   voteOrDonateProjectAdaptor,
 } from 'src/core/adaptors';
+import { DateRangeStatus } from 'src/core/helpers/date-converter';
+import { formatVotingStartMessage } from 'src/core/helpers/date-helpers';
 import { translate } from 'src/core/helpers/utils';
 import useConfirm3DS from 'src/core/hooks/useConfirm3DS';
 import { RootState } from 'src/store';
@@ -18,7 +20,9 @@ import { RootState } from 'src/store';
 export const useVoteDonateCard = () => {
   const navigate = useNavigate();
   const { projectDetail: detail } = useLoaderData() as { projectDetail: Project };
-  const [selectedCard, setSelectedCard] = useState(detail.voted ? 'donate' : 'vote');
+  const [selectedCard, setSelectedCard] = useState(
+    detail.voted || detail.roundStatus !== DateRangeStatus.DURING ? 'donate' : 'vote',
+  );
   const [open3DSModal, setOpen3DSModal] = useState(false);
   const [openSuccessModal, setOpenSuccessModal] = useState(false);
   const [currentConfirmDonationData, setCurrentConfirmDonationData] = useState<ConfirmDonationRes | null>(null);
@@ -95,7 +99,14 @@ export const useVoteDonateCard = () => {
     //   setShowConfirmationModal(true);
     // }
   };
-
+  const getAlertTitle = () => {
+    if (status !== DateRangeStatus.DURING) {
+      return status === DateRangeStatus.BEFORE
+        ? `${translate('vote-donate.not-started')} ${formatVotingStartMessage(detail.votingStartAt as Date)}`
+        : translate('home-round-closed');
+    }
+    return translate('vote-donate.already-voted');
+  };
   const navigateToVerify = () => {
     window.open(config.accountCenterURL + '/verification', '_blank');
   };
@@ -116,6 +127,7 @@ export const useVoteDonateCard = () => {
       selectedPayment,
       alreadyVoted: detail.voted,
       openErrorModal,
+      status: detail.roundStatus,
     },
     operations: {
       setSelectedCard,
@@ -126,6 +138,7 @@ export const useVoteDonateCard = () => {
       navigateToVerify,
       setSelectedPayment,
       setOpenErrorModal,
+      getAlertTitle,
     },
   };
 };
