@@ -1,7 +1,8 @@
 import { Media } from '../media/index.types';
-import { VerificationStatus } from '../verification/index.types';
 
 export type IdentityType = 'users' | 'organizations';
+
+export type VerificationStatus = 'NOT_ACTIVE' | 'PENDING' | 'ACTIVE';
 
 export interface UserMeta {
   id: string;

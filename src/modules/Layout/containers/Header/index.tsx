@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import logo from 'src/assets/logo/logo.svg';
 import { translate } from 'src/core/helpers/utils';
+import AlertModal from 'src/modules/General/components/AlertModal';
 import Button from 'src/modules/General/components/Button';
 import ConfirmModal from 'src/modules/General/components/ConfirmModal';
 import FeaturedIcon from 'src/modules/General/components/FeaturedIcon';
@@ -11,7 +12,7 @@ import { useHeader } from './useHeader';
 
 const Header: React.FC = () => {
   const {
-    data: { accounts, image, userType, submissionOverModal, openKybModal },
+    data: { accounts, image, userType, submissionOverModal, openKybModal, alertModalVisible },
     operations: {
       onCreate,
       onLogout,
@@ -21,6 +22,8 @@ const Header: React.FC = () => {
       setSubmissionOverModal,
       setOpenKybModal,
       navigateKyb,
+      navigateMyProjects,
+      setAlertModalVisible,
     },
   } = useHeader();
 
@@ -49,6 +52,7 @@ const Header: React.FC = () => {
               img={image}
               accounts={accounts}
               iconItems={[
+                { iconName: 'layout-alt-02', label: 'Your Projects', onClick: navigateMyProjects },
                 { iconName: 'stars-02', label: translate('header-refer'), onClick: navigateRefer },
                 { iconName: 'settings-01', label: translate('header-setting'), onClick: navigateSettings },
                 {
@@ -108,6 +112,14 @@ const Header: React.FC = () => {
             onClick: () => setOpenKybModal(false),
           },
         ]}
+      />
+      <AlertModal
+        open={alertModalVisible}
+        onClose={() => setAlertModalVisible(false)}
+        message={translate('header-alert-organization-message')}
+        customIcon={<FeaturedIcon iconName="alert-circle" size="lg" theme="warning" type="light-circle-outlined" />}
+        submitButtonTheme="primary"
+        closeButtonLabel={translate('header-alert-organization-close')}
       />
     </div>
   );

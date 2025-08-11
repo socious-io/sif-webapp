@@ -1,7 +1,7 @@
 import { CircularProgress, Divider } from '@mui/material';
 import { CURRENCIES } from 'src/constants/CURRENCIES';
 import { translate } from 'src/core/helpers/utils';
-// import { AlertModal } from 'src/modules/General/components/AlertModal';
+// import AlertModal from 'src/modules/General/components/AlertModal';
 import Button from 'src/modules/General/components/Button';
 import Checkbox from 'src/modules/General/components/Checkbox';
 import Input from 'src/modules/General/components/Input';
@@ -50,7 +50,7 @@ const DonateProject: React.FC<DonateProjectProps> = ({ isLoading, onDonate }) =>
         label={translate('vote-donate.enter-donation')}
         placeholder="0"
         postfixDropdown={{
-          options: CURRENCIES,
+          options: CURRENCIES.filter(currency => currency.fiatOrCrypto === 'crypto'),
           value: selectedCurrency,
           onChange: onSelectCurrency,
         }}

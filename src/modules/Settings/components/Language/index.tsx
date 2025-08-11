@@ -38,7 +38,7 @@ const Languge = () => {
               <SearchDropdown
                 id="size"
                 className="mb-5"
-                placeholder={'English (US)'}
+                placeholder="English (US)"
                 formatOptionLabel={data => customFormatOptionLabel(data)}
                 options={LANGUAGES}
                 isSearchable={false}

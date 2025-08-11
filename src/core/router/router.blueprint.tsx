@@ -5,7 +5,8 @@ import { translate } from 'src/core/helpers/utils';
 import { Layout } from 'src/modules/Layout';
 import { RootState } from 'src/store';
 
-import { getProjectAdaptor, getProjectsAdaptor, getRawProjectAdaptor } from '../adaptors';
+import { getProjectAdaptor, getProjectsAdaptor, getRoundsAdaptor } from '../adaptors';
+import { getRound } from '../api';
 
 export const blueprint: RouteObject[] = [
   { path: '/', element: <DefaultRoute /> },
@@ -36,8 +37,13 @@ export const blueprint: RouteObject[] = [
               {
                 path: '',
                 loader: async () => {
-                  const projects = await getProjectsAdaptor(1, 10);
-                  return { projects: projects.data };
+                  const currentRound = await getRound();
+                  if (!currentRound) {
+                    return { projects: [], rounds: [] };
+                  }
+                  const projects = await getProjectsAdaptor(1, 10, { round_id: currentRound.id as string });
+                  const rounds = await getRoundsAdaptor();
+                  return { projects: projects.data, rounds: rounds.data };
                 },
                 async lazy() {
                   const { Projects } = await import('src/pages/projects');
@@ -81,21 +87,8 @@ export const blueprint: RouteObject[] = [
               }
             },
             async lazy() {
-              const { UsersProjects } = await import('src/pages/projects/user');
-              return { Component: Protect(UsersProjects, 'both') };
-            },
-          },
-          {
-            path: ':id/edit',
-            loader: async ({ params }) => {
-              if (params.id) {
-                const projects = await getRawProjectAdaptor(params.id);
-                return { project: projects.data };
-              }
-            },
-            async lazy() {
-              const { EditProject } = await import('src/pages/projects/edit');
-              return { Component: Protect(EditProject, 'both') };
+              const { Dashboard } = await import('src/pages/projects/dashboard');
+              return { Component: Protect(Dashboard, 'both') };
             },
           },
           {

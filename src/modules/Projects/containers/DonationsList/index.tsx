@@ -5,10 +5,10 @@ import variables from 'src/styles/constants/_exports.module.scss';
 
 import { useDonationsList } from './useDonationsList';
 
-const DonationsList = () => {
+const DonationsList = ({ projectId }) => {
   const {
     data: { donationsList },
-  } = useDonationsList();
+  } = useDonationsList(projectId);
 
   return (
     !!donationsList.length && (
@@ -26,19 +26,24 @@ const DonationsList = () => {
                 className="p-2 bg-Gray-light-mode-100 rounded-full border-[0.75px] border-solid border-[rgba(0,0,0,0.08)]"
               />
               <div className="flex flex-col items-stretch">
-                <span className="font-semibold leading-6">{donation.donated_identity.name}</span>
+                <span className="font-semibold leading-6">{donation.anonymous ? 'Anonymous' : donation.name}</span>
                 <span className="hidden xl:inline text-sm leading-5 text-Gray-light-mode-600">
                   {translate('projects-detail.donated-by')} {toRelativeTime(donation.date)}
                 </span>
                 <div className="flex items-center gap-1 xl:hidden text-sm leading-5 text-Gray-light-mode-600">
-                  <span className="font-medium leading-6 text-Gray-light-mode-900">{donation.donated_price} • </span>
+                  <span className="font-medium leading-6 text-Gray-light-mode-900">
+                    <span className="font-normal leading-5 text-Gray-light-mode-600">
+                      {donation.amount} {donation.currency}
+                    </span>
+                    •
+                  </span>
                   {toRelativeTime(donation.date)}
                 </div>
               </div>
             </div>
             <div className="hidden xl:flex items-center gap-1 font-medium leading-6">
-              {donation.donated_price}
-              <span className="font-normal leading-5 text-Gray-light-mode-600">($44.5 USD)</span>
+              {donation.amount}
+              <span className="font-normal leading-5 text-Gray-light-mode-600"> {donation.currency}</span>
             </div>
           </div>
         ))}

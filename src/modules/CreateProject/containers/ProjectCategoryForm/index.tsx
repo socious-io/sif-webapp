@@ -1,7 +1,7 @@
 import { PROJECT_CATEGORIES } from 'src/constants/PROJECT_CATEGORIES';
+import { OptionType } from 'src/core/adaptors';
 import { translate } from 'src/core/helpers/utils';
 import Button from 'src/modules/General/components/Button';
-import Input from 'src/modules/General/components/Input';
 import RichTextEditor from 'src/modules/General/components/RichTextEditor';
 import SearchDropdown from 'src/modules/General/components/SearchDropdown';
 
@@ -18,40 +18,38 @@ const ProjectCategoryForm: React.FC = () => {
       <form className="flex flex-col items-stretch gap-8">
         <SearchDropdown
           id="projectCategory"
-          label="Project category*"
+          label={translate('project-track-label') + '*'}
           className="mb-5"
-          placeholder="Please select a category"
+          placeholder={translate('project-track-placeholder')}
           options={PROJECT_CATEGORIES}
           isSearchable={false}
-          onChange={setProjectCategory}
+          onChange={value => setProjectCategory(value as OptionType)}
           value={PROJECT_CATEGORIES.find(opt => opt.value === projectCategory) || null}
           errors={errors['projectCategory']?.message ? [errors['projectCategory']?.message.toString()] : undefined}
         />
         <RichTextEditor
           name="problem_statement"
-          label="Problem Statement*"
-          placeholder="Describe the problem are you addressing..."
+          label={translate('project-statement-label') + '*'}
+          placeholder={translate('project-statement-placeholder')}
           value={problemStatement}
           setValue={setValue}
-          errors={errors['problemStatement']?.message ? [errors['problemStatement']?.message.toString()] : undefined}
+          errors={errors['problem_statement']?.message ? [errors['problem_statement']?.message.toString()] : undefined}
         />
         <RichTextEditor
           name="solution"
-          label="Solution*"
-          placeholder="Tell us how you are solving this problem..."
+          label={translate('project-solution-label') + '*'}
+          placeholder={translate('project-solution-placeholder')}
           value={solution}
           setValue={setValue}
           errors={errors['solution']?.message ? [errors['solution']?.message.toString()] : undefined}
         />
         <RichTextEditor
           name="goals"
-          label="Key Deliverables & Goals *"
-          placeholder="Give us an itemized breakdown of intended goals, deliverables, and timeline, e.g..."
+          label={translate('project-goals-label') + '*'}
+          placeholder={translate('project-goals-placeholder')}
           value={keyDeliverablesGoals}
           setValue={setValue}
-          errors={
-            errors['keyDeliverablesGoals']?.message ? [errors['keyDeliverablesGoals']?.message.toString()] : undefined
-          }
+          errors={errors['goals']?.message ? [errors['goals']?.message.toString()] : undefined}
         />
         <div className="flex flex-col items-stretch gap-3">
           <Button

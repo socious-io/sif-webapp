@@ -1,4 +1,5 @@
 import { Divider } from '@mui/material';
+import { CURRENCIES } from 'src/constants/CURRENCIES';
 import { translate } from 'src/core/helpers/utils';
 import Button from 'src/modules/General/components/Button';
 import Checkbox from 'src/modules/General/components/Checkbox';
@@ -10,8 +11,15 @@ import AddCardModal from '../../components/AddCardModal';
 
 const FiatDonation = ({ onDonate }) => {
   const {
-    data: { openAddCardModal, card, disabled, donation, preventDisplayName },
-    operations: { setOpenAddCardModal, onSelectCard, setDonation, onSubmit, setPreventDisplayName },
+    data: { openAddCardModal, card, disabled, donation, preventDisplayName, selectedCurrency },
+    operations: {
+      setOpenAddCardModal,
+      onSelectCard,
+      setDonation,
+      onSubmit,
+      setPreventDisplayName,
+      setSelectedCurrency,
+    },
   } = useFiatDonation(onDonate);
   return (
     <form className="flex flex-col items-stretch gap-5">
@@ -29,8 +37,12 @@ const FiatDonation = ({ onDonate }) => {
         placeholder="0"
         noBorderPostfix
         hintCustomClass="!text-right"
-        postfix={'$'}
         value={donation}
+        postfixDropdown={{
+          options: CURRENCIES.filter(currency => currency.fiatOrCrypto === 'fiat'),
+          value: CURRENCIES.find(currency => currency.value === selectedCurrency),
+          onChange: value => setSelectedCurrency(value),
+        }}
         onChange={e => {
           const numericValue = e.target.value.replace(/[^0-9]/g, '');
           setDonation(numericValue);

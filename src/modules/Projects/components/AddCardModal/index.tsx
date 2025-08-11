@@ -1,6 +1,5 @@
 import { translate } from 'src/core/helpers/utils';
 import Button from 'src/modules/General/components/Button';
-import FeaturedIcon from 'src/modules/General/components/FeaturedIcon';
 import Modal from 'src/modules/General/components/Modal';
 
 import { AddCardModalProps } from './index.types';

@@ -1,7 +1,7 @@
 {
   "socious-fund": "Socious 基金",
   "header-login": "登录",
-  "layout-action-button": "创建项目",
+  "layout-action-button": "获取资金",
   "layout-verification": {
     "success-text": "您的 {{title}} 已成功验证",
     "success-support-text": "您现在可以为项目投票和捐款。",
@@ -27,5 +27,7 @@
   "header-create-org": "创建组织",
   "submission-closed-header": "提交已结束",
   "submission-closed-subheader": "项目提交期已结束。请在下一轮提交您的提案。",
-  "submission-closed-button": "关闭"
+  "submission-closed-button": "关闭",
+  "header-alert-organization-message": "请切换到组织账户。",
+  "header-alert-organization-close": "关闭"
 }

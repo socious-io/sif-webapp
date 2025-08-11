@@ -1,8 +1,11 @@
 import { CircularProgress, Divider } from '@mui/material';
+import { DateRangeStatus } from 'src/core/helpers/date-converter';
 import { translate } from 'src/core/helpers/utils';
-import { AlertModal } from 'src/modules/General/components/AlertModal';
+import AlertMessage from 'src/modules/General/components/AlertMessage';
+import AlertModal from 'src/modules/General/components/AlertModal';
 import Button from 'src/modules/General/components/Button';
 import CardRadioButton from 'src/modules/General/components/CardRadioButton';
+import FeaturedIcon from 'src/modules/General/components/FeaturedIcon';
 import HorizontalTabs from 'src/modules/General/components/HorizontalTabs';
 import Icon from 'src/modules/General/components/Icon';
 import Link from 'src/modules/General/components/Link';
@@ -16,8 +19,28 @@ import FiatDonation from '../FiatDonation';
 
 const VoteDonateCard = () => {
   const {
-    data: { detail, selectedCard, isVoteChoice, userImpactPoints, openSuccessModal, voteInfo, donateInfo, loading },
-    operations: { setSelectedCard, onVoteOrDonate, setOpenSuccessModal, onContinue, setSelectedPayment },
+    data: {
+      detail,
+      selectedCard,
+      isVoteChoice,
+      userImpactPoints,
+      openSuccessModal,
+      voteInfo,
+      donateInfo,
+      loading,
+      alreadyVoted,
+      openErrorModal,
+      status,
+    },
+    operations: {
+      setSelectedCard,
+      onVoteOrDonate,
+      setOpenSuccessModal,
+      onContinue,
+      setSelectedPayment,
+      setOpenErrorModal,
+      getAlertTitle,
+    },
   } = useVoteDonateCard();
 
   const voteChoices = [
@@ -34,6 +57,7 @@ const VoteDonateCard = () => {
       ),
       title: translate('vote-donate.option-1-title'),
       description: translate('vote-donate.option-1-desc'),
+      disabled: alreadyVoted || status !== DateRangeStatus.DURING,
     },
     {
       id: '2',
@@ -46,7 +70,10 @@ const VoteDonateCard = () => {
           className="p-[0.625rem] bg-Brand-100 rounded-full"
         />
       ),
-      title: translate('vote-donate.option-2-title'),
+      title:
+        alreadyVoted || status !== DateRangeStatus.DURING
+          ? translate('vote-donate.option-2-title-2')
+          : translate('vote-donate.option-2-title'),
       description: translate('vote-donate.option-2-desc'),
     },
   ];
@@ -109,6 +136,9 @@ const VoteDonateCard = () => {
             titleClassName="!text-lg !font-semibold !leading-7 !text-Gray-light-mode-900"
           />
         </div>
+        {(alreadyVoted || status !== DateRangeStatus.DURING) && (
+          <AlertMessage theme="warning" iconName="alert-circle" title={getAlertTitle()} />
+        )}
         <Divider />
         {isVoteChoice ? (
           <>
@@ -122,6 +152,14 @@ const VoteDonateCard = () => {
           <HorizontalTabs tabs={tabs} onChangeTab={tab => setSelectedPayment(tab.label as 'Fiat' | 'Crypto')} />
         )}
       </div>
+      <AlertModal
+        open={openErrorModal.open}
+        onClose={() => setOpenErrorModal({ open: false, title: '', message: '' })}
+        title={openErrorModal.title}
+        message={openErrorModal.message}
+        customIcon={<FeaturedIcon iconName="alert-circle" size="md" theme="error" type="light-circle-outlined" />}
+        closeButton={false}
+      />
       <SuccessModal
         open={openSuccessModal}
         handleClose={() => setOpenSuccessModal(false)}
@@ -130,17 +168,6 @@ const VoteDonateCard = () => {
         donateInfo={donateInfo}
         onContinue={onContinue}
       />
-      {/* <AlertModal
-        open={showConfirmationModal}
-        onClose={() => setShowConfirmationModal(false)}
-        onSubmit={navigateToVerify}
-        message={translate('alertModal.message')}
-        title={translate('alertModal.title')}
-        submitButton={true}
-        submitButtonTheme="primary"
-        submitButtonLabel={translate('alertModal.verify-button-label')}
-        closeButtonLabel={translate('alertModal.close-button-label')}
-      /> */}
     </>
   );
 };

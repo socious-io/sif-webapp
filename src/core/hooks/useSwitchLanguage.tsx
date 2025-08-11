@@ -1,17 +1,23 @@
-import i18next from 'i18next';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useSearchParams } from 'react-router-dom';
 import { LANGUAGES } from 'src/constants/Languages';
 
 const useSwitchLanguage = (defaultLanguage = 'en') => {
-  const [selectedLanguage, setSelectedLanguage] = useState(() => {
-    return localStorage.getItem('language') || defaultLanguage;
-  });
+  const { i18n } = useTranslation();
+  const [selectedLanguage, setSelectedLanguage] = useState(i18n.language || defaultLanguage);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const queryLang = searchParams.get('lang');
 
   const switchLanguage = language => {
     if (LANGUAGES.map(lang => lang.value).includes(language)) {
       setSelectedLanguage(language);
-      i18next.changeLanguage(language);
-      localStorage.setItem('language', language);
+      i18n.changeLanguage(language);
+      localStorage.setItem('lang', language);
+      if (queryLang) {
+        searchParams.set('lang', language);
+        setSearchParams(searchParams);
+      }
       window.location.reload();
     } else {
       console.warn(`Language '${language}' is not supported.`);

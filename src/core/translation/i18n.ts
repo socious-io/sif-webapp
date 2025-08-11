@@ -1,7 +1,6 @@
 import i18next from 'i18next';
 import detector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
-import store from 'src/store';
 
 import { generateTranslationFile as generateARTranslationFile } from './locales/ar/translation';
 import { generateTranslationFile } from './locales/en/translation';
@@ -11,19 +10,17 @@ import { generateTranslationFile as generateJPTranslationFile } from './locales/
 import { generateTranslationFile as generateKRTranslationFile } from './locales/kr/translation';
 import { generateTranslationFile as generateZHTranslationFile } from './locales/zh/translation';
 
-const language = store.getState().language.language;
-
 const resources = {
   en: {
     translation: generateTranslationFile(),
   },
-  jp: {
+  ja: {
     translation: generateJPTranslationFile(),
   },
   es: {
     translation: generateESTranslationFile(),
   },
-  kr: {
+  ko: {
     translation: generateKRTranslationFile(),
   },
   ar: {
@@ -32,10 +29,19 @@ const resources = {
   fr: {
     translation: generateFRTranslationFile(),
   },
-  zh: {
+  'zh-CN': {
     translation: generateZHTranslationFile(),
   },
 };
+
+const savedLang = localStorage.getItem('lang');
+const queryLang = new URLSearchParams(window.location.search).get('lang');
+const browserLang = navigator.language.split('-')[0];
+if (queryLang) {
+  localStorage.setItem('lang', queryLang);
+}
+
+const language = queryLang || savedLang || browserLang || 'en';
 
 i18next
   .use(detector)

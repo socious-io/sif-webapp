@@ -9,17 +9,17 @@ import * as yup from 'yup';
 interface FormData {
   title: string;
   description: string;
-  website?: string | null;
-  email?: string | null;
-  linkedin?: string | null;
+  email: string;
+  website?: string;
+  linkedin?: string;
 }
 
 const schema = yup.object().shape({
   title: yup.string().required('This field is required'),
-  description: yup.string().required('This field is required'),
-  website: yup.string().url('Must be a valid URL').nullable(),
-  email: yup.string().email('Must be a valid email').nullable(),
-  linkedin: yup.string().url('Must be a valid LinkedIn URL').nullable(),
+  description: yup.string().required('This field is required').max(3000, 'Description cannot exceed 3000 characters'),
+  email: yup.string().email('Must be a valid email').required('This field is required'),
+  website: yup.string().url('Must be a valid URL'),
+  linkedin: yup.string().url('Must be a valid LinkedIn URL'),
 });
 
 export const useNameDescriptionForm = () => {
@@ -39,8 +39,8 @@ export const useNameDescriptionForm = () => {
     defaultValues: {
       title: project.title || '',
       description: project.description || '',
-      website: project.website || '',
       email: project.email || '',
+      website: project.website || '',
       linkedin: project.linkedin || '',
     },
   });
@@ -50,6 +50,8 @@ export const useNameDescriptionForm = () => {
   const email = watch('email') || '';
   const linkedin = watch('linkedin') || '';
   const hasErrors = !isValid;
+  const descriptionLength = description?.length || 0;
+  const maxDescriptionLength = 3000;
 
   const goBack = () => {
     dispatch(setProjectData({ title, description, website, email, linkedin }));
@@ -70,6 +72,8 @@ export const useNameDescriptionForm = () => {
       errors,
       description,
       hasErrors,
+      descriptionLength,
+      maxDescriptionLength,
     },
     operations: {
       goBack,

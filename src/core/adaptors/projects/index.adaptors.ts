@@ -1,6 +1,16 @@
 import { categoriesAdaptor } from 'src/constants/PROJECT_CATEGORIES';
 import { SOCIAL_CAUSES } from 'src/constants/SOCIAL_CAUSES';
-import { createProjects, editProjects, getProject, getProjects, IdentityType } from 'src/core/api';
+import {
+  confirmDonation,
+  createProjects,
+  editProjects,
+  getDonations,
+  getProject,
+  getProjects,
+  getRounds,
+  IdentityType,
+  Round,
+} from 'src/core/api';
 import { donate, vote } from 'src/core/api';
 import { Project as ProjectRaw } from 'src/core/api/projects/index.types';
 import { DonationReq as DonateReqRaw } from 'src/core/api/projects/index.types';
@@ -10,12 +20,22 @@ import { removedEmptyProps } from 'src/core/helpers/objects-arrays';
 import { translate } from 'src/core/helpers/utils';
 import { ProjectState } from 'src/store/reducers/createProject.reducer';
 
-import { AdaptorRes, DonateReq, getIdentityMeta, Project, ProjectRes, SuccessRes } from '..';
+import {
+  AdaptorRes,
+  Donate,
+  DonateReq,
+  getIdentityMeta,
+  Project,
+  ProjectRes,
+  SuccessRes,
+  ProjectReq,
+  VotedOrDonatedRes,
+} from '..';
 
 export const getProjectsAdaptor = async (
   page = 1,
   limit = 10,
-  filters?: { identity_id: string },
+  filters?: { identity_id?: string; round_id?: string; category?: string },
 ): Promise<AdaptorRes<ProjectRes>> => {
   try {
     const { results: projects, total } = await getProjects({ page, limit }, filters);
@@ -24,7 +44,7 @@ export const getProjectsAdaptor = async (
       return {
         id: project.id,
         coverImg: project.cover?.url || '',
-        category: translate(project.social_cause) || SOCIAL_CAUSES[project.social_cause]?.label,
+        socialCause: translate(project.social_cause) || SOCIAL_CAUSES[project.social_cause]?.label,
         title: project.title,
         description: cleanMarkdown(project.description),
         creator: {
@@ -33,12 +53,12 @@ export const getProjectsAdaptor = async (
           name,
           img,
         },
-        feasibility: project.feasibility || '',
-        impact_assessment: project.impact_assessment || null,
-        problem_statement: project.problem_statement || '',
-        solution: project.solution || '',
-        total_requested_amount: project.total_requested_amount || null,
-        cost_breakdown: project.cost_breakdown || '',
+        feasibility: project.feasibility,
+        impact_assessment: project.impact_assessment,
+        problem_statement: project.problem_statement,
+        solution: project.solution,
+        total_requested_amount: project.total_requested_amount,
+        cost_breakdown: project.cost_breakdown,
       };
     });
     return {
@@ -64,7 +84,7 @@ export const getProjectAdaptor = async (projectId: string): Promise<AdaptorRes<P
       id: project.id,
       coverImg: project.cover?.url || '',
       socialCause: translate(project.social_cause) || SOCIAL_CAUSES[project.social_cause]?.label,
-      category: categoriesAdaptor(project.category),
+      category: categoriesAdaptor(project.category) || '',
       title: project.title,
       description: project.description,
       creator: { id: project.identity.id, type: type as IdentityType, name, img, username },
@@ -73,7 +93,8 @@ export const getProjectAdaptor = async (projectId: string): Promise<AdaptorRes<P
       overview: convertMarkdownToJSX(project.description),
       voted: project.user_voted,
       roundStatus: getDateRangeStatus(project.round.voting_start_at, project.round.voting_end_at),
-      roundStats: { donatedAmount: project.total_donations, votes: project.total_votes },
+      roundStats: { donations: project.total_donations || 0, votes: project.total_votes },
+      votingStartAt: project.round.voting_start_at,
       donations: [
         {
           id: '1',
@@ -83,21 +104,18 @@ export const getProjectAdaptor = async (projectId: string): Promise<AdaptorRes<P
         },
         { id: '2', donated_identity: { name: 'Anonymous' }, donated_price: '200.00 ADA', date: new Date().toString() },
       ],
-      created_at: project.created_at,
-      updated_at: project.updated_at,
-      status: project.status,
-      total_requested_amount: project.total_requested_amount || null,
-      impact_assessment: project.impact_assessment || null,
+      total_requested_amount: project.total_requested_amount,
+      impact_assessment: project.impact_assessment,
       problem_statement: project.problem_statement,
-      solution: project.solution || '',
+      solution: project.solution,
       feasibility: project.feasibility,
       video: project.video,
-      wallet_address: project.wallet_address,
-      wallet_env: project.wallet_env,
       cost_breakdown: project.cost_breakdown,
       goals: project.goals,
       voluntery_contribution: project.voluntery_contribution,
-      impact_assessment: project.impact_assessment,
+      status: project.status,
+      wallet_address: project.wallet_address,
+      wallet_env: project.wallet_env,
     };
     return {
       data,
@@ -112,51 +130,90 @@ export const getProjectAdaptor = async (projectId: string): Promise<AdaptorRes<P
 export const voteOrDonateProjectAdaptor = async (
   projectId: string,
   donatePayload?: DonateReq,
-): Promise<AdaptorRes<SuccessRes>> => {
+): Promise<AdaptorRes<VotedOrDonatedRes>> => {
   try {
-    if (donatePayload) {
-      if (donatePayload.type === 'FIAT') {
-        const payload: DonateReqRaw = {
-          amount: donatePayload.donate,
-          payment_type: donatePayload.type,
-          card_token: donatePayload.token,
-          currency: donatePayload.currency,
-        };
-        await donate(projectId, payload);
-      } else {
-        // Crypto
-        const payload: DonateReqRaw = {
-          amount: donatePayload.donate,
-          currency: donatePayload.currency,
-          txid: donatePayload.transactionHash,
-          wallet_address: donatePayload.wallet_address,
-        };
-        await donate(projectId, payload);
-      }
-    } else {
+    if (!donatePayload) {
       await vote(projectId);
+
+      return { data: { message: 'succeed' }, error: null };
     }
-    return { data: { message: 'succeed' }, error: null };
+
+    if (donatePayload.type === 'FIAT') {
+      const payload: DonateReqRaw = {
+        amount: donatePayload.donate,
+        payment_type: donatePayload.type,
+        card_token: donatePayload.token,
+        currency: donatePayload.currency,
+        rate: donatePayload.rate,
+        anonymous: donatePayload.anonymous,
+      };
+      const { donation, action_required, client_secret } = await donate(projectId, payload);
+
+      return {
+        data: {
+          donationId: donation.id,
+          is3DSRequired: action_required,
+          clientSecret: client_secret || '',
+        },
+        error: null,
+      };
+    } else {
+      // Crypto
+      const payload: DonateReqRaw = {
+        amount: donatePayload.donate,
+        currency: donatePayload.currency,
+        txid: donatePayload.transactionHash,
+        wallet_address: donatePayload.wallet_address,
+        rate: donatePayload.rate,
+        anonymous: donatePayload.anonymous,
+      };
+      await donate(projectId, payload);
+
+      return { data: { message: 'succeed' }, error: null };
+    }
   } catch (error) {
+    let customError = '';
+    if (!donatePayload) {
+      customError = translate('vote-donate.error-modal.vote-error-message');
+    } else {
+      customError =
+        donatePayload.type === 'FIAT'
+          ? translate('vote-donate.error-modal.fiat-error-message')
+          : translate('vote-donate.error-modal.crypto-error-message');
+    }
+
     console.error('Error in voting/donating project: ', error);
-    return { data: null, error: 'Error in voting/donating project' };
+    return { data: null, error: customError };
   }
 };
 
-export const createProjectAdaptor = async (project): Promise<AdaptorRes<Project>> => {
+export const confirmDonationAdaptor = async (
+  donationId: string,
+  paymentIntentId: string,
+): Promise<AdaptorRes<SuccessRes>> => {
   try {
-    const newProject = await createProjects(removedEmptyProps(project) as Partial<Project>);
-    return { data: newProject, error: null };
+    await confirmDonation(donationId, { payment_intent_id: paymentIntentId });
+    return { data: { message: 'succeed' }, error: null };
+  } catch (error) {
+    console.error('Error in confirming donation: ', error);
+    return { data: null, error: 'Error in confirming donation' };
+  }
+};
+
+export const createProjectAdaptor = async (project: ProjectReq): Promise<AdaptorRes<Partial<Project>>> => {
+  try {
+    const { id } = await createProjects(removedEmptyProps(project) as Partial<ProjectReq>);
+    return { data: { id }, error: null };
   } catch (error) {
     console.error('Error in creating project: ', error);
     return { data: null, error: 'Error in creating project' };
   }
 };
 
-export const editProjectAdaptor = async (project): Promise<AdaptorRes<Project>> => {
+export const editProjectAdaptor = async (project: ProjectReq): Promise<AdaptorRes<Partial<Project>>> => {
   try {
-    const newProject = await editProjects(project.id, removedEmptyProps(project) as Partial<Project>);
-    return { data: newProject, error: null };
+    const { id } = await editProjects(project.id, removedEmptyProps(project) as Partial<ProjectReq>);
+    return { data: { id }, error: null };
   } catch (error) {
     console.error('Error in editing project: ', error);
     return { data: null, error: 'Error in editing project' };
@@ -180,27 +237,27 @@ export const getEditProjectAdaptor = async (projectId: string): Promise<AdaptorR
     const project = await getProject(projectId);
 
     const data = {
-      title: project.title || '',
+      title: project.title,
       wallet_address: project.wallet_address || '',
       cover_id: project.cover.id || '',
-      website: project.website || null,
-      description: project.description || '',
-      social_cause: project.social_cause || '',
+      website: project.website || '',
+      description: project.description,
+      social_cause: project.social_cause,
       city: project.city || '',
       country: project.country || '',
       cover_url: project.cover?.url || '',
-      email: project.email || null,
-      linkedin: project.linkedin || null,
-      category: project.category || '',
-      problem_statement: project.problem_statement || '',
-      solution: project.solution || '',
-      total_requested_amount: project.total_requested_amount || null,
-      feasibility: project.feasibility || '',
-      goals: project.goals || '',
+      email: project.email,
+      linkedin: project.linkedin || '',
+      category: project.category,
+      problem_statement: project.problem_statement,
+      solution: project.solution,
+      total_requested_amount: project.total_requested_amount,
+      feasibility: project.feasibility,
+      goals: project.goals,
       video: project.video || '',
-      cost_breakdown: project.cost_breakdown || '',
+      cost_breakdown: project.cost_breakdown,
       voluntery_contribution: project.voluntery_contribution || '',
-      impact_assessment: project.impact_assessment || null,
+      impact_assessment: project.impact_assessment,
     };
 
     return {
@@ -212,6 +269,46 @@ export const getEditProjectAdaptor = async (projectId: string): Promise<AdaptorR
     return {
       data: null,
       error: 'Error in getting project',
+    };
+  }
+};
+
+export const getProjectDonationsAdaptor = async (projectId): Promise<AdaptorRes<Donate[]>> => {
+  try {
+    const donations = await getDonations(projectId);
+    const data = donations.results.map(donation => ({
+      id: donation.id,
+      amount: donation.amount,
+      anonymous: donation.anonymous,
+      name: `${donation.user?.first_name} ${donation.user?.last_name}`,
+      date: donation.created_at,
+      currency: donation.currency || 'USD',
+    }));
+    return {
+      data,
+      error: null,
+    };
+  } catch (error) {
+    console.error('Error in getting project donations: ', error);
+    return {
+      data: null,
+      error: 'Error in getting project donations',
+    };
+  }
+};
+
+export const getRoundsAdaptor = async (): Promise<AdaptorRes<Round[]>> => {
+  try {
+    const { data } = await getRounds();
+    return {
+      data,
+      error: null,
+    };
+  } catch (error) {
+    console.error('Error in getting rounds: ', error);
+    return {
+      data: null,
+      error: 'Error in getting rounds',
     };
   }
 };

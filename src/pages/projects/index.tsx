@@ -1,5 +1,9 @@
 import { Divider } from '@mui/material';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useLoaderData } from 'react-router-dom';
+import { OptionType } from 'src/core/adaptors';
+import { Round } from 'src/core/api';
 import { convertDateFormat, getDaysUntil } from 'src/core/helpers/date-converter';
 import { translate } from 'src/core/helpers/utils';
 import Breadcrumbs from 'src/modules/General/components/Breadcrumbs';
@@ -9,15 +13,22 @@ import { RootState } from 'src/store';
 
 export const Projects = () => {
   const round = useSelector((state: RootState) => state.round.round);
-
-  const roundIsClosed = getDaysUntil(round?.voting_end_at as string) <= 0;
+  const { rounds } = useLoaderData() as { rounds: Array<Round> };
+  const roundIsClosed = round && getDaysUntil(round.voting_end_at) <= 0;
+  const [selectedRound, setSelectedRound] = useState<OptionType | null>(null);
 
   const breadcrumbs = [
     { iconName: 'home-line', label: '', link: '/' },
     { label: translate('projects-breadcrumb-explore'), link: '/projects' },
-    { label: round?.name || '' },
+    {
+      label: selectedRound?.label || '',
+      options: rounds.map(r => ({ label: r.name, value: r.id })),
+      onChange: value => {
+        setSelectedRound(value as OptionType);
+      },
+      defaultValue: { label: rounds[rounds.length - 1].name, value: rounds[rounds.length - 1].name },
+    },
   ];
-
   return (
     <>
       <img src="/images/explorer-cover.png" alt="Explorer Cover" width="100%" height="100%" />
@@ -41,7 +52,7 @@ export const Projects = () => {
           )}
         </div>
         <Divider />
-        <ProjectsList />
+        <ProjectsList roundId={selectedRound?.value || ''} />
       </div>
     </>
   );

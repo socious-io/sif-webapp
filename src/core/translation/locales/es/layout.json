@@ -1,7 +1,7 @@
 {
   "socious-fund": "Fondo Socious",
   "header-login": "Iniciar sesión",
-  "layout-action-button": "Crear un proyecto",
+  "layout-action-button": "Consigue financiación",
   "layout-verification": {
     "success-text": "Tu {{title}} ha sido verificado con éxito",
     "success-support-text": "Ahora puedes votar y donar para proyectos.",
@@ -25,5 +25,7 @@
   "header-create-org": "Crear una organización",
   "submission-closed-header": "Cierre de presentación",
   "submission-closed-subheader": "El período de presentación de proyectos ha finalizado. Por favor, presenta tu propuesta en la próxima ronda.",
-  "submission-closed-button": "Cerrar"
+  "submission-closed-button": "Cerrar",
+  "header-alert-organization-message": "Por favor, cambia a una cuenta de organización.",
+  "header-alert-organization-close": "Cerrar"
 }

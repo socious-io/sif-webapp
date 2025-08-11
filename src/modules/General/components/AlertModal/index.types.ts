@@ -8,7 +8,7 @@ export interface AlertModalProps {
   open: boolean;
   onClose: () => void;
   onSubmit?: () => void;
-  closeButtn?: boolean;
+  closeButton?: boolean;
   closeButtonLabel?: string;
   submitButton?: boolean;
   disableSubmitButton?: boolean;

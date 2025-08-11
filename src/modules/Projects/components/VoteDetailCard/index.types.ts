@@ -5,9 +5,8 @@ export interface VoteDetailCardProps {
   roundStats: RoundStats;
   isOwner?: boolean;
   alreadyVoted?: boolean;
-  roundStatus?: DateRangeStatus;
-  onVote?: () => void;
-  votingStartAt?: Date;
-  showResult: boolean;
   identityType?: 'users' | 'organizations';
+  onVote?: () => void;
+  roundStatus?: DateRangeStatus;
+  votingStartAt?: Date;
 }

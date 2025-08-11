@@ -1,7 +1,7 @@
 {
   "socious-fund": "Socious Fund",
   "header-login": "Login",
-  "layout-action-button": " Create a Project",
+  "layout-action-button": "Get Funded",
   "layout-verification": {
     "success-text": "Your {{title}} has been successfully verified",
     "success-support-text": "You can now vote and donate for projects.",
@@ -28,5 +28,7 @@
   "submission-closed-header": "Submission Closed",
   "submission-closed-subheader": "The project submission period has ended. Please submit your proposal in the next round.",
   "submission-closed-button": "Close",
-  "page-not-found": "Page not found :"
+  "page-not-found": "Page not found :",
+  "header-alert-organization-message": "Please switch to a organization account.",
+  "header-alert-organization-close": "Close"
 }

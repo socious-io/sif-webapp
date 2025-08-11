@@ -1,4 +1,4 @@
-export const convertDateFormat = (isoDate: string): string => {
+export const convertDateFormat = (isoDate: string | Date): string => {
   const date = new Date(isoDate);
   const year = date.getUTCFullYear();
   const month = String(date.getUTCMonth() + 1).padStart(2, '0');

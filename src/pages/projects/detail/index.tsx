@@ -1,7 +1,7 @@
 import { Divider } from '@mui/material';
-import { convertMarkdownToJSX } from 'src/core/convert-md-to-jsx';
+import { convertMarkdownToJSX } from 'src/core/helpers/convert-md-to-jsx';
 import { getYouTubeEmbedUrl, translate } from 'src/core/helpers/utils';
-// import { AlertModal } from 'src/modules/General/components/AlertModal';
+// import AlertModal from 'src/modules/General/components/AlertModal';
 import AvatarLabelGroup from 'src/modules/General/components/AvatarLabelGroup';
 import BackLink from 'src/modules/General/components/BackLink';
 import Breadcrumbs from 'src/modules/General/components/Breadcrumbs';
@@ -14,6 +14,7 @@ import Link from 'src/modules/General/components/Link';
 import VerticalTabs from 'src/modules/General/components/VerticalTabs';
 import VoteDetailCard from 'src/modules/Projects/components/VoteDetailCard';
 import CommentSection from 'src/modules/Projects/containers/CommentSection';
+import DonationsList from 'src/modules/Projects/containers/DonationsList';
 import variables from 'src/styles/constants/_exports.module.scss';
 
 import { useProjectDetail } from './useProjectDetail';
@@ -97,7 +98,7 @@ export const ProjectDetail = () => {
       ),
     },
     {
-      label: 'Category',
+      label: translate('projects-detail.category'),
       content: (
         <div className="flex items-center gap-1.5 text-base font-semibold leading-6 text-Brand-600">
           {detail.category}
@@ -105,30 +106,30 @@ export const ProjectDetail = () => {
       ),
     },
   ];
-  console.log('GOals', detail.goals);
+
   const contents = [
-    { label: 'Project Description', content: convertMarkdownToJSX(detail.description) },
-    { label: 'Problem Statement', content: convertMarkdownToJSX(detail.problem_statement) },
-    { label: 'Solution', content: convertMarkdownToJSX(detail.solution) },
-    { label: 'Key Deliverables & Goals', content: detail.goals ? convertMarkdownToJSX(detail.goals) : '' },
+    { label: translate('project-description-label'), content: convertMarkdownToJSX(detail.description) },
+    { label: translate('project-statement-label'), content: convertMarkdownToJSX(detail.problem_statement) },
+    { label: translate('project-solution-label'), content: convertMarkdownToJSX(detail.solution) },
+    { label: translate('project-goals-label'), content: detail.goals ? convertMarkdownToJSX(detail.goals) : '' },
     {
-      label: 'Impact Assessment',
+      label: translate('project-impact-assessment-label'),
       content: convertMarkdownToJSX(detail?.impact_assessment),
     },
     {
-      label: 'Voluntary Contribution',
-      content: detail?.voluntery_contribution ? convertMarkdownToJSX(detail?.voluntery_contribution) : 'N/A',
+      label: translate('project-voluntary-contribution-label'),
+      content: detail?.voluntery_contribution ? convertMarkdownToJSX(detail.voluntery_contribution) : 'N/A',
     },
     {
-      label: 'Funding and budget',
+      label: translate('create-project-step4-title'),
       content: (
         <>
-          <div>{`Total amount requested: ${detail.total_requested_amount}`}</div>
+          <div>{`${translate('project-amount-label')}: ${detail.total_requested_amount}`}</div>
           {convertMarkdownToJSX(detail.cost_breakdown)}
         </>
       ),
     },
-    { label: 'Feasibility and team', content: convertMarkdownToJSX(detail.feasibility) },
+    { label: translate('project-feasibility-label'), content: convertMarkdownToJSX(detail.feasibility) },
   ];
   const tabs = [
     {
@@ -164,6 +165,7 @@ export const ProjectDetail = () => {
         </div>
       ),
     },
+    { label: translate('projects-detail.donations'), content: <DonationsList projectId={projectId} /> },
   ];
 
   return (
@@ -242,13 +244,12 @@ export const ProjectDetail = () => {
         {detail.roundStats && (
           <VoteDetailCard
             roundStats={detail.roundStats}
+            roundStatus={detail.roundStatus}
             isOwner={isOwner}
             alreadyVoted={detail.voted}
-            roundStatus={detail.roundStatus}
-            onVote={onVote}
-            votingStartAt={round?.voting_start_at}
-            showResult={isOwner}
             identityType={identityType}
+            onVote={onVote}
+            votingStartAt={detail.votingStartAt}
           />
         )}
       </div>

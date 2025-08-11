@@ -41,8 +41,10 @@ export const useDonateProject = (onDonate: (data: DonateReq) => void) => {
   } = useForm<Form>({ mode: 'all', resolver: yupResolver(schema) });
   const selectedCurrencyValue = watch('currency');
   const selectedCurrency = CURRENCIES.find(currency => currency.value === selectedCurrencyValue);
+
   const selectedCurrencyLabel = selectedCurrency?.label;
   const donateValue = watch('donate') || 0;
+  const anonymous = watch('preventDisplayName');
   // const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 
   const currentIdentity = useSelector<RootState, CurrentIdentity | undefined>(state => {
@@ -102,7 +104,8 @@ export const useDonateProject = (onDonate: (data: DonateReq) => void) => {
       const unsignedTx = await tx.build();
       const signedTx = await wallet.signTx(unsignedTx);
       const txHash = await wallet.submitTx(signedTx);
-      return onDonate({ ...data, transactionHash: txHash, wallet_address: address });
+      const rate = await selectedCurrency.rateConversionFunc(data.donate);
+      return onDonate({ ...data, transactionHash: txHash, wallet_address: address, rate, anonymous });
     } catch (error) {
       alert(error);
     }
