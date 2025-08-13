@@ -29,5 +29,15 @@
   "submission-closed-subheader": "项目提交期已结束。请在下一轮提交您的提案。",
   "submission-closed-button": "关闭",
   "header-alert-organization-message": "请切换到组织账户。",
-  "header-alert-organization-close": "关闭"
+  "header-alert-organization-close": "关闭",
+  "error-not-found": {
+    "header": "404 - 页面未找到",
+    "subheader": "哎呀！您访问的页面在本站不存在",
+    "go-to-home-btn": "返回首页"
+  },
+  "error-internal": {
+    "header": "服务器内部错误",
+    "subheader": "我们为带来的不便深感抱歉，请稍后再试",
+    "home-btn": "主页"
+  }
 }
