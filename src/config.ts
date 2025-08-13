@@ -14,6 +14,7 @@ export const config = {
   datadogClientToken: import.meta.env.VITE_DATADOG_CLIENT_TOKEN,
   payoutDonationsAddress: import.meta.env.VITE_PAYOUT_DONATIONS_ADDRESS,
   stripePublicKey: import.meta.env.VITE_STRIPE_PUBLIC_KEY,
+  logDiscordWebHook: import.meta.env.VITE_LOG_DISCORD_WEBHOOK,
   rates: {
     ada: import.meta.env.VITE_CARDANO_ADA_RATE,
     fiat: import.meta.env.VITE_FIAT_API_RATE,

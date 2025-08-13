@@ -30,5 +30,15 @@
   "submission-closed-button": "Close",
   "page-not-found": "Page not found :",
   "header-alert-organization-message": "Please switch to a organization account.",
-  "header-alert-organization-close": "Close"
+  "header-alert-organization-close": "Close",
+  "error-not-found": {
+    "header": "404 - Page Not Found",
+    "subheader": "Oops! The page you're looking for doesn't exist on",
+    "go-to-home-btn": "Go to Home"
+  },
+  "error-internal": {
+    "header": "Internal Server Error",
+    "subheader": "We apologize for the inconvenience. Please try again later",
+    "home-btn": " Home Page"
+  }
 }

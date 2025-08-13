@@ -1,8 +1,9 @@
 import { ComponentType } from 'react';
 import { useSelector } from 'react-redux';
-import { Navigate, RouteObject, createBrowserRouter } from 'react-router-dom';
-import { translate } from 'src/core/helpers/utils';
+import { Navigate, RouteObject, createBrowserRouter, useRouteError } from 'react-router-dom';
 import { Layout } from 'src/modules/Layout';
+import { FallBack } from 'src/pages/error/fallback';
+import { NotFound } from 'src/pages/error/notFound';
 import { RootState } from 'src/store';
 
 import { getProjectAdaptor, getProjectsAdaptor, getRoundsAdaptor } from '../adaptors';
@@ -10,7 +11,7 @@ import { getRound } from '../api';
 
 export const blueprint: RouteObject[] = [
   { path: '/', element: <DefaultRoute /> },
-  { path: '*', element: <div>{translate('page-not-found')}(</div> },
+  { path: '*', element: <NotFound /> },
   {
     path: '/',
     children: [
@@ -202,6 +203,7 @@ export const blueprint: RouteObject[] = [
         },
       },
     ],
+    errorElement: <ErrorBoundary />,
   },
 ];
 
@@ -232,6 +234,15 @@ function Protect<T extends object>(Component: ComponentType<T>, allowedIdentity:
       return <Navigate to="/intro" />;
     }
   };
+}
+
+function ErrorBoundary() {
+  const error: any = useRouteError();
+  if (error?.response?.status === 401) {
+    <Navigate to="/intro" />;
+    return null;
+  }
+  return <FallBack />;
 }
 
 export const routes = createBrowserRouter(blueprint);
