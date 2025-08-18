@@ -29,5 +29,15 @@
   "submission-closed-subheader": "انتهت فترة تقديم المشاريع. يرجى تقديم اقتراحك في الجولة القادمة.",
   "submission-closed-button": "إغلاق",
   "header-alert-organization-message": "يرجى التبديل إلى حساب مؤسسة.",
-  "header-alert-organization-close": "إغلاق"
+  "header-alert-organization-close": "إغلاق",
+  "error-not-found": {
+    "header": "404 - الصفحة غير موجودة",
+    "subheader": "عذرًا! الصفحة التي تبحث عنها غير موجودة على",
+    "go-to-home-btn": "الانتقال إلى الصفحة الرئيسية"
+  },
+  "error-internal": {
+    "header": "خطأ في الخادم الداخلي",
+    "subheader": "نعتذر عن الإزعاج. يرجى المحاولة مرة أخرى لاحقًا",
+    "home-btn": "الصفحة الرئيسية"
+  }
 }
