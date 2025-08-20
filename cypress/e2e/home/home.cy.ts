@@ -1,4 +1,4 @@
-import { PROJECTS, ROUNDS } from './mocks';
+import { ALL_ROUNDS, PROJECTS, ROUNDS } from './mocks';
 import { API_SERVER, APP_URL } from '../constants/constants';
 
 describe('home page test', () => {
@@ -18,9 +18,12 @@ describe('home page test', () => {
 
     // explore projects intercepts
 
-    cy.intercept('GET', `${API_SERVER}/projects?t=*&page=1&limit=10`, req => {
+    cy.intercept('GET', `${API_SERVER}/projects?t=*&page=1&limit=10&filter.round_id=*`, req => {
       req.reply(200, PROJECTS);
     }).as('getProjects');
+    cy.intercept('GET', `${API_SERVER}/rounds/rounds?t=*`, req => {
+      req.reply(200, ALL_ROUNDS);
+    }).as('getRounds');
   });
 
   Cypress.on('uncaught:exception', err => {
@@ -48,8 +51,9 @@ describe('home page test', () => {
 
   it('user navigates to Home from page navigator', () => {
     cy.visit(`${APP_URL}/projects`);
-    cy.get('[data-testid="home-icon"]').should('exist');
-    cy.get('[data-testid="home-icon"]').first().click();
-    cy.contains('Make your impact').should('exist');
+    cy.get('[data-testid="breadcrumbs"]').should('exist');
+    cy.get('[data-testid="breadcrumbs"]').find('[data-testid="home-icon"]').should('exist');
+    cy.get('[data-testid="breadcrumbs"]').find('[data-testid="home-icon"]').first().click();
+    cy.url().should('contain', '/home');
   });
 });
