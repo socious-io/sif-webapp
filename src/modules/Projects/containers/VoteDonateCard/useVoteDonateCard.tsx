@@ -100,8 +100,8 @@ export const useVoteDonateCard = () => {
     // }
   };
   const getAlertTitle = () => {
-    if (status !== DateRangeStatus.DURING) {
-      return status === DateRangeStatus.BEFORE
+    if (detail.roundStatus !== DateRangeStatus.DURING) {
+      return detail.roundStatus === DateRangeStatus.BEFORE
         ? `${translate('vote-donate.not-started')} ${formatVotingStartMessage(detail.votingStartAt as Date)}`
         : translate('home-round-closed');
     }
