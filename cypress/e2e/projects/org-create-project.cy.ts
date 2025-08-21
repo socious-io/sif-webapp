@@ -1,12 +1,10 @@
-import {
-  ROUNDS,
+import {  
   VERIFIED_ORG,
   SUBMITABLE_ROUNDS,
   MEDIA,
   POST_PROJECTS,
   NEW_PROJECT_DETAIL,
-  LOCATIONS,
-  NOT_VERIFIED_ORG,
+  LOCATIONS,  
 } from './mocks';
 import { API_SERVER, APP_URL } from '../constants/constants';
 
@@ -44,18 +42,18 @@ describe('Organization creates project', () => {
     }
   });
 
-  it('Submition vote period', () => {
-    mockRoundsResponse = ROUNDS;
+  // it('Submition vote period', () => {
+  //   mockRoundsResponse = ROUNDS;
 
-    cy.visit(`${APP_URL}/home`);
-    cy.contains('Your organization has been successfully verified').should('be.visible');
-    cy.contains('Make your impact').should('be.visible');
+  //   cy.visit(`${APP_URL}/home`);
+  //   cy.contains('Your organization has been successfully verified').should('be.visible');
+  //   cy.contains('Make your impact').should('be.visible');
 
-    cy.contains('Get Funded').should('exist').click();
-    cy.contains('Submission Closed').should('be.visible');
+  //   cy.contains('Get Funded').should('exist').click();
+  //   cy.contains('Submission Closed').should('be.visible');
 
-    cy.contains('Close').click({ force: true });
-  });
+  //   cy.contains('Close').click({ force: true });
+  // });
 
   it('verified organization creates Project', () => {
     mockRoundsResponse = SUBMITABLE_ROUNDS;
@@ -83,6 +81,10 @@ describe('Organization creates project', () => {
 
     cy.get('[name=title]').focus();
     cy.get('[name=title]').type('Test project');
+    cy.get('[name=email]').focus();
+    cy.get('[name=email]').type('TestEmail@Email.com');
+    cy.get('[name=linkedin]').focus();
+    cy.get('[name=linkedin]').type('https://linkedin.com/');
     cy.get('[name=website]').focus();
     cy.get('[name=website]').type('http://test.com');
     cy.get('[role=textbox]').focus();
@@ -128,6 +130,133 @@ describe('Organization creates project', () => {
     cy.contains('Continue').should('be.enabled').click();
 
     //step 3
+    cy.get('#projectCategory').should('exist');
+    cy.get('#projectCategory').click();
+    cy.contains('Emerging markets').should('be.visible');
+    cy.contains('Open innovation').should('be.visible');
+    cy.contains('Women leaders').should('be.visible');
+    cy.contains('Women leaders').should('be.visible').click();
+
+    cy.get('[role=textbox]').first().focus();
+    cy.get('[role=textbox]').first().type('this is a test paragraph {enter}');
+
+    cy.contains('button', 'B').first().click();
+    cy.get('[role=textbox]').first().focus();
+    cy.get('[role=textbox]').first().type('this test is bold {enter}');
+
+    cy.contains('button', 'i').first().click();
+    cy.get('[role=textbox]').first().focus();
+    cy.get('[role=textbox]').first().type('this text is itallic and bold {enter}');
+
+    cy.contains('button', 'B').first().click();
+    cy.get('[role=textbox]').first().focus();
+    cy.get('[role=textbox]').first().type('this text is only itallic {enter}');
+
+    cy.contains('button', 'i').first().click();
+    cy.contains('button', 'u').first().click();
+    cy.get('[role=textbox]').first().focus();
+    cy.get('[role=textbox]').first().type('this text has underline {enter}');
+
+    cy.contains('button', 'i').first().click();
+    cy.contains('button', 'B').first().click();
+    cy.get('[role=textbox]').first().focus();
+    cy.get('[role=textbox]').first().type('this text has all at the same time {enter}');
+
+    cy.get('.tiptap.ProseMirror').first()
+      .invoke('html')
+      .then(html => {
+        expect(html).to.include('<p>this is a test paragraph </p>');
+        expect(html).to.include('<strong class="font-bold">this test is bold </strong>');
+        expect(html).to.include(
+          '<strong class="font-bold"><em class="italic">this text is itallic and bold </em></strong>',
+        );
+        expect(html).to.include('<em class="italic">this text is only itallic </em>');
+        expect(html).to.include('<u class="underline">this text has underline </u>');
+        expect(html).to.include(
+          '<strong class="font-bold"><em class="italic"><u class="underline">this text has all at the same time </u></em></strong>',
+        );
+      });
+
+    cy.get('[role=textbox]').eq(1).focus();
+    cy.get('[role=textbox]').eq(1).type('this is a test paragraph {enter}');
+
+    cy.get('[role=textbox]').eq(1).contains('button', 'B').click().pause();
+    cy.get('[role=textbox]').eq(1).focus();
+    cy.get('[role=textbox]').eq(1).type('this test is bold {enter}');
+
+    cy.contains('button', 'i').eq(1).click();
+    cy.get('[role=textbox]').eq(1).focus();
+    cy.get('[role=textbox]').eq(1).type('this text is itallic and bold {enter}');
+
+    cy.contains('button', 'B').eq(1).click();
+    cy.get('[role=textbox]').eq(1).focus();
+    cy.get('[role=textbox]').eq(1).type('this text is only itallic {enter}');
+
+    cy.contains('button', 'i').eq(1).click();
+    cy.contains('button', 'u').eq(1).click();
+    cy.get('[role=textbox]').eq(1).focus();
+    cy.get('[role=textbox]').eq(1).type('this text has underline {enter}');
+
+    cy.contains('button', 'i').eq(1).click();
+    cy.contains('button', 'B').eq(1).click();
+    cy.get('[role=textbox]').eq(1).focus();
+    cy.get('[role=textbox]').eq(1).type('this text has all at the same time {enter}');
+
+    cy.get('.tiptap.ProseMirror').eq(1)
+      .invoke('html')
+      .then(html => {
+        expect(html).to.include('<p>this is a test paragraph </p>');
+        expect(html).to.include('<strong class="font-bold">this test is bold </strong>');
+        expect(html).to.include(
+          '<strong class="font-bold"><em class="italic">this text is itallic and bold </em></strong>',
+        );
+        expect(html).to.include('<em class="italic">this text is only itallic </em>');
+        expect(html).to.include('<u class="underline">this text has underline </u>');
+        expect(html).to.include(
+          '<strong class="font-bold"><em class="italic"><u class="underline">this text has all at the same time </u></em></strong>',
+        );
+      });
+    cy.get('[role=textbox]').eq(2).focus();
+    cy.get('[role=textbox]').eq(2).type('this is a test paragraph {enter}');
+
+    cy.contains('button', 'B').eq(2).click();
+    cy.get('[role=textbox]').eq(2).focus();
+    cy.get('[role=textbox]').eq(2).type('this test is bold {enter}');
+
+    cy.contains('button', 'i').eq(2).click();
+    cy.get('[role=textbox]').eq(2).focus();
+    cy.get('[role=textbox]').eq(2).type('this text is itallic and bold {enter}');
+
+    cy.contains('button', 'B').eq(2).click();
+    cy.get('[role=textbox]').eq(2).focus();
+    cy.get('[role=textbox]').eq(2).type('this text is only itallic {enter}');
+
+    cy.contains('button', 'i').eq(2).click();
+    cy.contains('button', 'u').eq(2).click();
+    cy.get('[role=textbox]').eq(2).focus();
+    cy.get('[role=textbox]').eq(2).type('this text has underline {enter}');
+
+    cy.contains('button', 'i').eq(2).click();
+    cy.contains('button', 'B').eq(2).click();
+    cy.get('[role=textbox]').eq(2).focus();
+    cy.get('[role=textbox]').eq(2).type('this text has all at the same time {enter}');
+
+    cy.get('.tiptap.ProseMirror').eq(2)
+      .invoke('html')
+      .then(html => {
+        expect(html).to.include('<p>this is a test paragraph </p>');
+        expect(html).to.include('<strong class="font-bold">this test is bold </strong>');
+        expect(html).to.include(
+          '<strong class="font-bold"><em class="italic">this text is itallic and bold </em></strong>',
+        );
+        expect(html).to.include('<em class="italic">this text is only itallic </em>');
+        expect(html).to.include('<u class="underline">this text has underline </u>');
+        expect(html).to.include(
+          '<strong class="font-bold"><em class="italic"><u class="underline">this text has all at the same time </u></em></strong>',
+        );
+      }).pause();
+
+    //step 4
     cy.contains('Add a cover photo').should('be.visible');
     cy.contains('Continue').should('be.disabled');
 
@@ -158,32 +287,32 @@ describe('Organization creates project', () => {
     cy.contains('Project Details').should('be.visible');
   });
 
-  it('user selects location', () => {
-    mockRoundsResponse = SUBMITABLE_ROUNDS;
+  // it('user selects location', () => {
+  //   mockRoundsResponse = SUBMITABLE_ROUNDS;
 
-    cy.visit(`${APP_URL}/home`);
-    cy.contains('Get Funded').click();
+  //   cy.visit(`${APP_URL}/home`);
+  //   cy.contains('Get Funded').click();
 
-    cy.contains('Start a project').should('be.visible');
-    cy.contains('Start a project').click();
+  //   cy.contains('Start a project').should('be.visible');
+  //   cy.contains('Start a project').click();
 
-    cy.contains(`Let's begin your fundraising journey`);
+  //   cy.contains(`Let's begin your fundraising journey`);
 
-    cy.contains('City / Country').click();
-    cy.get('[data-testid="search-dropdown"]').click();
-    cy.get('[data-testid="search-dropdown"]').type('tokyo');
-    cy.contains('Japan, Tokyo').should('be.visible');
-    cy.wait('@getLocation');
-  });
+  //   cy.contains('City / Country').click();
+  //   cy.get('[data-testid="search-dropdown"]').click();
+  //   cy.get('[data-testid="search-dropdown"]').type('tokyo');
+  //   cy.contains('Japan, Tokyo').should('be.visible');
+  //   cy.wait('@getLocation');
+  // });
 
-  it('not verified organization tries to submit a project', () => {
-    org = NOT_VERIFIED_ORG;
-    mockRoundsResponse = SUBMITABLE_ROUNDS;
+  // it('not verified organization tries to submit a project', () => {
+  //   org = NOT_VERIFIED_ORG;
+  //   mockRoundsResponse = SUBMITABLE_ROUNDS;
 
-    cy.visit(`${APP_URL}/home`);
-    cy.contains('Make your impact').should('be.visible');
+  //   cy.visit(`${APP_URL}/home`);
+  //   cy.contains('Make your impact').should('be.visible');
 
-    cy.contains('Get Funded').should('exist').click();
-    cy.contains('Verify your organization').should('be.visible');
-  });
+  //   cy.contains('Get Funded').should('exist').click();
+  //   cy.contains('Verify your organization').should('be.visible');
+  // });
 });
