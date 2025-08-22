@@ -45,7 +45,7 @@ export const useVoteDonateCard = () => {
     selectedCard === 'donate'
       ? {
           donate: Number(currentDonateInfo?.donate || 0).toFixed(2),
-          currency: CURRENCIES.find(currency => currency.value === currentDonateInfo?.currency)?.label,
+          currency: CURRENCIES.find(currency => currency.value === currentDonateInfo?.currency)?.label || 'USD',
           donateConversion:
             selectedPayment === 'Crypto' ? `$${Number(currentDonateInfo?.donate || 0).toFixed(2)} USD` : '',
         }

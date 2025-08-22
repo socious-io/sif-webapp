@@ -34,13 +34,16 @@ const SuccessModal: React.FC<SuccessModalProps> = ({
   };
 
   useEffect(() => {
-    if (donateInfo && donateInfo.donate && donateInfo.currency) {
-      getUsdEquivalent().then(result => {
+    const fetchUsdEquivalent = async () => {
+      if (donateInfo && donateInfo.donate && donateInfo.currency) {
+        const result = await getUsdEquivalent();
         setUsdEquivalent(result);
-      });
-    } else {
-      setUsdEquivalent(null);
-    }
+      } else {
+        setUsdEquivalent(null);
+      }
+    };
+
+    fetchUsdEquivalent();
   }, [donateInfo?.donate, donateInfo?.currency]);
 
   const footerJsx = (
@@ -57,7 +60,9 @@ const SuccessModal: React.FC<SuccessModalProps> = ({
       title={`Thank you for your ${voteInfo ? 'vote' : 'donation'}!`}
       subTitle={
         <>
-          {translate('vote-donate.success-modal.vote-or-contribution', { title: voteInfo ? 'vote' : 'contribution' })}
+          {translate('vote-donate.success-modal.vote-or-contribution', {
+            title: voteInfo ? 'vote' : 'contribution',
+          })}
           <span className="font-medium text-Gray-light-mode-900"> {projectTitle} </span>
           {translate('vote-donate.success-modal.processed')}
         </>
