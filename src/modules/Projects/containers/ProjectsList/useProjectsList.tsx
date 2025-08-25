@@ -20,6 +20,7 @@ export const useProjectsList = (roundId: string) => {
       category: projectCategory.value,
     });
     data && setCurrentProjects(data);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
   useEffect(() => {
     const changeRound = async () => {

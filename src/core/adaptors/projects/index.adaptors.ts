@@ -15,7 +15,7 @@ import { donate, vote } from 'src/core/api';
 import { Project as ProjectRaw } from 'src/core/api/projects/index.types';
 import { DonationReq as DonateReqRaw } from 'src/core/api/projects/index.types';
 import { cleanMarkdown, convertMarkdownToJSX } from 'src/core/helpers/convert-md-to-jsx';
-import { getDateRangeStatus } from 'src/core/helpers/date-converter';
+import { DateRangeStatus, getDateRangeStatus } from 'src/core/helpers/date-converter';
 import { removedEmptyProps } from 'src/core/helpers/objects-arrays';
 import { translate } from 'src/core/helpers/utils';
 import { ProjectState } from 'src/store/reducers/createProject.reducer';
@@ -92,7 +92,7 @@ export const getProjectAdaptor = async (projectId: string): Promise<AdaptorRes<P
       location: [project.city, project.country].filter(Boolean).join(', ') || 'Worldwide',
       overview: convertMarkdownToJSX(project.description),
       voted: project.user_voted,
-      roundStatus: getDateRangeStatus(project.round.voting_start_at, project.round.voting_end_at),
+      roundStatus: DateRangeStatus.DURING,
       roundStats: { donations: project.total_donations || 0, votes: project.total_votes },
       votingStartAt: project.round.voting_start_at,
       donations: [

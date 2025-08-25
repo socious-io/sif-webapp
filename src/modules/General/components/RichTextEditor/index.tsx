@@ -38,7 +38,7 @@ const MenuBar = ({ editor }) => {
         disabled={!editor.can().chain().focus().toggleBold().run()}
         className={`${styles['button']} ${editor.isActive('bold') && styles['button--active']}`}
       >
-        B
+        {'B'}
       </button>
       <button
         type="button"
@@ -46,7 +46,7 @@ const MenuBar = ({ editor }) => {
         disabled={!editor.can().chain().focus().toggleItalic().run()}
         className={`italic ${styles['button']} ${editor.isActive('italic') && styles['button--active']}`}
       >
-        i
+        {'i'}
       </button>
       <button
         type="button"
@@ -54,7 +54,7 @@ const MenuBar = ({ editor }) => {
         disabled={!editor.can().chain().focus().toggleUnderline().run()}
         className={`underline ${styles['button']} ${editor.isActive('underline') && styles['button--active']}`}
       >
-        u
+        {'u'}
       </button>
     </div>
   );
@@ -103,7 +103,10 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
   return (
     <div className={styles['main']}>
       {label && <label className={styles['label']}>{label}</label>}
-      <div data-testid="description-input" className={`${styles['container']} ${errors ? styles['container--error'] : styles['container--default']}`}>
+      <div
+        data-testid="description-input"
+        className={`${styles['container']} ${errors ? styles['container--error'] : styles['container--default']}`}
+      >
         <EditorContent editor={editor} />
         <MenuBar editor={editor} />
       </div>
