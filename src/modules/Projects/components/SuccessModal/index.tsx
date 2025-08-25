@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react'; // Import React hooks
+import { CURRENCIES } from 'src/constants/CURRENCIES';
 import { translate } from 'src/core/helpers/utils';
 import Button from 'src/modules/General/components/Button';
 import FeaturedIcon from 'src/modules/General/components/FeaturedIcon';
@@ -14,6 +16,36 @@ const SuccessModal: React.FC<SuccessModalProps> = ({
   onContinue,
   ...props
 }) => {
+  const [usdEquivalent, setUsdEquivalent] = useState<string | null>(null);
+
+  const getUsdEquivalent = async () => {
+    if (donateInfo?.currency === 'USD') return '';
+    try {
+      const currency = CURRENCIES.find(currency => currency.label.toLowerCase() === donateInfo?.currency.toLowerCase());
+      if (!currency) {
+        throw new Error('Selected currency not found');
+      }
+      const converted = await currency.rateConversionFunc(Number(donateInfo?.donate));
+      return `(${converted} USD)`;
+    } catch (error) {
+      console.error('Error fetching USD equivalent:', error);
+      return null;
+    }
+  };
+
+  useEffect(() => {
+    const fetchUsdEquivalent = async () => {
+      if (donateInfo && donateInfo.donate && donateInfo.currency) {
+        const result = await getUsdEquivalent();
+        setUsdEquivalent(result);
+      } else {
+        setUsdEquivalent(null);
+      }
+    };
+
+    fetchUsdEquivalent();
+  }, [donateInfo?.donate, donateInfo?.currency]);
+
   const footerJsx = (
     <Button color="primary" variant="text" customStyle="!h-auto !py-0 !underline" onClick={onContinue}>
       {translate('vote-donate.success-modal.continue-btn')}
@@ -28,7 +60,9 @@ const SuccessModal: React.FC<SuccessModalProps> = ({
       title={`Thank you for your ${voteInfo ? 'vote' : 'donation'}!`}
       subTitle={
         <>
-          {translate('vote-donate.success-modal.vote-or-contribution', { title: voteInfo ? 'vote' : 'contribution' })}
+          {translate('vote-donate.success-modal.vote-or-contribution', {
+            title: voteInfo ? 'vote' : 'contribution',
+          })}
           <span className="font-medium text-Gray-light-mode-900"> {projectTitle} </span>
           {translate('vote-donate.success-modal.processed')}
         </>
@@ -55,7 +89,7 @@ const SuccessModal: React.FC<SuccessModalProps> = ({
             <span className="font-medium text-Gray-light-mode-900">
               {` ${donateInfo.donate} ${donateInfo.currency} `}
             </span>
-            {donateInfo.donateConversion && `(${donateInfo.donateConversion}) `}
+            {usdEquivalent && usdEquivalent}
             {translate('vote-donate.success-modal.meaningful-impact')}
           </p>
           <p className="mt-4">{translate('vote-donate.success-modal.meaningful-difference')}</p>

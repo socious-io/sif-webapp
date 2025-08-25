@@ -13,6 +13,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className = '', ...pro
   return (
     <MUIBreadcrumbs
       aria-label="breadcrumb"
+      data-testid="breadcrumbs"
       separator={<Icon name="chevron-right" fontSize={16} color={variables.color_grey_300} />}
       className={`${styles['container']} ${className}`}
       {...props}

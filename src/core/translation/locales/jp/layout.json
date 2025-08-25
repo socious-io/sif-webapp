@@ -29,5 +29,15 @@
   "submission-closed-subheader": "プロジェクトの提出期間が終了しました。次のラウンドで提案を提出してください。",
   "submission-closed-button": "閉じる",
   "header-alert-organization-message": "組織アカウントに切り替えてください。",
-  "header-alert-organization-close": "閉じる"
+  "header-alert-organization-close": "閉じる",
+  "error-not-found": {
+    "header": "404 - ページが見つかりません",
+    "subheader": "お探しのページは存在しません",
+    "go-to-home-btn": "ホームに戻る"
+  },
+  "error-internal": {
+    "header": "内部サーバーエラー",
+    "subheader": "ご不便をおかけして申し訳ありません。後でもう一度お試しください",
+    "home-btn": "ホームページ"
+  }
 }

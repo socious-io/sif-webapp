@@ -1,7 +1,7 @@
 .expect {
-    word-wrap: break-word;
+    overflow-wrap: normal;
+    word-break: normal;
     white-space: pre-wrap;
-
     :where(:not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)) {
         all: revert;
     }
