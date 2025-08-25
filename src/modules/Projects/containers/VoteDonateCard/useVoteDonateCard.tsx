@@ -45,11 +45,7 @@ export const useVoteDonateCard = () => {
     selectedCard === 'donate'
       ? {
           donate: Number(currentDonateInfo?.donate || 0).toFixed(2),
-          currency:
-            selectedPayment === 'Crypto'
-              ? CURRENCIES.find(currency => currency.value === currentDonateInfo?.currency)?.label ||
-                CURRENCIES[0].label
-              : 'USD',
+          currency: CURRENCIES.find(currency => currency.value === currentDonateInfo?.currency)?.label || 'USD',
           donateConversion:
             selectedPayment === 'Crypto' ? `$${Number(currentDonateInfo?.donate || 0).toFixed(2)} USD` : '',
         }
@@ -100,8 +96,8 @@ export const useVoteDonateCard = () => {
     // }
   };
   const getAlertTitle = () => {
-    if (status !== DateRangeStatus.DURING) {
-      return status === DateRangeStatus.BEFORE
+    if (detail.roundStatus !== DateRangeStatus.DURING) {
+      return detail.roundStatus === DateRangeStatus.BEFORE
         ? `${translate('vote-donate.not-started')} ${formatVotingStartMessage(detail.votingStartAt as Date)}`
         : translate('home-round-closed');
     }
