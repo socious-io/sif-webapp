@@ -22,6 +22,7 @@ export const useUsersProjects = () => {
     setPage(newPage);
     const { data } = await getProjectsAdaptor(newPage, 10, { identity_id: currentIdentity?.id as string });
     data && setCurrentProjects(data);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
   useEffect(() => {
     if (location.pathname.includes('dashboard')) onChangePage(1);

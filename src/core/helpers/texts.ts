@@ -16,3 +16,11 @@ export const truncateFromMiddle = (fullStr: string, frontChars: number, backChar
   if (fullStr.length <= frontChars) return fullStr;
   return fullStr.slice(0, frontChars) + middleStr + fullStr.slice(fullStr.length - backChars);
 };
+
+export const countTextCharacters = (html: string): number => {
+  const text = html
+    .replace(/<[^>]+>/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+  return text.length;
+};
