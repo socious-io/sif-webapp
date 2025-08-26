@@ -7,6 +7,7 @@ import {
   getDonations,
   getProject,
   getProjects,
+  getProjectsPreview,
   getRounds,
   IdentityType,
   Round,
@@ -30,12 +31,13 @@ import {
   SuccessRes,
   ProjectReq,
   VotedOrDonatedRes,
+  ProjectPreviewRes,
 } from '..';
 
 export const getProjectsAdaptor = async (
   page = 1,
   limit = 10,
-  filters?: { identity_id?: string; round_id?: string; category?: string },
+  filters?: { identity_id?: string; round_id?: string; category?: string; q?: string },
 ): Promise<AdaptorRes<ProjectRes>> => {
   try {
     const { results: projects, total } = await getProjects({ page, limit }, filters);
@@ -59,6 +61,43 @@ export const getProjectsAdaptor = async (
         solution: project.solution,
         total_requested_amount: project.total_requested_amount,
         cost_breakdown: project.cost_breakdown,
+      };
+    });
+    return {
+      data: {
+        items,
+        page,
+        limit,
+        total,
+      },
+      error: null,
+    };
+  } catch (error) {
+    console.error('Error in getting projects List: ', error);
+    return { data: null, error: 'Error in getting projects List' };
+  }
+};
+export const getProjectsPreviewAdaptor = async (
+  page = 1,
+  limit = 10,
+  filters?: { identity_id?: string; round_id?: string; category?: string; q?: string },
+): Promise<AdaptorRes<ProjectPreviewRes>> => {
+  try {
+    const { results: projects, total } = await getProjectsPreview({ page, limit }, filters);
+    const items = projects.map(project => {
+      const { name, profileImage: img, type = 'organizations' } = getIdentityMeta(project.identity);
+      return {
+        id: project.id,
+        coverImg: project.cover?.url || '',
+        socialCause: translate(project.social_cause) || SOCIAL_CAUSES[project.social_cause]?.label,
+        title: project.title,
+        description: cleanMarkdown(project.description),
+        creator: {
+          id: project.identity.id,
+          type: type as IdentityType,
+          name,
+          img,
+        },
       };
     });
     return {

@@ -234,5 +234,8 @@
   "cont-add-credit-card": "クレジットカードを追加",
   "cont-add-card-btn": "カードを追加",
   "cont-change-card-btn": "カードを変更",
-  "vote-donate.strict-org": "投票するには、個人用のSociousアカウントに切り替えてください。"
+  "vote-donate.strict-org": "投票するには、個人用のSociousアカウントに切り替えてください。",
+  "filter-by": "フィルター：",
+  "search-keyword": "キーワードで検索",
+  "category-all": "すべてのカテゴリ"
 }

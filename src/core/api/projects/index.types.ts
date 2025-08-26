@@ -60,8 +60,18 @@ export interface Project {
   expires_at: Date;
   deleted_at: Date;
 }
+export interface ProjectPreview {
+  id: string;
+  title: string;
+  description: string;
+  cover: Media;
+  social_cause: string;
+  cover_id: string;
+  identity: Identity;
+}
 
 export type ProjectsRes = PaginateResV3<Project>;
+export type ProjectsPreviewRes = PaginateResV3<ProjectPreview>;
 
 export type DonationReq = {
   amount: number;
