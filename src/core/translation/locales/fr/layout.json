@@ -27,5 +27,15 @@
   "submission-closed-subheader": "La période de soumission des projets est terminée. Veuillez soumettre votre proposition lors du prochain cycle.",
   "submission-closed-button": "Fermer",
   "header-alert-organization-message": "Veuillez passer à un compte d'organisation.",
-  "header-alert-organization-close": "Fermer"
+  "header-alert-organization-close": "Fermer",
+  "error-not-found": {
+    "header": "404 - Page non trouvée",
+    "subheader": "Oups ! La page que vous recherchez n'existe pas sur",
+    "go-to-home-btn": "Aller à l'accueil"
+  },
+  "error-internal": {
+    "header": "Erreur interne du serveur",
+    "subheader": "Nous nous excusons pour le désagrément. Veuillez réessayer plus tard",
+    "home-btn": "Page d'accueil"
+  }
 }

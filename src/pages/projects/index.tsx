@@ -15,7 +15,9 @@ export const Projects = () => {
   const round = useSelector((state: RootState) => state.round.round);
   const { rounds } = useLoaderData() as { rounds: Array<Round> };
   const roundIsClosed = round && getDaysUntil(round.voting_end_at) <= 0;
-  const [selectedRound, setSelectedRound] = useState<OptionType | null>(null);
+  const [selectedRound, setSelectedRound] = useState<OptionType | null>(
+    rounds.length > 0 ? { label: rounds[rounds.length - 1].name, value: rounds[rounds.length - 1].id } : null,
+  );
 
   const breadcrumbs = [
     { iconName: 'home-line', label: '', link: '/' },

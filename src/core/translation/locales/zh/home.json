@@ -5,7 +5,7 @@
   "home-learn-more-button": "了解更多",
   "home-explore-button": "探索",
   "home-round": "第 {{count}} 轮：{{name}}",
-  "home-starts": "开始时间",
+  "home-starts": "投票开始于",
   "home-ends": "结束时间",
   "home-proposal": "提案提交期：",
   "home-vote-period": "投票期：",

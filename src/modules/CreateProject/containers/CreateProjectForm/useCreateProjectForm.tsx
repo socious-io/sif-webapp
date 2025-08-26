@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { config } from 'src/config';
 import { CurrentIdentity } from 'src/core/adaptors';
 import { getDaysUntil } from 'src/core/helpers/date-converter';
 import { RootState } from 'src/store';
+import { resetProject } from 'src/store/reducers/createProject.reducer';
 
 export const useCreateProjectForm = () => {
   const navigate = useNavigate();
@@ -15,8 +16,11 @@ export const useCreateProjectForm = () => {
     return state.identity.entities.find(i => i.current);
   });
   const round = useSelector((state: RootState) => state.round.round);
+  const dispatch = useDispatch();
 
   const onCreate = () => {
+    dispatch(resetProject());
+
     const isSubmissionOver = getDaysUntil(round?.submission_end_at as string) <= 0;
     if (isSubmissionOver) {
       setSubmissionOverModal(true);

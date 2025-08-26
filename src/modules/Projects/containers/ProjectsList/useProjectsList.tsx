@@ -15,8 +15,12 @@ export const useProjectsList = (roundId: string) => {
   const [projectCategory, setProjectCategory] = useState<ProjectCategory>({ id: '1', label: 'All', value: '' });
   const onChangePage = async (newPage: number) => {
     setPage(newPage);
-    const { data } = await getProjectsAdaptor(newPage, limit);
+    const { data } = await getProjectsAdaptor(newPage, limit, {
+      round_id: roundId,
+      category: projectCategory.value,
+    });
     data && setCurrentProjects(data);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
   useEffect(() => {
     const changeRound = async () => {
