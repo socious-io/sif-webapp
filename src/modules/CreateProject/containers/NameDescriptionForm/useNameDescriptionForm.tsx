@@ -2,9 +2,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { countTextCharacters } from 'src/core/helpers/texts';
 import { RootState } from 'src/store';
 import { setProjectData } from 'src/store/reducers/createProject.reducer';
 import * as yup from 'yup';
+import 'src/core/helpers/yupUtils';
 
 interface FormData {
   title: string;
@@ -16,7 +18,10 @@ interface FormData {
 
 const schema = yup.object().shape({
   title: yup.string().required('This field is required'),
-  description: yup.string().required('This field is required').max(3000, 'Description cannot exceed 3000 characters'),
+  description: yup
+    .string()
+    .maxTextCharacters(3000, 'Description cannot exceed 3000 characters')
+    .required('This field is required'),
   email: yup.string().email('Must be a valid email').required('This field is required'),
   website: yup.string().url('Must be a valid URL'),
   linkedin: yup.string().url('Must be a valid LinkedIn URL'),
@@ -50,7 +55,7 @@ export const useNameDescriptionForm = () => {
   const email = watch('email') || '';
   const linkedin = watch('linkedin') || '';
   const hasErrors = !isValid;
-  const descriptionLength = description?.length || 0;
+  const descriptionLength = countTextCharacters(description) || 0;
   const maxDescriptionLength = 3000;
 
   const goBack = () => {
