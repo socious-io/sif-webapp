@@ -1,7 +1,8 @@
 import { Divider } from '@mui/material';
 import { PROJECT_CATEGORIES, ProjectCategory } from 'src/constants/PROJECT_CATEGORIES';
 import { translate } from 'src/core/helpers/utils';
-import { OptionType } from 'src/modules/General/components/InputDropdown/index.types';
+import Icon from 'src/modules/General/components/Icon';
+import Input from 'src/modules/General/components/Input';
 import Pagination from 'src/modules/General/components/Pagination';
 import PaginationMobile from 'src/modules/General/components/PaginationMobile';
 import SearchDropdown from 'src/modules/General/components/SearchDropdown';
@@ -12,9 +13,10 @@ import { useProjectsList } from './useProjectsList';
 
 const ProjectsList: React.FC<ProjectsListProps> = ({ hasTitle = true, roundId }) => {
   const {
-    data: { projects, total, page, totalPage, projectCategory },
-    operations: { navigate, onChangePage, setProjectCategory },
+    data: { projects, total, page, totalPage, projectCategory, searchQuery },
+    operations: { navigate, onChangePage, setProjectCategory, setSearchQuery },
   } = useProjectsList(roundId);
+
   return (
     <>
       <div className="flex flex-col gap-8 mt-2 text-lg font-semibold">
@@ -23,17 +25,27 @@ const ProjectsList: React.FC<ProjectsListProps> = ({ hasTitle = true, roundId })
             <span>
               {translate('projects-all')} ({total})
             </span>
-            <div className="flex mt-4 items-center">
-              <span> {translate('filter-by')} </span>
-              <div className="w-[240px] ml-2">
-                <SearchDropdown
-                  id="projectCategory"
-                  options={[{ label: 'All', value: '' }, ...PROJECT_CATEGORIES]}
-                  isSearchable={false}
-                  onChange={value => setProjectCategory(value as ProjectCategory)}
-                  value={projectCategory}
-                  valueStyleObject={{ fontSize: '14px' }}
-                />
+            <div className="flex flex-col mt-4 gap-4">
+              <span>{translate('filter-by')}</span>
+              <div className="flex flex-wrap gap-4">
+                <div className="w-[240px]">
+                  <SearchDropdown
+                    id="projectCategory"
+                    options={[{ label: translate('category-all'), value: '' }, ...PROJECT_CATEGORIES]}
+                    isSearchable={false}
+                    onChange={value => setProjectCategory(value as ProjectCategory)}
+                    value={projectCategory}
+                    valueStyleObject={{ fontSize: '14px' }}
+                  />
+                </div>
+                <div className="w-[240px]">
+                  <Input
+                    startIcon={<Icon name="search-lg" fontSize={20} />}
+                    value={searchQuery}
+                    onChange={e => setSearchQuery(e.target.value)}
+                    placeholder={translate('search-keyword')}
+                  />
+                </div>
               </div>
             </div>
           </div>

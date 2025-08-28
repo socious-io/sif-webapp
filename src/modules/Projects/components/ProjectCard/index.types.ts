@@ -1,6 +1,6 @@
-import { Project } from 'src/core/adaptors';
+import { ProjectPreview } from 'src/core/adaptors';
 
-export interface ProjectCardProps extends Project {
+export interface ProjectCardProps extends ProjectPreview {
   onClick?: () => void;
   className?: string;
 }

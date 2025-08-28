@@ -230,5 +230,8 @@
     "verify-button-label": "Vérifier",
     "close-button-label": "Fermer"
   },
-  "vote-donate.strict-org": "Veuillez passer à votre compte Socious personnel pour voter."
+  "vote-donate.strict-org": "Veuillez passer à votre compte Socious personnel pour voter.",
+  "filter-by": "Filtrer par :",
+  "search-keyword": "Rechercher par mots-clés",
+  "category-all": "Toutes les catégories"
 }

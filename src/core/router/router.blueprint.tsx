@@ -6,7 +6,7 @@ import { FallBack } from 'src/pages/error/fallback';
 import { NotFound } from 'src/pages/error/notFound';
 import { RootState } from 'src/store';
 
-import { getProjectAdaptor, getProjectsAdaptor, getRoundsAdaptor } from '../adaptors';
+import { getProjectAdaptor, getProjectsPreviewAdaptor, getRoundsAdaptor } from '../adaptors';
 import { getRound } from '../api';
 
 export const blueprint: RouteObject[] = [
@@ -42,7 +42,7 @@ export const blueprint: RouteObject[] = [
                   if (!currentRound) {
                     return { projects: [], rounds: [] };
                   }
-                  const projects = await getProjectsAdaptor(1, 10, { round_id: currentRound.id as string });
+                  const projects = await getProjectsPreviewAdaptor(1, 10, { round_id: currentRound.id as string });
                   const rounds = await getRoundsAdaptor();
                   return { projects: projects.data, rounds: rounds.data };
                 },
@@ -83,7 +83,7 @@ export const blueprint: RouteObject[] = [
             path: 'dashboard/:id',
             loader: async ({ params }) => {
               if (params.id) {
-                const projects = await getProjectsAdaptor(1, 10, { identity_id: params.id });
+                const projects = await getProjectsPreviewAdaptor(1, 10, { identity_id: params.id });
                 return { projects: projects.data };
               }
             },

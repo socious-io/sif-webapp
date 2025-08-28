@@ -49,8 +49,16 @@ export interface Project {
   wallet_env?: string;
   votingStartAt?: Date;
 }
-
+export interface ProjectPreview {
+  id: string;
+  coverImg?: string;
+  socialCause?: string;
+  title: string;
+  description: string;
+  creator: { id: string; type: IdentityType; name: string; img: string; username?: string };
+}
 export type ProjectRes = PaginateRes<Project>;
+export type ProjectPreviewRes = PaginateRes<ProjectPreview>;
 
 export type ProjectReq = {
   id: string;

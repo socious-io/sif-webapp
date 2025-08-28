@@ -80,3 +80,7 @@ export async function getRound(): Promise<Round> {
 export async function getRounds(): Promise<RoundsRes> {
   return (await get<RoundsRes>(`rounds/rounds`)).data;
 }
+
+export async function getProjectsPreview(params: PaginateReq, filters?: FilterReq): Promise<ProjectsRes> {
+  return (await get<ProjectsRes>('projects/preview', { params }, filters)).data;
+}
