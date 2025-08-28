@@ -233,5 +233,8 @@
   "cont-add-credit-card": "신용카드 추가",
   "cont-add-card-btn": "카드 추가",
   "cont-change-card-btn": "카드 변경",
-  "vote-donate.strict-org": "투표하려면 개인 Socious 계정으로 전환해 주세요."
+  "vote-donate.strict-org": "투표하려면 개인 Socious 계정으로 전환해 주세요.",
+  "filter-by": "필터링 기준:",
+  "search-keyword": "키워드로 검색",
+  "category-all": "모든 카테고리"
 }

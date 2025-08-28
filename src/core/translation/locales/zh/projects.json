@@ -230,5 +230,8 @@
     "verify-button-label": "验证",
     "close-button-label": "关闭"
   },
-  "vote-donate.strict-org": "请切换到您的个人Socious账户进行投票。"
+  "vote-donate.strict-org": "请切换到您的个人Socious账户进行投票。",
+  "filter-by": "按以下过滤：",
+  "search-keyword": "按关键字搜索",
+  "category-all": "所有类别"
 }

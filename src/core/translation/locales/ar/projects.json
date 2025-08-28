@@ -230,5 +230,8 @@
     "verify-button-label": "تحقق",
     "close-button-label": "إغلاق"
   },
-  "vote-donate.strict-org": "يرجى التبديل إلى حسابك الشخصي في Socious للتصويت."
+  "vote-donate.strict-org": "يرجى التبديل إلى حسابك الشخصي في Socious للتصويت.",
+  "filter-by": "تصفية حسب:",
+  "search-keyword": "البحث باستخدام الكلمات المفتاحية",
+  "category-all": "الفئات كلها"
 }

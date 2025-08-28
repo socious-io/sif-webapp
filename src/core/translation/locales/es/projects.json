@@ -234,5 +234,8 @@
   "cont-add-credit-card": "Agregar una tarjeta de crédito",
   "cont-add-card-btn": "Agregar tarjeta",
   "cont-change-card-btn": "Cambiar tarjeta",
-  "vote-donate.strict-org": "Por favor, cambia a tu cuenta personal de Socious para votar."
+  "vote-donate.strict-org": "Por favor, cambia a tu cuenta personal de Socious para votar.",
+  "filter-by": "تصفية حسب:",
+  "search-keyword": "البحث باستخدام الكلمات المفتاحية",
+  "category-all": "Todas las categorías"
 }
