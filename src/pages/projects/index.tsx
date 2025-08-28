@@ -16,7 +16,7 @@ export const Projects = () => {
   const { rounds } = useLoaderData() as { rounds: Array<Round> };
   const roundIsClosed = round && getDaysUntil(round.voting_end_at) <= 0;
   const [selectedRound, setSelectedRound] = useState<OptionType | null>(
-    rounds.length > 0 ? { label: rounds[rounds.length - 1].name, value: rounds[rounds.length - 1].id } : null,
+    rounds.length > 0 ? { label: rounds[0].name, value: rounds[0].id } : null,
   );
 
   const breadcrumbs = [
@@ -28,7 +28,7 @@ export const Projects = () => {
       onChange: value => {
         setSelectedRound(value as OptionType);
       },
-      defaultValue: { label: rounds[rounds.length - 1].name, value: rounds[rounds.length - 1].name },
+      defaultValue: { label: rounds[0].name, value: rounds[0].name },
     },
   ];
   return (
