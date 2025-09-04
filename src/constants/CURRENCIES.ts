@@ -88,11 +88,11 @@ export const CURRENCIES: CurrencyType[] = [
 
       try {
         const response = await axios.get(config.rates.fiat);
-        if (response.status === 200 && response.data?.rates?.JPY) {
-          const jpyRate = response.data.rates.JPY;
+        if (response.status === 200 && response.data?.data) {
+          const jpyRate = response.data.data.find(c => c.symbol === 'JPY').rateUsd;
           localStorage.setItem(cacheKey, String(jpyRate));
           localStorage.setItem(`${cacheKey}_TIME`, String(now));
-          return Math.round(amount * jpyRate * 100) / 100;
+          return parseFloat((jpyRate * amount).toFixed(4));
         }
       } catch (error) {
         console.warn('Failed to fetch JPY rate:', error);
