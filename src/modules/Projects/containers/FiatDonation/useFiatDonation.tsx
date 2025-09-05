@@ -25,7 +25,7 @@ export const useFiatDonation = (onDonate: (data: DonateReq) => void) => {
         preventDisplayName,
         type: 'FIAT',
         token: card.id,
-        currency: 'USD',
+        currency: selectedCurrency,
         rate,
         anonymous: preventDisplayName,
       });

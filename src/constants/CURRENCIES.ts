@@ -83,16 +83,16 @@ export const CURRENCIES: CurrencyType[] = [
       const cachedTime = localStorage.getItem(`${cacheKey}_TIME`);
       const now = Date.now();
       if (cachedRate && cachedTime && Number(cachedTime) > now - cacheExpireTime) {
-        return Math.round(amount * Number(cachedRate) * 100) / 100;
+        return parseFloat((Number(cachedRate) * amount).toFixed(4));
       }
 
       try {
         const response = await axios.get(config.rates.fiat);
-        if (response.status === 200 && response.data?.rates?.JPY) {
-          const jpyRate = response.data.rates.JPY;
+        if (response.status === 200 && response.data?.data) {
+          const jpyRate = response.data.data.find(c => c.symbol === 'JPY').rateUsd;
           localStorage.setItem(cacheKey, String(jpyRate));
           localStorage.setItem(`${cacheKey}_TIME`, String(now));
-          return Math.round(amount * jpyRate * 100) / 100;
+          return parseFloat((jpyRate * amount).toFixed(4));
         }
       } catch (error) {
         console.warn('Failed to fetch JPY rate:', error);
