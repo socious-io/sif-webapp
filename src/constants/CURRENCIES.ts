@@ -83,7 +83,7 @@ export const CURRENCIES: CurrencyType[] = [
       const cachedTime = localStorage.getItem(`${cacheKey}_TIME`);
       const now = Date.now();
       if (cachedRate && cachedTime && Number(cachedTime) > now - cacheExpireTime) {
-        return Math.round(amount * Number(cachedRate) * 100) / 100;
+        return parseFloat((Number(cachedRate) * amount).toFixed(4));
       }
 
       try {
