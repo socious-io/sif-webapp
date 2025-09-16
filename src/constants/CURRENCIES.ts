@@ -58,6 +58,13 @@ export const CURRENCIES: CurrencyType[] = [
     rateConversionFunc: async (amount: number) => amount,
   },
   {
+    label: 'thank',
+    value: `bd8669352095ea280c834bad675525b3cefca1d3333fe6f6298e36320014df10534f43494f`,
+    decimals: 1n,
+    fiatOrCrypto: 'crypto',
+    rateConversionFunc: async (amount: number) => amount,
+  },
+  {
     label: 'USDA',
     value: `fe7c786ab321f41c654ef6c1af7b3250a613c24e4213e0425a7ae45655534441`,
     decimals: 1000000n,
