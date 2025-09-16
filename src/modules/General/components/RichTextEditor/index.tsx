@@ -3,7 +3,8 @@ import Placeholder from '@tiptap/extension-placeholder';
 import Underline from '@tiptap/extension-underline';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
-import { ChangeEvent, useEffect } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
+import { uploadMediaAdaptor } from 'src/core/adaptors';
 import variables from 'src/styles/constants/_exports.module.scss';
 
 import styles from './index.module.scss';
@@ -11,25 +12,43 @@ import { RichTextEditorProps } from './index.types';
 import IconButton from '../IconButton';
 
 const MenuBar = ({ editor }) => {
-  const onUploadImage = (event: ChangeEvent<HTMLInputElement>) => {
+  const [isUploading, setIsUploading] = useState(false);
+
+  const onUploadImage = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onload = () => editor.chain().focus().setImage({ src: reader.result }).run();
-      reader.readAsDataURL(file);
+      setIsUploading(true);
+      try {
+        const { error, data } = await uploadMediaAdaptor(file);
+        if (!error && data) {
+          editor.chain().focus().setImage({ src: data.url }).run();
+        } else {
+          console.error('Failed to upload image:', error);
+        }
+      } catch (error) {
+        console.error('Error uploading image:', error);
+      } finally {
+        setIsUploading(false);
+      }
     }
   };
 
   return (
     <div className={styles['menu']}>
       <div className="relative">
-        <input type="file" className={styles['file']} onChange={onUploadImage} />
+        <input
+          type="file"
+          className={styles['file']}
+          onChange={onUploadImage}
+          disabled={isUploading}
+          accept="image/*"
+        />
         <IconButton
           iconName="image-01"
           size="medium"
           iconSize={20}
-          iconColor={variables.color_grey_600}
-          customStyle={styles['button']}
+          iconColor={isUploading ? variables.color_grey_400 : variables.color_grey_600}
+          customStyle={`${styles['button']} ${isUploading ? 'opacity-50 cursor-not-allowed' : ''}`}
         />
       </div>
       <button
@@ -79,7 +98,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
     Underline.configure({ HTMLAttributes: { class: 'underline' } }),
     Image.configure({
       inline: true,
-      allowBase64: true,
+      allowBase64: false,
     }),
   ];
 
