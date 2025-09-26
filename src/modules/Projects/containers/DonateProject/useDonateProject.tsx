@@ -2,13 +2,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Transaction } from '@meshsdk/core';
 import { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useSelector } from 'react-redux';
 import { config } from 'src/config';
 import { CURRENCIES } from 'src/constants/CURRENCIES';
-import { CurrentIdentity, DonateReq } from 'src/core/adaptors';
+import { DonateReq } from 'src/core/adaptors';
 import { translate } from 'src/core/helpers/utils';
-import Connect from 'src/modules/General/components/ConnectButton';
-import { RootState } from 'src/store';
+import { Mesh } from 'src/core/wallet';
 import * as yup from 'yup';
 
 import { Form } from './index.types';
@@ -28,7 +26,7 @@ const schema = yup
   .required();
 
 export const useDonateProject = (onDonate: (data: DonateReq) => void) => {
-  const { ConnectButton, connected, wallet, address } = Connect();
+  const { connected, cardanoWallet: wallet, address } = Mesh.useMeshWallet();
   const [donateValueConversion, setDonationValueConversion] = useState(0);
   const [userImpactPoints, setUserImpactPoints] = useState(0);
   const {
@@ -46,10 +44,6 @@ export const useDonateProject = (onDonate: (data: DonateReq) => void) => {
   const donateValue = watch('donate') || 0;
   const anonymous = watch('preventDisplayName');
   // const [showConfirmationModal, setShowConfirmationModal] = useState(false);
-
-  const currentIdentity = useSelector<RootState, CurrentIdentity | undefined>(state => {
-    return state.identity.entities.find(i => i.current);
-  });
 
   // FIXME: socious fee later added to donate value
   // const sociousFee = 2;
@@ -111,6 +105,7 @@ export const useDonateProject = (onDonate: (data: DonateReq) => void) => {
     }
     // } else setShowConfirmationModal(true);
   };
+
   const navigateToVerify = () => {
     window.open(config.accountCenterURL + '/verification', '_blank');
   };
@@ -125,7 +120,6 @@ export const useDonateProject = (onDonate: (data: DonateReq) => void) => {
       selectedCurrencyLabel,
       donateValueConversion,
       isConnected: connected,
-      ConnectButton,
       // showConfirmationModal,
     },
     operations: {

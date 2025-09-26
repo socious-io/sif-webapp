@@ -178,6 +178,7 @@
     "enter-donation-positive-error": "Please enter a whole number without decimals.",
     "error-donation-required-error": "This field is required",
     "payment-method": "Payment method",
+    "payment-method-description": "Connect your Cardano wallet using Google, Twitter, Discord, or Apple. UTXOS links your social account to a wallet generated via the Mesh SDK, securely creating a Cardano address for you.",
     "prevent-display-name": "Don’t display my name publicly on this project",
     "donation-section": "Your donation",
     "your-donate": "Your donate",

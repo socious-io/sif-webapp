@@ -1,0 +1,46 @@
+@import 'src/styles/constants/_primitives.scss';
+
+.dropdown {
+    width: 100%;
+    max-height: 0;
+    margin-top: 0.675rem;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    z-index: 10;
+    background: $color-white;
+    border-radius: 8px;
+    box-shadow: $shadow-sm;
+    overflow-y: auto;
+    opacity: 0;
+    transform: translateY(-0.25rem);
+    transition: all 0.2s ease;
+
+    &--open {
+        border: 1px solid $color-grey-300;
+        max-height: 12.5rem;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    &__item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.375rem 0.75rem;
+        font-size: 014px;
+        color: $color-grey-600;
+        text-align: left;
+        white-space: nowrap;
+        cursor: pointer;
+
+        & + .dropdown__item {
+            border-top: 1px solid $color-grey-300;
+        }
+
+        &:hover {
+            background: $color-grey-100;
+        }
+    }
+}

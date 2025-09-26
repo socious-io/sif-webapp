@@ -8,6 +8,7 @@ import { identitySlice } from './reducers/identity.reducer';
 import { loadingSlice } from './reducers/loading.reducer';
 import { notificationSlice } from './reducers/notification.reducer';
 import { roundsSlice } from './reducers/round.reducer';
+import { walletSlice } from './reducers/wallet.reducer';
 
 const persistConfig = {
   key: 'root',
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   createProject: createProjectSlice.reducer,
   identity: identitySlice.reducer,
   round: roundsSlice.reducer,
+  wallet: walletSlice.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -30,7 +32,7 @@ const store = configureStore({
   middleware: getDefaultMiddleware => {
     return getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: ['modals/openModal', 'persist/PERSIST'],
+        ignoredActions: ['persist/PERSIST', 'wallet/setWalletState'],
       },
     });
   },

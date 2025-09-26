@@ -21,10 +21,15 @@
     "title": "Edit Image",
     "subtitle": "Crop your image to the desired dimensions."
   },
-  "connect-wallet": "Connect wallet",
-  "disconnect": "Disconnect",
-  "copy-address": "Copy Address",
-  "no-wallet-alert": "No Cardano wallet detected. Please install a Cardano wallet like Lace, Eternl, or Yoroi to continue.",
+  "wallet": {
+    "connect": "Connect wallet",
+    "connecting": "Connecting...",
+    "disconnect": "Disconnect",
+    "copy-address": "Copy Address",
+    "default-error": "We couldn't load wallet data for the default address. To proceed, please reconnect your wallet and complete the donation.",
+    "connect-error": "Failed to connect wallet. This may be due to a network issue or a problem with social login. Please try again.",
+    "failed": "Failed"
+  },
   "kyb": {
     "title": "Verify your organization to create a project",
     "subtitle": "To start a project, please complete a one-time verification of your organization in the Socious Account Center.",
