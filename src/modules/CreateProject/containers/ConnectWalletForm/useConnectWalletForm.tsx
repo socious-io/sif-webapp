@@ -17,6 +17,6 @@ export const useConnectWalletForm = () => {
   useEffect(() => {
     dispatch(setProjectData({ wallet_address: address }));
   }, [address]);
-  const isEnabled = !!address;
-  return { navigatePublish, goBack, isEnabled, ConnectButton, wallet_address };
+
+  return { navigatePublish, goBack };
 };

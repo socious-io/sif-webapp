@@ -1,4 +1,5 @@
 import { ThemeProvider } from '@emotion/react';
+import { MeshProvider } from '@meshsdk/react';
 import { StyledEngineProvider } from '@mui/material';
 import { theme } from 'material.theme';
 import { useEffect } from 'react';
@@ -14,6 +15,8 @@ import store, { AppDispatch } from './store';
 import 'src/core/translation/i18n';
 import { currentIdentities } from './store/thunks/identity,thunk';
 import { fetchRound } from './store/thunks/round.thunk';
+
+import '@meshsdk/react/styles.css';
 
 function App() {
   const dispatch = useDispatch<AppDispatch>();
@@ -36,8 +39,10 @@ function App() {
   return (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
-        <RouterProvider router={router.routes} />
-        <RequestLoading />
+        <MeshProvider>
+          <RouterProvider router={router.routes} />
+          <RequestLoading />
+        </MeshProvider>
       </ThemeProvider>
     </StyledEngineProvider>
   );

@@ -5,6 +5,7 @@ import { translate } from 'src/core/helpers/utils';
 import Button from 'src/modules/General/components/Button';
 import Checkbox from 'src/modules/General/components/Checkbox';
 import Input from 'src/modules/General/components/Input';
+import MeshWallet from 'src/modules/General/components/MeshWallet';
 import VoteInfo from 'src/modules/Projects/components/VoteInfo';
 import variables from 'src/styles/constants/_exports.module.scss';
 
@@ -22,7 +23,6 @@ const DonateProject: React.FC<DonateProjectProps> = ({ isLoading, onDonate }) =>
       selectedCurrencyLabel,
       donateValueConversion,
       isConnected,
-      ConnectButton,
       // showConfirmationModal,
     },
     operations: {
@@ -63,7 +63,7 @@ const DonateProject: React.FC<DonateProjectProps> = ({ isLoading, onDonate }) =>
       <Divider />
       <div className="flex flex-col items-stretch gap-5 text-lg font-medium leading-7">
         {translate('vote-donate.payment-method')}
-        <ConnectButton />
+        <MeshWallet />
         <Checkbox
           id="preventDisplayName"
           name="preventDisplayName"
