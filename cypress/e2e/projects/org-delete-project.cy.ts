@@ -106,7 +106,7 @@ describe('Organization creates project', () => {
     cy.contains('Project Details').should('be.visible');
 
     cy.contains('Remove').should('not.exist');
-    cy.contains('You have already voted for this project.').should('be.visible');
+    cy.contains('Donate').should('be.disabled');
   });
   it('organization navigates to another project details and fails to delete', () => {
     isOrgAccount = true;
