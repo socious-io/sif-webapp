@@ -158,6 +158,9 @@ describe('vote to a project test', () => {
     cy.contains('Donate now').should('exist').should('be.disabled');
     cy.get('#donate').should('exist');
 
+    cy.contains('Fiat').should('be.visible');
+    cy.contains('Fiat').click();
+
     cy.get('input#donate').focus();
     cy.get('input#donate').type('20');
     cy.contains('Add Card').should('be.enabled').click();
