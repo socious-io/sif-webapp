@@ -12,6 +12,7 @@ import {
   DonatedRes,
   VotedRes,
   ConfirmDonationReq,
+  ProjectsPreviewRes,
 } from './index.types';
 
 export async function getProjects(params: PaginateReq, filters?: FilterReq): Promise<ProjectsRes> {
@@ -81,6 +82,6 @@ export async function getRounds(): Promise<RoundsRes> {
   return (await get<RoundsRes>(`rounds/rounds`)).data;
 }
 
-export async function getProjectsPreview(params: PaginateReq, filters?: FilterReq): Promise<ProjectsRes> {
-  return (await get<ProjectsRes>('projects/preview', { params }, filters)).data;
+export async function getProjectsPreview(params: PaginateReq, filters?: FilterReq): Promise<ProjectsPreviewRes> {
+  return (await get<ProjectsPreviewRes>('projects/preview', { params }, filters)).data;
 }
