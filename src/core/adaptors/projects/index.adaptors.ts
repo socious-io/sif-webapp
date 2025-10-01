@@ -18,7 +18,7 @@ import { DonationReq as DonateReqRaw } from 'src/core/api/projects/index.types';
 import { cleanMarkdown, convertMarkdownToJSX } from 'src/core/helpers/convert-md-to-jsx';
 import { DateRangeStatus, getDateRangeStatus } from 'src/core/helpers/date-converter';
 import { removedEmptyProps } from 'src/core/helpers/objects-arrays';
-import { translate } from 'src/core/helpers/utils';
+import { convertDonationsToUSD, translate } from 'src/core/helpers/utils';
 import { ProjectState } from 'src/store/reducers/createProject.reducer';
 
 import {
@@ -84,22 +84,28 @@ export const getProjectsPreviewAdaptor = async (
 ): Promise<AdaptorRes<ProjectPreviewRes>> => {
   try {
     const { results: projects, total } = await getProjectsPreview({ page, limit }, filters);
-    const items = projects.map(project => {
-      const { name, profileImage: img, type = 'organizations' } = getIdentityMeta(project.identity);
-      return {
-        id: project.id,
-        coverImg: project.cover?.url || '',
-        socialCause: translate(project.social_cause) || SOCIAL_CAUSES[project.social_cause]?.label,
-        title: project.title,
-        description: cleanMarkdown(project.description),
-        creator: {
-          id: project.identity.id,
-          type: type as IdentityType,
-          name,
-          img,
-        },
-      };
-    });
+    const items = await Promise.all(
+      projects.map(async project => {
+        const { name, profileImage: img, type = 'organizations' } = getIdentityMeta(project.identity);
+        const totalDonationsInUSD = await convertDonationsToUSD(project.total_donations);
+        return {
+          id: project.id,
+          coverImg: project.cover?.url || '',
+          socialCause: translate(project.social_cause) || SOCIAL_CAUSES[project.social_cause]?.label,
+          title: project.title,
+          description: cleanMarkdown(project.description),
+          creator: {
+            id: project.identity.id,
+            type: type as IdentityType,
+            name,
+            img,
+          },
+          totalRequestedAmount: project.total_requested_amount,
+          totalDonations: project.total_donations,
+          totalDonationsInUSD,
+        };
+      }),
+    );
     return {
       data: {
         items,

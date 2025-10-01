@@ -1,0 +1,28 @@
+@import 'src/styles/constants/_primitives.scss';
+@import 'src/styles/utilities/_mixins.scss';
+.container {
+    @include flex(normal, center, column);
+    gap: 0.5rem;
+
+    .progress {
+        width: 100%;
+        height: 0.5rem;
+        background-color: $color-grey-200;
+        border-radius: 999px;
+        overflow: hidden;
+
+        .bar {
+            height: 100%;
+            background-color: $color-primary-700;
+            border-radius: inherit;
+            transition: width 0.3s ease-in-out;
+        }
+    }
+
+    .description {
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 20px;
+        color: green;
+    }
+}

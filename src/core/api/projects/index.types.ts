@@ -68,6 +68,8 @@ export interface ProjectPreview {
   social_cause: string;
   cover_id: string;
   identity: Identity;
+  total_donations: { [currency: string]: number };
+  total_requested_amount: number;
 }
 
 export type ProjectsRes = PaginateResV3<Project>;
