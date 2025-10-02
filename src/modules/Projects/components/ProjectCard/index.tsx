@@ -40,7 +40,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           <div className="flex items-center justify-between gap-3">
             <div className="text-sm leading-5 text-Gray-light-mode-600">
               {translate('projects-raised')}
-              <span className="font-semibold text-Gray-light-mode-900"> $ {raisedAmountUSD.toLocaleString()}</span>
+              <span className="font-semibold text-Gray-light-mode-900"> {progressValue}%</span>
             </div>
             <div className="text-sm leading-5 text-Gray-light-mode-600">
               {translate('projects-target')}
