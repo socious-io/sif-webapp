@@ -168,7 +168,7 @@
     "vote-for": "Vote for",
     "to-vote": "To vote:",
     "vote-now-btn": "Vote now",
-    "impact-points": "Your current impact points",
+    "impact-points": "Impact points you will earn",
     "estimated-match": "Estimated match",
     "total-contribution": "Total contribution",
     "pts": "pts",
@@ -237,5 +237,7 @@
   "vote-donate.strict-org": "Please switch to your personal Socious account to vote.",
   "filter-by": "Filter by:",
   "search-keyword": "Search by keywords",
-  "category-all": "All Categories"
+  "category-all": "All Categories",
+  "projects-raised": "Raised:",
+  "projects-target": "Target:"
 }

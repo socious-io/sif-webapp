@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import accountCenterLogo from 'src/assets/logo/account-center.svg';
 import workLogo from 'src/assets/logo/socious-logo.svg';
 import verifyLogo from 'src/assets/logo/verify-logo.svg';
 import { config } from 'src/config';
@@ -22,6 +23,11 @@ const NavPortal = () => {
       name: 'Verify',
       logo: verifyLogo,
       link: config.verifyURL,
+    },
+    {
+      name: 'AC',
+      logo: accountCenterLogo,
+      link: config.accountCenterURL,
     },
   ];
 
@@ -48,7 +54,7 @@ const NavPortal = () => {
             onClick={() => (window.location.href = product.link)}
           >
             <div className="flex items-center justify-center p-2 bg-Gray-light-mode-100 rounded-full">
-              <img src={product.logo} alt={`Socious ${product.name}`} width={24} height={24} />
+              <img src={product.logo} alt={`Socious ${product.name}`} width={24} height={26} />
             </div>
             {product.name}
           </div>

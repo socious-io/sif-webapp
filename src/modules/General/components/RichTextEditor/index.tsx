@@ -1,4 +1,7 @@
+import BulletList from '@tiptap/extension-bullet-list';
 import Image from '@tiptap/extension-image';
+import ListItem from '@tiptap/extension-list-item';
+import OrderedList from '@tiptap/extension-ordered-list';
 import Placeholder from '@tiptap/extension-placeholder';
 import Underline from '@tiptap/extension-underline';
 import { useEditor, EditorContent } from '@tiptap/react';
@@ -53,6 +56,24 @@ const MenuBar = ({ editor }) => {
       </div>
       <button
         type="button"
+        onClick={() => editor.chain().focus().toggleBulletList().run()}
+        disabled={!editor.can().chain().focus().toggleBulletList().run()}
+        className={`${styles['button']} ${editor.isActive('bulletList') && styles['button--active']}`}
+        title="Bullet List"
+      >
+        {'•'}
+      </button>
+      <button
+        type="button"
+        onClick={() => editor.chain().focus().toggleOrderedList().run()}
+        disabled={!editor.can().chain().focus().toggleOrderedList().run()}
+        className={`${styles['button']} ${editor.isActive('orderedList') && styles['button--active']}`}
+        title="Numbered List"
+      >
+        {'1.'}
+      </button>
+      <button
+        type="button"
         onClick={() => editor.chain().focus().toggleBold().run()}
         disabled={!editor.can().chain().focus().toggleBold().run()}
         className={`${styles['button']} ${editor.isActive('bold') && styles['button--active']}`}
@@ -94,12 +115,26 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
     StarterKit.configure({
       bold: { HTMLAttributes: { class: 'font-bold' } },
       italic: { HTMLAttributes: { class: 'italic' } },
+      bulletList: false,
+      orderedList: false,
+      listItem: false,
     }),
     Underline.configure({ HTMLAttributes: { class: 'underline' } }),
     Image.configure({
       inline: true,
       allowBase64: false,
     }),
+    BulletList.configure({
+      HTMLAttributes: {
+        class: 'list-disc pl-5',
+      },
+    }),
+    OrderedList.configure({
+      HTMLAttributes: {
+        class: 'list-decimal pl-5',
+      },
+    }),
+    ListItem,
   ];
 
   const editor = useEditor({

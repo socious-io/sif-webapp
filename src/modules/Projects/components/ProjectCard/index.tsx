@@ -1,8 +1,10 @@
 import { translate } from 'src/core/helpers/utils';
 import Avatar from 'src/modules/General/components/Avatar';
 import ExpandableText from 'src/modules/General/components/ExpandableText';
+import LinearProgressbar from 'src/modules/General/components/LinearProgressbar';
 
 import { ProjectCardProps } from './index.types';
+import { useProjectCard } from './useProjectCard';
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
   coverImg,
@@ -11,8 +13,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   description,
   creator,
   onClick,
+  totalDonationsInUSD,
+  totalRequestedAmount,
   className = '',
 }) => {
+  const { progressValue, raisedAmountUSD, targetAmount } = useProjectCard(totalDonationsInUSD, totalRequestedAmount);
   return (
     <div
       data-testid="project-card"
@@ -31,11 +36,26 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             customStyle="mt-3 leading-8 text-Gray-light-mode-600 line-clamp-3"
           />
         </div>
-        <div className="flex items-center justify-between">
-          <div className="leading-6 text-Gray-light-mode-600">
-            {translate('projects-by')} <span className="font-medium text-Brand-700">{creator.name}</span>
+        <div>
+          <div className="flex items-center justify-between gap-3">
+            <div className="text-sm leading-5 text-Gray-light-mode-600">
+              {translate('projects-raised')}
+              <span className="font-semibold text-Gray-light-mode-900"> {progressValue}%</span>
+            </div>
+            <div className="text-sm leading-5 text-Gray-light-mode-600">
+              {translate('projects-target')}
+              <span className="font-semibold text-Gray-light-mode-900"> $ {targetAmount.toLocaleString()}</span>
+            </div>
           </div>
-          <Avatar type={creator.type || 'users'} img={creator.img || ''} />
+          <div className="my-4">
+            <LinearProgressbar value={progressValue} />
+          </div>
+          <div className="flex items-center justify-between">
+            <div className="leading-6 text-Gray-light-mode-600">
+              {translate('projects-by')} <span className="font-medium text-Brand-700">{creator.name}</span>
+            </div>
+            <Avatar type={creator.type || 'users'} img={creator.img || ''} />
+          </div>
         </div>
       </div>
     </div>

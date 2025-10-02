@@ -56,6 +56,9 @@ export interface ProjectPreview {
   title: string;
   description: string;
   creator: { id: string; type: IdentityType; name: string; img: string; username?: string };
+  totalDonations: { [currency: string]: number };
+  totalRequestedAmount: number;
+  totalDonationsInUSD: number;
 }
 export type ProjectRes = PaginateRes<Project>;
 export type ProjectPreviewRes = PaginateRes<ProjectPreview>;

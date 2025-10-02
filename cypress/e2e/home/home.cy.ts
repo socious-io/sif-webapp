@@ -18,7 +18,7 @@ describe('home page test', () => {
 
     // explore projects intercepts
 
-    cy.intercept('GET', `${API_SERVER}/projects?t=*&page=1&limit=10&filter.round_id=*`, req => {
+    cy.intercept('GET', `${API_SERVER}/projects/preview?t=*&page=1&limit=10&filter.round_id=*`, req => {
       req.reply(200, PROJECTS);
     }).as('getProjects');
     cy.intercept('GET', `${API_SERVER}/rounds/rounds?t=*`, req => {
