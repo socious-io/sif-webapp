@@ -13,6 +13,8 @@ export const config = {
   datadogAppId: import.meta.env.VITE_DATADOG_APP_ID,
   datadogClientToken: import.meta.env.VITE_DATADOG_CLIENT_TOKEN,
   payoutDonationsAddress: import.meta.env.VITE_PAYOUT_DONATIONS_ADDRESS,
+  blockfrostProjectId: import.meta.env.VITE_BLOCKFROST_PROJECT_ID,
+  meshProjectId: import.meta.env.VITE_MESH_PROJECT_ID,
   stripePublicKey: import.meta.env.VITE_STRIPE_PUBLIC_KEY,
   logDiscordWebHook: import.meta.env.VITE_LOG_DISCORD_WEBHOOK,
   rates: {

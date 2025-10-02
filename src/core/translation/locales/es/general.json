@@ -15,10 +15,21 @@
     "of": "de"
   },
   "general-copy-link": "Copiar",
-  "connect-wallet": "Conectar billetera",
-  "disconnect": "Desconectar",
-  "copy-address": "Copiar dirección",
-  "no-wallet-alert": "No se detectó ninguna billetera Cardano. Por favor, instala una billetera Cardano como Lace, Eternl o Yoroi para continuar.",
+  "general-image-editor": {
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "title": "Editar Imagen",
+    "subtitle": "Recorta tu imagen a las dimensiones deseadas."
+  },
+  "wallet": {
+    "connect": "Conectar billetera",
+    "connecting": "Conectando...",
+    "disconnect": "Desconectar",
+    "copy-address": "Copiar Dirección",
+    "default-error": "No pudimos cargar los datos de la billetera para la dirección predeterminada. Para continuar, vuelve a conectar tu billetera y completa la donación.",
+    "connect-error": "Error al conectar la billetera. Esto puede deberse a un problema de red o a un problema con el inicio de sesión social. Por favor, inténtalo de nuevo.",
+    "failed": "Falló"
+  },
   "kyb": {
     "title": "Verifica tu organización para crear un proyecto",
     "subtitle": "Para iniciar un proyecto, completa una verificación única de tu organización en el Centro de Cuentas de Socious.",
