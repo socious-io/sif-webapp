@@ -67,7 +67,7 @@ export const useMeshWallet = (defaultAddress = '') => {
     try {
       const provider = new BlockfrostProvider(config.blockfrostProjectId);
       const options: EnableWeb3WalletOptions = {
-        networkId: config.dappENV === 'mainnet' ? 1 : 0,
+        networkId: config.env === 'production' ? 1 : 0,
         projectId: config.meshProjectId,
         fetcher: provider,
         submitter: provider,
