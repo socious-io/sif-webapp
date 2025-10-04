@@ -48,7 +48,7 @@ const DonateProject: React.FC<DonateProjectProps> = ({ isLoading, onDonate }) =>
         id="donate"
         name="donate"
         label={translate('vote-donate.enter-donation')}
-        placeholder="0"
+        placeholder="1"
         postfixDropdown={{
           options: CURRENCIES.filter(currency => currency.fiatOrCrypto === 'crypto'),
           value: selectedCurrency,

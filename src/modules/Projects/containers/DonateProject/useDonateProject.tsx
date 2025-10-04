@@ -96,6 +96,11 @@ export const useDonateProject = (onDonate: (data: DonateReq) => void) => {
     }
     try {
       const unsignedTx = await tx.build();
+
+      // sponsorship logic here
+      // new unsignedTxSponsored here
+      // const signedTx = await wallet.cardano.signTx(unsignedTxSponsored);
+
       const signedTx = await wallet.signTx(unsignedTx);
       const txHash = await wallet.submitTx(signedTx);
       const rate = await selectedCurrency.rateConversionFunc(data.donate);
