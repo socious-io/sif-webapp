@@ -27,7 +27,8 @@ const MeshWallet: React.FC<MeshWalletProps> = ({ showBalance = true }) => {
   const [showMenu, setShowMenu] = useState(false);
 
   const selectedTokenLabel = CURRENCIES.find(t => t.value === selectedToken)?.label || '';
-  const formattedBalance = balances !== null ? Number(balances[selectedToken].total.toFixed(3)).toLocaleString() : '';
+  const formattedBalance =
+    balances !== null ? Number(balances[selectedToken]?.total.toFixed(3)).toLocaleString() : '0.00';
   const hasDifferentTokens = balances && Object.keys(balances).length > 1;
 
   const handleClick = async () => {

@@ -11,12 +11,16 @@ import { resetWalletState, setWalletState, TokensBalance } from 'src/store/reduc
 import { dialog } from '../dialog/dialog';
 import { translate } from '../helpers/utils';
 
-export const getTokensBalanceFormatted = (utxos: UTxO[]): TokensBalance => {
+export const getTokensBalanceFormatted = (utxos: UTxO[]): TokensBalance | null => {
   const rawBalances = {};
   for (const utxo of utxos) {
     for (const { unit, quantity } of utxo.output.amount) {
       rawBalances[unit] = (rawBalances[unit] || 0n) + BigInt(quantity);
     }
+  }
+
+  if (Object.keys(rawBalances).length === 0) {
+    return null;
   }
 
   const formattedBalances = {};
@@ -26,7 +30,7 @@ export const getTokensBalanceFormatted = (utxos: UTxO[]): TokensBalance => {
     const symbol = currency?.label;
 
     formattedBalances[unit] = {
-      total: Number(amount) / Number(decimals),
+      total: Number(amount) / Number(decimals) || 0,
       symbol,
     };
   }
