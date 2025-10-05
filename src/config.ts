@@ -15,6 +15,9 @@ export const config = {
   payoutDonationsAddress: import.meta.env.VITE_PAYOUT_DONATIONS_ADDRESS,
   blockfrostProjectId: import.meta.env.VITE_BLOCKFROST_PROJECT_ID,
   meshProjectId: import.meta.env.VITE_MESH_PROJECT_ID,
+  meshApiKey: import.meta.env.VITE_MESH_API_KEY,
+  meshPrivateKey: import.meta.env.VITE_MESH_PRIVATE_KEY,
+  meshSponsorshipId: import.meta.env.VITE_MESH_SPONSORSHIP_ID,
   stripePublicKey: import.meta.env.VITE_STRIPE_PUBLIC_KEY,
   logDiscordWebHook: import.meta.env.VITE_LOG_DISCORD_WEBHOOK,
   rates: {

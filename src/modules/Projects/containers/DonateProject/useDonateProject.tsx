@@ -1,5 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Transaction } from '@meshsdk/core';
+import { MeshTxBuilder, Transaction } from '@meshsdk/core';
+import { BlockfrostProvider } from '@meshsdk/provider';
+import { Web3Sdk } from '@meshsdk/web3-sdk';
 import { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { config } from 'src/config';
@@ -24,6 +26,16 @@ const schema = yup
     currency: yup.string().required(translate('vote-donate.error-donation-required-error')),
   })
   .required();
+
+const provider = new BlockfrostProvider(config.blockfrostProjectId);
+const sdk = new Web3Sdk({
+  projectId: config.meshProjectId,
+  apiKey: config.meshApiKey,
+  network: config.env === 'production' ? 'mainnet' : 'testnet',
+  privateKey: config.meshPrivateKey,
+  fetcher: provider,
+  submitter: provider,
+});
 
 export const useDonateProject = (onDonate: (data: DonateReq) => void) => {
   const { connected, cardanoWallet: wallet, address } = Mesh.useMeshWallet();
@@ -82,29 +94,59 @@ export const useDonateProject = (onDonate: (data: DonateReq) => void) => {
   const onSubmit = async (data: Form) => {
     // if (currentIdentity?.verified) {
     if (!connected || !wallet || !selectedCurrency) return;
-    const tx = new Transaction({ initiator: wallet });
 
-    if (selectedCurrency.value === 'lovelace') {
-      tx.sendLovelace(config.payoutDonationsAddress, `${BigInt(data.donate) * selectedCurrency.decimals}`);
-    } else {
-      tx.sendAssets(config.payoutDonationsAddress, [
-        {
-          unit: selectedCurrency.value,
-          quantity: `${BigInt(data.donate) * selectedCurrency.decimals}`,
-        },
-      ]);
-    }
+    /* Build transaction */
+
+    // const tx = new Transaction({ initiator: wallet });
+    const txBuilder = new MeshTxBuilder({
+      fetcher: provider,
+    });
+
+    // if (selectedCurrency.value === 'lovelace') {
+    //   tx.sendLovelace(config.payoutDonationsAddress, `${BigInt(data.donate) * selectedCurrency.decimals}`);
+    // } else {
+    //   tx.sendAssets(config.payoutDonationsAddress, [
+    //     {
+    //       unit: selectedCurrency.value,
+    //       quantity: `${BigInt(data.donate) * selectedCurrency.decimals}`,
+    //     },
+    //   ]);
+    // }
+    txBuilder.txOut(config.payoutDonationsAddress, [
+      { unit: selectedCurrency.value, quantity: `${BigInt(data.donate) * selectedCurrency.decimals}` },
+    ]);
+
+    /* Setup sponsorship in transaction */
+    const staticInfo = sdk.sponsorship.getStaticInfo();
+
+    txBuilder.changeAddress(staticInfo.changeAddress);
+
+    txBuilder.txIn(
+      staticInfo.utxo.input.txHash,
+      staticInfo.utxo.input.outputIndex,
+      staticInfo.utxo.output.amount,
+      staticInfo.utxo.output.address,
+      0,
+    );
+
     try {
-      const unsignedTx = await tx.build();
+      /* Build transaction */
+      // const unsignedTx = await tx.build();
+      const unsignedTx = await txBuilder.complete();
 
-      // sponsorship logic here
-      // new unsignedTxSponsored here
-      // const signedTx = await wallet.cardano.signTx(unsignedTxSponsored);
+      /* Do sponsorship */
+      const sponsoredTx = await sdk.sponsorship.sponsorTx({
+        sponsorshipId: config.meshSponsorshipId,
+        tx: unsignedTx,
+      });
 
-      const signedTx = await wallet.signTx(unsignedTx);
-      const txHash = await wallet.submitTx(signedTx);
-      const rate = await selectedCurrency.rateConversionFunc(data.donate);
-      return onDonate({ ...data, transactionHash: txHash, wallet_address: address, rate, anonymous });
+      if (sponsoredTx.success) {
+        // const signedTx = await wallet.signTx(unsignedTx);
+        const signedTx = await wallet.signTx(sponsoredTx.data);
+        const txHash = await wallet.submitTx(signedTx);
+        const rate = await selectedCurrency.rateConversionFunc(data.donate);
+        return onDonate({ ...data, transactionHash: txHash, wallet_address: address, rate, anonymous });
+      }
     } catch (error) {
       alert(error);
     }
