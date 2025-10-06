@@ -42,8 +42,8 @@ export async function confirmDonation(id: string, payload: ConfirmDonationReq): 
   return (await put<SuccessRes>(`/projects/donates/${id}/confirm`, payload)).data;
 }
 
-export async function getDonations(id: string): Promise<DonationsRes> {
-  return (await get<DonationsRes>(`projects/${id}/donates`)).data;
+export async function getDonations(id: string, params?: PaginateReq): Promise<DonationsRes> {
+  return (await get<DonationsRes>(`projects/${id}/donates`, { params })).data;
 }
 
 export async function createProjects(payload: Partial<Project>): Promise<Project> {

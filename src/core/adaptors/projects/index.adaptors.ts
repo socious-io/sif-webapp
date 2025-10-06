@@ -23,8 +23,8 @@ import { ProjectState } from 'src/store/reducers/createProject.reducer';
 
 import {
   AdaptorRes,
-  Donate,
   DonateReq,
+  DonateRes,
   getIdentityMeta,
   Project,
   ProjectRes,
@@ -139,7 +139,7 @@ export const getProjectAdaptor = async (projectId: string): Promise<AdaptorRes<P
       overview: convertMarkdownToJSX(project.description),
       voted: project.user_voted,
       roundStatus: DateRangeStatus.DURING,
-      roundStats: { donations: project.total_donations || 0, votes: project.total_votes },
+      roundStats: { donations: project.total_donations || {}, votes: project.total_votes },
       votingStartAt: project.round.voting_start_at,
       donations: [
         {
@@ -319,10 +319,14 @@ export const getEditProjectAdaptor = async (projectId: string): Promise<AdaptorR
   }
 };
 
-export const getProjectDonationsAdaptor = async (projectId): Promise<AdaptorRes<Donate[]>> => {
+export const getProjectDonationsAdaptor = async (
+  projectId: string,
+  page = 1,
+  limit = 10,
+): Promise<AdaptorRes<DonateRes>> => {
   try {
-    const donations = await getDonations(projectId);
-    const data = donations.results.map(donation => ({
+    const donations = await getDonations(projectId, { page, limit });
+    const items = donations.results.map(donation => ({
       id: donation.id,
       amount: donation.amount,
       anonymous: donation.anonymous,
@@ -331,7 +335,12 @@ export const getProjectDonationsAdaptor = async (projectId): Promise<AdaptorRes<
       currency: donation.currency || 'USD',
     }));
     return {
-      data,
+      data: {
+        items,
+        page,
+        limit,
+        total: donations.total,
+      },
       error: null,
     };
   } catch (error) {

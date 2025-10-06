@@ -15,7 +15,6 @@ const VoteDetailCard: React.FC<VoteDetailCardProps> = ({
   identityType,
   onVote,
   roundStatus,
-  votingStartAt,
 }) => {
   const { donations, votes } = roundStats || {};
   const { isShared, handleCopy } = useVoteDetailCard();
@@ -35,7 +34,7 @@ const VoteDetailCard: React.FC<VoteDetailCardProps> = ({
                 <div key={currency} className="flex flex-row justify-between">
                   <span className="text-3xl font-semibold leading-8 text-Gray-light-mode-900">{currency}</span>
                   <span className="text-3xl font-semibold leading-8 text-Gray-light-mode-900">
-                    ${donations[currency].toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                    {donations[currency].amount.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                   </span>
                 </div>
               ))}

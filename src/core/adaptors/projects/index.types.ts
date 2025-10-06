@@ -7,7 +7,7 @@ export type ImpactAssessmentType = 'OPTION_A' | 'OPTION_B';
 
 export type RoundStats = {
   estimatedMatch?: number;
-  donations: Record<string, number>;
+  donations: Record<string, { rate: number; amount: number }>;
   votes: number;
 };
 
@@ -115,6 +115,8 @@ export type Donate = {
   date: string;
   currency: string;
 };
+
+export type DonateRes = PaginateRes<Donate>;
 
 export interface ConfirmDonationRes {
   donationId: string;
