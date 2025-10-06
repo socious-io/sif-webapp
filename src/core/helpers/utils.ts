@@ -21,19 +21,3 @@ export const getYouTubeEmbedUrl = (url: string | undefined): string | undefined 
   const videoIdMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]+)/);
   return videoIdMatch ? `https://www.youtube.com/embed/${videoIdMatch[1]}` : undefined;
 };
-
-export const convertDonationsToUSD = async (totalDonations: Record<string, number>): Promise<number> => {
-  const { CURRENCIES } = await import('src/constants/CURRENCIES');
-  let totalInUSD = 0;
-
-  for (const [currency, amount] of Object.entries(totalDonations)) {
-    const currencyConfig = CURRENCIES.find(c => c.value === currency || c.label === currency);
-
-    if (currencyConfig) {
-      const convertedAmount = await currencyConfig.rateConversionFunc(amount);
-      totalInUSD += convertedAmount;
-    }
-  }
-
-  return Math.round(totalInUSD * 100) / 100;
-};

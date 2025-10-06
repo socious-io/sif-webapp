@@ -1,53 +1,68 @@
 import { toRelativeTime } from 'src/core/helpers/date-helpers';
 import { translate } from 'src/core/helpers/utils';
 import Icon from 'src/modules/General/components/Icon';
+import Pagination from 'src/modules/General/components/Pagination';
+import PaginationMobile from 'src/modules/General/components/PaginationMobile';
 import variables from 'src/styles/constants/_exports.module.scss';
 
 import { useDonationsList } from './useDonationsList';
 
 const DonationsList = ({ projectId }) => {
   const {
-    data: { donationsList },
+    data: { donationsList, page, totalPage },
+    operations: { onChangePage },
   } = useDonationsList(projectId);
 
   return (
     !!donationsList.length && (
-      <div className="flex flex-col items-stretch">
-        {donationsList.map(donation => (
-          <div
-            key={donation.id}
-            className="flex items-center justify-between py-4 border-0 border-b border-solid border-Gray-light-mode-200"
-          >
-            <div className="flex-1 flex items-center gap-3">
-              <Icon
-                name="heart-hand"
-                fontSize={24}
-                color={variables.color_grey_500}
-                className="p-2 bg-Gray-light-mode-100 rounded-full border-[0.75px] border-solid border-[rgba(0,0,0,0.08)]"
-              />
-              <div className="flex flex-col items-stretch">
-                <span className="font-semibold leading-6">{donation.anonymous ? 'Anonymous' : donation.name}</span>
-                <span className="hidden xl:inline text-sm leading-5 text-Gray-light-mode-600">
-                  {translate('projects-detail.donated-by')} {toRelativeTime(donation.date)}
-                </span>
-                <div className="flex items-center gap-1 xl:hidden text-sm leading-5 text-Gray-light-mode-600">
-                  <span className="font-medium leading-6 text-Gray-light-mode-900">
-                    <span className="font-normal leading-5 text-Gray-light-mode-600">
-                      {donation.amount} {donation.currency}
-                    </span>
-                    •
+      <>
+        <div className="flex flex-col items-stretch">
+          {donationsList.map(donation => (
+            <div
+              key={donation.id}
+              className="flex items-center justify-between py-4 border-0 border-b border-solid border-Gray-light-mode-200"
+            >
+              <div className="flex-1 flex items-center gap-3">
+                <Icon
+                  name="heart-hand"
+                  fontSize={24}
+                  color={variables.color_grey_500}
+                  className="p-2 bg-Gray-light-mode-100 rounded-full border-[0.75px] border-solid border-[rgba(0,0,0,0.08)]"
+                />
+                <div className="flex flex-col items-stretch">
+                  <span className="font-semibold leading-6">{donation.anonymous ? 'Anonymous' : donation.name}</span>
+                  <span className="hidden xl:inline text-sm leading-5 text-Gray-light-mode-600">
+                    {translate('projects-detail.donated-by')} {toRelativeTime(donation.date)}
                   </span>
-                  {toRelativeTime(donation.date)}
+                  <div className="flex items-center gap-1 xl:hidden text-sm leading-5 text-Gray-light-mode-600">
+                    <span className="font-medium leading-6 text-Gray-light-mode-900">
+                      <span className="font-normal leading-5 text-Gray-light-mode-600">
+                        {donation.amount} {donation.currency}
+                      </span>
+                      •
+                    </span>
+                    {toRelativeTime(donation.date)}
+                  </div>
                 </div>
               </div>
+              <div className="hidden xl:flex items-center gap-1 font-medium leading-6">
+                {donation.amount}
+                <span className="font-normal leading-5 text-Gray-light-mode-600"> {donation.currency}</span>
+              </div>
             </div>
-            <div className="hidden xl:flex items-center gap-1 font-medium leading-6">
-              {donation.amount}
-              <span className="font-normal leading-5 text-Gray-light-mode-600"> {donation.currency}</span>
+          ))}
+        </div>
+        {totalPage > 1 && (
+          <>
+            <div className="hidden md:block mt-6">
+              <Pagination page={page} count={totalPage} onChange={(_, p) => onChangePage(p)} />
             </div>
-          </div>
-        ))}
-      </div>
+            <div className="block md:hidden mt-6">
+              <PaginationMobile page={page} count={totalPage} handleChange={onChangePage} />
+            </div>
+          </>
+        )}
+      </>
     )
   );
 };
