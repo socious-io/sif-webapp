@@ -70,7 +70,6 @@ export const useMeshWallet = (defaultAddress = '') => {
   const initializeWallet = async (): Promise<Web3Wallet> => {
     try {
       const provider = new BlockfrostProvider(config.blockfrostProjectId);
-      console.log(config.meshProjectId, config.blockfrostProjectId);
       const options: EnableWeb3WalletOptions = {
         networkId: config.env === 'production' ? 1 : 0,
         projectId: config.meshProjectId,
