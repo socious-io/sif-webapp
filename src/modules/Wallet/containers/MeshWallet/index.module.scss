@@ -1,0 +1,85 @@
+@import 'src/styles/constants/_primitives.scss';
+
+.button {
+    display: flex;
+    gap: 0;
+    padding: 0;
+
+    &:disabled {
+        background-color: $color-grey-200;
+    }
+
+    .symbol,
+    .loading {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .symbol {
+        position: relative;
+        padding: 0.375rem 1rem;
+        white-space: nowrap;
+        cursor: default;
+
+        &--clickable {
+            cursor: pointer;
+        }
+    }
+
+    .divider {
+        height: calc(100% - 0.75rem);
+        width: 1px;
+        background-color: $color-grey-300;
+    }
+
+    .address {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.375rem 0.25rem 0.375rem 1rem;
+        font-size: 16px;
+        font-weight: 600;
+        color: $color-grey-600;
+
+        &--connected {
+            cursor: default;
+        }
+
+        &__connected {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+        }
+
+        &__dot {
+            width: 0.5rem;
+            height: 0.5rem;
+            border-radius: 9999px;
+            background-color: $color-success-600;
+        }
+
+        &__info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: $color-grey-600;
+        }
+
+        &__action {
+            border-radius: 9999px;
+
+            &:focus {
+                box-shadow: none;
+            }
+        }
+    }
+
+    .balance {
+        color: $color-grey-600;
+    }
+}

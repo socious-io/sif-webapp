@@ -21,10 +21,15 @@
     "title": "Modifier l'image",
     "subtitle": "Recadrez votre image selon les dimensions souhaitées."
   },
-  "connect-wallet": "Connecter le portefeuille",
-  "disconnect": "Déconnecter",
-  "copy-address": "Copier l'adresse",
-  "no-wallet-alert": "Aucun portefeuille Cardano détecté. Veuillez installer un portefeuille Cardano tel que Lace, Eternl ou Yoroi pour continuer.",
+  "wallet": {
+    "connect": "Connecter le portefeuille",
+    "connecting": "Connexion...",
+    "disconnect": "Déconnecter",
+    "copy-address": "Copier l'adresse",
+    "default-error": "Nous n'avons pas pu charger les données du portefeuille pour l'adresse par défaut. Pour continuer, veuillez reconnecter votre portefeuille et effectuer le don.",
+    "connect-error": "Échec de la connexion au portefeuille. Cela peut être dû à un problème de réseau ou à un problème de connexion sociale. Veuillez réessayer.",
+    "failed": "Échec"
+  },
   "kyb": {
     "title": "Vérifiez votre organisation pour créer un projet",
     "subtitle": "Pour démarrer un projet, veuillez effectuer une vérification unique de votre organisation dans le Centre de Compte Socious.",

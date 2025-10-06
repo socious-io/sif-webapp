@@ -21,10 +21,15 @@
     "title": "编辑图片",
     "subtitle": "裁剪图片到所需尺寸。"
   },
-  "connect-wallet": "连接钱包",
-  "disconnect": "断开连接",
-  "copy-address": "复制地址",
-  "no-wallet-alert": "未检测到 Cardano 钱包。请安装如 Lace、Eternl 或 Yoroi 等 Cardano 钱包以继续操作。",
+  "wallet": {
+    "connect": "连接钱包",
+    "connecting": "正在连接...",
+    "disconnect": "断开连接",
+    "copy-address": "复制地址",
+    "default-error": "我们无法加载默认地址的钱包数据。要继续，请重新连接您的钱包并完成捐赠。",
+    "connect-error": "连接钱包失败。这可能是由于网络问题或社交登录问题。请重试。",
+    "failed": "失败"
+  },
   "kyb": {
     "title": "验证您的组织以创建项目",
     "subtitle": "要启动一个项目，请在Socious账户中心完成您组织的一次性验证。",

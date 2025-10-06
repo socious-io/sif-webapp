@@ -6,7 +6,7 @@ export const useProjectCard = (totalDonationsInUSD: number | undefined, totalReq
   useEffect(() => {
     if (totalDonationsInUSD !== undefined && totalRequestedAmount) {
       const percentage = (totalDonationsInUSD / totalRequestedAmount) * 100;
-      setProgressValue(Math.min(percentage, 100));
+      setProgressValue(Math.round(Math.min(percentage, 100)));
     }
   }, [totalDonationsInUSD, totalRequestedAmount]);
 
