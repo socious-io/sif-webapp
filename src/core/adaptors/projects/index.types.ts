@@ -56,7 +56,12 @@ export interface ProjectPreview {
   title: string;
   description: string;
   creator: { id: string; type: IdentityType; name: string; img: string; username?: string };
-  totalDonations: { [currency: string]: number };
+  totalDonations: {
+    [currency: string]: {
+      rate: number;
+      amount: number;
+    };
+  };
   totalRequestedAmount: number;
   totalDonationsInUSD: number;
 }
