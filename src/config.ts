@@ -17,6 +17,7 @@ export const config = {
   meshProjectId: import.meta.env.VITE_MESH_PROJECT_ID,
   stripePublicKey: import.meta.env.VITE_STRIPE_PUBLIC_KEY,
   logDiscordWebHook: import.meta.env.VITE_LOG_DISCORD_WEBHOOK,
+  activeEvent: import.meta.env.VITE_ACTIVE_EVENT,
   rates: {
     ada: import.meta.env.VITE_CARDANO_ADA_RATE,
     fiat: import.meta.env.VITE_FIAT_API_RATE,
