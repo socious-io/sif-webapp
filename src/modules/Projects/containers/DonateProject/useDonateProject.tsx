@@ -86,7 +86,7 @@ export const useDonateProject = (onDonate: (data: DonateReq) => void) => {
     let txHash = '';
     const isSpecialEvent = !!config.activeEvent;
     const isSpecialAmount = selectedCurrency.value === 'lovelace' && data.donate === 1;
-    const rate = await selectedCurrency.rateConversionFunc(data.donate);
+    const rate = await selectedCurrency.getRate();
 
     if (isSpecialEvent && isSpecialAmount) {
       txHash = 'tech4impact2025';
