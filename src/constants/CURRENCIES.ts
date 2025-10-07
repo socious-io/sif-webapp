@@ -7,6 +7,7 @@ export type CurrencyType = {
   decimals: bigint;
   icon?: string;
   rateConversionFunc: (amount: number) => Promise<number>;
+  getRate: () => Promise<number>;
   fiatOrCrypto: 'fiat' | 'crypto';
 };
 
@@ -16,24 +17,29 @@ export const CURRENCIES: CurrencyType[] = [
     value: 'lovelace',
     decimals: 1000000n,
     fiatOrCrypto: 'crypto',
-    rateConversionFunc: async (amount: number) => {
+    getRate: async () => {
       const cacheKey = 'ADA_RATE';
       const cacheExpireTime = 10 * 60 * 1000; // 10 minutes
       const cachedRate = localStorage.getItem(cacheKey);
       const cachedTime = localStorage.getItem(`${cacheKey}_TIME`);
       const now = Date.now();
       if (cachedRate && cachedTime && Number(cachedTime) > now - cacheExpireTime) {
-        return Math.round(amount * Number(cachedRate) * 100) / 100;
+        return Number(cachedRate);
       }
 
       const api = config.rates.ada;
       const { status, data } = await axios.get(api);
       if (status !== 200) {
-        return amount;
+        return 1;
       }
-      localStorage.setItem(cacheKey, String(data?.data.rateUsd));
+      const rate = data?.data.rateUsd;
+      localStorage.setItem(cacheKey, String(rate));
       localStorage.setItem(`${cacheKey}_TIME`, String(now));
-      return Math.round(amount * data?.data.rateUsd * 100) / 100;
+      return rate;
+    },
+    rateConversionFunc: async function (amount: number) {
+      const rate = await this.getRate!();
+      return Math.round(amount * rate * 100) / 100;
     },
   },
   {
@@ -42,6 +48,7 @@ export const CURRENCIES: CurrencyType[] = [
     decimals: 1000000n,
     fiatOrCrypto: 'crypto',
     rateConversionFunc: async (amount: number) => amount,
+    getRate: async () => 1,
   },
   {
     label: 'DJED',
@@ -49,6 +56,7 @@ export const CURRENCIES: CurrencyType[] = [
     decimals: 1000000n,
     fiatOrCrypto: 'crypto',
     rateConversionFunc: async (amount: number) => amount,
+    getRate: async () => 1,
   },
   {
     label: 'SOCIO',
@@ -56,6 +64,7 @@ export const CURRENCIES: CurrencyType[] = [
     decimals: 1000000n,
     fiatOrCrypto: 'crypto',
     rateConversionFunc: async (amount: number) => amount,
+    getRate: async () => 1,
   },
   {
     label: 'thank',
@@ -63,6 +72,7 @@ export const CURRENCIES: CurrencyType[] = [
     decimals: 1n,
     fiatOrCrypto: 'crypto',
     rateConversionFunc: async (amount: number) => amount,
+    getRate: async () => 1,
   },
   {
     label: 'USDA',
@@ -70,6 +80,7 @@ export const CURRENCIES: CurrencyType[] = [
     decimals: 1000000n,
     fiatOrCrypto: 'crypto',
     rateConversionFunc: async (amount: number) => amount,
+    getRate: async () => 1,
   },
   {
     label: 'USD',
@@ -77,20 +88,21 @@ export const CURRENCIES: CurrencyType[] = [
     decimals: 100n,
     fiatOrCrypto: 'fiat',
     rateConversionFunc: async (amount: number) => amount,
+    getRate: async () => 1,
   },
   {
     label: 'JPY',
     value: 'JPY',
     decimals: 100n,
     fiatOrCrypto: 'fiat',
-    rateConversionFunc: async (amount: number) => {
+    getRate: async () => {
       const cacheKey = 'JPY_RATE';
       const cacheExpireTime = 10 * 60 * 1000; // 10 minutes
       const cachedRate = localStorage.getItem(cacheKey);
       const cachedTime = localStorage.getItem(`${cacheKey}_TIME`);
       const now = Date.now();
       if (cachedRate && cachedTime && Number(cachedTime) > now - cacheExpireTime) {
-        return parseFloat((Number(cachedRate) * amount).toFixed(4));
+        return Number(cachedRate);
       }
 
       try {
@@ -99,13 +111,15 @@ export const CURRENCIES: CurrencyType[] = [
           const jpyRate = response.data.data.find(c => c.symbol === 'JPY').rateUsd;
           localStorage.setItem(cacheKey, String(jpyRate));
           localStorage.setItem(`${cacheKey}_TIME`, String(now));
-          return parseFloat((jpyRate * amount).toFixed(4));
+          return jpyRate;
         }
       } catch (error) {
         console.warn('Failed to fetch JPY rate:', error);
       }
-
-      return Math.round(amount * 150 * 100) / 100;
+    },
+    rateConversionFunc: async function (amount: number) {
+      const rate = await this.getRate!();
+      return parseFloat((rate * amount).toFixed(4));
     },
   },
 ];

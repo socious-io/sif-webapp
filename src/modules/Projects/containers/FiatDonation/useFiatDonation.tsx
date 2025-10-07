@@ -18,7 +18,7 @@ export const useFiatDonation = (onDonate: (data: DonateReq) => void) => {
     if (!currency) {
       throw new Error('Selected currency not found');
     }
-    const rate = await currency.rateConversionFunc(Number(donation));
+    const rate = await currency.getRate();
     if (card && donation) {
       await onDonate({
         donate: Number(donation),
