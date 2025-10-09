@@ -1,3 +1,4 @@
+import { get } from 'cypress/types/jquery';
 import { categoriesAdaptor } from 'src/constants/PROJECT_CATEGORIES';
 import { SOCIAL_CAUSES } from 'src/constants/SOCIAL_CAUSES';
 import {
@@ -138,7 +139,7 @@ export const getProjectAdaptor = async (projectId: string): Promise<AdaptorRes<P
       location: [project.city, project.country].filter(Boolean).join(', ') || 'Worldwide',
       overview: convertMarkdownToJSX(project.description),
       voted: project.user_voted,
-      roundStatus: DateRangeStatus.DURING,
+      roundStatus: getDateRangeStatus(project.round.voting_start_at, project.round.voting_end_at),
       roundStats: { donations: project.total_donations || {}, votes: project.total_votes },
       votingStartAt: project.round.voting_start_at,
       donations: [
