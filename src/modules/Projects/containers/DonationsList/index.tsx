@@ -11,8 +11,8 @@ const DonationsList = ({ projectId }) => {
   const {
     data: { donationsList, page, totalPage },
     operations: { onChangePage },
+    utils: { getCurrencyLabel },
   } = useDonationsList(projectId);
-
   return (
     !!donationsList.length && (
       <>
@@ -37,7 +37,7 @@ const DonationsList = ({ projectId }) => {
                   <div className="flex items-center gap-1 xl:hidden text-sm leading-5 text-Gray-light-mode-600">
                     <span className="font-medium leading-6 text-Gray-light-mode-900">
                       <span className="font-normal leading-5 text-Gray-light-mode-600">
-                        {donation.amount} {donation.currency}
+                        {donation.amount} {getCurrencyLabel(donation.currency)}
                       </span>
                       •
                     </span>
@@ -47,7 +47,10 @@ const DonationsList = ({ projectId }) => {
               </div>
               <div className="hidden xl:flex items-center gap-1 font-medium leading-6">
                 {donation.amount}
-                <span className="font-normal leading-5 text-Gray-light-mode-600"> {donation.currency}</span>
+                <span className="font-normal leading-5 text-Gray-light-mode-600">
+                  {' '}
+                  {getCurrencyLabel(donation.currency)}
+                </span>
               </div>
             </div>
           ))}
