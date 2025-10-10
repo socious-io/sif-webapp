@@ -19,26 +19,30 @@ export const CURRENCIES: CurrencyType[] = [
     fiatOrCrypto: 'crypto',
     getRate: async () => {
       const cacheKey = 'ADA_RATE';
-      const cacheExpireTime = 10 * 60 * 1000; // 10 minutes
+      const cacheExpireTime = 100 * 60 * 1000; // 100 minutes
       const cachedRate = localStorage.getItem(cacheKey);
       const cachedTime = localStorage.getItem(`${cacheKey}_TIME`);
       const now = Date.now();
       if (cachedRate && cachedTime && Number(cachedTime) > now - cacheExpireTime) {
         return Number(cachedRate);
       }
-
       const api = config.rates.ada;
-      const { status, data } = await axios.get(api);
-      if (status !== 200) {
+      try {
+        const { status, data } = await axios.get(api);
+        if (status !== 200) {
+          return 1;
+        }
+        const rate = data?.data.rateUsd;
+        localStorage.setItem(cacheKey, String(rate));
+        localStorage.setItem(`${cacheKey}_TIME`, String(now));
+        return rate;
+      } catch (error) {
+        console.error(error);
         return 1;
       }
-      const rate = data?.data.rateUsd;
-      localStorage.setItem(cacheKey, String(rate));
-      localStorage.setItem(`${cacheKey}_TIME`, String(now));
-      return rate;
     },
     rateConversionFunc: async function (amount: number) {
-      const rate = await this.getRate!();
+      const rate = await this.getRate();
       return Math.round(amount * rate * 100) / 100;
     },
   },
@@ -59,20 +63,12 @@ export const CURRENCIES: CurrencyType[] = [
     getRate: async () => 1,
   },
   {
-    label: 'SOCIO',
-    value: `bd8669352095ea280c834bad675525b3cefca1d3333fe6f6298e36320014df10534f43494f`,
-    decimals: 1000000n,
-    fiatOrCrypto: 'crypto',
-    rateConversionFunc: async (amount: number) => amount,
-    getRate: async () => 1,
-  },
-  {
-    label: 'thank',
+    label: 'THANK',
     value: `bd8669352095ea280c834bad675525b3cefca1d3333fe6f6298e36320014df10534f43494f`,
     decimals: 1n,
     fiatOrCrypto: 'crypto',
-    rateConversionFunc: async (amount: number) => amount,
-    getRate: async () => 1,
+    getRate: async () => 0.01,
+    rateConversionFunc: async (amount: number) => amount / 100,
   },
   {
     label: 'USDA',
@@ -85,7 +81,7 @@ export const CURRENCIES: CurrencyType[] = [
   {
     label: 'USD',
     value: 'USD',
-    decimals: 100n,
+    decimals: 1n,
     fiatOrCrypto: 'fiat',
     rateConversionFunc: async (amount: number) => amount,
     getRate: async () => 1,
@@ -93,11 +89,11 @@ export const CURRENCIES: CurrencyType[] = [
   {
     label: 'JPY',
     value: 'JPY',
-    decimals: 100n,
+    decimals: 1n,
     fiatOrCrypto: 'fiat',
     getRate: async () => {
       const cacheKey = 'JPY_RATE';
-      const cacheExpireTime = 10 * 60 * 1000; // 10 minutes
+      const cacheExpireTime = 100 * 60 * 1000; // 100 minutes
       const cachedRate = localStorage.getItem(cacheKey);
       const cachedTime = localStorage.getItem(`${cacheKey}_TIME`);
       const now = Date.now();
@@ -115,10 +111,11 @@ export const CURRENCIES: CurrencyType[] = [
         }
       } catch (error) {
         console.warn('Failed to fetch JPY rate:', error);
+        return 0.0065;
       }
     },
     rateConversionFunc: async function (amount: number) {
-      const rate = await this.getRate!();
+      const rate = await this.getRate();
       return parseFloat((rate * amount).toFixed(4));
     },
   },
