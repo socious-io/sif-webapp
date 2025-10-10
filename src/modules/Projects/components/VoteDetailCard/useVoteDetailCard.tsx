@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { CURRENCIES } from 'src/constants/CURRENCIES';
 
 export const useVoteDetailCard = () => {
   const [isShared, setIsShared] = useState(false);
@@ -15,5 +16,11 @@ export const useVoteDetailCard = () => {
       console.error('Failed to copy text: ', err);
     }
   };
-  return { isShared, handleCopy };
+
+  const getCurrencyLabel = (currencyValue: string) => {
+    const currency = CURRENCIES.find(c => c.value === currencyValue);
+    return currency?.label || currencyValue;
+  };
+
+  return { isShared, handleCopy, getCurrencyLabel };
 };

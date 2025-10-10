@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { CURRENCIES } from 'src/constants/CURRENCIES';
 import { Donate, getProjectDonationsAdaptor } from 'src/core/adaptors';
 
 export const useDonationsList = projectId => {
@@ -27,6 +28,11 @@ export const useDonationsList = projectId => {
 
   const totalPage = Math.ceil(total / limit);
 
+  const getCurrencyLabel = (currencyValue: string) => {
+    const currency = CURRENCIES.find(c => c.value === currencyValue);
+    return currency?.label || currencyValue;
+  };
+
   return {
     data: {
       donationsList,
@@ -36,6 +42,9 @@ export const useDonationsList = projectId => {
     },
     operations: {
       onChangePage,
+    },
+    utils: {
+      getCurrencyLabel,
     },
   };
 };

@@ -26,7 +26,8 @@
     "votes": "投票数",
     "link-copied": "リンクをコピーしました",
     "share-button": "シェア",
-    "vote-button": "今すぐ投票"
+    "vote-button": "今すぐ投票",
+    "total-usd": "合計（USD）"
   },
   "create-project-title": "プロジェクトを実現させましょう。",
   "create-project-subtitle": "数分で申請して資金を獲得！",

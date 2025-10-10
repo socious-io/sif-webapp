@@ -26,7 +26,8 @@
     "votes": "votes",
     "link-copied": "Link copied",
     "share-button": "Share",
-    "vote-button": "Vote now"
+    "vote-button": "Vote now",
+    "total-usd": "Total (USD)"
   },
   "create-project-title": "Bring your project to life.",
   "create-project-subtitle": "Apply in minutes and get funded!",

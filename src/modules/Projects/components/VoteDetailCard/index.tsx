@@ -17,7 +17,11 @@ const VoteDetailCard: React.FC<VoteDetailCardProps> = ({
   roundStatus,
 }) => {
   const { donations, votes } = roundStats || {};
-  const { isShared, handleCopy } = useVoteDetailCard();
+  const { isShared, handleCopy, getCurrencyLabel } = useVoteDetailCard();
+
+  const totalDonationsInUSD = donations
+    ? Object.values(donations).reduce((sum, { rate, amount }) => sum + amount * rate, 0)
+    : 0;
   return (
     <div className="w-full md:w-[22.5rem] flex flex-col items-stretch gap-4 p-6 bg-Gray-light-mode-50 rounded-xl">
       {/* <div className="flex flex-col gap-1 text-sm leading-5 text-Gray-light-mode-600">
@@ -29,15 +33,25 @@ const VoteDetailCard: React.FC<VoteDetailCardProps> = ({
       {isOwner ? (
         <>
           <div className="flex flex-col gap-1 text-sm leading-5 text-Gray-light-mode-600">
-            <div>
+            <div className="flex flex-col gap-2">
               {Object.entries(donations).map(([currency, amount]) => (
                 <div key={currency} className="flex flex-row justify-between">
-                  <span className="text-3xl font-semibold leading-8 text-Gray-light-mode-900">{currency}</span>
+                  <span className="text-3xl font-semibold leading-8 text-Gray-light-mode-900">
+                    {getCurrencyLabel(currency)}
+                  </span>
                   <span className="text-3xl font-semibold leading-8 text-Gray-light-mode-900">
                     {donations[currency].amount.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                   </span>
                 </div>
               ))}
+              <div className="flex flex-row justify-between pt-2 border-t border-Gray-light-mode-200">
+                <span className="text-2xl font-semibold leading-8 text-Gray-light-mode-700">
+                  {translate('projects-round-stats.total-usd')}
+                </span>
+                <span className="text-2xl font-semibold leading-8 text-Gray-light-mode-700">
+                  ${totalDonationsInUSD.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                </span>
+              </div>
             </div>
             {translate('projects-round-stats.donated')}
           </div>
