@@ -37,13 +37,27 @@ export const blueprint: RouteObject[] = [
             children: [
               {
                 path: '',
-                loader: async () => {
+                loader: async ({ request }) => {
+                  const url = new URL(request.url);
+                  const page = parseInt(url.searchParams.get('page') || '1', 10);
+                  const category = url.searchParams.get('category') || '';
+                  const search = url.searchParams.get('q') || '';
+                  const roundIdFromUrl = url.searchParams.get('round_id') || '';
+
                   const currentRound = await getRound();
-                  if (!currentRound) {
-                    return { projects: [], rounds: [] };
-                  }
-                  const projects = await getProjectsPreviewAdaptor(1, 10, { round_id: currentRound.id as string });
                   const rounds = await getRoundsAdaptor();
+
+                  if (!currentRound) {
+                    return { projects: [], rounds: rounds.data || [] };
+                  }
+
+                  const roundId = roundIdFromUrl || (currentRound.id as string);
+                  const projects = await getProjectsPreviewAdaptor(page, 10, {
+                    round_id: roundId,
+                    category,
+                    q: search,
+                  });
+
                   return { projects: projects.data, rounds: rounds.data };
                 },
                 async lazy() {

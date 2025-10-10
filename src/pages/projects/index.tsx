@@ -1,7 +1,7 @@
 import { Divider } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useSearchParams } from 'react-router-dom';
 import { OptionType } from 'src/core/adaptors';
 import { Round } from 'src/core/api';
 import { convertDateFormat, getDaysUntil } from 'src/core/helpers/date-converter';
@@ -14,10 +14,36 @@ import { RootState } from 'src/store';
 export const Projects = () => {
   const round = useSelector((state: RootState) => state.round.round);
   const { rounds } = useLoaderData() as { rounds: Array<Round> };
+  const [searchParams, setSearchParams] = useSearchParams();
+  const roundIdFromUrl = searchParams.get('round_id') || '';
+
+  const initialRound = rounds.find(r => r.id === roundIdFromUrl) || (rounds.length > 0 ? rounds[0] : null);
+
   const roundIsClosed = round && getDaysUntil(round.voting_end_at) <= 0;
   const [selectedRound, setSelectedRound] = useState<OptionType | null>(
-    rounds.length > 0 ? { label: rounds[0].name, value: rounds[0].id } : null,
+    initialRound ? { label: initialRound.name, value: initialRound.id } : null,
   );
+
+  const handleRoundChange = (value: OptionType) => {
+    setSelectedRound(value);
+    const params: Record<string, string> = { page: '1' };
+    if (value.value) params.round_id = value.value;
+    const category = searchParams.get('category');
+    const search = searchParams.get('q');
+    if (category) params.category = category;
+    if (search) params.q = search;
+    setSearchParams(params);
+  };
+
+  // Sync selectedRound with URL when navigating back/forward
+  useEffect(() => {
+    if (roundIdFromUrl) {
+      const roundFromUrl = rounds.find(r => r.id === roundIdFromUrl);
+      if (roundFromUrl && roundFromUrl.id !== selectedRound?.value) {
+        setSelectedRound({ label: roundFromUrl.name, value: roundFromUrl.id });
+      }
+    }
+  }, [roundIdFromUrl, rounds]);
 
   const breadcrumbs = [
     { iconName: 'home-line', label: '', link: '/' },
@@ -25,10 +51,8 @@ export const Projects = () => {
     {
       label: selectedRound?.label || '',
       options: rounds.map(r => ({ label: r.name, value: r.id })),
-      onChange: value => {
-        setSelectedRound(value as OptionType);
-      },
-      defaultValue: { label: rounds[0].name, value: rounds[0].name },
+      onChange: handleRoundChange,
+      defaultValue: { label: rounds[0]?.name || '', value: rounds[0]?.name || '' },
     },
   ];
   return (
