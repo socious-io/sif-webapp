@@ -5,8 +5,8 @@ import { useForm } from 'react-hook-form';
 import { config } from 'src/config';
 import { CURRENCIES } from 'src/constants/CURRENCIES';
 import { DonateReq } from 'src/core/adaptors';
+import Dapp from 'src/core/dapp';
 import { translate } from 'src/core/helpers/utils';
-import { Mesh } from 'src/core/wallet';
 import * as yup from 'yup';
 
 import { Form } from './index.types';
@@ -26,7 +26,7 @@ const schema = yup
   .required();
 
 export const useDonateProject = (onDonate: (data: DonateReq) => void) => {
-  const { connected, cardanoWallet: wallet, address } = Mesh.useMeshWallet();
+  const { connected, wallet, address } = Dapp.useWeb3();
   const [donateValueConversion, setDonationValueConversion] = useState(0);
   const [userImpactPoints, setUserImpactPoints] = useState(0);
   const {

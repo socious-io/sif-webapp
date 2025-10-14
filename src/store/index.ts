@@ -33,6 +33,7 @@ const store = configureStore({
     return getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: ['persist/PERSIST', 'wallet/setWalletState'],
+        ignoredPaths: ['wallet.wallet', 'wallet.walletProvider'],
       },
     });
   },
