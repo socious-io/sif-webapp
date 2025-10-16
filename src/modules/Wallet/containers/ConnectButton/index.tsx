@@ -1,30 +1,31 @@
-import { CircularProgress } from '@mui/material';
+import { BrowserWallet, Wallet } from '@meshsdk/core';
 import { useState } from 'react';
 import { CURRENCIES } from 'src/constants/CURRENCIES';
-import { CustomError } from 'src/core/adaptors';
+import Dapp from 'src/core/dapp';
 import { truncateFromMiddle } from 'src/core/helpers/texts';
 import { translate } from 'src/core/helpers/utils';
-import { Mesh } from 'src/core/wallet';
 import AlertModal from 'src/modules/General/components/AlertModal';
 import Button from 'src/modules/General/components/Button';
 import FeaturedIcon from 'src/modules/General/components/FeaturedIcon';
 import Icon from 'src/modules/General/components/Icon';
 import IconButton from 'src/modules/General/components/IconButton';
+import ChooseWalletModal from 'src/modules/Wallet/components/ChooseWalletModal';
 import ConnectModal from 'src/modules/Wallet/components/ConnectModal';
 import TokensDropdown from 'src/modules/Wallet/components/TokensDropdown';
 import variables from 'src/styles/constants/_exports.module.scss';
 
 import styles from './index.module.scss';
-import { MeshWalletProps } from './index.types';
+import { CardanoWallet, ConnectButtonProps } from './index.types';
 
-const MeshWallet: React.FC<MeshWalletProps> = ({ showBalance = true }) => {
-  const { balances, address, connected, handleConnect, handleDisconnect } = Mesh.useMeshWallet();
+const ConnectButton: React.FC<ConnectButtonProps> = ({ showBalance = true }) => {
+  const { address, connected, balances, setupCardanoConnection, disconnect } = Dapp.useWeb3();
 
+  const [availableWallets, setAvailableWallets] = useState<CardanoWallet[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
   const [selectedToken, setSelectedToken] = useState('lovelace');
   const [openDropdown, setOpenDropdown] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [showMenu, setShowMenu] = useState(false);
 
   const selectedTokenLabel = CURRENCIES.find(t => t.value === selectedToken)?.label || '';
   const formattedBalance =
@@ -34,28 +35,31 @@ const MeshWallet: React.FC<MeshWalletProps> = ({ showBalance = true }) => {
   const handleClick = async () => {
     if (connected) return;
 
-    setLoading(true);
-    setError('');
-    try {
-      await handleConnect();
-    } catch (error: unknown) {
-      setError((error as CustomError).message || translate('wallet.connect-error'));
-    } finally {
-      setLoading(false);
+    const cardanoWallets: Wallet[] = await BrowserWallet.getAvailableWallets();
+    const wallets = [...(cardanoWallets.map(wallet => ({ ...wallet, type: 'cardano' })) as CardanoWallet[])];
+
+    if (!wallets.length) {
+      setError(translate('wallet-not-installed-error'));
+      return;
     }
+    if (wallets.length === 1) {
+      const wallet = wallets[0];
+      setupCardanoConnection(wallet.name);
+    } else {
+      setAvailableWallets(wallets);
+      setIsModalOpen(true);
+    }
+  };
+
+  const handleDisconnect = () => {
+    disconnect();
+    setShowMenu(false);
   };
 
   const handleCopy = () => {
     navigator.clipboard.writeText(address);
     setShowMenu(false);
   };
-
-  const connectingJSX = (
-    <div className={styles['loading']}>
-      <CircularProgress size="1rem" color="secondary" />
-      {translate('wallet.connecting')}
-    </div>
-  );
 
   const connectWalletJSX = (
     <>
@@ -115,25 +119,38 @@ const MeshWallet: React.FC<MeshWalletProps> = ({ showBalance = true }) => {
   );
 
   return (
-    <div className="relative">
-      <Button color="info" onClick={handleClick} block disabled={loading} customStyle={styles['button']}>
-        {loading ? connectingJSX : connectWalletJSX}
-      </Button>
-      {connected && (
-        <ConnectModal
-          open={showMenu}
-          handleClose={() => setShowMenu(false)}
-          symbol={selectedTokenLabel}
-          address={truncateFromMiddle(address, 5, 5)}
-          formattedBalance={formattedBalance}
-          showBalance={showBalance}
-          handleDisconnect={() => {
-            handleDisconnect();
-            setShowMenu(false);
-          }}
-          handleCopy={handleCopy}
-        />
-      )}
+    <>
+      <div className="relative">
+        <Button color="info" onClick={handleClick} block customStyle={styles['button']}>
+          {connectWalletJSX}
+        </Button>
+        {connected && (
+          <ConnectModal
+            open={showMenu}
+            handleClose={() => setShowMenu(false)}
+            symbol={selectedTokenLabel}
+            address={truncateFromMiddle(address, 5, 5)}
+            formattedBalance={formattedBalance}
+            showBalance={showBalance}
+            handleDisconnect={() => {
+              handleDisconnect();
+              setShowMenu(false);
+            }}
+            handleCopy={handleCopy}
+          />
+        )}
+        {!!availableWallets.length && (
+          <ChooseWalletModal
+            open={isModalOpen}
+            handleClose={() => setIsModalOpen(false)}
+            wallets={availableWallets}
+            onWalletSelect={wallet => {
+              setupCardanoConnection(wallet.name);
+              setIsModalOpen(false);
+            }}
+          />
+        )}
+      </div>
       <AlertModal
         open={!!error}
         onClose={() => setError('')}
@@ -143,8 +160,8 @@ const MeshWallet: React.FC<MeshWalletProps> = ({ showBalance = true }) => {
         closeButton={false}
         submitButton={false}
       />
-    </div>
+    </>
   );
 };
 
-export default MeshWallet;
+export default ConnectButton;

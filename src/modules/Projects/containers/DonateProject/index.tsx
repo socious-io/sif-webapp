@@ -6,7 +6,7 @@ import Button from 'src/modules/General/components/Button';
 import Checkbox from 'src/modules/General/components/Checkbox';
 import Input from 'src/modules/General/components/Input';
 import VoteInfo from 'src/modules/Projects/components/VoteInfo';
-import MeshWallet from 'src/modules/Wallet/containers/MeshWallet';
+import ConnectButton from 'src/modules/Wallet/containers/ConnectButton';
 import variables from 'src/styles/constants/_exports.module.scss';
 
 import { DonateProjectProps } from './index.types';
@@ -68,7 +68,7 @@ const DonateProject: React.FC<DonateProjectProps> = ({ isLoading, onDonate }) =>
           </span>
           {translate('vote-donate.payment-method-description')}
         </div>
-        <MeshWallet />
+        <ConnectButton />
         <Checkbox
           id="preventDisplayName"
           name="preventDisplayName"

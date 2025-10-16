@@ -1,7 +1,6 @@
 import { BrowserWallet } from '@meshsdk/core';
 import { useState } from 'react';
 import Modal from 'src/modules/General/components/Modal';
-import { string } from 'yup';
 
 const ChooseWalletModal = ({
   open,

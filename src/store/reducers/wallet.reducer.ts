@@ -1,26 +1,34 @@
-import { Web3Wallet } from '@meshsdk/web3-sdk';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-export type TokensBalance = Record<
-  string,
-  {
-    total: number;
-    symbol?: string;
-  }
->;
+import { TokensBalance } from 'src/core/dapp/dapp.types';
 
 export type WalletState = {
-  wallet: Web3Wallet | null;
-  connected: boolean;
+  wallet: any | null;
   address: string;
+  connected: boolean;
   balances: TokensBalance | null;
+  //For EVM Wallets
+  chainId: number | null;
+  // walletProvider: BrowserWallet | null;
+  // provider: BrowserProvider | null;
+  // signer: JsonRpcSigner | null;
+  // network: any;
+  // networkName: string;
+  // testnet: boolean;
 };
 
 const initialState: WalletState = {
   wallet: null,
-  connected: false,
   address: '',
+  connected: false,
   balances: null,
+  //For EVM Wallets
+  chainId: null,
+  // walletProvider: null,
+  // provider: null,
+  // signer: null,
+  // network: null,
+  // networkName: '',
+  // testnet: false,
 };
 
 export const walletSlice = createSlice({

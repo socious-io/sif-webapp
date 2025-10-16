@@ -1,6 +1,6 @@
 import { translate } from 'src/core/helpers/utils';
 import Button from 'src/modules/General/components/Button';
-import MeshWallet from 'src/modules/Wallet/containers/MeshWallet';
+import ConnectButton from 'src/modules/Wallet/containers/ConnectButton';
 
 import { useConnectWalletForm } from './useConnectWalletForm';
 
@@ -19,7 +19,7 @@ const ConnectWalletForm: React.FC = () => {
           {translate('connect-wallet-description2')}
         </p>
         <div className="mt-2xl mb-4xl">
-          <MeshWallet showBalance={false} />
+          <ConnectButton />
         </div>
       </div>
       <div>
